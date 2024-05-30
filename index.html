@@ -8,12 +8,12 @@
     <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
     <style>
       .hexagon {
-        fill: steelblue;
         stroke: white;
-        stroke-width: 1px;
+        stroke-width: 0px;
       }
     </style>
   </head>
+  <!-- https://www.cbs.nl/nl-nl/cijfers/detail/80787ned?q=bodemgebruik%20nederland -->
   <body>
     <svg width="800" height="800"></svg>
     <script>
@@ -64,6 +64,32 @@
 
           console.log("Hex Data:", hexData); // Debugging: Log hex data
 
+          // Determine the color based on land use percentages
+          const totalHexagons = hexData.length;
+          const agricultureHex = Math.round(totalHexagons * 0.65); // Agriculture: 30% arable + 25% pastures + 10% horticulture
+          const urbanHex = Math.round(totalHexagons * 0.25); // Urban: 15% residential + 5% commercial/industrial + 5% infrastructure
+          const naturalHex = Math.round(totalHexagons * 0.15); // Natural: 10% forests + 3% wetlands + 2% dunes/coastal areas
+          const otherHex =
+            totalHexagons - (agricultureHex + urbanHex + naturalHex); // Other: 10% water bodies
+
+          const colorScale = d3
+            .scaleOrdinal()
+            .domain(["agriculture", "urban", "natural", "other"])
+            .range(["#0000FF", "#FF0000", "#00FF00", "#FFFF00"]); // Blue, Red, Green, Yellow
+
+          const hexColors = [];
+          hexData.forEach((d, i) => {
+            if (i < agricultureHex) {
+              hexColors.push("agriculture");
+            } else if (i < agricultureHex + urbanHex) {
+              hexColors.push("urban");
+            } else if (i < agricultureHex + urbanHex + naturalHex) {
+              hexColors.push("natural");
+            } else {
+              hexColors.push("other");
+            }
+          });
+
           // Draw hexagons
           svg
             .append("g")
@@ -73,7 +99,8 @@
             .append("path")
             .attr("class", "hexagon")
             .attr("d", (d) => hexbin.hexagon())
-            .attr("transform", (d) => `translate(${d.x},${d.y})`);
+            .attr("transform", (d) => `translate(${d.x},${d.y})`)
+            .attr("fill", (d, i) => colorScale(hexColors[i]));
         })
         .catch((error) => {
           console.error("Error loading or processing data:", error);
