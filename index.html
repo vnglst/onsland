@@ -12,6 +12,11 @@
         stroke: white;
         stroke-width: 1px;
       }
+      .boundary {
+        fill: none;
+        stroke: black;
+        stroke-width: 1px;
+      }
     </style>
   </head>
   <body>
@@ -31,9 +36,18 @@
       const path = d3.geoPath().projection(projection);
 
       // Alternative GeoJSON URL for the Netherlands
-      d3.json("netherlands.json")
+      d3.json(
+        "https://raw.githubusercontent.com/johan/world.geo.json/master/countries/NLD.geo.json"
+      )
         .then((data) => {
           const svg = d3.select("svg");
+
+          // Draw the boundary of the Netherlands for visualization
+          svg
+            .append("path")
+            .datum(data.features[0])
+            .attr("d", path)
+            .attr("class", "boundary");
 
           // Create hexbin generator
           const hexbin = d3
@@ -44,24 +58,19 @@
               [width, height],
             ]);
 
-          // Function to recursively extract coordinates from the GeoJSON structure
-          function extractCoordinates(coordinates, points) {
-            if (typeof coordinates[0] === "number") {
-              const point = projection(coordinates);
-              if (point) {
-                points.push(point);
-              }
-            } else {
-              coordinates.forEach((coord) => extractCoordinates(coord, points));
+          // Function to generate a grid of hexagon centers
+          const hexCenters = [];
+          for (let y = hexRadius; y < height; y += hexRadius * 1.5) {
+            for (let x = hexRadius; x < width; x += hexRadius * Math.sqrt(3)) {
+              hexCenters.push([x, y]);
             }
           }
 
-          const hexPoints = [];
-          const features = data.features;
-
-          features.forEach((feature) => {
-            const coordinates = feature.geometry.coordinates;
-            extractCoordinates(coordinates, hexPoints);
+          // Use d3.geoContains to check if points are within the Netherlands
+          const netherlandsFeature = data.features[0];
+          const hexPoints = hexCenters.filter((center) => {
+            const inverted = projection.invert(center);
+            return d3.geoContains(netherlandsFeature, inverted);
           });
 
           console.log("Hex Points:", hexPoints); // Debugging: Log hex points
