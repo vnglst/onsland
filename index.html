@@ -12,7 +12,7 @@
       }
 
       .hexagon {
-        stroke: white;
+        stroke: black;
         stroke-width: 0px;
       }
     </style>
@@ -34,7 +34,7 @@
       const path = d3.geoPath().projection(projection);
 
       d3.json("/netherlands.json")
-        .then((data) => {
+        .then((geoData) => {
           const svg = d3.select("svg");
 
           // Create hexbin generator
@@ -55,83 +55,59 @@
           }
 
           // Use d3.geoContains to check if points are within the Netherlands
-          const netherlandsFeature = data.features[0];
+          const netherlandsFeature = geoData.features[0];
           const hexPoints = hexCenters.filter((center) => {
             const inverted = projection.invert(center);
             return d3.geoContains(netherlandsFeature, inverted);
           });
 
-          console.log("Hex Points:", hexPoints); // Debugging: Log hex points
-
           const hexData = hexbin(hexPoints);
 
-          console.log("Hex Data:", hexData); // Debugging: Log hex data
-
-          // Determine the color based on land use percentages
           const totalHexagons = hexData.length;
-          const urbanHex = Math.round(totalHexagons * 0.25); // Urban: 15% residential + 5% commercial/industrial + 5% infrastructure
-          const agricultureHex = Math.round(totalHexagons * 0.65); // Agriculture: 30% arable + 25% pastures + 10% horticulture
-          const naturalHex = Math.round(totalHexagons * 0.15); // Natural: 10% forests + 3% wetlands + 2% dunes/coastal areas
-          const otherHex =
-            totalHexagons - (urbanHex + agricultureHex + naturalHex); // Other: 10% water bodies
 
-          // Subcategories for Urban, Agriculture, and Natural
-          const urbanSubcategories = [
-            "residential",
-            "commercial",
-            "infrastructure",
-          ];
-          const agricultureSubcategories = [
-            "arable",
-            "pastures",
-            "horticulture",
-          ];
-          const naturalSubcategories = ["forests", "wetlands", "coastal"];
+          const colorDistribution = {
+            "Agrarisch gebied": Math.round(totalHexagons * 0.475),
+            Kassen: Math.round(totalHexagons * 0.003),
+            Boomgarden: Math.round(totalHexagons * 0.007),
+            Bossen: Math.round(totalHexagons * 0.075),
+            Water: Math.round(totalHexagons * 0.196),
+            "Stedelijk gebied": Math.round(totalHexagons * 0.119),
+            Infrastructuur: Math.round(totalHexagons * 0.047),
+            Natuur: Math.round(totalHexagons * 0.078),
+          };
 
           const colorScale = d3
             .scaleOrdinal()
             .domain([
-              ...urbanSubcategories,
-              ...agricultureSubcategories,
-              ...naturalSubcategories,
-              "other",
+              "Agrarisch gebied",
+              "Kassen",
+              "Boomgarden",
+              "Bossen",
+              "Water",
+              "Stedelijk gebied",
+              "Infrastructuur",
+              "Natuur",
             ])
             .range([
-              "#FF9999", // residential
-              "#FF6666", // commercial
-              "#FF3333", // infrastructure
-              "#C19A6B", // arable
-              "lightgreen", // pastures
-              "grey", // horticulture
-              "darkgreen", // forests
-              "olive", // wetlands
-              "blue", // coastal
-              "white", // other
+              "#78c794", // Agrarisch gebied
+              "#bedbbe", // Kassen
+              "#9ccca4", // Boomgarden
+              "#d0aa55", // Bossen
+              "#2e6dac", // Water
+              "#7b7681", // Stedelijk gebied
+              "#a88978", // Infrastructuur
+              "#7f7e39", // Natuur
             ]);
 
-          const hexColors = [];
-          hexData.forEach((d, i) => {
-            if (i < urbanHex) {
-              const subIndex = Math.floor(
-                (i / urbanHex) * urbanSubcategories.length
-              );
-              hexColors.push(urbanSubcategories[subIndex]);
-            } else if (i < urbanHex + agricultureHex) {
-              const subIndex = Math.floor(
-                ((i - urbanHex) / agricultureHex) *
-                  agricultureSubcategories.length
-              );
-              hexColors.push(agricultureSubcategories[subIndex]);
-            } else if (i < urbanHex + agricultureHex + naturalHex) {
-              const subIndex = Math.floor(
-                ((i - urbanHex - agricultureHex) / naturalHex) *
-                  naturalSubcategories.length
-              );
-              hexColors.push(naturalSubcategories[subIndex]);
-            } else {
-              hexColors.push("other");
+          let hexColors = [];
+          for (const [key, value] of Object.entries(colorDistribution)) {
+            for (let i = 0; i < value; i++) {
+              hexColors.push(key);
             }
-          });
+          }
+
+          // Group the hexagons by color (land use type)
+          hexColors = hexColors.sort();
 
           // Draw hexagons
           svg
