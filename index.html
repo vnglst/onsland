@@ -12,11 +12,6 @@
         stroke: white;
         stroke-width: 1px;
       }
-      .boundary {
-        fill: none;
-        stroke: black;
-        stroke-width: 1px;
-      }
     </style>
   </head>
   <body>
@@ -24,7 +19,7 @@
     <script>
       const width = 800;
       const height = 800;
-      const hexRadius = 20;
+      const hexRadius = 5;
 
       // Projection and path for the Netherlands
       const projection = d3
@@ -35,19 +30,9 @@
 
       const path = d3.geoPath().projection(projection);
 
-      // Alternative GeoJSON URL for the Netherlands
-      d3.json(
-        "https://raw.githubusercontent.com/johan/world.geo.json/master/countries/NLD.geo.json"
-      )
+      d3.json("/netherlands.json")
         .then((data) => {
           const svg = d3.select("svg");
-
-          // Draw the boundary of the Netherlands for visualization
-          svg
-            .append("path")
-            .datum(data.features[0])
-            .attr("d", path)
-            .attr("class", "boundary");
 
           // Create hexbin generator
           const hexbin = d3
