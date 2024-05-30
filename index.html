@@ -13,7 +13,6 @@
       }
     </style>
   </head>
-  <!-- https://www.cbs.nl/nl-nl/cijfers/detail/80787ned?q=bodemgebruik%20nederland -->
   <body>
     <svg width="800" height="800"></svg>
     <script>
@@ -66,25 +65,65 @@
 
           // Determine the color based on land use percentages
           const totalHexagons = hexData.length;
-          const agricultureHex = Math.round(totalHexagons * 0.65); // Agriculture: 30% arable + 25% pastures + 10% horticulture
           const urbanHex = Math.round(totalHexagons * 0.25); // Urban: 15% residential + 5% commercial/industrial + 5% infrastructure
+          const agricultureHex = Math.round(totalHexagons * 0.65); // Agriculture: 30% arable + 25% pastures + 10% horticulture
           const naturalHex = Math.round(totalHexagons * 0.15); // Natural: 10% forests + 3% wetlands + 2% dunes/coastal areas
           const otherHex =
-            totalHexagons - (agricultureHex + urbanHex + naturalHex); // Other: 10% water bodies
+            totalHexagons - (urbanHex + agricultureHex + naturalHex); // Other: 10% water bodies
+
+          // Subcategories for Urban, Agriculture, and Natural
+          const urbanSubcategories = [
+            "residential",
+            "commercial",
+            "infrastructure",
+          ];
+          const agricultureSubcategories = [
+            "arable",
+            "pastures",
+            "horticulture",
+          ];
+          const naturalSubcategories = ["forests", "wetlands", "coastal"];
 
           const colorScale = d3
             .scaleOrdinal()
-            .domain(["agriculture", "urban", "natural", "other"])
-            .range(["#0000FF", "#FF0000", "#00FF00", "#FFFF00"]); // Blue, Red, Green, Yellow
+            .domain([
+              ...urbanSubcategories,
+              ...agricultureSubcategories,
+              ...naturalSubcategories,
+              "other",
+            ])
+            .range([
+              "#FF9999",
+              "#FF6666",
+              "#FF3333",
+              "#9999FF",
+              "#6666FF",
+              "#3333FF",
+              "#99FF99",
+              "#66FF66",
+              "#33FF33",
+              "#FFFF00",
+            ]); // Shades for subcategories and yellow for other
 
           const hexColors = [];
           hexData.forEach((d, i) => {
-            if (i < agricultureHex) {
-              hexColors.push("agriculture");
-            } else if (i < agricultureHex + urbanHex) {
-              hexColors.push("urban");
-            } else if (i < agricultureHex + urbanHex + naturalHex) {
-              hexColors.push("natural");
+            if (i < urbanHex) {
+              const subIndex = Math.floor(
+                (i / urbanHex) * urbanSubcategories.length
+              );
+              hexColors.push(urbanSubcategories[subIndex]);
+            } else if (i < urbanHex + agricultureHex) {
+              const subIndex = Math.floor(
+                ((i - urbanHex) / agricultureHex) *
+                  agricultureSubcategories.length
+              );
+              hexColors.push(agricultureSubcategories[subIndex]);
+            } else if (i < urbanHex + agricultureHex + naturalHex) {
+              const subIndex = Math.floor(
+                ((i - urbanHex - agricultureHex) / naturalHex) *
+                  naturalSubcategories.length
+              );
+              hexColors.push(naturalSubcategories[subIndex]);
             } else {
               hexColors.push("other");
             }
