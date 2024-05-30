@@ -7,6 +7,10 @@
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
     <style>
+      body {
+        background-color: black;
+      }
+
       .hexagon {
         stroke: white;
         stroke-width: 0px;
@@ -18,7 +22,7 @@
     <script>
       const width = 800;
       const height = 800;
-      const hexRadius = 5;
+      const hexRadius = 3;
 
       // Projection and path for the Netherlands
       const projection = d3
@@ -93,17 +97,17 @@
               "other",
             ])
             .range([
-              "#FF9999",
-              "#FF6666",
-              "#FF3333",
-              "#9999FF",
-              "#6666FF",
-              "#3333FF",
-              "#99FF99",
-              "#66FF66",
-              "#33FF33",
-              "#FFFF00",
-            ]); // Shades for subcategories and yellow for other
+              "#FF9999", // residential
+              "#FF6666", // commercial
+              "#FF3333", // infrastructure
+              "#C19A6B", // arable
+              "lightgreen", // pastures
+              "grey", // horticulture
+              "darkgreen", // forests
+              "olive", // wetlands
+              "blue", // coastal
+              "white", // other
+            ]);
 
           const hexColors = [];
           hexData.forEach((d, i) => {
