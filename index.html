@@ -16,8 +16,8 @@
 
       body {
         display: flex;
-        background-color: black;
-        color: white;
+        background-color: #111;
+        color: #333;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           "Helvetica Neue", Arial, sans-serif;
         flex-direction: row;
@@ -31,7 +31,7 @@
       }
 
       .hexagon {
-        stroke: black;
+        stroke: #333;
         stroke-width: 0px;
       }
     </style>
@@ -40,20 +40,20 @@
     <svg viewBox="0 0 800 800" preserveAspectRatio="xMidYMid meet"></svg>
     <script>
       const categories = [
-        { name: "Agrarisch gebied", color: "#78c794", percentage: 0.475 },
-        { name: "Kassen", color: "#9ccca4", percentage: 0.003 },
-        { name: "Boomgarden", color: "#bedbbe", percentage: 0.007 },
-        { name: "Zonneparken", color: "yellow", percentage: 0.0009 },
-        { name: "Water", color: "#2e6dac", percentage: 0.196 },
-        { name: "Stedelijk gebied", color: "#c6545b", percentage: 0.119 },
-        { name: "Infrastructuur", color: "#a88978", percentage: 0.047 },
         { name: "Natuur", color: "#7f7e39", percentage: 0.078 },
         { name: "Bossen", color: "#b1ca71", percentage: 0.075 },
+        { name: "Infrastructuur", color: "#a88978", percentage: 0.047 },
+        { name: "Stedelijk gebied", color: "#c6545b", percentage: 0.119 },
+        { name: "Water", color: "#2e6dac", percentage: 0.196 },
+        { name: "Agrarisch gebied", color: "#78c794", percentage: 0.475 },
+        { name: "Zonneparken", color: "yellow", percentage: 0.0009 },
+        { name: "Boomgarden", color: "#bedbbe", percentage: 0.007 },
+        { name: "Kassen", color: "#9ccca4", percentage: 0.003 },
       ];
 
       const width = 800;
       const height = 800;
-      const hexRadius = 4;
+      const hexRadius = 3;
 
       // Projection and path for the Netherlands
       const projection = d3
@@ -105,6 +105,10 @@
             const hexagonsPerCategory = Math.round(
               totalHexagons * category.percentage
             );
+
+            console.log(
+              `Category: ${category.name}, hexagons: ${hexagonsPerCategory}`
+            );
             for (let i = 0; i < hexagonsPerCategory; i++) {
               hexColors.push(category.name);
             }
@@ -144,6 +148,30 @@
               .text(category.name)
               .attr("font-size", "14px")
               .attr("fill", "white");
+          });
+
+          // Add labels to the map for categories with percentage > 10%
+          const largeCategories = categories.filter(
+            (category) => category.percentage > 0.07
+          );
+
+          const labels = {
+            Bossen: { x: 520, y: 120 },
+            Natuur: { x: 500, y: 180 },
+            "Stedelijk gebied": { x: 380, y: 260 },
+            Water: { x: 400, y: 350 },
+            "Agrarisch gebied": { x: 275, y: 510 },
+          };
+
+          largeCategories.forEach((category) => {
+            svg
+              .append("text")
+              .attr("x", labels[category.name].x)
+              .attr("y", labels[category.name].y)
+              .text(category.name)
+              .attr("font-size", "18px")
+              .attr("fill", "#EEE")
+              .attr("font-weight", "bold");
           });
         })
         .catch((error) => {
