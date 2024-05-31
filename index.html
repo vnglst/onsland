@@ -114,7 +114,7 @@
 
       const path = d3.geoPath().projection(projection);
 
-      d3.json("/netherlands.json")
+      d3.json("/simplified_netherlands-0.01.json")
         .then((geoData) => {
           const svg = d3.select("svg");
 
