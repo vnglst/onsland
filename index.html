@@ -7,16 +7,19 @@
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
     <style>
-      html {
+      html,
+      body {
         height: 100%;
+        margin: 0;
+        padding: 0;
       }
 
       body {
+        display: flex;
         background-color: black;
         color: white;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           "Helvetica Neue", Arial, sans-serif;
-        display: flex;
         flex-direction: row;
         margin: auto;
         height: 100%;
@@ -24,6 +27,7 @@
 
       svg {
         width: 100%;
+        height: 100%;
       }
 
       .hexagon {
@@ -65,7 +69,7 @@
         { name: "Agrarisch gebied", color: "#78c794", percentage: 0.475 },
         { name: "Kassen", color: "#9ccca4", percentage: 0.003 },
         { name: "Boomgarden", color: "#bedbbe", percentage: 0.007 },
-        { name: "Zonnepanelen", color: "yellow", percentage: 0.0009 },
+        { name: "Zonneparken", color: "yellow", percentage: 0.0009 },
         { name: "Water", color: "#2e6dac", percentage: 0.196 },
         { name: "Stedelijk gebied", color: "#c6545b", percentage: 0.119 },
         { name: "Infrastructuur", color: "#a88978", percentage: 0.047 },
@@ -81,7 +85,7 @@
       const projection = d3
         .geoMercator()
         .center([5.5, 52.2])
-        .scale(7000)
+        .scale(9_000)
         .translate([width / 2, height / 2]);
 
       const path = d3.geoPath().projection(projection);
