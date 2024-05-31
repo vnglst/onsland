@@ -40,15 +40,65 @@
     <svg viewBox="0 0 800 800" preserveAspectRatio="xMidYMid meet"></svg>
     <script>
       const categories = [
-        { name: "Natuur", color: "#7f7e39", percentage: 0.078 },
-        { name: "Bossen", color: "#b1ca71", percentage: 0.075 },
-        { name: "Infrastructuur", color: "#c6545b", percentage: 0.047 },
-        { name: "Stedelijk gebied", color: "#cc666d", percentage: 0.119 },
-        { name: "Water", color: "#629cd5", percentage: 0.196 },
-        { name: "Agrarisch gebied", color: "#78c794", percentage: 0.475 },
-        { name: "Zonneparken", color: "yellow", percentage: 0.0009 },
-        { name: "Boomgarden", color: "#bedbbe", percentage: 0.007 },
-        { name: "Kassen", color: "#9ccca4", percentage: 0.003 },
+        {
+          name: "Natuur",
+          color: "#7f7e39",
+          percentage: 0.078,
+          displayLabel: true,
+          labelPosition: { x: 520, y: 120 },
+        },
+        {
+          name: "Bossen",
+          color: "#b1ca71",
+          percentage: 0.075,
+          displayLabel: true,
+          labelPosition: { x: 500, y: 180 },
+        },
+        {
+          name: "Infrastructuur",
+          color: "#c6545b",
+          percentage: 0.047,
+          displayLabel: false,
+        },
+        {
+          name: "Stedelijk gebied",
+          color: "#cc666d",
+          percentage: 0.119,
+          displayLabel: true,
+          labelPosition: { x: 380, y: 260 },
+        },
+        {
+          name: "Water",
+          color: "#629cd5",
+          percentage: 0.196,
+          displayLabel: true,
+          labelPosition: { x: 400, y: 350 },
+        },
+        {
+          name: "Agrarisch gebied",
+          color: "#78c794",
+          percentage: 0.475,
+          displayLabel: true,
+          labelPosition: { x: 275, y: 510 },
+        },
+        {
+          name: "Zonneparken",
+          color: "yellow",
+          percentage: 0.0009,
+          displayLabel: false,
+        },
+        {
+          name: "Boomgarden",
+          color: "#bedbbe",
+          percentage: 0.007,
+          displayLabel: false,
+        },
+        {
+          name: "Kassen",
+          color: "#9ccca4",
+          percentage: 0.003,
+          displayLabel: false,
+        },
       ];
 
       const width = 800;
@@ -150,28 +200,17 @@
               .attr("fill", "hsl(141, 41%, 95%)");
           });
 
-          // Add labels to the map for categories with percentage > 10%
-          const largeCategories = categories.filter(
-            (category) => category.percentage > 0.07
-          );
-
-          const labels = {
-            Natuur: { x: 520, y: 120 },
-            Bossen: { x: 500, y: 180 },
-            "Stedelijk gebied": { x: 380, y: 260 },
-            Water: { x: 400, y: 350 },
-            "Agrarisch gebied": { x: 275, y: 510 },
-          };
-
-          largeCategories.forEach((category) => {
-            svg
-              .append("text")
-              .attr("x", labels[category.name].x)
-              .attr("y", labels[category.name].y)
-              .text(category.name)
-              .attr("font-size", "18px")
-              .attr("fill", "hsl(141, 41%, 5%)")
-              .attr("font-weight", "bold");
+          categories.forEach((category) => {
+            if (category.displayLabel) {
+              svg
+                .append("text")
+                .attr("x", category.labelPosition.x)
+                .attr("y", category.labelPosition.y)
+                .text(category.name)
+                .attr("font-size", "18px")
+                .attr("fill", "hsl(141, 41%, 5%)")
+                .attr("font-weight", "bold");
+            }
           });
         })
         .catch((error) => {
