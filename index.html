@@ -32,25 +32,23 @@
       }
 
       #legend {
-        position: fixed;
+        position: absolute;
         top: 20px;
         left: 20px;
         display: flex;
         flex-direction: column;
-        margin-left: 20px;
-        margin-bottom: 200px;
         margin-top: auto;
+        gap: 5px;
       }
 
       .legend-item {
         display: flex;
         align-items: center;
-        margin-bottom: 5px;
       }
 
       .legend-hex {
-        width: 15px;
-        height: 15px;
+        width: 10px;
+        height: 10px;
         margin-right: 10px;
       }
 
@@ -120,26 +118,19 @@
 
           const totalHexagons = hexData.length;
 
-          const colorDistribution = {};
-          const domain = [];
-          const range = [];
-
-          categories.forEach((category) => {
-            colorDistribution[category.name] = Math.round(
-              totalHexagons * category.percentage
-            );
-            domain.push(category.name);
-            range.push(category.color);
-          });
-
-          const colorScale = d3.scaleOrdinal().domain(domain).range(range);
+          const names = categories.map((category) => category.name);
+          const colors = categories.map((category) => category.color);
+          const colorScale = d3.scaleOrdinal().domain(names).range(colors);
 
           let hexColors = [];
-          for (const [key, value] of Object.entries(colorDistribution)) {
-            for (let i = 0; i < value; i++) {
-              hexColors.push(key);
+          categories.forEach((category) => {
+            const hexagonsPerCategory = Math.round(
+              totalHexagons * category.percentage
+            );
+            for (let i = 0; i < hexagonsPerCategory; i++) {
+              hexColors.push(category.name);
             }
-          }
+          });
 
           // Draw hexagons
           svg
