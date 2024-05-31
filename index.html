@@ -63,6 +63,18 @@
     <div id="legend"></div>
     <svg viewBox="0 0 800 800" preserveAspectRatio="xMidYMid meet"></svg>
     <script>
+      const categories = [
+        { name: "Agrarisch gebied", color: "#78c794", percentage: 0.475 },
+        { name: "Kassen", color: "#9ccca4", percentage: 0.003 },
+        { name: "Boomgarden", color: "#bedbbe", percentage: 0.007 },
+        { name: "Zonnepanelen", color: "yellow", percentage: 0.0009 },
+        { name: "Water", color: "#2e6dac", percentage: 0.196 },
+        { name: "Stedelijk gebied", color: "#c6545b", percentage: 0.119 },
+        { name: "Infrastructuur", color: "#a88978", percentage: 0.047 },
+        { name: "Natuur", color: "#7f7e39", percentage: 0.078 },
+        { name: "Bossen", color: "#b1ca71", percentage: 0.075 },
+      ];
+
       const width = 800;
       const height = 800;
       const hexRadius = 4;
@@ -108,42 +120,19 @@
 
           const totalHexagons = hexData.length;
 
-          const colorDistribution = {
-            Water: Math.round(totalHexagons * 0.196),
-            "Agrarisch gebied": Math.round(totalHexagons * 0.475),
-            Kassen: Math.round(totalHexagons * 0.003),
-            Boomgarden: Math.round(totalHexagons * 0.007),
-            Zonnepanelen: Math.round(totalHexagons * 0.0009),
-            "Stedelijk gebied": Math.round(totalHexagons * 0.119),
-            Infrastructuur: Math.round(totalHexagons * 0.047),
-            Natuur: Math.round(totalHexagons * 0.078),
-            Bossen: Math.round(totalHexagons * 0.075),
-          };
+          const colorDistribution = {};
+          const domain = [];
+          const range = [];
 
-          const colorScale = d3
-            .scaleOrdinal()
-            .domain([
-              "Water",
-              "Agrarisch gebied",
-              "Kassen",
-              "Boomgarden",
-              "Zonnepanelen",
-              "Stedelijk gebied",
-              "Infrastructuur",
-              "Natuur",
-              "Bossen",
-            ])
-            .range([
-              "#2e6dac", // Water
-              "#78c794", // Agrarisch gebied
-              "#9ccca4", // Kassen
-              "#bedbbe", // Boomgarden
-              "yellow",
-              "#c6545b", // Stedelijk gebied
-              "#a88978", // Infrastructuur
-              "#7f7e39", // Natuur
-              "#b1ca71", // Bossen
-            ]);
+          categories.forEach((category) => {
+            colorDistribution[category.name] = Math.round(
+              totalHexagons * category.percentage
+            );
+            domain.push(category.name);
+            range.push(category.color);
+          });
+
+          const colorScale = d3.scaleOrdinal().domain(domain).range(range);
 
           let hexColors = [];
           for (const [key, value] of Object.entries(colorDistribution)) {
@@ -164,22 +153,9 @@
             .attr("transform", (d) => `translate(${d.x},${d.y})`)
             .attr("fill", (d, i) => colorScale(hexColors[i]));
 
-          // Create legend
-          const legendData = [
-            { name: "Binnenwater", color: "#2e6dac" },
-            { name: "Agrarisch gebied", color: "#78c794" },
-            { name: "Kassen", color: "#bedbbe" },
-            { name: "Boomgarden", color: "#9ccca4" },
-            { name: "Zonneparken", color: "yellow" },
-            { name: "Stedelijk gebied", color: "#c6545b" },
-            { name: "Infrastructuur", color: "#a88978" },
-            { name: "Natuur", color: "#7f7e39" },
-            { name: "Bossen", color: "#b1ca71" },
-          ];
-
           const legend = d3.select("#legend");
 
-          legendData.forEach((item) => {
+          categories.forEach((item) => {
             const legendItem = legend
               .append("div")
               .attr("class", "legend-item");
