@@ -14,7 +14,8 @@
       body {
         background-color: black;
         color: white;
-        font-family: sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
         display: flex;
         flex-direction: row;
         margin: auto;
@@ -54,7 +55,7 @@
       }
 
       .legend-label {
-        font-size: 12px;
+        font-size: 14px;
       }
     </style>
   </head>
@@ -64,7 +65,7 @@
     <script>
       const width = 800;
       const height = 800;
-      const hexRadius = 3;
+      const hexRadius = 4;
 
       // Projection and path for the Netherlands
       const projection = d3
@@ -108,37 +109,40 @@
           const totalHexagons = hexData.length;
 
           const colorDistribution = {
+            Water: Math.round(totalHexagons * 0.196),
             "Agrarisch gebied": Math.round(totalHexagons * 0.475),
             Kassen: Math.round(totalHexagons * 0.003),
             Boomgarden: Math.round(totalHexagons * 0.007),
-            Bossen: Math.round(totalHexagons * 0.075),
-            Water: Math.round(totalHexagons * 0.196),
+            Zonnepanelen: Math.round(totalHexagons * 0.0009),
             "Stedelijk gebied": Math.round(totalHexagons * 0.119),
             Infrastructuur: Math.round(totalHexagons * 0.047),
             Natuur: Math.round(totalHexagons * 0.078),
+            Bossen: Math.round(totalHexagons * 0.075),
           };
 
           const colorScale = d3
             .scaleOrdinal()
             .domain([
+              "Water",
               "Agrarisch gebied",
               "Kassen",
               "Boomgarden",
-              "Bossen",
-              "Water",
+              "Zonnepanelen",
               "Stedelijk gebied",
               "Infrastructuur",
               "Natuur",
+              "Bossen",
             ])
             .range([
-              "#78c794", // Agrarisch gebied
-              "#bedbbe", // Kassen
-              "#9ccca4", // Boomgarden
-              "#d0aa55", // Bossen
               "#2e6dac", // Water
-              "#7b7681", // Stedelijk gebied
+              "#78c794", // Agrarisch gebied
+              "#9ccca4", // Kassen
+              "#bedbbe", // Boomgarden
+              "yellow",
+              "#c6545b", // Stedelijk gebied
               "#a88978", // Infrastructuur
               "#7f7e39", // Natuur
+              "#b1ca71", // Bossen
             ]);
 
           let hexColors = [];
@@ -162,14 +166,15 @@
 
           // Create legend
           const legendData = [
+            { name: "Binnenwater", color: "#2e6dac" },
             { name: "Agrarisch gebied", color: "#78c794" },
             { name: "Kassen", color: "#bedbbe" },
             { name: "Boomgarden", color: "#9ccca4" },
-            { name: "Bossen", color: "#d0aa55" },
-            { name: "Water", color: "#2e6dac" },
-            { name: "Stedelijk gebied", color: "#7b7681" },
+            { name: "Zonneparken", color: "yellow" },
+            { name: "Stedelijk gebied", color: "#c6545b" },
             { name: "Infrastructuur", color: "#a88978" },
             { name: "Natuur", color: "#7f7e39" },
+            { name: "Bossen", color: "#b1ca71" },
           ];
 
           const legend = d3.select("#legend");
@@ -178,7 +183,7 @@
             const legendItem = legend
               .append("div")
               .attr("class", "legend-item");
-
+            5;
             legendItem
               .append("div")
               .attr("class", "legend-hex")
