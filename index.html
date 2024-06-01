@@ -10,14 +10,48 @@
       :root {
         --text-dark: hsl(141, 41%, 5%);
         --text-light: hsl(141, 41%, 95%);
-        --bg-light: hsl(141, 41%, 5%);
+        --bg-light: hsl(51, 100%, 5%);
         --bg-dark: #000;
 
-        --water: hsl(210, 58%, 61%);
-        --nature: hsl(141, 44%, 75%);
-        --infra: hsl(347, 49%, 72%);
-        --urban: hsl(345, 43%, 63%);
-        --agriculture: hsl(51, 54%, 66%);
+        --water-400: hsl(210, 58%, 71%);
+        --water-500: hsl(210, 58%, 61%);
+        --water-600: hsl(210, 58%, 51%);
+
+        --nature-200: hsl(159, 27%, 63%);
+        --nature-300: hsl(159, 27%, 53%);
+        --nature-400: hsl(159, 27%, 43%);
+        --nature-500: hsl(159, 27%, 43%);
+        --nature-600: hsl(159, 27%, 33%);
+        --nature-700: hsl(159, 27%, 23%);
+
+        --infra-100: hsl(0, 0%, 89%);
+        --infra-200: hsl(0, 0%, 79%);
+        --infra-300: hsl(0, 0%, 69%);
+        --infra-400: hsl(0, 0%, 82%);
+        --infra-500: hsl(0, 0%, 72%);
+        --infra-600: hsl(0, 0%, 62%);
+        --infra-700: hsl(0, 0%, 52%);
+
+        --urban-200: hsl(345, 43%, 93%);
+        --urban-300: hsl(345, 43%, 83%);
+        --urban-400: hsl(345, 43%, 73%);
+        --urban-500: hsl(345, 43%, 63%);
+        --urban-600: hsl(345, 43%, 53%);
+        --urban-700: hsl(345, 43%, 43%);
+        --urban-800: hsl(345, 43%, 33%);
+
+        --agriculture-200: hsl(51, 100%, 99%);
+        --agriculture-250: hsl(51, 100%, 95%);
+        --agriculture-300: hsl(51, 100%, 90%);
+        --agriculture-350: hsl(51, 100%, 85%);
+        --agriculture-400: hsl(51, 100%, 80%);
+        --agriculture-450: hsl(51, 100%, 75%);
+        --agriculture-500: hsl(51, 100%, 70%);
+        --agriculture-550: hsl(51, 100%, 65%);
+        --agriculture-600: hsl(51, 100%, 60%);
+        --agriculture-650: hsl(51, 100%, 55%);
+        --agriculture-700: hsl(51, 100%, 50%);
+        --agriculture-750: hsl(51, 100%, 45%);
       }
 
       html,
@@ -40,11 +74,7 @@
       svg {
         width: 100%;
         height: 100%;
-        background: linear-gradient(
-          to bottom,
-          var(--bg-dark),
-          var(--background)
-        );
+        background: linear-gradient(to bottom, var(--bg-dark), var(--bg-light));
       }
 
       .hexagon {
@@ -59,43 +89,124 @@
       const categories = [
         {
           name: "Binnenwater",
-          color: "--water",
+          label: "Binnenwater",
+          color: "--water-400",
           percentage: 0.101461,
           displayLabel: true,
           labelPosition: { x: 470, y: 140 },
         },
         {
-          name: "Natuur",
-          color: "--nature",
-          percentage: 0.135519,
+          name: "Natuur, overig",
+          label: "Natuur",
+          color: "--nature-200",
+          percentage: 0.135519 - 0.046588 - 0.038298 - 0.013264 - 0.00459,
           displayLabel: true,
           labelPosition: { x: 450, y: 210 },
         },
-
         {
-          name: "Wegen en spoorwegen",
-          color: "--infra",
-          percentage: 0.052785,
+          name: "Heide",
+          color: "--nature-300",
+          percentage: 0.00459,
         },
         {
-          name: "Stedelijk gebied",
-          color: "--urban",
-          percentage: 0.166386,
+          name: "Overig gras",
+          color: "--nature-400",
+          percentage: 0.013264,
+        },
+        {
+          name: "Naaldbos",
+          color: "--nature-500",
+          percentage: 0.038298,
+        },
+        {
+          name: "Loofbos",
+          color: "--nature-600",
+          percentage: 0.046588,
+        },
+        {
+          name: "Infrastructuur",
+          color: "--infra-200",
+          percentage: 0.052785 - 0.000548,
+        },
+        {
+          name: "Zonneparken",
+          color: "--agriculture-700",
+          percentage: 0.000548,
+        },
+        {
+          name: "Stedelijk gebied, overig",
+          label: "Stedelijk gebied",
+          color: "--urban-300",
+          percentage: 0.166386 - 0.067443 - 0.026991 - 0.006573 - 0.02495,
           displayLabel: true,
-          labelPosition: { x: 380, y: 320 },
+          labelPosition: { x: 400, y: 295 },
         },
         {
-          name: "Landbouw",
-          color: "--agriculture",
-          percentage: 0.543848,
+          name: "Bebouwing",
+          color: "--urban-400",
+          percentage: 0.006573 + 0.02495,
+        },
+        {
+          name: "Gras bebouwd gebied",
+          color: "--urban-500",
+          percentage: 0.067443 + 0.026991,
+        },
+        {
+          name: "Landbouw, overig",
+          label: "Landbouw",
+          color: "--agriculture-300",
+          percentage:
+            0.543848 -
+            0.283128 -
+            0.05711 -
+            0.04463 -
+            0.006692 -
+            0.008295 -
+            0.003513 -
+            0.043472,
           displayLabel: true,
           labelPosition: { x: 300, y: 500 },
+        },
+        {
+          name: "Granen",
+          color: "--agriculture-350",
+          percentage: 0.043472,
+        },
+        {
+          name: "Glastuinbouw",
+          color: "--agriculture-400",
+          percentage: 0.003513,
+        },
+        {
+          name: "Bloembollen",
+          color: "--agriculture-450",
+          percentage: 0.008295,
+        },
+        {
+          name: "Fruit",
+          color: "--agriculture-500",
+          percentage: 0.006692,
+        },
+        {
+          name: "Aardappelen",
+          color: "--agriculture-550",
+          percentage: 0.04463,
+        },
+        {
+          name: "Mais",
+          color: "--agriculture-600",
+          percentage: 0.05711,
+        },
+        {
+          name: "Agrarisch gras",
+          color: "--agriculture-650",
+          percentage: 0.283128,
         },
       ];
 
       const width = 800;
       const height = 800;
-      const hexRadius = 3;
+      const hexRadius = 4;
 
       // Projection and path for the Netherlands
       const projection = d3
@@ -169,9 +280,7 @@
             .attr("transform", (d) => `translate(${d.x},${d.y})`)
             .attr("fill", (d, i) => `var(${colorScale(hexColors[i])})`);
 
-          const legend = svg
-            .append("g")
-            .attr("transform", `translate(50, 100)`);
+          const legend = svg.append("g").attr("transform", `translate(0, 100)`);
 
           categories.forEach((category, i) => {
             const legendItem = legend
@@ -199,7 +308,7 @@
                 .append("text")
                 .attr("x", category.labelPosition.x)
                 .attr("y", category.labelPosition.y)
-                .text(category.name)
+                .text(category.label)
                 .attr("font-size", "18px")
                 .attr("fill", "var(--text-dark)")
                 .attr("font-weight", "bold");
