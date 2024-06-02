@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Landgebruik in Nederland</title>
+    <title>Land Use in the Netherlands</title>
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3-hexbin@0.2.2"></script>
     <style>
@@ -96,12 +96,12 @@
   </head>
   <body>
     <svg viewBox="0 0 800 800" preserveAspectRatio="xMidYMin"></svg>
-    <h1>Landgebruik in Nederland</h1>
+    <h1>Land Use in the Netherlands</h1>
     <script>
       const categories = [
         {
-          name: "Binnenwater",
-          label: "Binnenwater",
+          name: "Inland Water",
+          label: "Inland Water",
           color: "--water-400",
           // add little bit to make sure it's 100%
           percentage: 0.101461 + 0.000999,
@@ -110,8 +110,8 @@
           labelTarget: { x: 660, y: 100 },
         },
         {
-          name: "Natuur, overig",
-          label: "Natuur",
+          name: "Nature, Other",
+          label: "Nature",
           color: "--nature-200",
           percentage: 0.135519 - 0.046588 - 0.038298 - 0.013264 - 0.00459,
           displayLabel: true,
@@ -119,38 +119,38 @@
           labelTarget: { x: 700, y: 200 },
         },
         {
-          name: "Heide",
+          name: "Heath",
           color: "--nature-300",
           percentage: 0.00459,
         },
         {
-          name: "Overig gras",
+          name: "Other Grass",
           color: "--nature-400",
           percentage: 0.013264,
         },
         {
-          name: "Naaldbos",
+          name: "Coniferous Forest",
           color: "--nature-500",
           percentage: 0.038298,
         },
         {
-          name: "Loofbos",
+          name: "Deciduous Forest",
           color: "--nature-600",
           percentage: 0.046588,
         },
         {
-          name: "Infrastructuur",
+          name: "Infrastructure",
           color: "--infra-200",
           percentage: 0.052785 - 0.000548,
         },
         {
-          name: "Zonneparken",
+          name: "Solar Parks",
           color: "--agriculture-700",
           percentage: 0.000548,
         },
         {
-          name: "Stedelijk gebied, overig",
-          label: "Stedelijk gebied",
+          name: "Urban Area, Other",
+          label: "Urban Area",
           color: "--urban-300",
           percentage: 0.166386 - 0.067443 - 0.026991 - 0.006573 - 0.02495,
           displayLabel: true,
@@ -158,18 +158,18 @@
           labelPosition: { x: 700, y: 320 },
         },
         {
-          name: "Bebouwing",
+          name: "Buildings",
           color: "--urban-400",
           percentage: 0.006573 + 0.02495,
         },
         {
-          name: "Gras bebouwd gebied",
+          name: "Grass in Built-up Area",
           color: "--urban-500",
           percentage: 0.067443 + 0.026991,
         },
         {
-          name: "Landbouw, overig",
-          label: "Landbouw",
+          name: "Agriculture, Other",
+          label: "Agriculture",
           color: "--agriculture-300",
           percentage:
             0.543848 -
@@ -185,17 +185,17 @@
           labelPosition: { x: 650, y: 540 },
         },
         {
-          name: "Granen",
+          name: "Cereals",
           color: "--agriculture-350",
           percentage: 0.043472,
         },
         {
-          name: "Glastuinbouw",
+          name: "Greenhouses",
           color: "--agriculture-400",
           percentage: 0.003513,
         },
         {
-          name: "Bloembollen",
+          name: "Flower Bulbs",
           color: "--agriculture-450",
           percentage: 0.008295,
         },
@@ -205,17 +205,17 @@
           percentage: 0.006692,
         },
         {
-          name: "Aardappelen",
+          name: "Potatoes",
           color: "--agriculture-550",
           percentage: 0.04463,
         },
         {
-          name: "Mais",
+          name: "Corn",
           color: "--agriculture-600",
           percentage: 0.05711,
         },
         {
-          name: "Agrarisch gras",
+          name: "Agricultural Grass",
           color: "--agriculture-650",
           percentage: 0.283128,
         },
