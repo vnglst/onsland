@@ -78,11 +78,13 @@
         margin: 0;
         padding: 32px;
         font-size: 24px;
+        background: var(--bg-light);
       }
 
       svg {
         width: 100%;
-        height: 100%;
+        min-width: 800px;
+        min-height: 800px;
         background: linear-gradient(to bottom, var(--bg-dark), var(--bg-light));
       }
 
@@ -93,15 +95,16 @@
     </style>
   </head>
   <body>
-    <h1>Landgebruik in Nederland</h1>
     <svg viewBox="0 0 800 800" preserveAspectRatio="xMidYMin"></svg>
+    <h1>Landgebruik in Nederland</h1>
     <script>
       const categories = [
         {
           name: "Binnenwater",
           label: "Binnenwater",
           color: "--water-400",
-          percentage: 0.101461,
+          // add little bit to make sure it's 100%
+          percentage: 0.101461 + 0.000999,
           displayLabel: true,
           labelPosition: { x: 470, y: 140 },
         },
@@ -214,9 +217,17 @@
         },
       ];
 
+      // Sanitey check, all percentages should add up to 1
+      const totalPercentage = categories.reduce(
+        (total, category) => total + category.percentage,
+        0
+      );
+
+      console.log("Total percentage:", totalPercentage);
+
       const width = 800;
       const height = 800;
-      const hexRadius = 4;
+      const hexRadius = 7;
 
       // Projection and path for the Netherlands
       const projection = d3
@@ -286,9 +297,19 @@
             .enter()
             .append("path")
             .attr("class", "hexagon")
-            .attr("d", (d) => hexbin.hexagon())
+            .attr("d", (d) => hexbin.hexagon(0))
+            .attr(
+              "transform",
+              (d) => `translate(${d.x + Math.random() * 100},${d.y})`
+            )
+            .attr("fill", "var(--bg-light)")
+            .transition()
+            .delay((d, i) => i * 0.7)
+            .duration(750)
+            .ease(d3.easeCubicOut)
+            .attr("fill", (d, i) => `var(${colorScale(hexColors[i])})`)
             .attr("transform", (d) => `translate(${d.x},${d.y})`)
-            .attr("fill", (d, i) => `var(${colorScale(hexColors[i])})`);
+            .attr("d", (d) => hexbin.hexagon(hexRadius));
 
           const legend = svg.append("g").attr("transform", `translate(50, 50)`);
 
@@ -301,7 +322,12 @@
               .append("path")
               .attr("d", hexbin.hexagon(5)) // half the size of the map hexagons
               .attr("transform", "translate(5,5)") // move it a bit to the right and down
-              .style("fill", `var(${category.color})`);
+              .style("fill", `var(${category.color})`)
+              .attr("opacity", 0)
+              .transition()
+              .delay(i * 40)
+              .duration(500)
+              .attr("opacity", 1);
 
             legendItem
               .append("text")
@@ -309,7 +335,12 @@
               .attr("y", 10)
               .text(category.name)
               .attr("font-size", "14px")
-              .attr("fill", "var(--text-light)");
+              .attr("fill", "var(--text-light)")
+              .attr("opacity", 0)
+              .transition()
+              .delay(i * 40)
+              .duration(500)
+              .attr("opacity", 1);
           });
 
           categories.forEach((category) => {
