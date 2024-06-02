@@ -12,49 +12,24 @@
         --text-light: hsl(141, 41%, 95%);
         --bg-light: hsl(51, 100%, 5%);
         --bg-dark: #000;
-
         --water-400: hsl(210, 58%, 71%);
-        --water-500: hsl(210, 58%, 61%);
-        --water-600: hsl(210, 58%, 51%);
-
         --nature-200: hsl(159, 27%, 63%);
         --nature-300: hsl(159, 27%, 53%);
         --nature-400: hsl(159, 27%, 43%);
         --nature-500: hsl(159, 27%, 43%);
         --nature-600: hsl(159, 27%, 33%);
-        --nature-700: hsl(159, 27%, 23%);
-
-        --infra-100: hsl(0, 0%, 89%);
         --infra-200: hsl(0, 0%, 79%);
-        --infra-300: hsl(0, 0%, 69%);
-        --infra-400: hsl(0, 0%, 82%);
-        --infra-500: hsl(0, 0%, 72%);
-        --infra-600: hsl(0, 0%, 62%);
-        --infra-700: hsl(0, 0%, 52%);
-
-        --urban-200: hsl(345, 43%, 93%);
         --urban-300: hsl(345, 43%, 83%);
         --urban-400: hsl(345, 43%, 73%);
         --urban-500: hsl(345, 43%, 63%);
-        --urban-600: hsl(345, 43%, 53%);
-        --urban-700: hsl(345, 43%, 43%);
-        --urban-800: hsl(345, 43%, 33%);
-
-        --agriculture-200: hsl(51, 100%, 99%);
-        --agriculture-250: hsl(51, 100%, 95%);
         --agriculture-300: hsl(51, 100%, 90%);
         --agriculture-350: hsl(51, 100%, 85%);
         --agriculture-400: hsl(51, 100%, 80%);
         --agriculture-450: hsl(51, 100%, 75%);
         --agriculture-500: hsl(51, 100%, 70%);
-        --agriculture-550: hsl(51, 100%, 65%);
         --agriculture-600: hsl(51, 100%, 60%);
-        --agriculture-650: hsl(51, 100%, 55%);
         --agriculture-700: hsl(51, 100%, 50%);
-        --agriculture-750: hsl(51, 100%, 45%);
         --agriculture-800: hsl(51, 100%, 40%);
-        --agriculture-850: hsl(51, 100%, 35%);
-        --agriculture-900: hsl(51, 100%, 30%);
       }
 
       * {
@@ -63,8 +38,7 @@
 
       html {
         background: linear-gradient(to bottom, var(--bg-dark), var(--bg-light));
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "Helvetica Neue", Arial, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         background-color: var(--bg-dark);
         color: var(--text-light);
       }
@@ -115,8 +89,7 @@
         {
           name: "Inland Water",
           label: "Inland Water",
-          color: "--water-400",
-          // add little bit to make sure it's 100%
+          color: "var(--water-400)",
           percentage: 0.101461 + 0.000999,
           displayLabel: true,
           labelTarget: { x: 660, y: 100 },
@@ -125,121 +98,49 @@
         {
           name: "Nature, Other",
           label: "Nature",
-          color: "--nature-200",
+          color: "var(--nature-200)",
           percentage: 0.135519 - 0.046588 - 0.038298 - 0.013264 - 0.00459,
           displayLabel: true,
           labelTarget: { x: 700, y: 200 },
           labelPosition: { x: 730, y: 200 },
         },
-        {
-          name: "Heath",
-          color: "--nature-300",
-          percentage: 0.00459,
-        },
-        {
-          name: "Other Grass",
-          color: "--nature-400",
-          percentage: 0.013264,
-        },
-        {
-          name: "Coniferous Forest",
-          color: "--nature-500",
-          percentage: 0.038298,
-        },
-        {
-          name: "Deciduous Forest",
-          color: "--nature-600",
-          percentage: 0.046588,
-        },
-        {
-          name: "Infrastructure",
-          color: "--infra-200",
-          percentage: 0.052785 - 0.000548,
-        },
-        {
-          name: "Solar Parks",
-          color: "--agriculture-400",
-          percentage: 0.000548,
-        },
+        { name: "Heath", color: "var(--nature-300)", percentage: 0.00459 },
+        { name: "Other Grass", color: "var(--nature-400)", percentage: 0.013264 },
+        { name: "Coniferous Forest", color: "var(--nature-500)", percentage: 0.038298 },
+        { name: "Deciduous Forest", color: "var(--nature-600)", percentage: 0.046588 },
+        { name: "Infrastructure", color: "var(--infra-200)", percentage: 0.052785 - 0.000548 },
+        { name: "Solar Parks", color: "var(--agriculture-400)", percentage: 0.000548 },
         {
           name: "Urban Area, Other",
           label: "Urban Area",
-          color: "--urban-400",
+          color: "var(--urban-400)",
           percentage: 0.166386 - 0.067443 - 0.026991 - 0.006573 - 0.02495,
           displayLabel: true,
           labelTarget: { x: 650, y: 320 },
           labelPosition: { x: 680, y: 320 },
         },
-        {
-          name: "Buildings",
-          color: "--urban-500",
-          percentage: 0.006573 + 0.02495,
-        },
-        {
-          name: "Grass in Built-up Area",
-          color: "--urban-300",
-          percentage: 0.067443 + 0.026991,
-        },
+        { name: "Buildings", color: "var(--urban-500)", percentage: 0.006573 + 0.02495 },
+        { name: "Grass in Built-up Area", color: "var(--urban-300)", percentage: 0.067443 + 0.026991 },
         {
           name: "Agriculture, Other",
           label: "Agriculture",
-          color: "--agriculture-300",
-          percentage:
-            0.543848 -
-            0.283128 -
-            0.05711 -
-            0.04463 -
-            0.006692 -
-            0.008295 -
-            0.003513 -
-            0.043472,
+          color: "var(--agriculture-300)",
+          percentage: 0.543848 - 0.283128 - 0.05711 - 0.04463 - 0.006692 - 0.008295 - 0.003513 - 0.043472,
           displayLabel: true,
           labelTarget: { x: 535, y: 540 },
           labelPosition: { x: 600, y: 540 },
         },
-        {
-          name: "Cereals",
-          color: "--agriculture-350",
-          percentage: 0.043472,
-        },
-        {
-          name: "Greenhouses",
-          color: "--agriculture-400",
-          percentage: 0.003513,
-        },
-        {
-          name: "Flower Bulbs",
-          color: "--agriculture-450",
-          percentage: 0.008295,
-        },
-        {
-          name: "Fruit",
-          color: "--agriculture-500",
-          percentage: 0.006692,
-        },
-        {
-          name: "Potatoes",
-          color: "--agriculture-600",
-          percentage: 0.04463,
-        },
-        {
-          name: "Corn",
-          color: "--agriculture-700",
-          percentage: 0.05711,
-        },
-        {
-          name: "Agricultural Grass",
-          color: "--agriculture-800",
-          percentage: 0.283128,
-        },
+        { name: "Cereals", color: "var(--agriculture-350)", percentage: 0.043472 },
+        { name: "Greenhouses", color: "var(--agriculture-400)", percentage: 0.003513 },
+        { name: "Flower Bulbs", color: "var(--agriculture-450)", percentage: 0.008295 },
+        { name: "Fruit", color: "var(--agriculture-500)", percentage: 0.006692 },
+        { name: "Potatoes", color: "var(--agriculture-600)", percentage: 0.04463 },
+        { name: "Corn", color: "var(--agriculture-700)", percentage: 0.05711 },
+        { name: "Agricultural Grass", color: "var(--agriculture-800)", percentage: 0.283128 },
       ];
 
-      // Sanitey check, all percentages should add up to 1
-      const totalPercentage = categories.reduce(
-        (total, category) => total + category.percentage,
-        0
-      );
-
+      // Sanity check, all percentages should add up to 1
+      const totalPercentage = categories.reduce((total, category) => total + category.percentage, 0);
       console.log("Total percentage:", totalPercentage);
 
       const width = 800;
@@ -249,7 +150,7 @@
       const projection = d3
         .geoMercator()
         .center([5.5, 52.2])
-        .scale(9_000)
+        .scale(9000)
         .translate([width / 2, height / 2]);
 
       const path = d3.geoPath().projection(projection);
@@ -257,7 +158,6 @@
       d3.json("/simplified_netherlands-0.01.json")
         .then((geoData) => {
           const svg = d3.select("svg");
-
           const hexbin = d3
             .hexbin()
             .radius(hexRadius)
@@ -274,32 +174,22 @@
           }
 
           const netherlandsFeature = geoData.features[0];
-          const hexPoints = hexCenters.filter((center) => {
-            const inverted = projection.invert(center);
-            return d3.geoContains(netherlandsFeature, inverted);
-          });
-
+          const hexPoints = hexCenters.filter((center) =>
+            d3.geoContains(netherlandsFeature, projection.invert(center))
+          );
           const hexData = hexbin(hexPoints);
 
           const totalHexagons = hexData.length;
-
-          const names = categories.map((category) => category.name);
-          const colors = categories.map((category) => category.color);
-          const colorScale = d3.scaleOrdinal().domain(names).range(colors);
+          const colorScale = d3
+            .scaleOrdinal()
+            .domain(categories.map((c) => c.name))
+            .range(categories.map((c) => c.color));
 
           let hexColors = [];
 
           categories.forEach((category) => {
-            const hexagonsPerCategory = Math.round(
-              totalHexagons * category.percentage
-            );
-
-            console.log(
-              `Category: ${category.name}, hexagons: ${hexagonsPerCategory}`
-            );
-            for (let i = 0; i < hexagonsPerCategory; i++) {
-              hexColors.push(category.name);
-            }
+            const hexagonsPerCategory = Math.round(totalHexagons * category.percentage);
+            for (let i = 0; i < hexagonsPerCategory; i++) hexColors.push(category.name);
           });
 
           svg
@@ -310,39 +200,35 @@
             .append("path")
             .attr("class", "hexagon")
             .attr("d", (d) => hexbin.hexagon(0))
-            .attr(
-              "transform",
-              (d) => `translate(${d.x},${d.y - Math.random() * 200})`
-            )
+            .attr("transform", (d) => `translate(${d.x},${d.y - Math.random() * 200})`)
             .attr("fill", "var(--bg-light)")
             .on("mouseenter", function (event, d) {
               const category = hexColors[hexData.indexOf(d)];
+
               svg
                 .selectAll(".hexagon")
                 .filter((_, i) => hexColors[i] === category)
                 .classed("highlight", true);
+
               svg
                 .selectAll(".legend-item")
                 .filter((_, i) => categories[i].name !== category)
                 .classed("dimmed", true);
+
               svg
                 .selectAll(".legend-item")
                 .filter((_, i) => categories[i].name === category)
                 .classed("dimmed", false);
             })
             .on("mouseleave", function (event, d) {
-              const category = hexColors[hexData.indexOf(d)];
-              svg
-                .selectAll(".hexagon")
-                .filter((_, i) => hexColors[i] === category)
-                .classed("highlight", false);
+              svg.selectAll(".hexagon").classed("highlight", false);
               svg.selectAll(".legend-item").classed("dimmed", false);
             })
             .transition()
             .delay((d, i) => i * 0.7)
             .duration(750)
             .ease(d3.easeCubicOut)
-            .attr("fill", (d, i) => `var(${colorScale(hexColors[i])})`)
+            .attr("fill", (d, i) => colorScale(hexColors[i]))
             .attr("transform", (d) => `translate(${d.x},${d.y})`)
             .attr("d", (d) => hexbin.hexagon(hexRadius));
 
@@ -352,16 +238,13 @@
             const legendItem = legend
               .append("g")
               .attr("transform", `translate(0, ${i * 20})`)
-              .attr(
-                "class",
-                `legend-item ${category.name.replace(/\s+/g, "-")}`
-              );
+              .attr("class", `legend-item ${category.name.replace(/\s+/g, "-")}`);
 
             legendItem
               .append("path")
               .attr("d", hexbin.hexagon(5))
               .attr("transform", "translate(5,5)")
-              .style("fill", `var(${category.color})`)
+              .style("fill", category.color)
               .attr("opacity", 0)
               .transition()
               .delay(i * 40)
@@ -372,9 +255,7 @@
               .append("text")
               .attr("x", 20)
               .attr("y", 10)
-              .text(
-                `${category.name}, ${(category.percentage * 100).toFixed(2)}%`
-              )
+              .text(`${category.name}, ${(category.percentage * 100).toFixed(2)}%`)
               .attr("font-size", "14px")
               .attr("fill", "var(--text-light)")
               .attr("opacity", 0)
@@ -384,70 +265,66 @@
               .attr("opacity", 1);
           });
 
-          const categoriesWithLabels = categories.filter(
-            (category) => category.displayLabel
-          );
+          categories
+            .filter((c) => c.displayLabel)
+            .forEach((category, i) => {
+              const labelGroup = svg;
 
-          categoriesWithLabels.forEach((category, i) => {
-            const labelGroup = svg;
+              labelGroup
+                .append("text")
+                .attr("x", category.labelPosition.x)
+                .attr("y", category.labelPosition.y)
+                .text(category.label)
+                .attr("font-size", "18px")
+                .attr("fill", "var(--text-light)")
+                .attr("font-weight", "bold")
+                .attr("opacity", 0)
+                .transition()
+                .delay(totalHexagons * 0.7 + 750 + i * 300)
+                .duration(500)
+                .attr("opacity", 1);
 
-            labelGroup
-              .append("text")
-              .attr("x", category.labelPosition.x)
-              .attr("y", category.labelPosition.y)
-              .text(category.label)
-              .attr("font-size", "18px")
-              .attr("fill", "var(--text-light)")
-              .attr("font-weight", "bold")
-              .attr("opacity", 0)
-              .transition()
-              .delay(totalHexagons * 0.7 + 750 + i * 300)
-              .duration(500)
-              .attr("opacity", 1);
+              labelGroup
+                .append("line")
+                .attr("x1", category.labelPosition.x - 10)
+                .attr("y1", category.labelPosition.y - 5)
+                .attr("x2", category.labelTarget.x - 10)
+                .attr("y2", category.labelTarget.y - 5)
+                .attr("stroke", "var(--text-light)")
+                .attr("stroke-width", 2)
+                .attr("stroke-dasharray", "2,2")
+                .attr("opacity", 0)
+                .transition()
+                .delay(totalHexagons * 0.7 + 750 + i * 300)
+                .duration(500)
+                .attr("opacity", 1);
 
-            const line = labelGroup
-              .append("line")
-              .attr("x1", category.labelPosition.x - 10)
-              .attr("y1", category.labelPosition.y - 5)
-              .attr("x2", category.labelTarget.x - 10)
-              .attr("y2", category.labelTarget.y - 5)
-              .attr("stroke", "var(--text-light)")
-              .attr("stroke-width", 2)
-              .attr("stroke-dasharray", "2,2")
-              .attr("opacity", 0)
-              .transition()
-              .delay(totalHexagons * 0.7 + 750 + i * 300)
-              .duration(500)
-              .attr("opacity", 1);
+              labelGroup
+                .append("circle")
+                .attr("cx", category.labelPosition.x - 10)
+                .attr("cy", category.labelPosition.y - 5)
+                .attr("r", 3)
+                .attr("fill", "var(--text-light)")
+                .attr("opacity", 0)
+                .transition()
+                .delay(totalHexagons * 0.7 + 750 + i * 300)
+                .duration(500)
+                .attr("opacity", 1);
 
-            labelGroup
-              .append("circle")
-              .attr("cx", category.labelPosition.x - 10)
-              .attr("cy", category.labelPosition.y - 5)
-              .attr("r", 3)
-              .attr("fill", "var(--text-light)")
-              .attr("opacity", 0)
-              .transition()
-              .delay(totalHexagons * 0.7 + 750 + i * 300)
-              .duration(500)
-              .attr("opacity", 1);
-
-            labelGroup
-              .append("circle")
-              .attr("cx", category.labelTarget.x - 10)
-              .attr("cy", category.labelTarget.y - 5)
-              .attr("r", 3)
-              .attr("fill", "var(--text-light)")
-              .attr("opacity", 0)
-              .transition()
-              .delay(totalHexagons * 0.7 + 750 + i * 300)
-              .duration(500)
-              .attr("opacity", 1);
-          });
+              labelGroup
+                .append("circle")
+                .attr("cx", category.labelTarget.x - 10)
+                .attr("cy", category.labelTarget.y - 5)
+                .attr("r", 3)
+                .attr("fill", "var(--text-light)")
+                .attr("opacity", 0)
+                .transition()
+                .delay(totalHexagons * 0.7 + 750 + i * 300)
+                .duration(500)
+                .attr("opacity", 1);
+            });
         })
-        .catch((error) => {
-          console.error("Error loading or processing data:", error);
-        });
+        .catch((error) => console.error("Error loading or processing data:", error));
     </script>
   </body>
 </html>
