@@ -155,7 +155,7 @@
           percentage: 0.166386 - 0.067443 - 0.026991 - 0.006573 - 0.02495,
           displayLabel: true,
           labelTarget: { x: 650, y: 320 },
-          labelPosition: { x: 700, y: 320 },
+          labelPosition: { x: 710, y: 320 },
         },
         {
           name: "Buildings",
@@ -181,8 +181,8 @@
             0.003513 -
             0.043472,
           displayLabel: true,
-          labelTarget: { x: 530, y: 540 },
-          labelPosition: { x: 650, y: 540 },
+          labelTarget: { x: 535, y: 540 },
+          labelPosition: { x: 695, y: 540 },
         },
         {
           name: "Cereals",
@@ -347,7 +347,7 @@
               .attr("opacity", 1);
           });
 
-          categories.forEach((category) => {
+          categories.forEach((category, i) => {
             if (category.displayLabel) {
               const labelGroup = svg;
 
@@ -358,7 +358,12 @@
                 .text(category.label)
                 .attr("font-size", "18px")
                 .attr("fill", "var(--text-light)")
-                .attr("font-weight", "bold");
+                .attr("font-weight", "bold")
+                .attr("opacity", 0) // Initially set opacity to 0
+                .transition()
+                .delay(totalHexagons * 0.7 + 750) // Delay until all hexagon animations are complete
+                .duration(500)
+                .attr("opacity", 1); // Fade in the label
 
               const line = labelGroup
                 .append("line")
@@ -368,21 +373,36 @@
                 .attr("y2", category.labelTarget.y - 5)
                 .attr("stroke", "var(--text-light)")
                 .attr("stroke-width", 2)
-                .attr("stroke-dasharray", "2,2");
+                .attr("stroke-dasharray", "2,2")
+                .attr("opacity", 0) // Initially set opacity to 0
+                .transition()
+                .delay(totalHexagons * 0.7 + 750) // Delay until all hexagon animations are complete
+                .duration(500)
+                .attr("opacity", 1); // Fade in the line
 
               labelGroup
                 .append("circle")
                 .attr("cx", category.labelPosition.x - 10)
                 .attr("cy", category.labelPosition.y - 5)
                 .attr("r", 3)
-                .attr("fill", "var(--text-light)");
+                .attr("fill", "var(--text-light)")
+                .attr("opacity", 0) // Initially set opacity to 0
+                .transition()
+                .delay(totalHexagons * 0.7 + 750) // Delay until all hexagon animations are complete
+                .duration(500)
+                .attr("opacity", 1); // Fade in the circle
 
               labelGroup
                 .append("circle")
                 .attr("cx", category.labelTarget.x - 10)
                 .attr("cy", category.labelTarget.y - 5)
                 .attr("r", 3)
-                .attr("fill", "var(--text-light)");
+                .attr("fill", "var(--text-light)")
+                .attr("opacity", 0) // Initially set opacity to 0
+                .transition()
+                .delay(totalHexagons * 0.7 + 750) // Delay until all hexagon animations are complete
+                .duration(500)
+                .attr("opacity", 1); // Fade in the circle
             }
           });
         })
