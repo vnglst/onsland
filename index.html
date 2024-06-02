@@ -100,6 +100,11 @@
       .hexagon {
         stroke: var(--bg-light);
         stroke-width: 0.1px;
+        cursor: pointer;
+      }
+
+      .hexagon.highlight {
+        stroke-width: 1px;
       }
     </style>
   </head>
@@ -316,6 +321,20 @@
               (d) => `translate(${d.x + Math.random() * 100},${d.y})`
             )
             .attr("fill", "var(--bg-light)")
+            .on("mouseenter", function (event, d) {
+              const category = hexColors[hexData.indexOf(d)];
+              svg
+                .selectAll(".hexagon")
+                .filter((_, i) => hexColors[i] === category)
+                .classed("highlight", true);
+            })
+            .on("mouseleave", function (event, d) {
+              const category = hexColors[hexData.indexOf(d)];
+              svg
+                .selectAll(".hexagon")
+                .filter((_, i) => hexColors[i] === category)
+                .classed("highlight", false);
+            })
             .transition()
             .delay((d, i) => i * 0.7)
             .duration(750)
