@@ -109,15 +109,35 @@
     <script>
       const categories = [
         {
-          name: "Inland Water",
-          label: "Inland Water",
-          color: "--water-400",
-          // add little bit to make sure it's 100%
-          percentage: 0.101461 + 0.000999,
-          displayLabel: true,
-          labelTarget: { x: 660, y: 100 },
-          labelPosition: { x: 680, y: 50 },
+          name: "Buildings",
+          color: "--urban-500",
+          percentage: 0.006573 + 0.02495,
         },
+        {
+          name: "Urban Area, Other",
+          label: "Urban Area",
+          color: "--urban-400",
+          percentage: 0.166386 - 0.067443 - 0.026991 - 0.006573 - 0.02495,
+          displayLabel: true,
+          labelTarget: { x: 650, y: 320 },
+          labelPosition: { x: 680, y: 320 },
+        },
+        {
+          name: "Grass in Built-up Area",
+          color: "--urban-300",
+          percentage: 0.067443 + 0.026991,
+        },
+        {
+          name: "Solar Parks",
+          color: "--agriculture-400",
+          percentage: 0.000548,
+        },
+        {
+          name: "Infrastructure",
+          color: "--infra-200",
+          percentage: 0.052785 - 0.000548,
+        },
+
         {
           name: "Nature, Other",
           label: "Nature",
@@ -148,33 +168,14 @@
           percentage: 0.046588,
         },
         {
-          name: "Infrastructure",
-          color: "--infra-200",
-          percentage: 0.052785 - 0.000548,
-        },
-        {
-          name: "Solar Parks",
-          color: "--agriculture-400",
-          percentage: 0.000548,
-        },
-        {
-          name: "Urban Area, Other",
-          label: "Urban Area",
-          color: "--urban-400",
-          percentage: 0.166386 - 0.067443 - 0.026991 - 0.006573 - 0.02495,
+          name: "Inland Water",
+          label: "Inland Water",
+          color: "--water-400",
+          // add little bit to make sure it's 100%
+          percentage: 0.101461 + 0.000999,
           displayLabel: true,
-          labelTarget: { x: 650, y: 320 },
-          labelPosition: { x: 680, y: 320 },
-        },
-        {
-          name: "Buildings",
-          color: "--urban-500",
-          percentage: 0.006573 + 0.02495,
-        },
-        {
-          name: "Grass in Built-up Area",
-          color: "--urban-300",
-          percentage: 0.067443 + 0.026991,
+          labelTarget: { x: 660, y: 100 },
+          labelPosition: { x: 680, y: 50 },
         },
         {
           name: "Agriculture, Other",
@@ -242,7 +243,6 @@
       const height = 800;
       const hexRadius = 7;
 
-      // Projection and path for the Netherlands
       const projection = d3
         .geoMercator()
         .center([5.5, 52.2])
@@ -255,7 +255,6 @@
         .then((geoData) => {
           const svg = d3.select("svg");
 
-          // Create hexbin generator
           const hexbin = d3
             .hexbin()
             .radius(hexRadius)
@@ -264,7 +263,6 @@
               [width, height],
             ]);
 
-          // Function to generate a grid of hexagon centers
           const hexCenters = [];
           for (let y = hexRadius; y < height; y += hexRadius * 1.5) {
             for (let x = hexRadius; x < width; x += hexRadius * Math.sqrt(3)) {
@@ -272,7 +270,6 @@
             }
           }
 
-          // Use d3.geoContains to check if points are within the Netherlands
           const netherlandsFeature = geoData.features[0];
           const hexPoints = hexCenters.filter((center) => {
             const inverted = projection.invert(center);
@@ -293,14 +290,25 @@
             const hexagonsPerCategory = Math.round(
               totalHexagons * category.percentage
             );
-
-            console.log(
-              `Category: ${category.name}, hexagons: ${hexagonsPerCategory}`
-            );
             for (let i = 0; i < hexagonsPerCategory; i++) {
               hexColors.push(category.name);
             }
           });
+
+          // Calculate center of the hexagon grid
+          const hexCenterX = d3.mean(hexData, (d) => d.x - 150);
+          const hexCenterY = d3.mean(hexData, (d) => d.y + 30);
+
+          // Calculate distance and angle for sorting
+          hexData.forEach((d) => {
+            d.distance = Math.sqrt(
+              (d.x - hexCenterX) ** 2 + (d.y - hexCenterY) ** 2
+            );
+            d.angle = Math.atan2(d.y - hexCenterY, d.x - hexCenterX);
+          });
+
+          // Sort by distance and then by angle
+          hexData.sort((a, b) => a.distance - b.distance || a.angle - b.angle);
 
           // Draw hexagons
           svg
@@ -313,15 +321,15 @@
             .attr("d", (d) => hexbin.hexagon(0))
             .attr(
               "transform",
-              (d) => `translate(${d.x + Math.random() * 100},${d.y})`
+              (d) => `translate(${d.x},${d.y - Math.random() * 100})`
             )
             .attr("fill", "var(--bg-light)")
             .transition()
             .delay((d, i) => i * 0.7)
             .duration(750)
             .ease(d3.easeCubicOut)
-            .attr("fill", (d, i) => `var(${colorScale(hexColors[i])})`)
             .attr("transform", (d) => `translate(${d.x},${d.y})`)
+            .attr("fill", (d, i) => `var(${colorScale(hexColors[i])})`)
             .attr("d", (d) => hexbin.hexagon(hexRadius));
 
           const legend = svg.append("g").attr("transform", `translate(50, 50)`);
@@ -356,66 +364,66 @@
               .attr("opacity", 1);
           });
 
-          const categoriesWithLabels = categories.filter(
-            (category) => category.displayLabel
-          );
+          // const categoriesWithLabels = categories.filter(
+          //   (category) => category.displayLabel
+          // );
 
-          categoriesWithLabels.forEach((category, i) => {
-            const labelGroup = svg;
+          // categoriesWithLabels.forEach((category, i) => {
+          //   const labelGroup = svg;
 
-            labelGroup
-              .append("text")
-              .attr("x", category.labelPosition.x)
-              .attr("y", category.labelPosition.y)
-              .text(category.label)
-              .attr("font-size", "18px")
-              .attr("fill", "var(--text-light)")
-              .attr("font-weight", "bold")
-              .attr("opacity", 0)
-              .transition()
-              .delay(totalHexagons * 0.7 + 750 + i * 300)
-              .duration(500)
-              .attr("opacity", 1);
+          //   labelGroup
+          //     .append("text")
+          //     .attr("x", category.labelPosition.x)
+          //     .attr("y", category.labelPosition.y)
+          //     .text(category.label)
+          //     .attr("font-size", "18px")
+          //     .attr("fill", "var(--text-light)")
+          //     .attr("font-weight", "bold")
+          //     .attr("opacity", 0)
+          //     .transition()
+          //     .delay(totalHexagons * 0.7 + 750 + i * 300)
+          //     .duration(500)
+          //     .attr("opacity", 1);
 
-            const line = labelGroup
-              .append("line")
-              .attr("x1", category.labelPosition.x - 10)
-              .attr("y1", category.labelPosition.y - 5)
-              .attr("x2", category.labelTarget.x - 10)
-              .attr("y2", category.labelTarget.y - 5)
-              .attr("stroke", "var(--text-light)")
-              .attr("stroke-width", 2)
-              .attr("stroke-dasharray", "2,2")
-              .attr("opacity", 0)
-              .transition()
-              .delay(totalHexagons * 0.7 + 750 + i * 300)
-              .duration(500)
-              .attr("opacity", 1);
+          //   const line = labelGroup
+          //     .append("line")
+          //     .attr("x1", category.labelPosition.x - 10)
+          //     .attr("y1", category.labelPosition.y - 5)
+          //     .attr("x2", category.labelTarget.x - 10)
+          //     .attr("y2", category.labelTarget.y - 5)
+          //     .attr("stroke", "var(--text-light)")
+          //     .attr("stroke-width", 2)
+          //     .attr("stroke-dasharray", "2,2")
+          //     .attr("opacity", 0)
+          //     .transition()
+          //     .delay(totalHexagons * 0.7 + 750 + i * 300)
+          //     .duration(500)
+          //     .attr("opacity", 1);
 
-            labelGroup
-              .append("circle")
-              .attr("cx", category.labelPosition.x - 10)
-              .attr("cy", category.labelPosition.y - 5)
-              .attr("r", 3)
-              .attr("fill", "var(--text-light)")
-              .attr("opacity", 0)
-              .transition()
-              .delay(totalHexagons * 0.7 + 750 + i * 300)
-              .duration(500)
-              .attr("opacity", 1);
+          //   labelGroup
+          //     .append("circle")
+          //     .attr("cx", category.labelPosition.x - 10)
+          //     .attr("cy", category.labelPosition.y - 5)
+          //     .attr("r", 3)
+          //     .attr("fill", "var(--text-light)")
+          //     .attr("opacity", 0)
+          //     .transition()
+          //     .delay(totalHexagons * 0.7 + 750 + i * 300)
+          //     .duration(500)
+          //     .attr("opacity", 1);
 
-            labelGroup
-              .append("circle")
-              .attr("cx", category.labelTarget.x - 10)
-              .attr("cy", category.labelTarget.y - 5)
-              .attr("r", 3)
-              .attr("fill", "var(--text-light)")
-              .attr("opacity", 0)
-              .transition()
-              .delay(totalHexagons * 0.7 + 750 + i * 300)
-              .duration(500)
-              .attr("opacity", 1);
-          });
+          //   labelGroup
+          //     .append("circle")
+          //     .attr("cx", category.labelTarget.x - 10)
+          //     .attr("cy", category.labelTarget.y - 5)
+          //     .attr("r", 3)
+          //     .attr("fill", "var(--text-light)")
+          //     .attr("opacity", 0)
+          //     .transition()
+          //     .delay(totalHexagons * 0.7 + 750 + i * 300)
+          //     .duration(500)
+          //     .attr("opacity", 1);
+          // });
         })
         .catch((error) => {
           console.error("Error loading or processing data:", error);
