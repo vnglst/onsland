@@ -16,11 +16,11 @@ This will create a webserver that automatically refreshes when you make changes 
 
 ## TODOs
 
-- [ ] move index.html to public/index.html
-- [ ] add source + credits
+- [x] move index.html to public/index.html
 - [x] use concentric areas for the hexagons (see branch feature/randstad/centric)
-- [ ] add hover state for hexagon categories
-- [ ] show percentage without cluttering the visualization
+- [x] add hover state for hexagon categories
+- [x] show percentage without cluttering the visualization
+- [ ] add source + credits
 
 ## Data sources
 
