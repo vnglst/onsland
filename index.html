@@ -106,7 +106,8 @@
           // add little bit to make sure it's 100%
           percentage: 0.101461 + 0.000999,
           displayLabel: true,
-          labelPosition: { x: 470, y: 140 },
+          labelPosition: { x: 700, y: 100 },
+          labelTarget: { x: 660, y: 100 },
         },
         {
           name: "Natuur, overig",
@@ -114,7 +115,8 @@
           color: "--nature-200",
           percentage: 0.135519 - 0.046588 - 0.038298 - 0.013264 - 0.00459,
           displayLabel: true,
-          labelPosition: { x: 450, y: 210 },
+          labelPosition: { x: 750, y: 200 },
+          labelTarget: { x: 700, y: 200 },
         },
         {
           name: "Heide",
@@ -152,7 +154,8 @@
           color: "--urban-300",
           percentage: 0.166386 - 0.067443 - 0.026991 - 0.006573 - 0.02495,
           displayLabel: true,
-          labelPosition: { x: 400, y: 295 },
+          labelTarget: { x: 650, y: 320 },
+          labelPosition: { x: 700, y: 320 },
         },
         {
           name: "Bebouwing",
@@ -178,7 +181,8 @@
             0.003513 -
             0.043472,
           displayLabel: true,
-          labelPosition: { x: 300, y: 500 },
+          labelTarget: { x: 530, y: 540 },
+          labelPosition: { x: 650, y: 540 },
         },
         {
           name: "Granen",
@@ -345,14 +349,40 @@
 
           categories.forEach((category) => {
             if (category.displayLabel) {
-              svg
+              const labelGroup = svg;
+
+              labelGroup
                 .append("text")
                 .attr("x", category.labelPosition.x)
                 .attr("y", category.labelPosition.y)
                 .text(category.label)
                 .attr("font-size", "18px")
-                .attr("fill", "var(--text-dark)")
+                .attr("fill", "var(--text-light)")
                 .attr("font-weight", "bold");
+
+              const line = labelGroup
+                .append("line")
+                .attr("x1", category.labelPosition.x - 10)
+                .attr("y1", category.labelPosition.y - 5)
+                .attr("x2", category.labelTarget.x - 10)
+                .attr("y2", category.labelTarget.y - 5)
+                .attr("stroke", "var(--text-light)")
+                .attr("stroke-width", 2)
+                .attr("stroke-dasharray", "2,2");
+
+              labelGroup
+                .append("circle")
+                .attr("cx", category.labelPosition.x - 10)
+                .attr("cy", category.labelPosition.y - 5)
+                .attr("r", 3)
+                .attr("fill", "var(--text-light)");
+
+              labelGroup
+                .append("circle")
+                .attr("cx", category.labelTarget.x - 10)
+                .attr("cy", category.labelTarget.y - 5)
+                .attr("r", 3)
+                .attr("fill", "var(--text-light)");
             }
           });
         })
