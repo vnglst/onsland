@@ -14,6 +14,14 @@ npx vite
 
 This will create a webserver that automatically refreshes when you make changes to the code.
 
+## TODOs
+
+- [ ] move index.html to public/index.html
+- [ ] add source + credits
+- [x] use concentric areas for the hexagons (see branch feature/randstad/centric)
+- [ ] add hover state for hexagon categories
+- [ ] show percentage without cluttering the visualization
+
 ## Data sources
 
 - [Agricultural land use](https://agrimatie.nl/ThemaResultaat.aspx?subpubID=2232&themaID=2286&indicatorID=2911#:~:text=Van%20het%20totaal%20areaal%20cultuurgrond,0%2C6%25%20voor%20glastuinbouw.&text=De%20basis%20voor%20de%20oppervlakte%20cultuurgrond%20is%20de%20Landbouwtelling.) (2022)
