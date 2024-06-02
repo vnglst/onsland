@@ -57,23 +57,26 @@
         --agriculture-900: hsl(51, 100%, 30%);
       }
 
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
+      * {
+        box-sizing: border-box;
       }
 
-      body {
-        display: flex;
-        background-color: var(--bg-dark);
-        color: var(--text-light);
+      html {
+        background: linear-gradient(to bottom, var(--bg-dark), var(--bg-light));
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           "Helvetica Neue", Arial, sans-serif;
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+      }
+
+      html,
+      body {
+        min-height: 100%;
+        min-width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
         flex-direction: column;
-        margin: auto;
-        height: 100%;
-        width: 100%;
       }
 
       h1 {
@@ -81,20 +84,12 @@
         margin: 0;
         padding: 32px;
         font-size: 24px;
-        background: var(--bg-light);
+        width: 100%;
       }
 
       svg {
-        width: 100%;
-        min-width: 800px;
-        min-height: 800px;
-        background: linear-gradient(to bottom, var(--bg-dark), var(--bg-light));
-      }
-
-      @media (max-width: 800px) {
-        svg {
-          min-width: 100%;
-        }
+        padding: 50px;
+        height: 100vh;
       }
 
       .hexagon {
@@ -105,6 +100,10 @@
 
       .hexagon.highlight {
         stroke-width: 1px;
+      }
+
+      .legend-item.dimmed {
+        opacity: 0.4;
       }
     </style>
   </head>
@@ -247,7 +246,6 @@
       const height = 800;
       const hexRadius = 7;
 
-      // Projection and path for the Netherlands
       const projection = d3
         .geoMercator()
         .center([5.5, 52.2])
@@ -260,7 +258,6 @@
         .then((geoData) => {
           const svg = d3.select("svg");
 
-          // Create hexbin generator
           const hexbin = d3
             .hexbin()
             .radius(hexRadius)
@@ -269,7 +266,6 @@
               [width, height],
             ]);
 
-          // Function to generate a grid of hexagon centers
           const hexCenters = [];
           for (let y = hexRadius; y < height; y += hexRadius * 1.5) {
             for (let x = hexRadius; x < width; x += hexRadius * Math.sqrt(3)) {
@@ -277,7 +273,6 @@
             }
           }
 
-          // Use d3.geoContains to check if points are within the Netherlands
           const netherlandsFeature = geoData.features[0];
           const hexPoints = hexCenters.filter((center) => {
             const inverted = projection.invert(center);
@@ -307,7 +302,6 @@
             }
           });
 
-          // Draw hexagons
           svg
             .append("g")
             .selectAll("path")
@@ -318,7 +312,7 @@
             .attr("d", (d) => hexbin.hexagon(0))
             .attr(
               "transform",
-              (d) => `translate(${d.x + Math.random() * 100},${d.y})`
+              (d) => `translate(${d.x},${d.y - Math.random() * 200})`
             )
             .attr("fill", "var(--bg-light)")
             .on("mouseenter", function (event, d) {
@@ -327,6 +321,14 @@
                 .selectAll(".hexagon")
                 .filter((_, i) => hexColors[i] === category)
                 .classed("highlight", true);
+              svg
+                .selectAll(".legend-item")
+                .filter((_, i) => categories[i].name !== category)
+                .classed("dimmed", true);
+              svg
+                .selectAll(".legend-item")
+                .filter((_, i) => categories[i].name === category)
+                .classed("dimmed", false);
             })
             .on("mouseleave", function (event, d) {
               const category = hexColors[hexData.indexOf(d)];
@@ -334,6 +336,7 @@
                 .selectAll(".hexagon")
                 .filter((_, i) => hexColors[i] === category)
                 .classed("highlight", false);
+              svg.selectAll(".legend-item").classed("dimmed", false);
             })
             .transition()
             .delay((d, i) => i * 0.7)
@@ -343,17 +346,21 @@
             .attr("transform", (d) => `translate(${d.x},${d.y})`)
             .attr("d", (d) => hexbin.hexagon(hexRadius));
 
-          const legend = svg.append("g").attr("transform", `translate(50, 50)`);
+          const legend = svg.append("g").attr("transform", `translate(0, 0)`);
 
           categories.forEach((category, i) => {
             const legendItem = legend
               .append("g")
-              .attr("transform", `translate(0, ${i * 20})`);
+              .attr("transform", `translate(0, ${i * 20})`)
+              .attr(
+                "class",
+                `legend-item ${category.name.replace(/\s+/g, "-")}`
+              );
 
             legendItem
               .append("path")
-              .attr("d", hexbin.hexagon(5)) // half the size of the map hexagons
-              .attr("transform", "translate(5,5)") // move it a bit to the right and down
+              .attr("d", hexbin.hexagon(5))
+              .attr("transform", "translate(5,5)")
               .style("fill", `var(${category.color})`)
               .attr("opacity", 0)
               .transition()
@@ -363,9 +370,11 @@
 
             legendItem
               .append("text")
-              .attr("x", 20) // move the text a bit to the right
+              .attr("x", 20)
               .attr("y", 10)
-              .text(category.name)
+              .text(
+                `${category.name}, ${(category.percentage * 100).toFixed(2)}%`
+              )
               .attr("font-size", "14px")
               .attr("fill", "var(--text-light)")
               .attr("opacity", 0)
