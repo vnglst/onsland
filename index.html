@@ -52,6 +52,9 @@
         --agriculture-650: hsl(51, 100%, 55%);
         --agriculture-700: hsl(51, 100%, 50%);
         --agriculture-750: hsl(51, 100%, 45%);
+        --agriculture-800: hsl(51, 100%, 40%);
+        --agriculture-850: hsl(51, 100%, 35%);
+        --agriculture-900: hsl(51, 100%, 30%);
       }
 
       html,
@@ -112,8 +115,8 @@
           // add little bit to make sure it's 100%
           percentage: 0.101461 + 0.000999,
           displayLabel: true,
-          labelPosition: { x: 700, y: 100 },
           labelTarget: { x: 660, y: 100 },
+          labelPosition: { x: 680, y: 50 },
         },
         {
           name: "Nature, Other",
@@ -121,8 +124,8 @@
           color: "--nature-200",
           percentage: 0.135519 - 0.046588 - 0.038298 - 0.013264 - 0.00459,
           displayLabel: true,
-          labelPosition: { x: 750, y: 200 },
           labelTarget: { x: 700, y: 200 },
+          labelPosition: { x: 730, y: 200 },
         },
         {
           name: "Heath",
@@ -151,26 +154,26 @@
         },
         {
           name: "Solar Parks",
-          color: "--agriculture-700",
+          color: "--agriculture-400",
           percentage: 0.000548,
         },
         {
           name: "Urban Area, Other",
           label: "Urban Area",
-          color: "--urban-300",
+          color: "--urban-400",
           percentage: 0.166386 - 0.067443 - 0.026991 - 0.006573 - 0.02495,
           displayLabel: true,
           labelTarget: { x: 650, y: 320 },
-          labelPosition: { x: 710, y: 320 },
+          labelPosition: { x: 680, y: 320 },
         },
         {
           name: "Buildings",
-          color: "--urban-400",
+          color: "--urban-500",
           percentage: 0.006573 + 0.02495,
         },
         {
           name: "Grass in Built-up Area",
-          color: "--urban-500",
+          color: "--urban-300",
           percentage: 0.067443 + 0.026991,
         },
         {
@@ -188,7 +191,7 @@
             0.043472,
           displayLabel: true,
           labelTarget: { x: 535, y: 540 },
-          labelPosition: { x: 695, y: 540 },
+          labelPosition: { x: 600, y: 540 },
         },
         {
           name: "Cereals",
@@ -212,17 +215,17 @@
         },
         {
           name: "Potatoes",
-          color: "--agriculture-550",
+          color: "--agriculture-600",
           percentage: 0.04463,
         },
         {
           name: "Corn",
-          color: "--agriculture-600",
+          color: "--agriculture-700",
           percentage: 0.05711,
         },
         {
           name: "Agricultural Grass",
-          color: "--agriculture-650",
+          color: "--agriculture-800",
           percentage: 0.283128,
         },
       ];
