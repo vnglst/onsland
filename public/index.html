@@ -210,6 +210,30 @@
             for (let i = 0; i < hexagonsPerCategory; i++) hexColors.push(category.name);
           });
 
+          let selectedCategory = null;
+
+          function highlightHexagons(category) {
+            svg
+              .selectAll(".hexagon")
+              .filter((_, i) => hexColors[i] === category)
+              .classed("highlight", true);
+            svg
+              .selectAll(".legend-item")
+              .filter((_, i) => categories[i].name !== category)
+              .classed("dimmed", true);
+            svg
+              .selectAll(".legend-item")
+              .filter((_, i) => categories[i].name === category)
+              .classed("dimmed", false);
+          }
+
+          function deselectHexagons() {
+            svg.selectAll(".hexagon").classed("highlight", false);
+            svg.selectAll(".legend-item").classed("dimmed", false);
+            selectedCategory = null;
+          }
+
+          // Draw hexagons
           svg
             .append("g")
             .selectAll("path")
@@ -220,27 +244,27 @@
             .attr("d", (d) => hexbin.hexagon(0))
             .attr("transform", (d) => `translate(${d.x},${d.y - Math.random() * 200})`)
             .attr("fill", "var(--bg-light)")
-            .on("mouseenter touchstart", function (event, d) {
+            .on("mouseenter", function (event, d) {
               const category = hexColors[hexData.indexOf(d)];
-
-              svg
-                .selectAll(".hexagon")
-                .filter((_, i) => hexColors[i] === category)
-                .classed("highlight", true);
-
-              svg
-                .selectAll(".legend-item")
-                .filter((_, i) => categories[i].name !== category)
-                .classed("dimmed", true);
-
-              svg
-                .selectAll(".legend-item")
-                .filter((_, i) => categories[i].name === category)
-                .classed("dimmed", false);
+              highlightHexagons(category);
             })
-            .on("mouseleave touchend", function (event, d) {
-              svg.selectAll(".hexagon").classed("highlight", false);
-              svg.selectAll(".legend-item").classed("dimmed", false);
+            .on("mouseleave", function (event, d) {
+              if (!selectedCategory) {
+                deselectHexagons();
+              }
+            })
+            .on("click", function (event, d) {
+              const category = hexColors[hexData.indexOf(d)];
+              if (selectedCategory === category) {
+                // Deselect on second click
+                deselectHexagons();
+              } else {
+                deselectHexagons();
+                highlightHexagons(category);
+                selectedCategory = category;
+              }
+              event.stopPropagation();
+              event.preventDefault();
             })
             .transition()
             .delay((d, i) => i * 0.7)
@@ -249,6 +273,13 @@
             .attr("fill", (d, i) => colorScale(hexColors[i]))
             .attr("transform", (d) => `translate(${d.x},${d.y})`)
             .attr("d", (d) => hexbin.hexagon(hexRadius));
+
+          d3.select("body").on("click", function () {
+            // Deselect all hexagons if clicking outside of hexagon
+            if (selectedCategory !== null) {
+              deselectHexagons();
+            }
+          });
 
           const legend = svg.append("g").attr("transform", `translate(5, 5)`);
 
