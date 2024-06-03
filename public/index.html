@@ -245,7 +245,7 @@
             .attr("transform", (d) => `translate(${d.x},${d.y})`)
             .attr("d", (d) => hexbin.hexagon(hexRadius));
 
-          const legend = svg.append("g").attr("transform", `translate(0, 0)`);
+          const legend = svg.append("g").attr("transform", `translate(5, 5)`);
 
           categories.forEach((category, i) => {
             const legendItem = legend
@@ -255,7 +255,7 @@
 
             legendItem
               .append("path")
-              .attr("d", hexbin.hexagon(5))
+              .attr("d", hexbin.hexagon(hexRadius))
               .attr("transform", "translate(5,5)")
               .style("fill", category.color)
               .attr("opacity", 0)
