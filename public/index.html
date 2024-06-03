@@ -68,6 +68,11 @@
         margin: auto;
       }
 
+      a {
+        text-decoration: underline;
+        color: var(--text-light);
+      }
+
       .hexagon {
         stroke: var(--bg-light);
         stroke-width: 0.1px;
@@ -336,6 +341,28 @@
                 .duration(500)
                 .attr("opacity", 1);
             });
+
+          svg
+            .append("foreignObject")
+            .attr("x", 25)
+            .attr("y", height - 50)
+            .attr("width", 760)
+            .attr("height", 30)
+            .attr("font-size", "12px")
+            .append("xhtml:div")
+            .html(
+              `Data: <a target="_blank" href="https://www.wur.nl/nl/onderzoek-resultaten/onderzoeksinstituten/environmental-research/faciliteiten-producten/kaarten-en-gis-bestanden/landelijk-grondgebruik-nederland.htm">WUR</a>`
+            );
+
+          svg
+            .append("foreignObject")
+            .attr("x", 25)
+            .attr("y", height - 30)
+            .attr("width", 760)
+            .attr("height", 30)
+            .attr("font-size", "12px")
+            .append("xhtml:div")
+            .html(`Visualisation by <a target="_blank" href="https://koenvangilst.nl">Koen van Gilst</a>`);
         })
         .catch((error) => console.error("Error loading or processing data:", error));
     </script>

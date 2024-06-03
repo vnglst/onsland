@@ -20,7 +20,7 @@ This will create a webserver that automatically refreshes when you make changes 
 - [x] use concentric areas for the hexagons (see branch feature/randstad/centric)
 - [x] add hover state for hexagon categories
 - [x] show percentage without cluttering the visualization
-- [ ] add source + credits
+- [x] add source + credits
 - [ ] integrate in website
 - [ ] write article
 - [ ] publish on socials
