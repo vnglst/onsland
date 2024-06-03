@@ -220,7 +220,7 @@
             .attr("d", (d) => hexbin.hexagon(0))
             .attr("transform", (d) => `translate(${d.x},${d.y - Math.random() * 200})`)
             .attr("fill", "var(--bg-light)")
-            .on("mouseenter", function (event, d) {
+            .on("mouseenter touchstart", function (event, d) {
               const category = hexColors[hexData.indexOf(d)];
 
               svg
@@ -238,7 +238,7 @@
                 .filter((_, i) => categories[i].name === category)
                 .classed("dimmed", false);
             })
-            .on("mouseleave", function (event, d) {
+            .on("mouseleave touchend", function (event, d) {
               svg.selectAll(".hexagon").classed("highlight", false);
               svg.selectAll(".legend-item").classed("dimmed", false);
             })
