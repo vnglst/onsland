@@ -90,21 +90,13 @@
       const categories = [
         {
           name: "Inland Water",
-          label: "Inland Water",
           color: "var(--water-400)",
           percentage: 0.101461 + 0.000999,
-          displayLabel: true,
-          labelTarget: { x: 660, y: 100 },
-          labelPosition: { x: 680, y: 50 },
         },
         {
           name: "Nature, Other",
-          label: "Nature",
           color: "var(--nature-200)",
           percentage: 0.135519 - 0.046588 - 0.038298 - 0.013264 - 0.00459,
-          displayLabel: true,
-          labelTarget: { x: 700, y: 200 },
-          labelPosition: { x: 730, y: 200 },
         },
         { name: "Heath", color: "var(--nature-300)", percentage: 0.00459 },
         { name: "Other Grass", color: "var(--nature-400)", percentage: 0.013264 },
@@ -114,23 +106,15 @@
         { name: "Solar Parks", color: "var(--agriculture-400)", percentage: 0.000548 },
         {
           name: "Urban Area, Other",
-          label: "Urban Area",
           color: "var(--urban-400)",
           percentage: 0.166386 - 0.067443 - 0.026991 - 0.006573 - 0.02495,
-          displayLabel: true,
-          labelTarget: { x: 650, y: 320 },
-          labelPosition: { x: 680, y: 320 },
         },
         { name: "Buildings", color: "var(--urban-500)", percentage: 0.006573 + 0.02495 },
         { name: "Grass in Built-up Area", color: "var(--urban-300)", percentage: 0.067443 + 0.026991 },
         {
           name: "Agriculture, Other",
-          label: "Agriculture",
           color: "var(--agriculture-300)",
           percentage: 0.543848 - 0.283128 - 0.05711 - 0.04463 - 0.006692 - 0.008295 - 0.003513 - 0.043472,
-          displayLabel: true,
-          labelTarget: { x: 535, y: 540 },
-          labelPosition: { x: 600, y: 540 },
         },
         { name: "Cereals", color: "var(--agriculture-350)", percentage: 0.043472 },
         { name: "Greenhouses", color: "var(--agriculture-400)", percentage: 0.003513 },
@@ -139,6 +123,33 @@
         { name: "Potatoes", color: "var(--agriculture-600)", percentage: 0.04463 },
         { name: "Corn", color: "var(--agriculture-700)", percentage: 0.05711 },
         { name: "Agricultural Grass", color: "var(--agriculture-800)", percentage: 0.283128 },
+      ];
+
+      const labels = [
+        {
+          label: "Inland Water",
+          displayLabel: true,
+          labelTarget: { x: 660, y: 100 },
+          labelPosition: { x: 680, y: 50 },
+        },
+        {
+          label: "Nature",
+          displayLabel: true,
+          labelTarget: { x: 700, y: 200 },
+          labelPosition: { x: 730, y: 200 },
+        },
+        {
+          label: "Urban Area",
+          displayLabel: true,
+          labelTarget: { x: 650, y: 320 },
+          labelPosition: { x: 680, y: 320 },
+        },
+        {
+          label: "Agriculture",
+          displayLabel: true,
+          labelTarget: { x: 535, y: 540 },
+          labelPosition: { x: 600, y: 540 },
+        },
       ];
 
       // Sanity check, all percentages should add up to 1
@@ -267,7 +278,7 @@
               .attr("opacity", 1);
           });
 
-          categories
+          labels
             .filter((c) => c.displayLabel)
             .forEach((category, i) => {
               const labelGroup = svg;

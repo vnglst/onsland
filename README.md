@@ -21,6 +21,9 @@ This will create a webserver that automatically refreshes when you make changes 
 - [x] add hover state for hexagon categories
 - [x] show percentage without cluttering the visualization
 - [ ] add source + credits
+- [ ] integrate in website
+- [ ] write article
+- [ ] publish on socials
 
 ## Data sources
 
