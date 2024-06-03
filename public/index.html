@@ -356,6 +356,16 @@
 
           svg
             .append("foreignObject")
+            .attr("x", 90)
+            .attr("y", height - 50)
+            .attr("width", 760)
+            .attr("height", 30)
+            .attr("font-size", "12px")
+            .append("xhtml:div")
+            .html(`| Code: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a>`);
+
+          svg
+            .append("foreignObject")
             .attr("x", 25)
             .attr("y", height - 30)
             .attr("width", 760)
