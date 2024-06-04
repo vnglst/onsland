@@ -1,6 +1,6 @@
 # Ons Land
 
-How do we use our land in the Netherlands? This webpage visualizes land use in the Netherlands. Each hexagon represents x% (y hectares) of the total land area of the Netherlands. The color of the hexagon indicates the type of land use.
+How do we use our land in the Netherlands? This webpage visualizes land use in the Netherlands. Each hexagon represents 0.06% (26.647 hectares) of land of the Netherlands. The color of the hexagon indicates the type of land use.
 
 ![Screenshot of the webpage](./version-wageningen-4.png)
 
@@ -21,9 +21,8 @@ This will create a webserver that automatically refreshes when you make changes 
 - [x] add hover state for hexagon categories
 - [x] show percentage without cluttering the visualization
 - [x] add source + credits
-- [ ] integrate in website
+- [x] integrate in website
 - [ ] write article
-- [ ] publish on socials
 
 ## Data sources
 

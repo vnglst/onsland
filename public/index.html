@@ -198,6 +198,11 @@
           const hexData = hexbin(hexPoints);
 
           const totalHexagons = hexData.length;
+
+          console.log("1 hexagon represents", (1 / totalHexagons) * 100, "% of the total area");
+          // Total hectares of the Netherlands: 41,543,000
+          console.log("Hectare per hexagon:", 41543000 / totalHexagons, "hectares");
+
           const colorScale = d3
             .scaleOrdinal()
             .domain(categories.map((c) => c.name))
@@ -403,7 +408,9 @@
             .attr("height", 30)
             .attr("font-size", "12px")
             .append("xhtml:div")
-            .html(`Visualisation by <a target="_blank" href="https://koenvangilst.nl">Koen van Gilst</a>`);
+            .html(
+              `Visualisation by <a target="_blank" href="https://koenvangilst.nl/labs/ons-land">Koen van Gilst</a>`
+            );
         })
         .catch((error) => console.error("Error loading or processing data:", error));
     </script>
