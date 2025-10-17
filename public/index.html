@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Land Use Visualization</title>
+    <title>OnsLand - Land Use In Europe</title>
     <link rel="canonical" href="https:/onsland.koenvangilst.nl" />
     <link rel="stylesheet" href="style.css" />
     <script src="lib/d3.v7.min.js"></script>
@@ -14,13 +14,19 @@
       <h1>
         Land Use in
         <select class="country-dropdown" id="countrySelect">
-          <option value="netherlands">The Netherlands</option>
-          <option value="denmark">Denmark</option>
-          <option value="sweden">Sweden</option>
-          <option value="germany">Germany</option>
-          <option value="croatia">Croatia</option>
+          <option value="austria">Austria</option>
           <option value="belgium">Belgium</option>
+          <option value="croatia">Croatia</option>
+          <option value="denmark">Denmark</option>
+          <option value="finland">Finland</option>
           <option value="france">France</option>
+          <option value="germany">Germany</option>
+          <option value="ireland">Ireland</option>
+          <option value="italy">Italy</option>
+          <option value="netherlands">The Netherlands</option>
+          <option value="portugal">Portugal</option>
+          <option value="spain">Spain</option>
+          <option value="sweden">Sweden</option>
           <option value="uk">United Kingdom</option>
         </select>
       </h1>
@@ -35,7 +41,22 @@
       // Get country from URL query parameter or default to netherlands
       const urlParams = new URLSearchParams(window.location.search);
       const countryFromUrl = urlParams.get("country");
-      const validCountries = ["netherlands", "denmark", "sweden", "germany", "croatia", "belgium", "france", "uk"];
+      const validCountries = [
+        "austria",
+        "belgium",
+        "croatia",
+        "denmark",
+        "finland",
+        "france",
+        "germany",
+        "ireland",
+        "italy",
+        "netherlands",
+        "portugal",
+        "spain",
+        "sweden",
+        "uk",
+      ];
       let currentCountry = validCountries.includes(countryFromUrl) ? countryFromUrl : "netherlands";
 
       // Set dropdown to match URL immediately to prevent flash
@@ -220,7 +241,15 @@
           }
         });
 
-        const legend = svg.append("g").attr("transform", `translate(5, 5)`);
+        // Determine legend position based on config
+        const legendPosition = config.legendPosition || "top";
+        let legendY = 5; // default top position
+        if (legendPosition === "bottom") {
+          // Calculate bottom position: height - (number of categories * 20px per item) - padding
+          legendY = height - categories.length * 20 - 120;
+        }
+
+        const legend = svg.append("g").attr("transform", `translate(5, ${legendY})`);
 
         categories.forEach((category, i) => {
           const legendItem = legend
@@ -426,12 +455,12 @@
           .attr("font-size", "12px")
           .append("xhtml:div")
           .html(
-            `Data: <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table">Eurostat Land Cover 2022</a>`
+            `Data: <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table">Eurostat Land Cover</a>`
           );
 
         svg
           .append("foreignObject")
-          .attr("x", 210)
+          .attr("x", 180)
           .attr("y", height - 50)
           .attr("width", 760)
           .attr("height", 30)
