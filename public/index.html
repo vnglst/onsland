@@ -38,6 +38,9 @@
       const validCountries = ["netherlands", "denmark", "sweden", "germany", "croatia", "belgium", "france", "uk"];
       let currentCountry = validCountries.includes(countryFromUrl) ? countryFromUrl : "netherlands";
 
+      // Set dropdown to match URL immediately to prevent flash
+      document.getElementById("countrySelect").value = currentCountry;
+
       let worldData = null;
       let isSquareLayout = false;
       let hexDataGlobal = null;
@@ -48,8 +51,6 @@
         .then((response) => response.json())
         .then((world) => {
           worldData = world;
-          // Set dropdown to match URL
-          document.getElementById("countrySelect").value = currentCountry;
           renderCountry(currentCountry);
         })
         .catch((error) => console.error("Error loading data:", error));
