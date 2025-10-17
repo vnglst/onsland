@@ -1,0 +1,205 @@
+:root {
+  --text-dark: hsl(141, 41%, 5%);
+  --text-light: hsl(141, 41%, 95%);
+  --bg-light: hsl(51, 100%, 5%);
+  --bg-dark: #000;
+  --water-400: hsl(210, 58%, 71%);
+  --nature-200: hsl(159, 27%, 63%);
+  --nature-300: hsl(159, 27%, 53%);
+  --nature-400: hsl(159, 27%, 43%);
+  --nature-500: hsl(159, 27%, 43%);
+  --nature-600: hsl(159, 27%, 33%);
+  --infra-200: hsl(0, 0%, 79%);
+  --urban-300: hsl(345, 43%, 83%);
+  --urban-400: hsl(345, 43%, 73%);
+  --urban-500: hsl(345, 43%, 63%);
+  --agriculture-300: hsl(51, 100%, 90%);
+  --agriculture-350: hsl(51, 100%, 85%);
+  --agriculture-400: hsl(51, 100%, 80%);
+  --agriculture-450: hsl(51, 100%, 75%);
+  --agriculture-500: hsl(51, 100%, 70%);
+  --agriculture-600: hsl(51, 100%, 60%);
+  --agriculture-650: hsl(51, 100%, 55%);
+  --agriculture-700: hsl(51, 100%, 50%);
+  --agriculture-750: hsl(51, 100%, 45%);
+  --agriculture-775: hsl(51, 100%, 42%);
+  --agriculture-800: hsl(51, 100%, 40%);
+  --agriculture-825: hsl(51, 100%, 38%);
+  --agriculture-850: hsl(51, 100%, 35%);
+  --agriculture-900: hsl(51, 100%, 30%);
+  --agriculture-920: hsl(51, 100%, 28%);
+  --agriculture-950: hsl(51, 100%, 25%);
+  --bare-200: hsl(0, 0%, 85%);
+  --bare-300: hsl(0, 0%, 75%);
+  --bare-400: hsl(0, 0%, 65%);
+  --bare-500: hsl(0, 0%, 55%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: linear-gradient(to bottom, var(--bg-dark), var(--bg-light));
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+}
+
+html,
+body {
+  min-height: 100%;
+  min-width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.country-dropdown {
+  background: var(--bg-dark);
+  border: none;
+  color: var(--text-light);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23f0f0f0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 20px;
+  padding-right: 40px;
+  transition: all 0.2s ease;
+}
+
+.country-dropdown:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.country-dropdown:focus {
+  outline: none;
+  border: none;
+  border-color: var(--text-light);
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.country-dropdown option {
+  background: var(--bg-dark);
+  color: var(--text-light);
+  padding: 10px;
+}
+
+.toggle-button {
+  background: var(--bg-dark);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-light);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+}
+
+.toggle-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.toggle-button:active {
+  transform: scale(0.98);
+}
+
+.toggle-button:focus {
+  outline: none;
+  border-color: var(--text-light);
+}
+
+svg {
+  padding: 25px;
+  max-width: 800px;
+  margin: auto;
+}
+
+a {
+  text-decoration: underline;
+  color: var(--text-light);
+}
+
+.hexagon {
+  stroke: var(--bg-light);
+  stroke-width: 0.1px;
+  cursor: pointer;
+}
+
+.hexagon.highlight {
+  stroke-width: 1px;
+}
+
+.legend-item.dimmed {
+  opacity: 0.4;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  header {
+    padding: 20px 16px;
+  }
+
+  h1 {
+    font-size: 16px;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .country-dropdown {
+    font-size: 14px;
+    padding: 8px 12px;
+    padding-right: 36px;
+    background-size: 18px;
+  }
+
+  .toggle-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 14px;
+  }
+
+  .country-dropdown {
+    font-size: 13px;
+    padding: 6px 10px;
+    padding-right: 32px;
+  }
+
+  .toggle-button {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+}

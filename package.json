@@ -1,0 +1,15 @@
+{
+  "name": "onsland",
+  "version": "1.0.0",
+  "description": "Land cover visualization for European countries",
+  "scripts": {
+    "start": "serve public",
+    "import-db": "node data/import-to-sqlite.js",
+    "query": "node data/query-country.js",
+    "query-denmark": "node data/query-country.js DK"
+  },
+  "dependencies": {
+    "serve": "^14.2.5",
+    "sqlite3": "^5.1.7"
+  }
+}
