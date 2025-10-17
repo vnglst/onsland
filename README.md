@@ -1,34 +1,81 @@
-# Ons Land
+# Ons Land - European Land Use Visualization
 
-I created a visualization to show how we use our land in the Netherlands. Much of our public discourse revolves around land use—housing crisis, sustainable farming, more solar energy? It's all about the land. Each hexagon represents 0.06% (26.647 hectares) of land of the Netherlands. The color of the hexagon indicates the type of land use.
+A hexagonal visualization showing land use patterns across European countries. Each hexagon represents a percentage of the country's total land area, with colors indicating different types of land use (water, woodland, agriculture, urban areas, etc.).
 
-You can find this visualization, how it was made, and the data sources on my website: https://koenvangilst.nl/labs/ons-land
+Originally created to visualize land use in the Netherlands, the project has expanded to include Denmark, Sweden, and Germany, with an interactive country selector.
 
-![Screenshot of the webpage](./version-wageningen-4.png)
+🔗 Live visualization: https://onsland.koenvangilst.nl
+
+## Features
+
+- **Interactive country selector** - Switch between Netherlands, Denmark, Sweden, and Germany
+- **Hexagonal binning** - Each hexagon represents a proportional area of the country
+- **Category highlighting** - Hover or click on hexagons to highlight land use categories
+- **Responsive design** - Optimized for desktop and mobile viewing
+- **Data-driven** - Based on Eurostat Land Cover Statistics 2022
+- **Development mode** - Toggle drag-and-drop label positioning for fine-tuning
+
+## Countries Included
+
+- 🇳🇱 **Netherlands** - Detailed cropland breakdown (cereals, maize, potatoes)
+- 🇩🇰 **Denmark** - Agriculture-focused (44.8% cropland)
+- 🇸🇪 **Sweden** - Forest-dominated (61.7% woodland) with mountain terrain details
+- 🇩🇪 **Germany** - Balanced mix of woodland (34.2%) and cropland (27.4%)
 
 ## Development
 
-Use the following commands to start the development server:
+Start the development server:
 
 ```bash
-npx vite
+npx serve public
 ```
 
-This will create a webserver that automatically refreshes when you make changes to the code.
+Query land cover data for a country (using 2-letter ISO codes):
 
-## TODOs
+```bash
+npm run query <COUNTRY_CODE>
+```
 
-- [x] move index.html to public/index.html
-- [x] use concentric areas for the hexagons (see branch feature/randstad/centric)
-- [x] add hover state for hexagon categories
-- [x] show percentage without cluttering the visualization
-- [x] add source + credits
-- [x] integrate in website
-- [ ] write article
+### Development Mode
 
-## Data sources
+To enable drag-and-drop label positioning:
 
-- [Agricultural land use](https://agrimatie.nl/ThemaResultaat.aspx?subpubID=2232&themaID=2286&indicatorID=2911#:~:text=Van%20het%20totaal%20areaal%20cultuurgrond,0%2C6%25%20voor%20glastuinbouw.&text=De%20basis%20voor%20de%20oppervlakte%20cultuurgrond%20is%20de%20Landbouwtelling.) (2022)
-- [All land use](https://lgn.nl/reports/WENR-rapport%203235_Totaal_LR.pdf) (2021)
-- [CBS Landtelling, agrarisch gebruik](https://www.cbs.nl/nl-nl/cijfers/detail/80780ned#shortTableDescription)
-- Solar parks, according to [Kadaster](https://www.kadaster.nl/documents/d/kadaster.nl/kadaster-onderzoeksrapport-naar-zonneparken-in-nederland-1) (2023)
+1. Open `public/index.html`
+2. Change `const DEV_MODE = false;` to `const DEV_MODE = true;`
+3. Refresh the page
+4. Drag labels and circles to adjust positions
+5. Copy JSON coordinates from console
+6. Update `public/countries.js` with new positions
+
+## Project Structure
+
+```
+public/
+  ├── index.html          # Main visualization page
+  ├── style.css           # Styling and color variables
+  ├── countries.js        # Country configurations and data
+  └── lib/                # Local dependencies (D3, TopoJSON, GeoJSON)
+data/
+  ├── query-country.js    # Script to query Eurostat data
+  └── *.csv              # Raw data files
+```
+
+## Technology Stack
+
+- **D3.js v7** - Data visualization and SVG rendering
+- **d3-hexbin v0.2** - Hexagonal binning
+- **TopoJSON Client v3** - Geographic data conversion
+- **Eurostat API** - Land cover statistics data source
+
+## Data Sources
+
+- **Primary**: [Eurostat Land Cover Statistics 2022](https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table)
+- **Netherlands specific**:
+
+## License
+
+See [LICENSE](./LICENSE) for details.
+
+## Author
+
+Created by [Koen van Gilst](https://koenvangilst.nl)
