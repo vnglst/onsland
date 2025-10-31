@@ -1031,4 +1031,71 @@ const countryConfigs = {
       },
     ],
   },
+  romania: {
+    title: "Land Use in Romania",
+    isoCode: "642",
+    center: [25, 46],
+    scale: 4600,
+    categories: [
+      { name: "Water", color: "var(--water-400)", percentage: 0.016},
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.351},
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.014},
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.027},
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.33},
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.028},
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.213},
+      { name: "Cereals", color: "var(--agriculture-700)", percentage: 0.213},
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.317, },
+    ],
+    labels: [
+      {
+        "label": "Water",
+        "displayLabel": true,
+        "labelTarget": {
+          "x": 550,
+          "y": 160,
+        },
+        "labelPosition": {
+          "x": 598,
+          "y": 120,
+        },
+      },
+      {
+        "label": "Nature",
+        "displayLabel": true,
+        "labelTarget": {
+          "x": 573,
+          "y": 300,
+        },
+        "labelPosition": {
+          "x": 700,
+          "y": 271,
+        },
+      },
+      {
+        "label": "Cities",
+        "displayLabel": true,
+        "labelTarget": {
+          "x": 624,
+          "y": 526,
+        },
+        "labelPosition": {
+          "x": 707,
+          "y": 455,
+        },
+      },
+      {
+        "label": "Agriculture",
+        "displayLabel": true,
+        "labelTarget": {
+          "x": 458,
+          "y": 652,
+        },
+        "labelPosition": {
+          "x": 518,
+          "y": 714,
+        },
+      },
+    ],
+  },
 };
