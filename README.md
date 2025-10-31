@@ -6,6 +6,8 @@ An interactive hexagonal map showing land use patterns across European countries
 
 Originally created to visualize Dutch land use during election debates, this project now lets you compare land use patterns across Europe and see what makes each country unique.
 
+https://github.com/user-attachments/assets/2e425a3a-3fa4-439e-a37d-18a6d4a0877b
+
 ## Contributing
 
 Want to add more countries? The map rendering is already there, and land use data is available in the SQLite database for EU countries. PRs welcome, also for non-European countries!
