@@ -18,9 +18,14 @@ Want to add more countries? The map rendering is already there, and land use dat
    npm run query <COUNTRY_CODE>  # e.g., PL, RO, GR
    ```
 
-2. Add country configuration to [public/countries.js](public/countries.js)
+2. Add the country configuration to [public/countries.js](public/countries.js)
+    - Add the `isoCode` by checking the Wikipedia "[List of ISO 3166 country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)" to get the country's **NUM**eric code
+    - Add the geographic `center` coordinates (longitude and then latitude) for proper map centering
+    - Play with the `scale` value to get the best fit for the hex map
+    - Populate the `categories` percentages from the "Land Cover Categories" of the command's output
+    - Adjust the `labels` for better readability (use the instructions in the [Development](#development) section for help)
 
-3. Add country option to the dropdown in [public/index.html](public/index.html)
+3. Add the country option to the dropdown in [public/index.html](public/index.html)
 
 See the existing country configurations for examples.
 
@@ -33,6 +38,7 @@ npx serve public
 ```
 
 Enable drag-and-drop label positioning by setting `DEV_MODE = true` in [public/index.html](public/index.html).
+Check the browser console for the current label positions to update the configuration.
 
 ## Technology
 
