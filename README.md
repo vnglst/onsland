@@ -42,6 +42,25 @@ npx serve public
 Enable drag-and-drop label positioning by setting `DEV_MODE = true` in [public/index.html](public/index.html).
 Check the browser console for the current label positions to update the configuration.
 
+## Planned Features
+
+Based on user feedback from our community, here are features we're considering:
+
+### High Priority
+- **Country Comparison** - Side-by-side comparison view with rankings by land use category
+- **Absolute Values** - Display hectares/m² alongside percentages for better context when comparing countries of different sizes
+- **Bug Fix** - Square view animation rendering issue when switching views during country transitions
+
+### Medium Priority
+- **Interactive Legend** - Hover over legend items to highlight corresponding hexagons on the map
+- **Geographic View** - Toggle to show actual geographic distribution of land use instead of grid layout
+- **Detailed Categories** - Separate pasture land from other agriculture and distinguish forest types (pending data availability)
+
+### Low Priority
+- **Economic Overlay** - Optional layer showing economic output by land use type
+
+Want to contribute or discuss these features? Open an issue or submit a PR.
+
 ## Technology
 
 Built with D3.js, d3-hexbin, and TopoJSON. Data from [Eurostat Land Cover Statistics 2022](https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table).
