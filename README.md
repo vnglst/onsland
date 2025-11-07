@@ -4,7 +4,7 @@ An interactive hexagonal map showing land use patterns across European countries
 
 🔗 **Live demo**: https://onsland.koenvangilst.nl
 
-Originally created to visualize Dutch land use during election debates, this project now lets you compare land use patterns across Europe and see what makes each country unique.
+Originally created to visualize Dutch land use, this project now lets you compare land use patterns across Europe and see what makes each country unique.
 
 https://github.com/user-attachments/assets/2e425a3a-3fa4-439e-a37d-18a6d4a0877b
 
