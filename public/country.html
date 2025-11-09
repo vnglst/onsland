@@ -26,15 +26,12 @@
     <script src="countries.js"></script>
     <script src="render.js"></script>
     <script>
-      // Development mode: set to true to enable drag-and-drop label positioning
       const DEV_MODE = true;
 
-      // Get country from URL query parameter
       const urlParams = new URLSearchParams(window.location.search);
       const countryFromUrl = urlParams.get("country");
       const currentCountry = validCountries.includes(countryFromUrl) ? countryFromUrl : "netherlands";
 
-      // Update page title and header
       document.getElementById("pageTitle").textContent = `Land Use in ${countryNames[currentCountry]} - OnsLand`;
       document.getElementById("countryTitle").textContent = `Land Use in ${countryNames[currentCountry]}`;
 
@@ -43,7 +40,6 @@
       let hexDataGlobal = null;
       let hexColorsGlobal = null;
 
-      // Load world data
       fetch("lib/countries-50m.json")
         .then((response) => response.json())
         .then((world) => {
@@ -52,12 +48,10 @@
         })
         .catch((error) => console.error("Error loading data:", error));
 
-      // Back button handler
       document.getElementById("backButton").addEventListener("click", () => {
         window.location.href = "index.html";
       });
 
-      // Layout toggle handler
       document.getElementById("layoutToggle").addEventListener("click", () => {
         isSquareLayout = !isSquareLayout;
         document.getElementById("layoutToggle").textContent = isSquareLayout ? "Map View" : "Square View";
@@ -71,7 +65,6 @@
         const categories = config.categories;
         const labels = config.labels;
 
-        // Clear SVG
         const svg = d3.select("#countrySvg");
         svg.selectAll("*").remove();
 
@@ -87,10 +80,7 @@
 
         const path = d3.geoPath().projection(projection);
 
-        // Convert TopoJSON to GeoJSON
         const countries = topojson.feature(worldData, worldData.objects.countries);
-
-        // Find country by ISO code
         const countryFeature = countries.features.find((d) => d.id === config.isoCode);
 
         if (!countryFeature) {
@@ -124,14 +114,12 @@
           .domain(categories.map((c) => c.name))
           .range(categories.map((c) => c.color));
 
-        // Create color array based on percentages - avoid rounding errors
         let hexColors = [];
         let remainingHexagons = totalHexagons;
 
         categories.forEach((category, index) => {
           let hexagonsPerCategory;
           if (index === categories.length - 1) {
-            // Last category gets all remaining hexagons to avoid rounding errors
             hexagonsPerCategory = remainingHexagons;
           } else {
             hexagonsPerCategory = Math.round(totalHexagons * category.percentage);
@@ -167,7 +155,6 @@
           selectedCategory = null;
         }
 
-        // Draw hexagons
         svg
           .append("g")
           .selectAll("path")
@@ -213,7 +200,6 @@
           }
         });
 
-        // Determine legend position based on config
         const legendPosition = config.legendPosition || "top";
         let legendY = 5;
         if (legendPosition === "bottom") {
@@ -258,7 +244,6 @@
           .forEach((category, i) => {
             const labelGroup = svg;
 
-            // Label text
             const labelText = labelGroup
               .append("text")
               .attr("x", category.labelPosition.x)
@@ -271,7 +256,6 @@
               .attr("data-label", category.label)
               .attr("data-type", "position");
 
-            // Line connecting label to target
             const line = labelGroup
               .append("line")
               .attr("x1", category.labelPosition.x - 10)
@@ -290,7 +274,6 @@
               .duration(500)
               .attr("opacity", 1);
 
-            // Target circle
             const targetCircle = labelGroup
               .append("circle")
               .attr("cx", category.labelTarget.x - 10)
@@ -307,7 +290,6 @@
               .duration(500)
               .attr("opacity", 1);
 
-            // Label position circle
             const positionCircle = labelGroup
               .append("circle")
               .attr("cx", category.labelPosition.x - 10)
@@ -324,7 +306,6 @@
               .duration(500)
               .attr("opacity", 1);
 
-            // Only add drag functionality in dev mode
             if (DEV_MODE) {
               const dragPosition = d3
                 .drag()
@@ -382,7 +363,6 @@
               .attr("opacity", 1);
           });
 
-        // Function to print current label coordinates
         function printLabelCoordinates() {
           const coordinates = [];
 
@@ -443,14 +423,12 @@
           .html(`Visualisation by <a target="_blank" href="https://koenvangilst.nl/labs/ons-land">Koen van Gilst</a>`);
       }
 
-      // Toggle between map and square layout
       function toggleLayout() {
         const svg = d3.select("#countrySvg");
         const hexRadius = 6;
         const squareSize = 10;
 
         if (isSquareLayout) {
-          // Animate to square layout
           const squarePositions = calculateSquarePositions(hexDataGlobal.length);
 
           svg
@@ -465,14 +443,12 @@
             .attr("d", squarePath(squareSize))
             .attr("stroke-width", 0);
 
-          // Hide labels in square view
           svg
             .selectAll("text[data-label], line[data-label], circle[data-label]")
             .transition()
             .duration(500)
             .attr("opacity", 0);
         } else {
-          // Animate back to map layout
           const hexbin = d3.hexbin().radius(hexRadius);
 
           svg
@@ -484,7 +460,6 @@
             .attr("d", hexbin.hexagon(hexRadius))
             .attr("stroke-width", 0.1);
 
-          // Show labels in map view
           svg
             .selectAll("text[data-label], line[data-label], circle[data-label]")
             .transition()

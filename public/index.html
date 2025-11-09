@@ -25,7 +25,6 @@
       let isSquareView = false;
       let currentObserver = null;
 
-      // Load world data once
       fetch("lib/countries-50m.json")
         .then((response) => response.json())
         .then((world) => {
@@ -34,12 +33,10 @@
         })
         .catch((error) => console.error("Error loading data:", error));
 
-      // View toggle handler
       document.getElementById("viewToggle").addEventListener("click", () => {
         isSquareView = !isSquareView;
         document.getElementById("viewToggle").textContent = isSquareView ? "Map View" : "Square View";
 
-        // Re-render all loaded countries
         const homepage = document.getElementById("homepage");
         const loadedCards = homepage.querySelectorAll(".country-card:not(.loading)");
 
@@ -83,10 +80,9 @@
           homepage.appendChild(countryCard);
         });
 
-        // Use Intersection Observer for lazy loading
         const observerOptions = {
-          root: null, // viewport
-          rootMargin: "200px", // Start loading 200px before entering viewport
+          root: null,
+          rootMargin: "200px",
           threshold: 0
         };
 
@@ -96,18 +92,15 @@
               const countryCard = entry.target;
               const countryKey = countryCard.getAttribute("data-country");
 
-              // Only render if not already rendered
               if (countryCard.classList.contains("loading")) {
                 renderCountryCard(countryCard, countryKey);
               }
 
-              // Stop observing this card
               observer.unobserve(countryCard);
             }
           });
         }, observerOptions);
 
-        // Observe all country cards
         validCountries.forEach((countryKey) => {
           const countryCard = homepage.querySelector(`[data-country="${countryKey}"]`);
           if (countryCard) {
@@ -117,14 +110,12 @@
       }
 
       function renderCountryCard(countryCard, countryKey) {
-        // Remove loading state
         countryCard.classList.remove("loading");
         const placeholder = countryCard.querySelector(".loading-placeholder");
         const loadingText = countryCard.querySelector(".loading-text");
         if (placeholder) placeholder.remove();
         if (loadingText) loadingText.remove();
 
-        // Create SVG
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svg.setAttribute("viewBox", "0 0 800 800");
         svg.setAttribute("preserveAspectRatio", "xMidYMid");
@@ -132,12 +123,10 @@
 
         countryCard.appendChild(svg);
 
-        // Add click handler - navigate to country page
         countryCard.onclick = () => {
           window.location.href = `country.html?country=${countryKey}`;
         };
 
-        // Render the country based on current view mode
         if (isSquareView) {
           renderCountrySquarePreview(countryKey, svg, worldData);
         } else {

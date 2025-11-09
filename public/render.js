@@ -48,7 +48,7 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
 
   const width = 800;
   const height = 800;
-  const hexRadius = 12; // Larger hexagons = fewer elements = faster rendering
+  const hexRadius = 12;
 
   const projection = d3
     .geoMercator()
@@ -85,14 +85,12 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
     .domain(categories.map((c) => c.name))
     .range(categories.map((c) => c.color));
 
-  // Create color array based on percentages - avoid rounding errors
   let hexColors = [];
   let remainingHexagons = totalHexagons;
 
   categories.forEach((category, index) => {
     let hexagonsPerCategory;
     if (index === categories.length - 1) {
-      // Last category gets all remaining hexagons to avoid rounding errors
       hexagonsPerCategory = remainingHexagons;
     } else {
       hexagonsPerCategory = Math.round(totalHexagons * category.percentage);
@@ -103,7 +101,6 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
     }
   });
 
-  // Draw hexagons without animations
   svg
     .append("g")
     .selectAll("path")
@@ -132,13 +129,10 @@ function renderCountrySquarePreview(countryKey, svgElement, worldData) {
   const height = 800;
   const squareSize = 10;
   const padding = 50;
-
-  // Calculate grid dimensions - use same total "area" for all countries
-  const totalSquares = 2500; // Fixed number for all countries
+  const totalSquares = 2500;
   const cols = Math.ceil(Math.sqrt(totalSquares));
   const rows = Math.ceil(totalSquares / cols);
 
-  // Center the grid
   const gridWidth = cols * squareSize;
   const gridHeight = rows * squareSize;
   const offsetX = (width - gridWidth) / 2;
@@ -149,14 +143,12 @@ function renderCountrySquarePreview(countryKey, svgElement, worldData) {
     .domain(categories.map((c) => c.name))
     .range(categories.map((c) => c.color));
 
-  // Create color array based on percentages - avoid rounding errors
   let squareColors = [];
   let remainingSquares = totalSquares;
 
   categories.forEach((category, index) => {
     let squaresPerCategory;
     if (index === categories.length - 1) {
-      // Last category gets all remaining squares to avoid rounding errors
       squaresPerCategory = remainingSquares;
     } else {
       squaresPerCategory = Math.round(totalSquares * category.percentage);
@@ -167,7 +159,6 @@ function renderCountrySquarePreview(countryKey, svgElement, worldData) {
     }
   });
 
-  // Draw squares
   svg
     .append("g")
     .selectAll("rect")
@@ -183,13 +174,11 @@ function renderCountrySquarePreview(countryKey, svgElement, worldData) {
     .attr("stroke-width", 0.5);
 }
 
-// Generate a square path
 function squarePath(size) {
   const half = size / 2;
   return `M ${-half},${-half} L ${half},${-half} L ${half},${half} L ${-half},${half} Z`;
 }
 
-// Calculate square grid positions
 function calculateSquarePositions(totalHexagons) {
   const width = 800;
   const height = 800;
