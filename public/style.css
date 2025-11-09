@@ -119,6 +119,15 @@ h2 {
   border-color: var(--text-light);
 }
 
+/* Back button text variants */
+.back-text-short {
+  display: none;
+}
+
+.back-text-full {
+  display: inline;
+}
+
 svg {
   padding: 25px;
   max-width: 800px;
@@ -281,6 +290,21 @@ a {
     padding: 8px 16px;
     min-width: 100px;
   }
+
+  /* Show short back button text on mobile */
+  .back-text-full {
+    display: none;
+  }
+
+  .back-text-short {
+    display: inline;
+    font-size: 18px;
+  }
+
+  .back-button {
+    min-width: 50px;
+    padding: 8px 12px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -307,10 +331,19 @@ a {
     min-height: 22px;
   }
 
-  .toggle-button,
-  .back-button {
+  .toggle-button {
     font-size: 13px;
     padding: 6px 12px;
     min-width: 90px;
+  }
+
+  .back-button {
+    font-size: 13px;
+    padding: 6px 10px;
+    min-width: 45px;
+  }
+
+  .back-text-short {
+    font-size: 16px;
   }
 }

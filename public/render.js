@@ -85,10 +85,22 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
     .domain(categories.map((c) => c.name))
     .range(categories.map((c) => c.color));
 
+  // Create color array based on percentages - avoid rounding errors
   let hexColors = [];
-  categories.forEach((category) => {
-    const hexagonsPerCategory = Math.round(totalHexagons * category.percentage);
-    for (let i = 0; i < hexagonsPerCategory; i++) hexColors.push(category.name);
+  let remainingHexagons = totalHexagons;
+
+  categories.forEach((category, index) => {
+    let hexagonsPerCategory;
+    if (index === categories.length - 1) {
+      // Last category gets all remaining hexagons to avoid rounding errors
+      hexagonsPerCategory = remainingHexagons;
+    } else {
+      hexagonsPerCategory = Math.round(totalHexagons * category.percentage);
+      remainingHexagons -= hexagonsPerCategory;
+    }
+    for (let i = 0; i < hexagonsPerCategory; i++) {
+      hexColors.push(category.name);
+    }
   });
 
   // Draw hexagons without animations
@@ -137,10 +149,19 @@ function renderCountrySquarePreview(countryKey, svgElement, worldData) {
     .domain(categories.map((c) => c.name))
     .range(categories.map((c) => c.color));
 
-  // Create color array based on percentages
+  // Create color array based on percentages - avoid rounding errors
   let squareColors = [];
-  categories.forEach((category) => {
-    const squaresPerCategory = Math.round(totalSquares * category.percentage);
+  let remainingSquares = totalSquares;
+
+  categories.forEach((category, index) => {
+    let squaresPerCategory;
+    if (index === categories.length - 1) {
+      // Last category gets all remaining squares to avoid rounding errors
+      squaresPerCategory = remainingSquares;
+    } else {
+      squaresPerCategory = Math.round(totalSquares * category.percentage);
+      remainingSquares -= squaresPerCategory;
+    }
     for (let i = 0; i < squaresPerCategory; i++) {
       squareColors.push(category.name);
     }
