@@ -48,7 +48,7 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
 
   const width = 800;
   const height = 800;
-  const hexRadius = 6;
+  const hexRadius = 12; // Larger hexagons = fewer elements = faster rendering
 
   const projection = d3
     .geoMercator()
