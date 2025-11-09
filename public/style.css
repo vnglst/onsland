@@ -77,19 +77,10 @@ h2 {
   text-align: center;
 }
 
+.homepage-header,
 #countryHeader {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  width: 100%;
-  max-width: 900px;
-  padding: 0 20px;
-}
-
-header > h1 {
-  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
@@ -276,10 +267,7 @@ a {
     padding: 16px 12px;
   }
 
-  header > h1 {
-    padding: 0 12px;
-  }
-
+  .homepage-header,
   #countryHeader {
     padding: 0 12px;
   }
@@ -340,10 +328,7 @@ a {
     padding: 14px 8px;
   }
 
-  header > h1 {
-    padding: 0 8px;
-  }
-
+  .homepage-header,
   #countryHeader {
     padding: 0 8px;
     gap: 8px;
