@@ -58,58 +58,39 @@ body {
 
 header {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 32px;
+  padding: 32px 20px;
   gap: 12px;
-  flex-wrap: wrap;
 }
 
 h1 {
   margin: 0;
+  font-size: 32px;
+  text-align: center;
+}
+
+h2 {
+  margin: 0;
   font-size: 24px;
+  text-align: center;
+}
+
+.homepage-header,
+#countryHeader {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 6px;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  max-width: 900px;
+  padding: 0 20px;
 }
 
-.country-dropdown {
-  background: var(--bg-dark);
-  border: none;
-  color: var(--text-light);
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-size: 24px;
-  font-weight: 600;
-  cursor: pointer;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23f0f0f0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 8px center;
-  background-size: 20px;
-  padding-right: 40px;
-  transition: all 0.2s ease;
-}
-
-.country-dropdown:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.country-dropdown:focus {
-  outline: none;
-  border: none;
-  border-color: var(--text-light);
-  background-color: rgba(255, 255, 255, 0);
-}
-
-.country-dropdown option {
-  background: var(--bg-dark);
-  color: var(--text-light);
-  padding: 10px;
-}
-
-.toggle-button {
+.toggle-button,
+.back-button {
   background: var(--bg-dark);
   border: 2px solid rgba(255, 255, 255, 0.2);
   color: var(--text-light);
@@ -122,18 +103,35 @@ h1 {
   min-width: 120px;
 }
 
-.toggle-button:hover {
+.toggle-button:hover,
+.back-button:hover {
   background-color: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.3);
 }
 
-.toggle-button:active {
+.toggle-button:active,
+.back-button:active {
   transform: scale(0.98);
 }
 
-.toggle-button:focus {
+.toggle-button:focus,
+.back-button:focus {
   outline: none;
   border-color: var(--text-light);
+}
+
+/* Text variants for responsive design */
+.back-text-short,
+.toggle-text-short,
+.title-short {
+  display: none;
+}
+
+.back-text-full,
+.toggle-text-full,
+.title-full,
+.title-prefix {
+  display: inline;
 }
 
 svg {
@@ -161,45 +159,230 @@ a {
   opacity: 0.4;
 }
 
+/* Homepage grid styles */
+.homepage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px 40px;
+  max-width: 100%;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.country-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 320px;
+}
+
+.country-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.country-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text-light);
+  margin-bottom: 8px;
+  min-height: 28px;
+}
+
+.country-preview {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  aspect-ratio: 1 / 1;
+}
+
+.hexagon-preview {
+  pointer-events: none;
+}
+
+/* Loading state */
+.country-card.loading {
+  cursor: default;
+  pointer-events: none;
+}
+
+.country-card.loading:hover {
+  transform: none;
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.loading-placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.loading-text {
+  font-size: 14px;
+  text-align: center;
+  color: var(--text-light);
+  opacity: 0.6;
+  margin-top: 8px;
+}
+
 /* Mobile responsive styles */
+@media (max-width: 1200px) {
+  .homepage-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    padding: 20px 30px;
+  }
+}
+
 @media (max-width: 768px) {
   header {
-    padding: 20px 16px;
+    padding: 16px 12px;
+  }
+
+  .homepage-header,
+  #countryHeader {
+    padding: 0 12px;
   }
 
   h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  #countryHeader {
+    gap: 12px;
+  }
+
+  .homepage-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    padding: 16px 20px;
+  }
+
+  .country-card {
+    min-height: 280px;
+  }
+
+  .country-card-title {
     font-size: 16px;
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
+    min-height: 24px;
   }
 
-  .country-dropdown {
+  .toggle-button,
+  .back-button {
     font-size: 14px;
-    padding: 8px 12px;
-    padding-right: 36px;
-    background-size: 18px;
+    padding: 7px 12px;
+    min-width: 80px;
   }
 
-  .toggle-button {
-    font-size: 14px;
-    padding: 8px 16px;
+  .back-text-full,
+  .toggle-text-full {
+    display: none;
+  }
+
+  .back-text-short,
+  .toggle-text-short {
+    display: inline;
+    font-size: 16px;
+  }
+
+  .back-button {
+    min-width: 44px;
+    padding: 7px 10px;
   }
 }
 
 @media (max-width: 480px) {
-  h1 {
-    font-size: 14px;
+  header {
+    padding: 14px 8px;
   }
 
-  .country-dropdown {
-    font-size: 13px;
-    padding: 6px 10px;
-    padding-right: 32px;
+  .homepage-header,
+  #countryHeader {
+    padding: 0 8px;
+    gap: 8px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  .title-prefix {
+    display: none;
+  }
+
+  .title-full {
+    display: none;
+  }
+
+  .title-short {
+    display: inline;
+  }
+
+  .homepage-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
+  .country-card {
+    min-height: 300px;
+  }
+
+  .country-card-title {
+    font-size: 14px;
+    min-height: 22px;
   }
 
   .toggle-button {
     font-size: 13px;
-    padding: 6px 12px;
+    padding: 6px 10px;
+    min-width: 70px;
+  }
+
+  .back-button {
+    font-size: 14px;
+    padding: 6px 8px;
+    min-width: 40px;
+  }
+
+  .back-text-short,
+  .toggle-text-short {
+    font-size: 15px;
   }
 }
