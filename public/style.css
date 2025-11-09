@@ -61,7 +61,7 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 32px;
+  padding: 32px 20px;
   gap: 12px;
 }
 
@@ -81,11 +81,21 @@ h2 {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+header > h1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  max-width: 900px;
+  padding: 0 20px;
 }
 
 .toggle-button,
@@ -266,6 +276,14 @@ a {
     padding: 16px 12px;
   }
 
+  header > h1 {
+    padding: 0 12px;
+  }
+
+  #countryHeader {
+    padding: 0 12px;
+  }
+
   h1 {
     font-size: 20px;
   }
@@ -319,7 +337,16 @@ a {
 
 @media (max-width: 480px) {
   header {
-    padding: 14px 10px;
+    padding: 14px 8px;
+  }
+
+  header > h1 {
+    padding: 0 8px;
+  }
+
+  #countryHeader {
+    padding: 0 8px;
+    gap: 8px;
   }
 
   h1 {
@@ -328,10 +355,6 @@ a {
 
   h2 {
     font-size: 16px;
-  }
-
-  #countryHeader {
-    gap: 8px;
   }
 
   .title-prefix {
