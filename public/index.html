@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OnsLand - Land Use In Europe</title>
+    <meta name="description" content="Interactive visualization comparing land use across European countries. Explore how different nations utilize their land for agriculture, nature, urban areas, and more.">
     <link rel="canonical" href="https:/onsland.koenvangilst.nl" />
     <link rel="stylesheet" href="style.css" />
     <script defer data-domain="onsland.koenvangilst.nl" src="https://plausible.koenvangilst.nl/js/script.js"></script>
@@ -11,36 +12,22 @@
     <script src="lib/d3-hexbin.v0.2.min.js"></script>
   </head>
   <body>
-    <header>
-      <h1>
-        Land Use in
-        <select class="country-dropdown" id="countrySelect">
-          <option value="austria">Austria</option>
-          <option value="belgium">Belgium</option>
-          <option value="croatia">Croatia</option>
-          <option value="denmark">Denmark</option>
-          <option value="finland">Finland</option>
-          <option value="france">France</option>
-          <option value="germany">Germany</option>
-          <option value="ireland">Ireland</option>
-          <option value="italy">Italy</option>
-          <option value="netherlands">The Netherlands</option>
-          <option value="portugal">Portugal</option>
-          <option value="romania">Romania</option>
-          <option value="spain">Spain</option>
-          <option value="sweden">Sweden</option>
-          <option value="uk">United Kingdom</option>
-        </select>
-      </h1>
-      <button class="toggle-button" id="layoutToggle">Square View</button>
+    <header id="mainHeader">
+      <h1 id="pageTitle">Land Use in Europe</h1>
+      <div id="countryHeader" style="display: none;">
+        <button class="back-button" id="backButton">← Back to Overview</button>
+        <h2 id="countryTitle"></h2>
+        <button class="toggle-button" id="layoutToggle">Square View</button>
+      </div>
     </header>
-    <svg viewBox="0 0 800 800" preserveAspectRatio="xMidYMid"></svg>
+    <div id="homepage" class="homepage-grid"></div>
+    <svg id="countrySvg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid" style="display: none;"></svg>
     <script src="countries.js"></script>
     <script>
       // Development mode: set to true to enable drag-and-drop label positioning
       const DEV_MODE = true;
 
-      // Get country from URL query parameter or default to netherlands
+      // Get country from URL query parameter
       const urlParams = new URLSearchParams(window.location.search);
       const countryFromUrl = urlParams.get("country");
       const validCountries = [
@@ -60,11 +47,26 @@
         "sweden",
         "uk",
       ];
-      let currentCountry = validCountries.includes(countryFromUrl) ? countryFromUrl : "netherlands";
 
-      // Set dropdown to match URL immediately to prevent flash
-      document.getElementById("countrySelect").value = currentCountry;
+      const countryNames = {
+        austria: "Austria",
+        belgium: "Belgium",
+        croatia: "Croatia",
+        denmark: "Denmark",
+        finland: "Finland",
+        france: "France",
+        germany: "Germany",
+        ireland: "Ireland",
+        italy: "Italy",
+        netherlands: "The Netherlands",
+        portugal: "Portugal",
+        romania: "Romania",
+        spain: "Spain",
+        sweden: "Sweden",
+        uk: "United Kingdom",
+      };
 
+      let currentCountry = validCountries.includes(countryFromUrl) ? countryFromUrl : null;
       let worldData = null;
       let isSquareLayout = false;
       let hexDataGlobal = null;
@@ -75,27 +77,24 @@
         .then((response) => response.json())
         .then((world) => {
           worldData = world;
-          renderCountry(currentCountry);
+          if (currentCountry) {
+            showCountryView(currentCountry);
+          } else {
+            showHomepage();
+          }
         })
         .catch((error) => console.error("Error loading data:", error));
 
-      // Country dropdown change handler
-      const countrySelect = document.getElementById("countrySelect");
-      countrySelect.addEventListener("change", (event) => {
-        const country = event.target.value;
-        if (country === currentCountry) return;
-
-        // Update country and re-render
-        currentCountry = country;
-        isSquareLayout = false;
-        document.getElementById("layoutToggle").textContent = "Square View";
-
-        // Update URL with new country parameter
+      // Back button handler
+      const backButton = document.getElementById("backButton");
+      backButton.addEventListener("click", () => {
+        // Update URL to remove country parameter
         const newUrl = new URL(window.location);
-        newUrl.searchParams.set("country", country);
+        newUrl.searchParams.delete("country");
         window.history.pushState({}, "", newUrl);
 
-        renderCountry(country);
+        currentCountry = null;
+        showHomepage();
       });
 
       // Layout toggle handler
@@ -106,6 +105,132 @@
         toggleLayout();
       });
 
+      // Show homepage with all countries
+      function showHomepage() {
+        document.getElementById("pageTitle").style.display = "block";
+        document.getElementById("countryHeader").style.display = "none";
+        document.getElementById("homepage").style.display = "grid";
+        document.getElementById("countrySvg").style.display = "none";
+
+        const homepage = document.getElementById("homepage");
+        homepage.innerHTML = "";
+
+        validCountries.forEach((countryKey) => {
+          const countryCard = document.createElement("div");
+          countryCard.className = "country-card";
+          countryCard.onclick = () => {
+            // Update URL with country parameter
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set("country", countryKey);
+            window.history.pushState({}, "", newUrl);
+
+            currentCountry = countryKey;
+            showCountryView(countryKey);
+          };
+
+          const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+          svg.setAttribute("viewBox", "0 0 800 800");
+          svg.setAttribute("preserveAspectRatio", "xMidYMid");
+          svg.classList.add("country-preview");
+
+          const title = document.createElement("div");
+          title.className = "country-card-title";
+          title.textContent = countryNames[countryKey];
+
+          countryCard.appendChild(title);
+          countryCard.appendChild(svg);
+          homepage.appendChild(countryCard);
+
+          // Render small version of country
+          renderCountryPreview(countryKey, svg);
+        });
+      }
+
+      // Show individual country view
+      function showCountryView(countryKey) {
+        document.getElementById("pageTitle").style.display = "none";
+        document.getElementById("countryHeader").style.display = "flex";
+        document.getElementById("homepage").style.display = "none";
+        document.getElementById("countrySvg").style.display = "block";
+
+        document.getElementById("countryTitle").textContent = `Land Use in ${countryNames[countryKey]}`;
+
+        isSquareLayout = false;
+        document.getElementById("layoutToggle").textContent = "Square View";
+
+        renderCountry(countryKey);
+      }
+
+      // Render small preview version of a country (no animations, no interactions)
+      function renderCountryPreview(countryKey, svgElement) {
+        if (!worldData) return;
+
+        const config = countryConfigs[countryKey];
+        const categories = config.categories;
+
+        const svg = d3.select(svgElement);
+        svg.selectAll("*").remove();
+
+        const width = 800;
+        const height = 800;
+        const hexRadius = 6;
+
+        const projection = d3
+          .geoMercator()
+          .center(config.center)
+          .scale(config.scale)
+          .translate([width / 2, height / 2]);
+
+        const countries = topojson.feature(worldData, worldData.objects.countries);
+        const countryFeature = countries.features.find((d) => d.id === config.isoCode);
+
+        if (!countryFeature) return;
+
+        const hexbin = d3
+          .hexbin()
+          .radius(hexRadius)
+          .extent([
+            [0, 0],
+            [width, height],
+          ]);
+
+        const hexCenters = [];
+        for (let y = hexRadius; y < height; y += hexRadius * 1.5) {
+          for (let x = hexRadius; x < width; x += hexRadius * Math.sqrt(3)) {
+            hexCenters.push([x, y]);
+          }
+        }
+
+        const hexPoints = hexCenters.filter((center) => d3.geoContains(countryFeature, projection.invert(center)));
+        const hexData = hexbin(hexPoints);
+        const totalHexagons = hexData.length;
+
+        const colorScale = d3
+          .scaleOrdinal()
+          .domain(categories.map((c) => c.name))
+          .range(categories.map((c) => c.color));
+
+        let hexColors = [];
+        categories.forEach((category) => {
+          const hexagonsPerCategory = Math.round(totalHexagons * category.percentage);
+          for (let i = 0; i < hexagonsPerCategory; i++) hexColors.push(category.name);
+        });
+
+        // Draw hexagons without animations
+        svg
+          .append("g")
+          .selectAll("path")
+          .data(hexData)
+          .enter()
+          .append("path")
+          .attr("class", "hexagon-preview")
+          .attr("d", (d) => hexbin.hexagon(hexRadius))
+          .attr("transform", (d) => `translate(${d.x},${d.y})`)
+          .attr("fill", (d, i) => colorScale(hexColors[i]))
+          .attr("stroke", "var(--bg-light)")
+          .attr("stroke-width", 0.1);
+      }
+
       function renderCountry(countryKey) {
         if (!worldData) return;
 
@@ -114,7 +239,7 @@
         const labels = config.labels;
 
         // Clear SVG
-        const svg = d3.select("svg");
+        const svg = d3.select("#countrySvg");
         svg.selectAll("*").remove();
 
         const width = 800;
@@ -523,7 +648,7 @@
 
       // Toggle between map and square layout
       function toggleLayout() {
-        const svg = d3.select("svg");
+        const svg = d3.select("#countrySvg");
         const hexRadius = 6;
         const squareSize = 10;
 
