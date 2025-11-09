@@ -106,6 +106,62 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
     .attr("stroke-width", 0.1);
 }
 
+// Render square preview with uniform grid (no country shape, just data viz)
+function renderCountrySquarePreview(countryKey, svgElement, worldData) {
+  if (!worldData) return;
+
+  const config = countryConfigs[countryKey];
+  const categories = config.categories;
+
+  const svg = d3.select(svgElement);
+  svg.selectAll("*").remove();
+
+  const width = 800;
+  const height = 800;
+  const squareSize = 10;
+  const padding = 50;
+
+  // Calculate grid dimensions - use same total "area" for all countries
+  const totalSquares = 2500; // Fixed number for all countries
+  const cols = Math.ceil(Math.sqrt(totalSquares));
+  const rows = Math.ceil(totalSquares / cols);
+
+  // Center the grid
+  const gridWidth = cols * squareSize;
+  const gridHeight = rows * squareSize;
+  const offsetX = (width - gridWidth) / 2;
+  const offsetY = (height - gridHeight) / 2;
+
+  const colorScale = d3
+    .scaleOrdinal()
+    .domain(categories.map((c) => c.name))
+    .range(categories.map((c) => c.color));
+
+  // Create color array based on percentages
+  let squareColors = [];
+  categories.forEach((category) => {
+    const squaresPerCategory = Math.round(totalSquares * category.percentage);
+    for (let i = 0; i < squaresPerCategory; i++) {
+      squareColors.push(category.name);
+    }
+  });
+
+  // Draw squares
+  svg
+    .append("g")
+    .selectAll("rect")
+    .data(d3.range(totalSquares))
+    .enter()
+    .append("rect")
+    .attr("x", (d, i) => offsetX + (i % cols) * squareSize)
+    .attr("y", (d, i) => offsetY + Math.floor(i / cols) * squareSize)
+    .attr("width", squareSize)
+    .attr("height", squareSize)
+    .attr("fill", (d, i) => squareColors[i] ? colorScale(squareColors[i]) : "var(--bg-light)")
+    .attr("stroke", "var(--bg-light)")
+    .attr("stroke-width", 0.5);
+}
+
 // Generate a square path
 function squarePath(size) {
   const half = size / 2;

@@ -15,12 +15,15 @@
   <body>
     <header>
       <h1>Land Use in Europe</h1>
+      <button class="toggle-button" id="viewToggle">Square View</button>
     </header>
     <div id="homepage" class="homepage-grid"></div>
     <script src="countries.js"></script>
     <script src="render.js"></script>
     <script>
       let worldData = null;
+      let isSquareView = false;
+      let currentObserver = null;
 
       // Load world data once
       fetch("lib/countries-50m.json")
@@ -30,6 +33,28 @@
           showHomepage();
         })
         .catch((error) => console.error("Error loading data:", error));
+
+      // View toggle handler
+      document.getElementById("viewToggle").addEventListener("click", () => {
+        isSquareView = !isSquareView;
+        document.getElementById("viewToggle").textContent = isSquareView ? "Map View" : "Square View";
+
+        // Re-render all loaded countries
+        const homepage = document.getElementById("homepage");
+        const loadedCards = homepage.querySelectorAll(".country-card:not(.loading)");
+
+        loadedCards.forEach(card => {
+          const countryKey = card.getAttribute("data-country");
+          const svg = card.querySelector("svg");
+          if (svg && countryKey) {
+            if (isSquareView) {
+              renderCountrySquarePreview(countryKey, svg, worldData);
+            } else {
+              renderCountryPreview(countryKey, svg, worldData);
+            }
+          }
+        });
+      });
 
       function showHomepage() {
         const homepage = document.getElementById("homepage");
@@ -112,8 +137,12 @@
           window.location.href = `country.html?country=${countryKey}`;
         };
 
-        // Render the country
-        renderCountryPreview(countryKey, svg, worldData);
+        // Render the country based on current view mode
+        if (isSquareView) {
+          renderCountrySquarePreview(countryKey, svg, worldData);
+        } else {
+          renderCountryPreview(countryKey, svg, worldData);
+        }
       }
     </script>
   </body>
