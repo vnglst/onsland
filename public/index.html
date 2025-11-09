@@ -14,8 +14,14 @@
   </head>
   <body>
     <header>
-      <h1>Land Use in Europe</h1>
-      <button class="toggle-button" id="viewToggle">Square View</button>
+      <h1>
+        <span class="title-full">Land Use in Europe</span>
+        <span class="title-short">Europe</span>
+      </h1>
+      <button class="toggle-button" id="viewToggle">
+        <span class="toggle-text-full">Square View</span>
+        <span class="toggle-text-short">Square</span>
+      </button>
     </header>
     <div id="homepage" class="homepage-grid"></div>
     <script src="countries.js"></script>
@@ -35,7 +41,10 @@
 
       document.getElementById("viewToggle").addEventListener("click", () => {
         isSquareView = !isSquareView;
-        document.getElementById("viewToggle").textContent = isSquareView ? "Map View" : "Square View";
+        const fullText = isSquareView ? "Map View" : "Square View";
+        const shortText = isSquareView ? "Map" : "Square";
+        document.querySelector("#viewToggle .toggle-text-full").textContent = fullText;
+        document.querySelector("#viewToggle .toggle-text-short").textContent = shortText;
 
         const homepage = document.getElementById("homepage");
         const loadedCards = homepage.querySelectorAll(".country-card:not(.loading)");

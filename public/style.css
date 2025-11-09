@@ -119,12 +119,17 @@ h2 {
   border-color: var(--text-light);
 }
 
-/* Back button text variants */
-.back-text-short {
+/* Text variants for responsive design */
+.back-text-short,
+.toggle-text-short,
+.title-short {
   display: none;
 }
 
-.back-text-full {
+.back-text-full,
+.toggle-text-full,
+.title-full,
+.title-prefix {
   display: inline;
 }
 
@@ -258,15 +263,19 @@ a {
 
 @media (max-width: 768px) {
   header {
-    padding: 20px 16px;
+    padding: 16px 12px;
   }
 
   h1 {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   h2 {
     font-size: 18px;
+  }
+
+  #countryHeader {
+    gap: 12px;
   }
 
   .homepage-grid {
@@ -287,33 +296,54 @@ a {
   .toggle-button,
   .back-button {
     font-size: 14px;
-    padding: 8px 16px;
-    min-width: 100px;
+    padding: 7px 12px;
+    min-width: 80px;
   }
 
-  /* Show short back button text on mobile */
-  .back-text-full {
+  .back-text-full,
+  .toggle-text-full {
     display: none;
   }
 
-  .back-text-short {
+  .back-text-short,
+  .toggle-text-short {
     display: inline;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .back-button {
-    min-width: 50px;
-    padding: 8px 12px;
+    min-width: 44px;
+    padding: 7px 10px;
   }
 }
 
 @media (max-width: 480px) {
+  header {
+    padding: 14px 10px;
+  }
+
   h1 {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   h2 {
     font-size: 16px;
+  }
+
+  #countryHeader {
+    gap: 8px;
+  }
+
+  .title-prefix {
+    display: none;
+  }
+
+  .title-full {
+    display: none;
+  }
+
+  .title-short {
+    display: inline;
   }
 
   .homepage-grid {
@@ -333,17 +363,18 @@ a {
 
   .toggle-button {
     font-size: 13px;
-    padding: 6px 12px;
-    min-width: 90px;
+    padding: 6px 10px;
+    min-width: 70px;
   }
 
   .back-button {
-    font-size: 13px;
-    padding: 6px 10px;
-    min-width: 45px;
+    font-size: 14px;
+    padding: 6px 8px;
+    min-width: 40px;
   }
 
-  .back-text-short {
-    font-size: 16px;
+  .back-text-short,
+  .toggle-text-short {
+    font-size: 15px;
   }
 }

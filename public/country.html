@@ -18,8 +18,14 @@
           <span class="back-text-full">← Back to Overview</span>
           <span class="back-text-short">←</span>
         </button>
-        <h1 id="countryTitle">Land Use</h1>
-        <button class="toggle-button" id="layoutToggle">Square View</button>
+        <h1 id="countryTitle">
+          <span class="title-prefix">Land Use in </span>
+          <span class="title-country"></span>
+        </h1>
+        <button class="toggle-button" id="layoutToggle">
+          <span class="toggle-text-full">Square View</span>
+          <span class="toggle-text-short">Square</span>
+        </button>
       </div>
     </header>
     <svg id="countrySvg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid"></svg>
@@ -33,7 +39,7 @@
       const currentCountry = validCountries.includes(countryFromUrl) ? countryFromUrl : "netherlands";
 
       document.getElementById("pageTitle").textContent = `Land Use in ${countryNames[currentCountry]} - OnsLand`;
-      document.getElementById("countryTitle").textContent = `Land Use in ${countryNames[currentCountry]}`;
+      document.querySelector(".title-country").textContent = countryNames[currentCountry];
 
       let worldData = null;
       let isSquareLayout = false;
@@ -54,7 +60,10 @@
 
       document.getElementById("layoutToggle").addEventListener("click", () => {
         isSquareLayout = !isSquareLayout;
-        document.getElementById("layoutToggle").textContent = isSquareLayout ? "Map View" : "Square View";
+        const fullText = isSquareLayout ? "Map View" : "Square View";
+        const shortText = isSquareLayout ? "Map" : "Square";
+        document.querySelector(".toggle-text-full").textContent = fullText;
+        document.querySelector(".toggle-text-short").textContent = shortText;
         toggleLayout();
       });
 
