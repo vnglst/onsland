@@ -115,34 +115,65 @@
         const homepage = document.getElementById("homepage");
         homepage.innerHTML = "";
 
+        // Create all cards with loading placeholders first to prevent layout shift
         validCountries.forEach((countryKey) => {
           const countryCard = document.createElement("div");
-          countryCard.className = "country-card";
-          countryCard.onclick = () => {
-            // Update URL with country parameter
-            const newUrl = new URL(window.location);
-            newUrl.searchParams.set("country", countryKey);
-            window.history.pushState({}, "", newUrl);
-
-            currentCountry = countryKey;
-            showCountryView(countryKey);
-          };
-
-          const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-          svg.setAttribute("viewBox", "0 0 800 800");
-          svg.setAttribute("preserveAspectRatio", "xMidYMid");
-          svg.classList.add("country-preview");
+          countryCard.className = "country-card loading";
+          countryCard.setAttribute("data-country", countryKey);
 
           const title = document.createElement("div");
           title.className = "country-card-title";
           title.textContent = countryNames[countryKey];
 
-          countryCard.appendChild(title);
-          countryCard.appendChild(svg);
-          homepage.appendChild(countryCard);
+          const placeholder = document.createElement("div");
+          placeholder.className = "loading-placeholder";
 
-          // Render small version of country
-          renderCountryPreview(countryKey, svg);
+          const loadingText = document.createElement("div");
+          loadingText.className = "loading-text";
+          loadingText.textContent = "Loading...";
+
+          countryCard.appendChild(title);
+          countryCard.appendChild(placeholder);
+          countryCard.appendChild(loadingText);
+          homepage.appendChild(countryCard);
+        });
+
+        // Render countries progressively
+        validCountries.forEach((countryKey, index) => {
+          // Stagger rendering to avoid blocking the UI
+          setTimeout(() => {
+            const countryCard = homepage.querySelector(`[data-country="${countryKey}"]`);
+            if (!countryCard) return;
+
+            // Remove loading state
+            countryCard.classList.remove("loading");
+            const placeholder = countryCard.querySelector(".loading-placeholder");
+            const loadingText = countryCard.querySelector(".loading-text");
+            if (placeholder) placeholder.remove();
+            if (loadingText) loadingText.remove();
+
+            // Create SVG
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("viewBox", "0 0 800 800");
+            svg.setAttribute("preserveAspectRatio", "xMidYMid");
+            svg.classList.add("country-preview");
+
+            countryCard.appendChild(svg);
+
+            // Add click handler
+            countryCard.onclick = () => {
+              // Update URL with country parameter
+              const newUrl = new URL(window.location);
+              newUrl.searchParams.set("country", countryKey);
+              window.history.pushState({}, "", newUrl);
+
+              currentCountry = countryKey;
+              showCountryView(countryKey);
+            };
+
+            // Render the country
+            renderCountryPreview(countryKey, svg);
+          }, index * 50); // Stagger by 50ms
         });
       }
 
