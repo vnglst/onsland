@@ -29,6 +29,20 @@
       </div>
     </header>
     <svg id="countrySvg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid"></svg>
+    <footer>
+      <div class="footer-content">
+        <span>Data: <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table">Eurostat Land Cover</a></span>
+        <span class="footer-separator">|</span>
+        <span>Code: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a></span>
+        <button class="download-button" id="downloadButton">
+          <span>📥</span>
+          <span>Download PNG</span>
+        </button>
+      </div>
+      <div class="footer-creator">
+        Visualisation by <a target="_blank" href="https://koenvangilst.nl/labs/ons-land">Koen van Gilst</a>
+      </div>
+    </footer>
     <script src="countries.js"></script>
     <script src="render.js"></script>
     <script>
@@ -399,37 +413,6 @@
           console.log("===============================================\n");
         }
 
-        svg
-          .append("foreignObject")
-          .attr("x", 25)
-          .attr("y", height - 50)
-          .attr("width", 760)
-          .attr("height", 30)
-          .attr("font-size", "12px")
-          .append("xhtml:div")
-          .html(
-            `Data: <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table">Eurostat Land Cover</a>`
-          );
-
-        svg
-          .append("foreignObject")
-          .attr("x", 180)
-          .attr("y", height - 50)
-          .attr("width", 760)
-          .attr("height", 30)
-          .attr("font-size", "12px")
-          .append("xhtml:div")
-          .html(`| Code: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a>`);
-
-        svg
-          .append("foreignObject")
-          .attr("x", 25)
-          .attr("y", height - 30)
-          .attr("width", 760)
-          .attr("height", 30)
-          .attr("font-size", "12px")
-          .append("xhtml:div")
-          .html(`Visualisation by <a target="_blank" href="https://koenvangilst.nl/labs/ons-land">Koen van Gilst</a>`);
       }
 
       function toggleLayout() {
@@ -477,6 +460,49 @@
             .attr("opacity", 1);
         }
       }
+
+      // Download SVG as PNG functionality
+      document.getElementById("downloadButton").addEventListener("click", () => {
+        const svgElement = document.getElementById("countrySvg");
+        const svgData = new XMLSerializer().serializeToString(svgElement);
+
+        // Get computed styles for the SVG
+        const svgBlob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
+        const url = URL.createObjectURL(svgBlob);
+
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement("canvas");
+          canvas.width = 1600; // 2x resolution for better quality
+          canvas.height = 1600;
+
+          const ctx = canvas.getContext("2d");
+
+          // Fill with background color
+          ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg-dark').trim();
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          // Draw the SVG image
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          URL.revokeObjectURL(url);
+
+          // Convert canvas to PNG and download
+          canvas.toBlob((blob) => {
+            const pngUrl = URL.createObjectURL(blob);
+            const downloadLink = document.createElement("a");
+            const fileName = `onsland-${currentCountry}-${Date.now()}.png`;
+            downloadLink.href = pngUrl;
+            downloadLink.download = fileName;
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            URL.revokeObjectURL(pngUrl);
+          });
+        };
+
+        img.src = url;
+      });
     </script>
   </body>
 </html>
