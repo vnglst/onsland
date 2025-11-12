@@ -1098,25 +1098,3 @@ const countryConfigs = {
     ],
   },
 };
-
-// Country names for display
-const countryNames = {
-  netherlands: "Netherlands",
-  denmark: "Denmark",
-  sweden: "Sweden",
-  germany: "Germany",
-  croatia: "Croatia",
-  belgium: "Belgium",
-  france: "France",
-  uk: "United Kingdom",
-  spain: "Spain",
-  italy: "Italy",
-  portugal: "Portugal",
-  ireland: "Ireland",
-  austria: "Austria",
-  finland: "Finland",
-  romania: "Romania"
-};
-
-// Valid country keys
-const validCountries = Object.keys(countryConfigs);
