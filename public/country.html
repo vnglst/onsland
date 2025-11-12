@@ -29,17 +29,10 @@
       </div>
     </header>
 
-    <div id="rankingsInfo" class="rankings-info">
-      <!-- Rankings information will be dynamically inserted here -->
-    </div>
-
     <svg id="countrySvg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid"></svg>
 
-    <div class="country-rankings-container">
-      <h2 class="country-rankings-title">Category Rankings</h2>
-      <div id="countryRankingsTable" class="country-rankings-table">
-        <!-- Rankings table will be dynamically generated here -->
-      </div>
+    <div id="rankingsInfo" class="rankings-info">
+      <!-- Rankings information will be dynamically inserted here -->
     </div>
 
     <script src="countries.js"></script>
@@ -102,138 +95,71 @@
         return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
       }
 
+      function createRankingBadge(ranking, label, isTopRank) {
+        const badge = document.createElement('div');
+        badge.className = 'ranking-badge';
+
+        const link = document.createElement('a');
+        link.href = `rankings.html#${createCategorySlug(ranking.categoryName)}`;
+
+        const positionNumber = document.createElement('div');
+        positionNumber.className = `ranking-position-number ${isTopRank ? 'top-rank' : 'bottom-rank'}`;
+        positionNumber.textContent = `#${ranking.position}`;
+
+        const content = document.createElement('div');
+        content.className = 'ranking-badge-content';
+
+        const category = document.createElement('div');
+        category.className = 'ranking-badge-category';
+        category.textContent = ranking.categoryName;
+
+        const labelDiv = document.createElement('div');
+        labelDiv.className = 'ranking-badge-label';
+        labelDiv.textContent = label;
+
+        content.appendChild(category);
+        content.appendChild(labelDiv);
+
+        link.appendChild(positionNumber);
+        link.appendChild(content);
+        badge.appendChild(link);
+
+        return badge;
+      }
+
       function displayRankings() {
         const rankings = calculateCountryRankings();
         const container = document.getElementById('rankingsInfo');
 
-        // Find highest ranking (lowest position number)
-        const topRanking = rankings.reduce((min, r) => r.position < min.position ? r : min, rankings[0]);
+        // Filter categories with multiple countries for fair comparison
+        const multiCountryRankings = rankings.filter(r => r.totalCountries > 1);
 
-        // Find lowest ranking (highest position number, but not last place in categories with only this country)
-        const bottomRanking = rankings
-          .filter(r => r.totalCountries > 1) // Only consider categories with multiple countries
-          .reduce((max, r) => r.position > max.position ? r : max, { position: 0 });
+        // Sort by position
+        const sortedRankings = [...multiCountryRankings].sort((a, b) => a.position - b.position);
 
-        // Create badges
-        if (topRanking) {
-          const topBadge = document.createElement('div');
-          topBadge.className = 'ranking-badge';
+        // Get top 2 rankings (lowest positions)
+        const topRankings = sortedRankings.slice(0, 2);
 
-          const link = document.createElement('a');
-          link.href = `rankings.html#${createCategorySlug(topRanking.categoryName)}`;
+        // Get bottom 2 rankings (highest positions)
+        const bottomRankings = sortedRankings.slice(-2).reverse();
 
-          const positionNumber = document.createElement('div');
-          positionNumber.className = 'ranking-position-number top-rank';
-          positionNumber.textContent = `#${topRanking.position}`;
+        // Create top ranking badges
+        topRankings.forEach((ranking, index) => {
+          const label = index === 0 ? 'Highest ranking' : 'Second highest';
+          const badge = createRankingBadge(ranking, label, true);
+          container.appendChild(badge);
+        });
 
-          const content = document.createElement('div');
-          content.className = 'ranking-badge-content';
-
-          const category = document.createElement('div');
-          category.className = 'ranking-badge-category';
-          category.textContent = topRanking.categoryName;
-
-          const label = document.createElement('div');
-          label.className = 'ranking-badge-label';
-          label.textContent = `Highest ranking`;
-
-          content.appendChild(category);
-          content.appendChild(label);
-
-          link.appendChild(positionNumber);
-          link.appendChild(content);
-          topBadge.appendChild(link);
-
-          container.appendChild(topBadge);
-        }
-
-        if (bottomRanking && bottomRanking.position > 0) {
-          const bottomBadge = document.createElement('div');
-          bottomBadge.className = 'ranking-badge';
-
-          const link = document.createElement('a');
-          link.href = `rankings.html#${createCategorySlug(bottomRanking.categoryName)}`;
-
-          const positionNumber = document.createElement('div');
-          positionNumber.className = 'ranking-position-number bottom-rank';
-          positionNumber.textContent = `#${bottomRanking.position}`;
-
-          const content = document.createElement('div');
-          content.className = 'ranking-badge-content';
-
-          const category = document.createElement('div');
-          category.className = 'ranking-badge-category';
-          category.textContent = bottomRanking.categoryName;
-
-          const label = document.createElement('div');
-          label.className = 'ranking-badge-label';
-          label.textContent = `Lowest ranking`;
-
-          content.appendChild(category);
-          content.appendChild(label);
-
-          link.appendChild(positionNumber);
-          link.appendChild(content);
-          bottomBadge.appendChild(link);
-
-          container.appendChild(bottomBadge);
-        }
+        // Create bottom ranking badges
+        bottomRankings.forEach((ranking, index) => {
+          const label = index === 0 ? 'Lowest ranking' : 'Second lowest';
+          const badge = createRankingBadge(ranking, label, false);
+          container.appendChild(badge);
+        });
       }
 
       // Display rankings when page loads
       displayRankings();
-
-      function displayFullRankingsTable() {
-        const rankings = calculateCountryRankings();
-        const container = document.getElementById('countryRankingsTable');
-
-        // Sort rankings by position (best ranks first)
-        rankings.sort((a, b) => a.position - b.position);
-
-        rankings.forEach(ranking => {
-          const row = document.createElement('div');
-          row.className = 'ranking-row';
-
-          const link = document.createElement('a');
-          link.href = `rankings.html#${createCategorySlug(ranking.categoryName)}`;
-
-          const rank = document.createElement('div');
-          rank.className = `ranking-rank${ranking.position <= 3 ? ' rank-' + ranking.position : ''}`;
-          rank.textContent = `#${ranking.position}`;
-
-          const categoryName = document.createElement('div');
-          categoryName.className = 'ranking-category-name';
-
-          const colorBox = document.createElement('div');
-          colorBox.className = 'ranking-category-color';
-          colorBox.style.backgroundColor = ranking.categoryColor;
-
-          const categoryText = document.createElement('span');
-          categoryText.textContent = ranking.categoryName;
-
-          categoryName.appendChild(colorBox);
-          categoryName.appendChild(categoryText);
-
-          const value = document.createElement('div');
-          value.className = 'ranking-value';
-          value.textContent = `${(ranking.percentage * 100).toFixed(2)}%`;
-
-          const outOf = document.createElement('div');
-          outOf.className = 'ranking-outof';
-          outOf.textContent = `of ${ranking.totalCountries}`;
-
-          link.appendChild(rank);
-          link.appendChild(categoryName);
-          link.appendChild(value);
-          link.appendChild(outOf);
-
-          row.appendChild(link);
-          container.appendChild(row);
-        });
-      }
-
-      // Display full rankings table
-      displayFullRankingsTable();
 
       let worldData = null;
       let isSquareLayout = false;
