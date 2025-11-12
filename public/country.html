@@ -34,6 +34,14 @@
     </div>
 
     <svg id="countrySvg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid"></svg>
+
+    <div class="country-rankings-container">
+      <h2 class="country-rankings-title">Category Rankings</h2>
+      <div id="countryRankingsTable" class="country-rankings-table">
+        <!-- Rankings table will be dynamically generated here -->
+      </div>
+    </div>
+
     <script src="countries.js"></script>
     <script src="render.js"></script>
     <script>
@@ -174,6 +182,58 @@
 
       // Display rankings when page loads
       displayRankings();
+
+      function displayFullRankingsTable() {
+        const rankings = calculateCountryRankings();
+        const container = document.getElementById('countryRankingsTable');
+
+        // Sort rankings by position (best ranks first)
+        rankings.sort((a, b) => a.position - b.position);
+
+        rankings.forEach(ranking => {
+          const row = document.createElement('div');
+          row.className = 'ranking-row';
+
+          const link = document.createElement('a');
+          link.href = `rankings.html#${createCategorySlug(ranking.categoryName)}`;
+
+          const rank = document.createElement('div');
+          rank.className = `ranking-rank${ranking.position <= 3 ? ' rank-' + ranking.position : ''}`;
+          rank.textContent = `#${ranking.position}`;
+
+          const categoryName = document.createElement('div');
+          categoryName.className = 'ranking-category-name';
+
+          const colorBox = document.createElement('div');
+          colorBox.className = 'ranking-category-color';
+          colorBox.style.backgroundColor = ranking.categoryColor;
+
+          const categoryText = document.createElement('span');
+          categoryText.textContent = ranking.categoryName;
+
+          categoryName.appendChild(colorBox);
+          categoryName.appendChild(categoryText);
+
+          const value = document.createElement('div');
+          value.className = 'ranking-value';
+          value.textContent = `${(ranking.percentage * 100).toFixed(2)}%`;
+
+          const outOf = document.createElement('div');
+          outOf.className = 'ranking-outof';
+          outOf.textContent = `of ${ranking.totalCountries}`;
+
+          link.appendChild(rank);
+          link.appendChild(categoryName);
+          link.appendChild(value);
+          link.appendChild(outOf);
+
+          row.appendChild(link);
+          container.appendChild(row);
+        });
+      }
+
+      // Display full rankings table
+      displayFullRankingsTable();
 
       let worldData = null;
       let isSquareLayout = false;
