@@ -35,7 +35,10 @@
         <span class="footer-separator">|</span>
         <span>Code: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a></span>
         <button class="download-button" id="downloadButton">
-          <span>📥</span>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 11L4 7h2.5V2h3v5H12L8 11z" fill="currentColor"/>
+            <path d="M14 14H2v-2h12v2z" fill="currentColor"/>
+          </svg>
           <span>Download PNG</span>
         </button>
       </div>
@@ -413,6 +416,17 @@
           console.log("===============================================\n");
         }
 
+        // Add creator name at bottom of SVG (small text)
+        svg
+          .append("text")
+          .attr("x", width / 2)
+          .attr("y", height - 10)
+          .attr("text-anchor", "middle")
+          .attr("font-size", "10px")
+          .attr("fill", "var(--text-light)")
+          .attr("opacity", 0.5)
+          .text("Koen van Gilst");
+
       }
 
       function toggleLayout() {
@@ -464,9 +478,36 @@
       // Download SVG as PNG functionality
       document.getElementById("downloadButton").addEventListener("click", () => {
         const svgElement = document.getElementById("countrySvg");
-        const svgData = new XMLSerializer().serializeToString(svgElement);
 
-        // Get computed styles for the SVG
+        // Clone the SVG to avoid modifying the original
+        const svgClone = svgElement.cloneNode(true);
+
+        // Get computed CSS variable values
+        const rootStyles = getComputedStyle(document.documentElement);
+        const bgDark = rootStyles.getPropertyValue('--bg-dark').trim();
+        const textLight = rootStyles.getPropertyValue('--text-light').trim();
+        const bgLight = rootStyles.getPropertyValue('--bg-light').trim();
+
+        // Replace all CSS variables with actual color values in the clone
+        svgClone.querySelectorAll('*').forEach(el => {
+          const fill = el.getAttribute('fill');
+          const stroke = el.getAttribute('stroke');
+
+          if (fill && fill.includes('var(')) {
+            if (fill.includes('--text-light')) el.setAttribute('fill', textLight);
+            if (fill.includes('--bg-light')) el.setAttribute('fill', bgLight);
+            if (fill.includes('--bg-dark')) el.setAttribute('fill', bgDark);
+          }
+
+          if (stroke && stroke.includes('var(')) {
+            if (stroke.includes('--bg-light')) el.setAttribute('stroke', bgLight);
+          }
+        });
+
+        // Serialize the modified SVG
+        const svgData = new XMLSerializer().serializeToString(svgClone);
+
+        // Create blob and object URL
         const svgBlob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
         const url = URL.createObjectURL(svgBlob);
 
@@ -479,7 +520,7 @@
           const ctx = canvas.getContext("2d");
 
           // Fill with background color
-          ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg-dark').trim();
+          ctx.fillStyle = bgDark;
           ctx.fillRect(0, 0, canvas.width, canvas.height);
 
           // Draw the SVG image
@@ -499,6 +540,11 @@
             document.body.removeChild(downloadLink);
             URL.revokeObjectURL(pngUrl);
           });
+        };
+
+        img.onerror = function(error) {
+          console.error("Error loading SVG for download:", error);
+          alert("Error generating PNG. Please try again.");
         };
 
         img.src = url;
