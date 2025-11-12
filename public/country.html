@@ -34,16 +34,6 @@
         <span>Data: <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table">Eurostat Land Cover</a></span>
         <span class="footer-separator">|</span>
         <span>Code: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a></span>
-        <button class="download-button" id="downloadButton">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 11L4 7h2.5V2h3v5H12L8 11z" fill="currentColor"/>
-            <path d="M14 14H2v-2h12v2z" fill="currentColor"/>
-          </svg>
-          <span>Download PNG</span>
-        </button>
-      </div>
-      <div class="footer-creator">
-        Visualisation by <a target="_blank" href="https://koenvangilst.nl/labs/ons-land">Koen van Gilst</a>
       </div>
     </footer>
     <script src="countries.js"></script>
@@ -416,16 +406,63 @@
           console.log("===============================================\n");
         }
 
-        // Add creator name at bottom of SVG (small text)
+        // Add creator credit at bottom of SVG
         svg
+          .append("foreignObject")
+          .attr("x", 25)
+          .attr("y", height - 30)
+          .attr("width", 760)
+          .attr("height", 30)
+          .attr("font-size", "11px")
+          .append("xhtml:div")
+          .style("opacity", "0.6")
+          .html(`Visualisation by <a target="_blank" href="https://koenvangilst.nl/labs/ons-land">Koen van Gilst</a>`);
+
+        // Add download button in SVG
+        const downloadGroup = svg
+          .append("g")
+          .attr("id", "svgDownloadButton")
+          .attr("cursor", "pointer")
+          .attr("opacity", 0.6)
+          .on("mouseenter", function() {
+            d3.select(this).attr("opacity", 1);
+          })
+          .on("mouseleave", function() {
+            d3.select(this).attr("opacity", 0.6);
+          });
+
+        downloadGroup
+          .append("rect")
+          .attr("x", width - 110)
+          .attr("y", height - 35)
+          .attr("width", 85)
+          .attr("height", 25)
+          .attr("fill", "rgba(255, 255, 255, 0.05)")
+          .attr("stroke", "rgba(255, 255, 255, 0.2)")
+          .attr("stroke-width", 1)
+          .attr("rx", 4);
+
+        // Download icon
+        const iconGroup = downloadGroup.append("g")
+          .attr("transform", `translate(${width - 102}, ${height - 27})`);
+
+        iconGroup
+          .append("path")
+          .attr("d", "M4 5.5L2 3.5h1.25V1h1.5v2.5H6L4 5.5z")
+          .attr("fill", "var(--text-light)");
+
+        iconGroup
+          .append("path")
+          .attr("d", "M7 7H1v-1h6v1z")
+          .attr("fill", "var(--text-light)");
+
+        downloadGroup
           .append("text")
-          .attr("x", width / 2)
-          .attr("y", height - 10)
-          .attr("text-anchor", "middle")
-          .attr("font-size", "10px")
+          .attr("x", width - 85)
+          .attr("y", height - 18)
+          .attr("font-size", "11px")
           .attr("fill", "var(--text-light)")
-          .attr("opacity", 0.5)
-          .text("Koen van Gilst");
+          .text("Download");
 
       }
 
@@ -476,33 +513,60 @@
       }
 
       // Download SVG as PNG functionality
-      document.getElementById("downloadButton").addEventListener("click", () => {
+      function downloadSVGasPNG() {
         const svgElement = document.getElementById("countrySvg");
 
         // Clone the SVG to avoid modifying the original
         const svgClone = svgElement.cloneNode(true);
 
-        // Get computed CSS variable values
-        const rootStyles = getComputedStyle(document.documentElement);
-        const bgDark = rootStyles.getPropertyValue('--bg-dark').trim();
-        const textLight = rootStyles.getPropertyValue('--text-light').trim();
-        const bgLight = rootStyles.getPropertyValue('--bg-light').trim();
+        // Remove the download button from the clone
+        const downloadBtn = svgClone.querySelector('#svgDownloadButton');
+        if (downloadBtn) {
+          downloadBtn.remove();
+        }
 
-        // Replace all CSS variables with actual color values in the clone
-        svgClone.querySelectorAll('*').forEach(el => {
-          const fill = el.getAttribute('fill');
-          const stroke = el.getAttribute('stroke');
+        // Get all elements from both original and clone
+        const originalElements = svgElement.querySelectorAll('*');
+        const cloneElements = svgClone.querySelectorAll('*');
 
-          if (fill && fill.includes('var(')) {
-            if (fill.includes('--text-light')) el.setAttribute('fill', textLight);
-            if (fill.includes('--bg-light')) el.setAttribute('fill', bgLight);
-            if (fill.includes('--bg-dark')) el.setAttribute('fill', bgDark);
+        // Copy computed styles from original to clone
+        originalElements.forEach((el, index) => {
+          const cloneEl = cloneElements[index];
+          if (!cloneEl) return;
+
+          const computedStyle = window.getComputedStyle(el);
+
+          // Copy fill
+          if (computedStyle.fill && computedStyle.fill !== 'none') {
+            cloneEl.setAttribute('fill', computedStyle.fill);
           }
 
-          if (stroke && stroke.includes('var(')) {
-            if (stroke.includes('--bg-light')) el.setAttribute('stroke', bgLight);
+          // Copy stroke
+          if (computedStyle.stroke && computedStyle.stroke !== 'none') {
+            cloneEl.setAttribute('stroke', computedStyle.stroke);
+          }
+
+          // Copy stroke-width
+          if (computedStyle.strokeWidth) {
+            cloneEl.setAttribute('stroke-width', computedStyle.strokeWidth);
+          }
+
+          // Copy opacity
+          if (computedStyle.opacity && computedStyle.opacity !== '1') {
+            cloneEl.setAttribute('opacity', computedStyle.opacity);
+          }
+
+          // Copy font properties for text elements
+          if (el.tagName === 'text' || el.tagName === 'tspan') {
+            cloneEl.setAttribute('font-size', computedStyle.fontSize);
+            cloneEl.setAttribute('font-weight', computedStyle.fontWeight);
+            cloneEl.setAttribute('font-family', computedStyle.fontFamily);
           }
         });
+
+        // Set background on SVG
+        const bgDark = getComputedStyle(document.documentElement).getPropertyValue('--bg-dark').trim();
+        svgClone.setAttribute('style', `background: ${bgDark}`);
 
         // Serialize the modified SVG
         const svgData = new XMLSerializer().serializeToString(svgClone);
@@ -548,7 +612,10 @@
         };
 
         img.src = url;
-      });
+      }
+
+      // Attach click handler to SVG download button
+      d3.select("#svgDownloadButton").on("click", downloadSVGasPNG);
     </script>
   </body>
 </html>
