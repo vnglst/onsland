@@ -29,6 +29,10 @@
       </div>
     </header>
     <svg id="countrySvg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid"></svg>
+    <section id="statsSection">
+      <h2>Land Use Statistics</h2>
+      <div id="statsContainer"></div>
+    </section>
     <script src="countries.js"></script>
     <script src="render.js"></script>
     <script>
@@ -67,12 +71,86 @@
         toggleLayout();
       });
 
+      function renderStats(countryKey) {
+        const config = countryConfigs[countryKey];
+        const categories = config.categories;
+
+        // Organize categories into groups
+        const groups = {
+          Water: [],
+          Nature: [],
+          Cities: [],
+          Agriculture: []
+        };
+
+        categories.forEach(category => {
+          const name = category.name;
+
+          if (name === "Water") {
+            groups.Water.push(category);
+          } else if (["Woodland", "Wetland", "Shrubland", "Bare land"].includes(name)) {
+            groups.Nature.push(category);
+          } else if (name === "Urban area") {
+            groups.Cities.push(category);
+          } else {
+            groups.Agriculture.push(category);
+          }
+        });
+
+        const statsContainer = document.getElementById("statsContainer");
+        statsContainer.innerHTML = "";
+
+        // Render each group
+        Object.entries(groups).forEach(([groupName, groupCategories]) => {
+          if (groupCategories.length === 0) return;
+
+          const groupDiv = document.createElement("div");
+          groupDiv.className = "stats-category";
+
+          const title = document.createElement("div");
+          title.className = "stats-category-title";
+          title.textContent = groupName;
+          groupDiv.appendChild(title);
+
+          groupCategories.forEach(category => {
+            const itemDiv = document.createElement("div");
+            itemDiv.className = "stats-item";
+
+            const nameDiv = document.createElement("div");
+            nameDiv.className = "stats-item-name";
+
+            const colorBox = document.createElement("div");
+            colorBox.className = "stats-item-color";
+            colorBox.style.backgroundColor = category.color;
+
+            const nameText = document.createElement("span");
+            nameText.textContent = category.name;
+
+            nameDiv.appendChild(colorBox);
+            nameDiv.appendChild(nameText);
+
+            const percentageDiv = document.createElement("div");
+            percentageDiv.className = "stats-item-percentage";
+            percentageDiv.textContent = `${(category.percentage * 100).toFixed(2)}%`;
+
+            itemDiv.appendChild(nameDiv);
+            itemDiv.appendChild(percentageDiv);
+            groupDiv.appendChild(itemDiv);
+          });
+
+          statsContainer.appendChild(groupDiv);
+        });
+      }
+
       function renderCountry(countryKey) {
         if (!worldData) return;
 
         const config = countryConfigs[countryKey];
         const categories = config.categories;
         const labels = config.labels;
+
+        // Render the stats section
+        renderStats(countryKey);
 
         const svg = d3.select("#countrySvg");
         svg.selectAll("*").remove();

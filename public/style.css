@@ -145,6 +145,82 @@ a {
   color: var(--text-light);
 }
 
+/* Stats section styles */
+#statsSection {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px 40px;
+}
+
+#statsSection h2 {
+  font-size: 28px;
+  margin-bottom: 24px;
+  color: var(--text-light);
+  text-align: center;
+}
+
+#statsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.stats-category {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.stats-category:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.stats-category-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-light);
+}
+
+.stats-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stats-item:last-child {
+  border-bottom: none;
+}
+
+.stats-item-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.stats-item-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.stats-item-percentage {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-light);
+  opacity: 0.9;
+}
+
 .hexagon {
   stroke: var(--bg-light);
   stroke-width: 0.1px;
@@ -321,6 +397,20 @@ a {
     min-width: 44px;
     padding: 7px 10px;
   }
+
+  #statsSection {
+    padding: 20px 20px;
+    margin: 30px auto;
+  }
+
+  #statsSection h2 {
+    font-size: 22px;
+  }
+
+  #statsContainer {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -384,5 +474,23 @@ a {
   .back-text-short,
   .toggle-text-short {
     font-size: 15px;
+  }
+
+  #statsSection {
+    padding: 16px 16px;
+    margin: 20px auto;
+  }
+
+  #statsSection h2 {
+    font-size: 20px;
+  }
+
+  .stats-category-title {
+    font-size: 18px;
+  }
+
+  .stats-item-name,
+  .stats-item-percentage {
+    font-size: 13px;
   }
 }
