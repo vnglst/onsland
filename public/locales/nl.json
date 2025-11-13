@@ -97,7 +97,17 @@
     "aromPlants": "Geurplanten",
     "tempGrassland": "Tijdelijk grasland",
     "permanentCrops": "Blijvende gewassen",
-    "otherCropland": "Overig bouwland"
+    "otherCropland": "Overig bouwland",
+    "mountains": "Bergen",
+    "oliveTrees": "Olijfbomen",
+    "vineyard": "Wijngaard",
+    "fruitTrees": "Fruitbomen",
+    "fodderCrops": "Voedergewassen",
+    "lichensAndMoss": "Korstmossen en mos",
+    "rocksAndStones": "Rotsen en stenen",
+    "rootVegetables": "Wortelgewassen",
+    "otherCereals": "Overige granen",
+    "triticale": "Triticale"
   },
   "labels": {
     "water": "Water",

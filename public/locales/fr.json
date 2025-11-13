@@ -97,7 +97,17 @@
     "aromPlants": "Plantes aromatiques",
     "tempGrassland": "Prairie temporaire",
     "permanentCrops": "Cultures permanentes",
-    "otherCropland": "Autres terres cultivées"
+    "otherCropland": "Autres terres cultivées",
+    "mountains": "Montagnes",
+    "oliveTrees": "Oliviers",
+    "vineyard": "Vignoble",
+    "fruitTrees": "Arbres fruitiers",
+    "fodderCrops": "Cultures fourragères",
+    "lichensAndMoss": "Lichens et mousses",
+    "rocksAndStones": "Rochers et pierres",
+    "rootVegetables": "Légumes-racines",
+    "otherCereals": "Autres céréales",
+    "triticale": "Triticale"
   },
   "labels": {
     "water": "Eau",

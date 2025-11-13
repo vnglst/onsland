@@ -97,7 +97,17 @@
     "aromPlants": "Arom. plants",
     "tempGrassland": "Temp. grassland",
     "permanentCrops": "Permanent crops",
-    "otherCropland": "Other cropland"
+    "otherCropland": "Other cropland",
+    "mountains": "Mountains",
+    "oliveTrees": "Olive trees",
+    "vineyard": "Vineyard",
+    "fruitTrees": "Fruit trees",
+    "fodderCrops": "Fodder crops",
+    "lichensAndMoss": "Lichens and moss",
+    "rocksAndStones": "Rocks and stones",
+    "rootVegetables": "Root vegetables",
+    "otherCereals": "Other cereals",
+    "triticale": "Triticale"
   },
   "labels": {
     "water": "Water",
