@@ -1402,58 +1402,56 @@ const countryConfigs = {
       { name: "Barley", color: "var(--agriculture-850)", percentage: 0.019 },
       { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.09 },
     ],
-    labels: country
-      ? (country = slovakia)
-      : (537)[
-          ({
-            label: "Water",
-            displayLabel: true,
-            labelTarget: {
-              x: 418,
-              y: 222,
-            },
-            labelPosition: {
-              x: 452,
-              y: 172,
-            },
-          },
-          {
-            label: "Nature",
-            displayLabel: true,
-            labelTarget: {
-              x: 671,
-              y: 271,
-            },
-            labelPosition: {
-              x: 698,
-              y: 207,
-            },
-          },
-          {
-            label: "Cities",
-            displayLabel: true,
-            labelTarget: {
-              x: 729,
-              y: 417,
-            },
-            labelPosition: {
-              x: 732,
-              y: 459,
-            },
-          },
-          {
-            label: "Agriculture",
-            displayLabel: true,
-            labelTarget: {
-              x: 499,
-              y: 509,
-            },
-            labelPosition: {
-              x: 538,
-              y: 543,
-            },
-          })
-        ],
+    labels: [
+      {
+        label: "Water",
+        displayLabel: true,
+        labelTarget: {
+          x: 418,
+          y: 222,
+        },
+        labelPosition: {
+          x: 452,
+          y: 172,
+        },
+      },
+      {
+        label: "Nature",
+        displayLabel: true,
+        labelTarget: {
+          x: 671,
+          y: 271,
+        },
+        labelPosition: {
+          x: 698,
+          y: 207,
+        },
+      },
+      {
+        label: "Cities",
+        displayLabel: true,
+        labelTarget: {
+          x: 729,
+          y: 417,
+        },
+        labelPosition: {
+          x: 732,
+          y: 459,
+        },
+      },
+      {
+        label: "Agriculture",
+        displayLabel: true,
+        labelTarget: {
+          x: 499,
+          y: 509,
+        },
+        labelPosition: {
+          x: 538,
+          y: 543,
+        },
+      },
+    ],
   },
   estonia: {
     title: "Land Use in Estonia",
