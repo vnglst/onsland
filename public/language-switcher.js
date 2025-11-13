@@ -110,10 +110,17 @@ function initLanguageSwitcher() {
   if (header) {
     const switcher = createLanguageSwitcher();
 
-    // Insert after the header content
+    // Insert in the header content
     const headerContent = header.querySelector('.homepage-header, #countryHeader');
     if (headerContent) {
-      headerContent.appendChild(switcher);
+      // Check if there's a spacer div (rankings page) and replace it
+      const spacer = headerContent.querySelector('div[style*="min-width"]');
+      if (spacer) {
+        spacer.replaceWith(switcher);
+      } else {
+        // Otherwise append it to the header
+        headerContent.appendChild(switcher);
+      }
     } else {
       header.appendChild(switcher);
     }

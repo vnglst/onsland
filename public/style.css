@@ -556,19 +556,22 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 60px;
+  flex-shrink: 0;
 }
 
 .language-switcher-svg {
   display: block;
   transition: opacity 0.2s;
+  cursor: pointer;
 }
 
 .language-switcher-svg:hover {
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 .lang-option {
-  transition: opacity 0.2s;
+  transition: all 0.2s ease;
 }
 
 .lang-option:hover .lang-bg {
@@ -576,18 +579,26 @@ a {
 }
 
 .lang-option.active .lang-bg {
-  fill: rgba(255, 255, 255, 0.2);
+  fill: rgba(255, 255, 255, 0.25);
+}
+
+.lang-option.active text {
+  opacity: 1;
 }
 
 .lang-option:not(.active) {
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 .lang-option:not(.active):hover {
-  opacity: 0.8;
+  opacity: 0.75;
 }
 
 @media (max-width: 768px) {
+  .language-switcher {
+    min-width: 54px;
+  }
+
   .language-switcher-svg {
     width: 54px;
     height: 28px;
@@ -595,6 +606,10 @@ a {
 }
 
 @media (max-width: 480px) {
+  .language-switcher {
+    min-width: 50px;
+  }
+
   .language-switcher-svg {
     width: 50px;
     height: 26px;
