@@ -67,10 +67,6 @@
         min-width: 40px;
       }
 
-      .ranking-position.top-3 {
-        color: hsl(51, 100%, 70%);
-      }
-
       .ranking-country {
         flex: 1;
         font-size: 18px;
@@ -258,7 +254,7 @@
             item.className = 'ranking-item';
 
             const position = document.createElement('span');
-            position.className = 'ranking-position' + (index < 3 ? ' top-3' : '');
+            position.className = 'ranking-position';
             position.textContent = `${index + 1}.`;
             item.appendChild(position);
 
