@@ -1525,7 +1525,7 @@ const countryConfigs = {
         label: "Water",
         displayLabel: true,
         labelTarget: {
-          x: 420,
+          x: 334,
           y: 181,
         },
         labelPosition: {
@@ -1549,20 +1549,20 @@ const countryConfigs = {
         label: "Cities",
         displayLabel: true,
         labelTarget: {
-          x: 712,
-          y: 455,
+          x: 681,
+          y: 377,
         },
         labelPosition: {
-          x: 735,
-          y: 418,
+          x: 747,
+          y: 376,
         },
       },
       {
         label: "Agriculture",
         displayLabel: true,
         labelTarget: {
-          x: 614,
-          y: 629,
+          x: 603,
+          y: 610,
         },
         labelPosition: {
           x: 650,
@@ -1590,10 +1590,54 @@ const countryConfigs = {
       { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.024 },
     ],
     labels: [
-      { label: "Water", displayLabel: true, labelTarget: { x: 400, y: 100 }, labelPosition: { x: 400, y: 100 } },
-      { label: "Nature", displayLabel: true, labelTarget: { x: 400, y: 200 }, labelPosition: { x: 400, y: 200 } },
-      { label: "Cities", displayLabel: true, labelTarget: { x: 400, y: 300 }, labelPosition: { x: 400, y: 300 } },
-      { label: "Agriculture", displayLabel: true, labelTarget: { x: 400, y: 500 }, labelPosition: { x: 400, y: 500 } },
+      {
+        label: "Water",
+        displayLabel: true,
+        labelTarget: {
+          x: 597,
+          y: 223,
+        },
+        labelPosition: {
+          x: 601,
+          y: 173,
+        },
+      },
+      {
+        label: "Nature",
+        displayLabel: true,
+        labelTarget: {
+          x: 610,
+          y: 365,
+        },
+        labelPosition: {
+          x: 639,
+          y: 378,
+        },
+      },
+      {
+        label: "Cities",
+        displayLabel: true,
+        labelTarget: {
+          x: 557,
+          y: 439,
+        },
+        labelPosition: {
+          x: 605,
+          y: 450,
+        },
+      },
+      {
+        label: "Agriculture",
+        displayLabel: true,
+        labelTarget: {
+          x: 510,
+          y: 509,
+        },
+        labelPosition: {
+          x: 549,
+          y: 534,
+        },
+      },
     ],
   },
 };
