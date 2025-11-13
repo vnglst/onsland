@@ -1115,9 +1115,9 @@ const countryConfigs = {
       { name: "Maize", color: "var(--agriculture-750)", percentage: 0.059 },
       { name: "Rape", color: "var(--agriculture-800)", percentage: 0.034 },
       { name: "Triticale", color: "var(--agriculture-825)", percentage: 0.031 },
-      { name: "Barley", color: "var(--agriculture-850)", percentage: 0.019 },
-      { name: "Rye", color: "var(--agriculture-875)", percentage: 0.024 },
-      { name: "Oats", color: "var(--agriculture-900)", percentage: 0.02 },
+      { name: "Rye", color: "var(--agriculture-850)", percentage: 0.024 },
+      { name: "Oats", color: "var(--agriculture-900)", percentage: 0.020 },
+      { name: "Barley", color: "var(--agriculture-920)", percentage: 0.019 },
       { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.072 },
     ],
     labels: [
