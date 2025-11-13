@@ -229,6 +229,11 @@
 
         sortedCategories.forEach(categoryName => {
           const data = categoryRankings[categoryName];
+
+          // Skip categories with 3 or fewer countries
+          if (data.countries.length <= 3) {
+            return;
+          }
           const categorySlug = createCategorySlug(categoryName);
 
           // Find the maximum percentage for this category (for bar scaling)

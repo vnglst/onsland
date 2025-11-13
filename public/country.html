@@ -131,8 +131,8 @@
         const rankings = calculateCountryRankings();
         const container = document.getElementById('rankingsInfo');
 
-        // Filter categories with multiple countries for fair comparison
-        const multiCountryRankings = rankings.filter(r => r.totalCountries > 1);
+        // Filter categories with more than 3 countries for meaningful rankings
+        const multiCountryRankings = rankings.filter(r => r.totalCountries > 3);
 
         // Sort by position
         const sortedRankings = [...multiCountryRankings].sort((a, b) => a.position - b.position);
