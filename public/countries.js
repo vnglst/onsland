@@ -1045,54 +1045,55 @@ const countryConfigs = {
       { name: "Urban area", color: "var(--urban-500)", percentage: 0.028 },
       { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.213 },
       { name: "Cereals", color: "var(--agriculture-700)", percentage: 0.187 },
-      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.13 }],
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.13 },
+    ],
     labels: [
       {
-        "label": "Water",
-        "displayLabel": true,
-        "labelTarget": {
-          "x": 582,
-          "y": 148,
+        label: "Water",
+        displayLabel: true,
+        labelTarget: {
+          x: 582,
+          y: 148,
         },
-        "labelPosition": {
-          "x": 635,
-          "y": 116,
-        },
-      },
-      {
-        "label": "Nature",
-        "displayLabel": true,
-        "labelTarget": {
-          "x": 656,
-          "y": 274,
-        },
-        "labelPosition": {
-          "x": 700,
-          "y": 251,
+        labelPosition: {
+          x: 635,
+          y: 116,
         },
       },
       {
-        "label": "Cities",
-        "displayLabel": true,
-        "labelTarget": {
-          "x": 672,
-          "y": 400,
+        label: "Nature",
+        displayLabel: true,
+        labelTarget: {
+          x: 656,
+          y: 274,
         },
-        "labelPosition": {
-          "x": 709,
-          "y": 368,
+        labelPosition: {
+          x: 700,
+          y: 251,
         },
       },
       {
-        "label": "Agriculture",
-        "displayLabel": true,
-        "labelTarget": {
-          "x": 678,
-          "y": 469,
+        label: "Cities",
+        displayLabel: true,
+        labelTarget: {
+          x: 672,
+          y: 400,
         },
-        "labelPosition": {
-          "x": 696,
-          "y": 443,
+        labelPosition: {
+          x: 709,
+          y: 368,
+        },
+      },
+      {
+        label: "Agriculture",
+        displayLabel: true,
+        labelTarget: {
+          x: 678,
+          y: 469,
+        },
+        labelPosition: {
+          x: 696,
+          y: 443,
         },
       },
     ],
@@ -1116,14 +1117,60 @@ const countryConfigs = {
       { name: "Triticale", color: "var(--agriculture-825)", percentage: 0.031 },
       { name: "Barley", color: "var(--agriculture-850)", percentage: 0.019 },
       { name: "Rye", color: "var(--agriculture-875)", percentage: 0.024 },
-      { name: "Oats", color: "var(--agriculture-900)", percentage: 0.020 },
+      { name: "Oats", color: "var(--agriculture-900)", percentage: 0.02 },
       { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.072 },
     ],
     labels: [
-      { label: "Water", displayLabel: true, labelTarget: { x: 400, y: 100 }, labelPosition: { x: 400, y: 100 } },
-      { label: "Nature", displayLabel: true, labelTarget: { x: 400, y: 200 }, labelPosition: { x: 400, y: 200 } },
-      { label: "Cities", displayLabel: true, labelTarget: { x: 400, y: 300 }, labelPosition: { x: 400, y: 300 } },
-      { label: "Agriculture", displayLabel: true, labelTarget: { x: 400, y: 500 }, labelPosition: { x: 400, y: 500 } },
+      [
+        {
+          label: "Water",
+          displayLabel: true,
+          labelTarget: {
+            x: 424,
+            y: 181,
+          },
+          labelPosition: {
+            x: 458,
+            y: 157,
+          },
+        },
+        {
+          label: "Nature",
+          displayLabel: true,
+          labelTarget: {
+            x: 634,
+            y: 269,
+          },
+          labelPosition: {
+            x: 696,
+            y: 258,
+          },
+        },
+        {
+          label: "Cities",
+          displayLabel: true,
+          labelTarget: {
+            x: 634,
+            y: 379,
+          },
+          labelPosition: {
+            x: 674,
+            y: 396,
+          },
+        },
+        {
+          label: "Agriculture",
+          displayLabel: true,
+          labelTarget: {
+            x: 631,
+            y: 535,
+          },
+          labelPosition: {
+            x: 661,
+            y: 532,
+          },
+        },
+      ],
     ],
   },
   bulgaria: {
