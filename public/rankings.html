@@ -178,7 +178,7 @@
   <body>
     <header>
       <div class="homepage-header">
-        <button class="back-button" onclick="window.location.href='index.html'">
+        <button class="back-button" onclick="window.location.href='/'">
           <span class="back-text-full">← Back to Overview</span>
           <span class="back-text-short">←</span>
         </button>
@@ -287,7 +287,7 @@
             const countryName = document.createElement('span');
             countryName.className = 'ranking-country';
             const link = document.createElement('a');
-            link.href = `country.html?country=${country.countryKey}`;
+            link.href = `country?country=${country.countryKey}`;
             link.textContent = country.countryName;
             countryName.appendChild(link);
             item.appendChild(countryName);

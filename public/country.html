@@ -107,7 +107,7 @@
         badge.className = 'ranking-badge';
 
         const link = document.createElement('a');
-        link.href = `rankings.html#${createCategorySlug(ranking.categoryName)}`;
+        link.href = `rankings#${createCategorySlug(ranking.categoryName)}`;
 
         const positionNumber = document.createElement('div');
         positionNumber.className = `ranking-position-number ${isTopRank ? 'top-rank' : 'bottom-rank'}`;
@@ -182,7 +182,7 @@
         .catch((error) => console.error("Error loading data:", error));
 
       document.getElementById("backButton").addEventListener("click", () => {
-        window.location.href = "index.html";
+        window.location.href = "/";
       });
 
       document.getElementById("layoutToggle").addEventListener("click", () => {
