@@ -8,7 +8,6 @@ const validCountries = [
   "czechia",
   "denmark",
   "estonia",
-  "europa",
   "finland",
   "france",
   "germany",
@@ -38,7 +37,6 @@ const countryNames = {
   czechia: "Czechia",
   denmark: "Denmark",
   estonia: "Estonia",
-  europa: "European Union",
   finland: "Finland",
   france: "France",
   germany: "Germany",
@@ -88,51 +86,20 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
       [width, height],
     ]);
 
-  let hexData;
-  let countryFeature = null;
+  const countries = topojson.feature(worldData, worldData.objects.countries);
+  const countryFeature = countries.features.find((d) => d.id === config.isoCode);
 
-  // Special handling for Europa (EU aggregate) - merge all EU27 countries
-  if (countryKey === "europa") {
-    // EU27 (2020) country ISO codes
-    const eu27Codes = ['040', '056', '100', '191', '196', '203', '208', '233', '246', '250', '276', '300', '348', '372', '380', '428', '440', '442', '470', '528', '616', '620', '642', '703', '705', '724', '752'];
+  if (!countryFeature) return;
 
-    // Get all EU country geometries and merge them
-    const euGeometries = worldData.objects.countries.geometries.filter(g => eu27Codes.includes(String(g.id)));
-    const mergedEU = topojson.merge(worldData, euGeometries);
-
-    // Create a feature from the merged geometry
-    countryFeature = {
-      type: "Feature",
-      geometry: mergedEU,
-      id: "EU",
-      properties: { name: "European Union" }
-    };
-
-    const hexCenters = [];
-    for (let y = hexRadius; y < height; y += hexRadius * 1.5) {
-      for (let x = hexRadius; x < width; x += hexRadius * Math.sqrt(3)) {
-        hexCenters.push([x, y]);
-      }
+  const hexCenters = [];
+  for (let y = hexRadius; y < height; y += hexRadius * 1.5) {
+    for (let x = hexRadius; x < width; x += hexRadius * Math.sqrt(3)) {
+      hexCenters.push([x, y]);
     }
-
-    const hexPoints = hexCenters.filter((center) => d3.geoContains(countryFeature, projection.invert(center)));
-    hexData = hexbin(hexPoints);
-  } else {
-    const countries = topojson.feature(worldData, worldData.objects.countries);
-    countryFeature = countries.features.find((d) => d.id === config.isoCode);
-
-    if (!countryFeature) return;
-
-    const hexCenters = [];
-    for (let y = hexRadius; y < height; y += hexRadius * 1.5) {
-      for (let x = hexRadius; x < width; x += hexRadius * Math.sqrt(3)) {
-        hexCenters.push([x, y]);
-      }
-    }
-
-    const hexPoints = hexCenters.filter((center) => d3.geoContains(countryFeature, projection.invert(center)));
-    hexData = hexbin(hexPoints);
   }
+
+  const hexPoints = hexCenters.filter((center) => d3.geoContains(countryFeature, projection.invert(center)));
+  const hexData = hexbin(hexPoints);
 
   const totalHexagons = hexData.length;
 
