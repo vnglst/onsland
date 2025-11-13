@@ -1431,12 +1431,12 @@ const countryConfigs = {
         label: "Cities",
         displayLabel: true,
         labelTarget: {
-          x: 729,
-          y: 417,
+          x: 739,
+          y: 419,
         },
         labelPosition: {
-          x: 732,
-          y: 459,
+          x: 737,
+          y: 457,
         },
       },
       {
