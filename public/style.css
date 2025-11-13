@@ -89,13 +89,6 @@ h2 {
   padding: 0 20px;
 }
 
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-}
-
 .toggle-button,
 .back-button {
   background: var(--bg-dark);
@@ -560,65 +553,36 @@ a {
 
 /* Language Switcher */
 .language-switcher {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 60px;
-  flex-shrink: 0;
-}
-
-.language-switcher-svg {
-  display: block;
-  transition: opacity 0.2s;
+  background: var(--bg-dark);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-light);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-}
-
-.language-switcher-svg:hover {
-  opacity: 0.95;
-}
-
-.lang-option {
   transition: all 0.2s ease;
+  min-width: 60px;
+  text-align: center;
 }
 
-.lang-option:hover .lang-bg {
-  fill: rgba(255, 255, 255, 0.15);
-}
-
-.lang-option.active .lang-bg {
-  fill: rgba(255, 255, 255, 0.25);
-}
-
-.lang-option.active text {
-  opacity: 1;
-}
-
-.lang-option:not(.active) {
-  opacity: 0.5;
-}
-
-.lang-option:not(.active):hover {
-  opacity: 0.75;
+.language-switcher:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 @media (max-width: 768px) {
   .language-switcher {
-    min-width: 54px;
-  }
-
-  .language-switcher-svg {
-    width: 54px;
-    height: 28px;
+    font-size: 14px;
+    padding: 7px 12px;
+    min-width: 50px;
   }
 }
 
 @media (max-width: 480px) {
   .language-switcher {
-    min-width: 50px;
-  }
-
-  .language-switcher-svg {
-    width: 50px;
-    height: 26px;
+    font-size: 13px;
+    padding: 6px 10px;
+    min-width: 44px;
   }
 }
