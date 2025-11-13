@@ -1779,4 +1779,46 @@ const countryConfigs = {
       },
     ],
   },
+  usa: {
+    title: "Land Use in the United States",
+    isoCode: "840",
+    center: [-98, 39],
+    scale: 1300,
+    categories: [
+      { name: "Water", color: "var(--water-400)", percentage: 0.0519 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.2413 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.0608 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.2176 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.0100 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.0582 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.1363 },
+      { name: "Cropland", color: "var(--agriculture-800)", percentage: 0.2241 },
+    ],
+    labels: [
+      {
+        label: "Water",
+        displayLabel: true,
+        labelTarget: { x: 400, y: 100 },
+        labelPosition: { x: 450, y: 80 },
+      },
+      {
+        label: "Nature",
+        displayLabel: true,
+        labelTarget: { x: 350, y: 250 },
+        labelPosition: { x: 300, y: 220 },
+      },
+      {
+        label: "Cities",
+        displayLabel: true,
+        labelTarget: { x: 500, y: 350 },
+        labelPosition: { x: 550, y: 320 },
+      },
+      {
+        label: "Agriculture",
+        displayLabel: true,
+        labelTarget: { x: 450, y: 500 },
+        labelPosition: { x: 500, y: 530 },
+      },
+    ],
+  },
 };

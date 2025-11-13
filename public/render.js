@@ -27,6 +27,7 @@ const validCountries = [
   "spain",
   "sweden",
   "uk",
+  "usa",
 ];
 
 const countryNames = {
@@ -56,6 +57,7 @@ const countryNames = {
   spain: "Spain",
   sweden: "Sweden",
   uk: "United Kingdom",
+  usa: "United States",
 };
 
 // Render small preview version of a country (no animations, no interactions)
