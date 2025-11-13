@@ -1663,26 +1663,50 @@ const countryConfigs = {
       {
         label: "Water",
         displayLabel: true,
-        labelTarget: { x: 650, y: 85 },
-        labelPosition: { x: 705, y: 60 },
+        labelTarget: {
+          x: 571,
+          y: 159,
+        },
+        labelPosition: {
+          x: 615,
+          y: 120,
+        },
       },
       {
         label: "Nature",
         displayLabel: true,
-        labelTarget: { x: 620, y: 250 },
-        labelPosition: { x: 675, y: 230 },
+        labelTarget: {
+          x: 674,
+          y: 281,
+        },
+        labelPosition: {
+          x: 704,
+          y: 310,
+        },
       },
       {
         label: "Cities",
         displayLabel: true,
-        labelTarget: { x: 580, y: 380 },
-        labelPosition: { x: 635, y: 385 },
+        labelTarget: {
+          x: 682,
+          y: 436,
+        },
+        labelPosition: {
+          x: 717,
+          y: 420,
+        },
       },
       {
         label: "Agriculture",
         displayLabel: true,
-        labelTarget: { x: 540, y: 550 },
-        labelPosition: { x: 590, y: 575 },
+        labelTarget: {
+          x: 658,
+          y: 726,
+        },
+        labelPosition: {
+          x: 693,
+          y: 745,
+        },
       },
     ],
   },
@@ -1708,26 +1732,50 @@ const countryConfigs = {
       {
         label: "Water",
         displayLabel: true,
-        labelTarget: { x: 615, y: 75 },
-        labelPosition: { x: 670, y: 50 },
+        labelTarget: {
+          x: 379,
+          y: 211,
+        },
+        labelPosition: {
+          x: 431,
+          y: 151,
+        },
       },
       {
         label: "Nature",
         displayLabel: true,
-        labelTarget: { x: 605, y: 210 },
-        labelPosition: { x: 660, y: 195 },
+        labelTarget: {
+          x: 442,
+          y: 308,
+        },
+        labelPosition: {
+          x: 517,
+          y: 237,
+        },
       },
       {
         label: "Cities",
         displayLabel: true,
-        labelTarget: { x: 570, y: 350 },
-        labelPosition: { x: 625, y: 355 },
+        labelTarget: {
+          x: 527,
+          y: 397,
+        },
+        labelPosition: {
+          x: 595,
+          y: 346,
+        },
       },
       {
         label: "Agriculture",
         displayLabel: true,
-        labelTarget: { x: 540, y: 580 },
-        labelPosition: { x: 590, y: 605 },
+        labelTarget: {
+          x: 514,
+          y: 518,
+        },
+        labelPosition: {
+          x: 576,
+          y: 505,
+        },
       },
     ],
   },
