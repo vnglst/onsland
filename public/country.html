@@ -14,21 +14,23 @@
     <script src="lib/d3.v7.min.js"></script>
     <script src="lib/d3-hexbin.v0.2.min.js"></script>
     <script src="lib/topojson-client.v3.min.js"></script>
+    <script src="i18n.js"></script>
+    <script src="language-switcher.js"></script>
   </head>
   <body>
     <header>
       <div id="countryHeader">
         <button class="back-button" id="backButton">
-          <span class="back-text-full">← Back</span>
-          <span class="back-text-short">←</span>
+          <span class="back-text-full"><span data-i18n="common.back">Back</span></span>
+          <span class="back-text-short" data-i18n="common.backShort">←</span>
         </button>
         <h1 id="countryTitle">
-          <span class="title-prefix">Land Use in </span>
+          <span class="title-prefix" data-i18n="country.titlePrefix">Land Use in </span>
           <span class="title-country"></span>
         </h1>
         <button class="toggle-button" id="layoutToggle">
-          <span class="toggle-text-full">Square View</span>
-          <span class="toggle-text-short">Square</span>
+          <span class="toggle-text-full" data-i18n="country.squareView">Square View</span>
+          <span class="toggle-text-short" data-i18n="country.squareViewShort">Square</span>
         </button>
       </div>
     </header>
@@ -42,14 +44,14 @@
     <footer class="page-footer">
       <div class="footer-content">
         <div>
-          Data:
+          <span data-i18n="common.data">Data</span>:
           <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table"
             >Eurostat Land Cover</a
           >
-          | Code: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a>
+          | <span data-i18n="common.code">Code</span>: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a>
         </div>
         <div>
-          Visualisation by <a target="_blank" href="https://koenvangilst.nl/lab/european-land-use">Koen van Gilst</a>
+          <span data-i18n="common.visualisationBy">Visualisation by</span> <a target="_blank" href="https://koenvangilst.nl/lab/european-land-use">Koen van Gilst</a>
         </div>
       </div>
     </footer>
@@ -63,8 +65,16 @@
       const countryFromUrl = urlParams.get("country");
       const currentCountry = validCountries.includes(countryFromUrl) ? countryFromUrl : "netherlands";
 
-      document.getElementById("pageTitle").textContent = `Land Use in ${countryNames[currentCountry]} - OnsLand`;
-      document.querySelector(".title-country").textContent = countryNames[currentCountry];
+      // Initialize i18n and language switcher
+      initI18n().then(() => {
+        const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
+        document.getElementById("pageTitle").textContent = `${i18n.t('country.titlePrefix')}${countryName} - OnsLand`;
+        document.querySelector(".title-country").textContent = countryName;
+        document.querySelector('meta[name="description"]').setAttribute('content', i18n.t('country.metaDescription'));
+
+        // Initialize language switcher
+        initLanguageSwitcher();
+      });
 
       // Calculate rankings for this country
       function calculateCountryRankings() {
@@ -114,7 +124,7 @@
         return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
       }
 
-      function createRankingBadge(ranking, label, isTopRank) {
+      function createRankingBadge(ranking, labelKey, isTopRank) {
         const badge = document.createElement("div");
         badge.className = "ranking-badge";
 
@@ -134,7 +144,7 @@
 
         const labelDiv = document.createElement("div");
         labelDiv.className = "ranking-badge-label";
-        labelDiv.textContent = label;
+        labelDiv.textContent = i18n.t(labelKey);
 
         content.appendChild(category);
         content.appendChild(labelDiv);
@@ -164,15 +174,15 @@
 
         // Create top ranking badges
         topRankings.forEach((ranking, index) => {
-          const label = index === 0 ? "Highest ranking" : "Second highest";
-          const badge = createRankingBadge(ranking, label, true);
+          const labelKey = index === 0 ? "country.highestRanking" : "country.secondHighest";
+          const badge = createRankingBadge(ranking, labelKey, true);
           container.appendChild(badge);
         });
 
         // Create bottom ranking badges
         bottomRankings.forEach((ranking, index) => {
-          const label = index === 0 ? "Lowest ranking" : "Second lowest";
-          const badge = createRankingBadge(ranking, label, false);
+          const labelKey = index === 0 ? "country.lowestRanking" : "country.secondLowest";
+          const badge = createRankingBadge(ranking, labelKey, false);
           container.appendChild(badge);
         });
       }
@@ -199,8 +209,8 @@
 
       document.getElementById("layoutToggle").addEventListener("click", () => {
         isSquareLayout = !isSquareLayout;
-        const fullText = isSquareLayout ? "Map View" : "Square View";
-        const shortText = isSquareLayout ? "Map" : "Square";
+        const fullText = isSquareLayout ? i18n.t('country.mapView') : i18n.t('country.squareView');
+        const shortText = isSquareLayout ? i18n.t('country.mapViewShort') : i18n.t('country.squareViewShort');
         document.querySelector(".toggle-text-full").textContent = fullText;
         document.querySelector(".toggle-text-short").textContent = shortText;
         toggleLayout();

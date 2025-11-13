@@ -10,6 +10,8 @@
     />
     <link rel="stylesheet" href="style.css" />
     <script defer data-domain="onsland.koenvangilst.nl" src="https://plausible.koenvangilst.nl/js/script.js"></script>
+    <script src="i18n.js"></script>
+    <script src="language-switcher.js"></script>
     <style>
       .rankings-container {
         max-width: 1400px;
@@ -182,12 +184,12 @@
     <header>
       <div class="homepage-header">
         <button class="back-button" onclick="window.location.href='/'">
-          <span class="back-text-full">← Back</span>
-          <span class="back-text-short">←</span>
+          <span class="back-text-full"><span data-i18n="common.back">Back</span></span>
+          <span class="back-text-short" data-i18n="common.backShort">←</span>
         </button>
         <h1>
-          <span class="title-full">Land Use Rankings</span>
-          <span class="title-short">Rankings</span>
+          <span class="title-full" data-i18n="rankings.heading">Land Use Rankings</span>
+          <span class="title-short" data-i18n="rankings.headingShort">Rankings</span>
         </h1>
         <div style="min-width: 120px"></div>
       </div>
@@ -200,14 +202,14 @@
     <footer class="page-footer">
       <div class="footer-content">
         <div>
-          Data:
+          <span data-i18n="common.data">Data</span>:
           <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table"
             >Eurostat Land Cover</a
           >
-          | Code: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a>
+          | <span data-i18n="common.code">Code</span>: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a>
         </div>
         <div>
-          Visualisation by <a target="_blank" href="https://koenvangilst.nl/lab/european-land-use">Koen van Gilst</a>
+          <span data-i18n="common.visualisationBy">Visualisation by</span> <a target="_blank" href="https://koenvangilst.nl/lab/european-land-use">Koen van Gilst</a>
         </div>
       </div>
     </footer>
@@ -215,6 +217,16 @@
     <script src="countries.js"></script>
     <script src="render.js"></script>
     <script>
+      // Initialize i18n and language switcher
+      initI18n().then(() => {
+        // Update page title and meta description
+        document.title = i18n.t('rankings.title');
+        document.querySelector('meta[name="description"]').setAttribute('content', i18n.t('rankings.metaDescription'));
+
+        // Initialize language switcher
+        initLanguageSwitcher();
+      });
+
       // Extract all categories and their data from all countries
       function getAllCategoryRankings() {
         const categoryData = {};
@@ -299,7 +311,7 @@
             countryName.className = "ranking-country";
             const link = document.createElement("a");
             link.href = `country?country=${country.countryKey}`;
-            link.textContent = country.countryName;
+            link.textContent = i18n.t(`countries.${country.countryKey}`) || country.countryName;
             countryName.appendChild(link);
             item.appendChild(countryName);
 
