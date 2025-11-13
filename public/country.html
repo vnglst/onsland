@@ -65,8 +65,8 @@
       const countryFromUrl = urlParams.get("country");
       const currentCountry = validCountries.includes(countryFromUrl) ? countryFromUrl : "netherlands";
 
-      // Initialize i18n and language switcher
-      initI18n().then(() => {
+      // Initialize page after translations are loaded
+      function initializePage() {
         const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
         document.getElementById("pageTitle").textContent = `${i18n.t('country.titlePrefix')}${countryName} - OnsLand`;
         document.querySelector(".title-country").textContent = countryName;
@@ -77,7 +77,7 @@
 
         // Display rankings after translations are loaded
         displayRankings();
-      });
+      }
 
       // Calculate rankings for this country
       function calculateCountryRankings() {
@@ -269,13 +269,25 @@
       let hexDataGlobal = null;
       let hexColorsGlobal = null;
 
-      fetch("lib/countries-50m.json")
+      // Load map data
+      const mapDataPromise = fetch("lib/countries-50m.json")
         .then((response) => response.json())
         .then((world) => {
           worldData = world;
-          renderCountry(currentCountry);
+          return world;
         })
         .catch((error) => console.error("Error loading data:", error));
+
+      // Wait for both translations and map data before rendering
+      Promise.all([initI18n(), mapDataPromise]).then(() => {
+        // Initialize page UI elements with translations
+        initializePage();
+
+        // Render the country visualization
+        if (worldData) {
+          renderCountry(currentCountry);
+        }
+      });
 
       document.getElementById("backButton").addEventListener("click", () => {
         window.location.href = "/";
