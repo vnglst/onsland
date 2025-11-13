@@ -89,15 +89,37 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
     ]);
 
   let hexData;
+  let countryFeature = null;
 
-  // Special handling for Europa (EU aggregate) - use square grid instead of geographic boundaries
+  // Special handling for Europa (EU aggregate) - merge all EU27 countries
   if (countryKey === "europa") {
-    const totalHexagons = 500; // Smaller for preview
-    const squarePositions = calculateSquarePositions(totalHexagons);
-    hexData = squarePositions.map(pos => ({ x: pos.x, y: pos.y }));
+    // EU27 (2020) country ISO codes
+    const eu27Codes = ['040', '056', '100', '191', '196', '203', '208', '233', '246', '250', '276', '300', '348', '372', '380', '428', '440', '442', '470', '528', '616', '620', '642', '703', '705', '724', '752'];
+
+    // Get all EU country geometries and merge them
+    const euGeometries = worldData.objects.countries.geometries.filter(g => eu27Codes.includes(String(g.id)));
+    const mergedEU = topojson.merge(worldData, euGeometries);
+
+    // Create a feature from the merged geometry
+    countryFeature = {
+      type: "Feature",
+      geometry: mergedEU,
+      id: "EU",
+      properties: { name: "European Union" }
+    };
+
+    const hexCenters = [];
+    for (let y = hexRadius; y < height; y += hexRadius * 1.5) {
+      for (let x = hexRadius; x < width; x += hexRadius * Math.sqrt(3)) {
+        hexCenters.push([x, y]);
+      }
+    }
+
+    const hexPoints = hexCenters.filter((center) => d3.geoContains(countryFeature, projection.invert(center)));
+    hexData = hexbin(hexPoints);
   } else {
     const countries = topojson.feature(worldData, worldData.objects.countries);
-    const countryFeature = countries.features.find((d) => d.id === config.isoCode);
+    countryFeature = countries.features.find((d) => d.id === config.isoCode);
 
     if (!countryFeature) return;
 
