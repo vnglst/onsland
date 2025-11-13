@@ -1116,7 +1116,7 @@ const countryConfigs = {
       { name: "Rape", color: "var(--agriculture-800)", percentage: 0.034 },
       { name: "Triticale", color: "var(--agriculture-825)", percentage: 0.031 },
       { name: "Rye", color: "var(--agriculture-850)", percentage: 0.024 },
-      { name: "Oats", color: "var(--agriculture-900)", percentage: 0.020 },
+      { name: "Oats", color: "var(--agriculture-900)", percentage: 0.02 },
       { name: "Barley", color: "var(--agriculture-920)", percentage: 0.019 },
       { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.072 },
     ],
@@ -1263,10 +1263,54 @@ const countryConfigs = {
       { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.107 },
     ],
     labels: [
-      { label: "Water", displayLabel: true, labelTarget: { x: 400, y: 100 }, labelPosition: { x: 400, y: 100 } },
-      { label: "Nature", displayLabel: true, labelTarget: { x: 400, y: 200 }, labelPosition: { x: 400, y: 200 } },
-      { label: "Cities", displayLabel: true, labelTarget: { x: 400, y: 300 }, labelPosition: { x: 400, y: 300 } },
-      { label: "Agriculture", displayLabel: true, labelTarget: { x: 400, y: 500 }, labelPosition: { x: 400, y: 500 } },
+      {
+        label: "Water",
+        displayLabel: true,
+        labelTarget: {
+          x: 332,
+          y: 210,
+        },
+        labelPosition: {
+          x: 322,
+          y: 134,
+        },
+      },
+      {
+        label: "Nature",
+        displayLabel: true,
+        labelTarget: {
+          x: 490,
+          y: 271,
+        },
+        labelPosition: {
+          x: 502,
+          y: 181,
+        },
+      },
+      {
+        label: "Cities",
+        displayLabel: true,
+        labelTarget: {
+          x: 683,
+          y: 380,
+        },
+        labelPosition: {
+          x: 716,
+          y: 349,
+        },
+      },
+      {
+        label: "Agriculture",
+        displayLabel: true,
+        labelTarget: {
+          x: 661,
+          y: 500,
+        },
+        labelPosition: {
+          x: 696,
+          y: 519,
+        },
+      },
     ],
   },
   hungary: {
