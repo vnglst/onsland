@@ -9,9 +9,19 @@
     <script defer data-domain="onsland.koenvangilst.nl" src="https://plausible.koenvangilst.nl/js/script.js"></script>
     <style>
       .rankings-container {
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 0 auto;
         padding: 20px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      @media (min-width: 900px) {
+        .rankings-container {
+          grid-template-columns: 1fr 1fr;
+          gap: 28px;
+        }
       }
 
       .category-ranking {
@@ -19,8 +29,7 @@
         border: 2px solid rgba(255, 255, 255, 0.1);
         border-radius: 12px;
         padding: 24px;
-        margin-bottom: 32px;
-        scroll-margin-top: 100px;
+        scroll-margin-top: 120px;
       }
 
       .category-ranking h2 {
@@ -115,11 +124,11 @@
       @media (max-width: 768px) {
         .rankings-container {
           padding: 16px;
+          gap: 20px;
         }
 
         .category-ranking {
           padding: 16px;
-          margin-bottom: 24px;
         }
 
         .category-ranking h2 {
@@ -151,6 +160,11 @@
       }
 
       @media (max-width: 480px) {
+        .rankings-container {
+          padding: 12px;
+          gap: 16px;
+        }
+
         .ranking-bar {
           display: none;
         }
