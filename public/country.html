@@ -28,7 +28,20 @@
         </button>
       </div>
     </header>
+
     <svg id="countrySvg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid"></svg>
+
+    <div id="rankingsInfo" class="rankings-info">
+      <!-- Rankings information will be dynamically inserted here -->
+    </div>
+
+    <footer class="page-footer">
+      <div class="footer-content">
+        <div>Data: <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table">Eurostat Land Cover</a> | Code: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a></div>
+        <div>Visualisation by <a target="_blank" href="https://koenvangilst.nl/lab/european-land-use">Koen van Gilst</a></div>
+      </div>
+    </footer>
+
     <script src="countries.js"></script>
     <script src="render.js"></script>
     <script>
@@ -40,6 +53,120 @@
 
       document.getElementById("pageTitle").textContent = `Land Use in ${countryNames[currentCountry]} - OnsLand`;
       document.querySelector(".title-country").textContent = countryNames[currentCountry];
+
+      // Calculate rankings for this country
+      function calculateCountryRankings() {
+        const currentConfig = countryConfigs[currentCountry];
+        const rankings = [];
+
+        // For each category this country has, calculate its ranking
+        currentConfig.categories.forEach(category => {
+          const categoryName = category.name;
+          const categoryPercentage = category.percentage;
+          const categoryColor = category.color;
+
+          // Collect all countries that have this category
+          const countriesWithCategory = [];
+          Object.keys(countryConfigs).forEach(countryKey => {
+            const config = countryConfigs[countryKey];
+            const matchingCategory = config.categories.find(c => c.name === categoryName);
+            if (matchingCategory) {
+              countriesWithCategory.push({
+                countryKey: countryKey,
+                countryName: countryNames[countryKey],
+                percentage: matchingCategory.percentage
+              });
+            }
+          });
+
+          // Sort by percentage descending
+          countriesWithCategory.sort((a, b) => b.percentage - a.percentage);
+
+          // Find position of current country
+          const position = countriesWithCategory.findIndex(c => c.countryKey === currentCountry) + 1;
+          const totalCountries = countriesWithCategory.length;
+
+          rankings.push({
+            categoryName: categoryName,
+            categoryColor: categoryColor,
+            position: position,
+            totalCountries: totalCountries,
+            percentage: categoryPercentage
+          });
+        });
+
+        return rankings;
+      }
+
+      function createCategorySlug(categoryName) {
+        return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      }
+
+      function createRankingBadge(ranking, label, isTopRank) {
+        const badge = document.createElement('div');
+        badge.className = 'ranking-badge';
+
+        const link = document.createElement('a');
+        link.href = `rankings.html#${createCategorySlug(ranking.categoryName)}`;
+
+        const positionNumber = document.createElement('div');
+        positionNumber.className = `ranking-position-number ${isTopRank ? 'top-rank' : 'bottom-rank'}`;
+        positionNumber.textContent = `#${ranking.position}`;
+
+        const content = document.createElement('div');
+        content.className = 'ranking-badge-content';
+
+        const category = document.createElement('div');
+        category.className = 'ranking-badge-category';
+        category.textContent = ranking.categoryName;
+
+        const labelDiv = document.createElement('div');
+        labelDiv.className = 'ranking-badge-label';
+        labelDiv.textContent = label;
+
+        content.appendChild(category);
+        content.appendChild(labelDiv);
+
+        link.appendChild(positionNumber);
+        link.appendChild(content);
+        badge.appendChild(link);
+
+        return badge;
+      }
+
+      function displayRankings() {
+        const rankings = calculateCountryRankings();
+        const container = document.getElementById('rankingsInfo');
+
+        // Filter categories with more than 3 countries for meaningful rankings
+        const multiCountryRankings = rankings.filter(r => r.totalCountries > 3);
+
+        // Sort by position
+        const sortedRankings = [...multiCountryRankings].sort((a, b) => a.position - b.position);
+
+        // Get top 2 rankings (lowest positions)
+        const topRankings = sortedRankings.slice(0, 2);
+
+        // Get bottom 2 rankings (highest positions)
+        const bottomRankings = sortedRankings.slice(-2).reverse();
+
+        // Create top ranking badges
+        topRankings.forEach((ranking, index) => {
+          const label = index === 0 ? 'Highest ranking' : 'Second highest';
+          const badge = createRankingBadge(ranking, label, true);
+          container.appendChild(badge);
+        });
+
+        // Create bottom ranking badges
+        bottomRankings.forEach((ranking, index) => {
+          const label = index === 0 ? 'Lowest ranking' : 'Second lowest';
+          const badge = createRankingBadge(ranking, label, false);
+          container.appendChild(badge);
+        });
+      }
+
+      // Display rankings when page loads
+      displayRankings();
 
       let worldData = null;
       let isSquareLayout = false;
@@ -399,37 +526,6 @@
           console.log("===============================================\n");
         }
 
-        svg
-          .append("foreignObject")
-          .attr("x", 25)
-          .attr("y", height - 50)
-          .attr("width", 760)
-          .attr("height", 30)
-          .attr("font-size", "12px")
-          .append("xhtml:div")
-          .html(
-            `Data: <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table">Eurostat Land Cover</a>`
-          );
-
-        svg
-          .append("foreignObject")
-          .attr("x", 180)
-          .attr("y", height - 50)
-          .attr("width", 760)
-          .attr("height", 30)
-          .attr("font-size", "12px")
-          .append("xhtml:div")
-          .html(`| Code: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a>`);
-
-        svg
-          .append("foreignObject")
-          .attr("x", 25)
-          .attr("y", height - 30)
-          .attr("width", 760)
-          .attr("height", 30)
-          .attr("font-size", "12px")
-          .append("xhtml:div")
-          .html(`Visualisation by <a target="_blank" href="https://koenvangilst.nl/labs/ons-land">Koen van Gilst</a>`);
       }
 
       function toggleLayout() {

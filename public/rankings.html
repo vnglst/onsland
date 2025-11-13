@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Land Use Rankings - OnsLand</title>
+    <meta name="description" content="Rankings of European countries by land use categories - which countries have the most water, woodland, urban areas, and more." />
+    <link rel="stylesheet" href="style.css" />
+    <script defer data-domain="onsland.koenvangilst.nl" src="https://plausible.koenvangilst.nl/js/script.js"></script>
+    <style>
+      .rankings-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      @media (min-width: 900px) {
+        .rankings-container {
+          grid-template-columns: 1fr 1fr;
+          gap: 28px;
+        }
+      }
+
+      .category-ranking {
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 24px;
+        scroll-margin-top: 120px;
+      }
+
+      .category-ranking h2 {
+        margin: 0 0 20px 0;
+        font-size: 24px;
+        color: var(--text-light);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .category-color-box {
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+        display: inline-block;
+      }
+
+      .ranking-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .ranking-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        transition: all 0.2s ease;
+      }
+
+      .ranking-item:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateX(4px);
+      }
+
+      .ranking-position {
+        font-weight: bold;
+        font-size: 20px;
+        color: var(--text-light);
+        min-width: 40px;
+      }
+
+      .ranking-country {
+        flex: 1;
+        font-size: 18px;
+        color: var(--text-light);
+      }
+
+      .ranking-country a {
+        color: var(--text-light);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
+      }
+
+      .ranking-country a:hover {
+        border-bottom-color: var(--text-light);
+      }
+
+      .ranking-percentage {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--text-light);
+        min-width: 80px;
+        text-align: right;
+      }
+
+      .ranking-bar {
+        width: 120px;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        margin-left: 16px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .ranking-bar-fill {
+        height: 100%;
+        border-radius: 4px;
+        transition: width 0.3s ease;
+      }
+
+      .back-button-container {
+        margin-bottom: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .rankings-container {
+          padding: 16px;
+          gap: 20px;
+        }
+
+        .category-ranking {
+          padding: 16px;
+        }
+
+        .category-ranking h2 {
+          font-size: 20px;
+        }
+
+        .ranking-item {
+          padding: 10px 12px;
+        }
+
+        .ranking-position {
+          font-size: 18px;
+          min-width: 32px;
+        }
+
+        .ranking-country {
+          font-size: 16px;
+        }
+
+        .ranking-percentage {
+          font-size: 16px;
+          min-width: 70px;
+        }
+
+        .ranking-bar {
+          width: 80px;
+          margin-left: 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .rankings-container {
+          padding: 12px;
+          gap: 16px;
+        }
+
+        .ranking-bar {
+          display: none;
+        }
+
+        .ranking-percentage {
+          min-width: 60px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="homepage-header">
+        <button class="back-button" onclick="window.location.href='index.html'">
+          <span class="back-text-full">← Back to Overview</span>
+          <span class="back-text-short">←</span>
+        </button>
+        <h1>
+          <span class="title-full">Land Use Rankings</span>
+          <span class="title-short">Rankings</span>
+        </h1>
+        <div style="min-width: 120px;"></div>
+      </div>
+    </header>
+
+    <div class="rankings-container" id="rankingsContainer">
+      <!-- Rankings will be dynamically generated here -->
+    </div>
+
+    <footer class="page-footer">
+      <div class="footer-content">
+        <div>Data: <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table">Eurostat Land Cover</a> | Code: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a></div>
+        <div>Visualisation by <a target="_blank" href="https://koenvangilst.nl/lab/european-land-use">Koen van Gilst</a></div>
+      </div>
+    </footer>
+
+    <script src="countries.js"></script>
+    <script src="render.js"></script>
+    <script>
+      // Extract all categories and their data from all countries
+      function getAllCategoryRankings() {
+        const categoryData = {};
+
+        // Iterate through all countries and collect category data
+        Object.keys(countryConfigs).forEach(countryKey => {
+          const config = countryConfigs[countryKey];
+          const countryName = countryNames[countryKey];
+
+          config.categories.forEach(category => {
+            if (!categoryData[category.name]) {
+              categoryData[category.name] = {
+                color: category.color,
+                countries: []
+              };
+            }
+
+            categoryData[category.name].countries.push({
+              countryKey: countryKey,
+              countryName: countryName,
+              percentage: category.percentage
+            });
+          });
+        });
+
+        // Sort countries within each category by percentage (descending)
+        Object.keys(categoryData).forEach(categoryName => {
+          categoryData[categoryName].countries.sort((a, b) => b.percentage - a.percentage);
+        });
+
+        return categoryData;
+      }
+
+      function createCategorySlug(categoryName) {
+        return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      }
+
+      function renderRankings() {
+        const categoryRankings = getAllCategoryRankings();
+        const container = document.getElementById('rankingsContainer');
+
+        // Sort categories by name for consistent display
+        const sortedCategories = Object.keys(categoryRankings).sort();
+
+        sortedCategories.forEach(categoryName => {
+          const data = categoryRankings[categoryName];
+
+          // Skip categories with 3 or fewer countries
+          if (data.countries.length <= 3) {
+            return;
+          }
+          const categorySlug = createCategorySlug(categoryName);
+
+          // Find the maximum percentage for this category (for bar scaling)
+          const maxPercentage = data.countries[0]?.percentage || 0;
+
+          const section = document.createElement('div');
+          section.className = 'category-ranking';
+          section.id = categorySlug;
+
+          const heading = document.createElement('h2');
+          const colorBox = document.createElement('span');
+          colorBox.className = 'category-color-box';
+          colorBox.style.backgroundColor = data.color;
+          heading.appendChild(colorBox);
+          heading.appendChild(document.createTextNode(categoryName));
+          section.appendChild(heading);
+
+          const list = document.createElement('ol');
+          list.className = 'ranking-list';
+
+          data.countries.forEach((country, index) => {
+            const item = document.createElement('li');
+            item.className = 'ranking-item';
+
+            const position = document.createElement('span');
+            position.className = 'ranking-position';
+            position.textContent = `${index + 1}.`;
+            item.appendChild(position);
+
+            const countryName = document.createElement('span');
+            countryName.className = 'ranking-country';
+            const link = document.createElement('a');
+            link.href = `country.html?country=${country.countryKey}`;
+            link.textContent = country.countryName;
+            countryName.appendChild(link);
+            item.appendChild(countryName);
+
+            const percentage = document.createElement('span');
+            percentage.className = 'ranking-percentage';
+            percentage.textContent = `${(country.percentage * 100).toFixed(2)}%`;
+            item.appendChild(percentage);
+
+            const bar = document.createElement('div');
+            bar.className = 'ranking-bar';
+            const barFill = document.createElement('div');
+            barFill.className = 'ranking-bar-fill';
+            barFill.style.backgroundColor = data.color;
+            barFill.style.width = `${(country.percentage / maxPercentage) * 100}%`;
+            bar.appendChild(barFill);
+            item.appendChild(bar);
+
+            list.appendChild(item);
+          });
+
+          section.appendChild(list);
+          container.appendChild(section);
+        });
+      }
+
+      // Render rankings when page loads
+      renderRankings();
+
+      // Scroll to category if hash is present in URL
+      if (window.location.hash) {
+        setTimeout(() => {
+          const element = document.querySelector(window.location.hash);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    </script>
+  </body>
+</html>
