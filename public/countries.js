@@ -1561,12 +1561,12 @@ const countryConfigs = {
         label: "Agriculture",
         displayLabel: true,
         labelTarget: {
-          x: 377,
-          y: 564,
+          x: 614,
+          y: 629,
         },
         labelPosition: {
-          x: 322,
-          y: 618,
+          x: 650,
+          y: 637,
         },
       },
     ],
