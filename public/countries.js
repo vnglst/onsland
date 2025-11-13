@@ -1659,7 +1659,32 @@ const countryConfigs = {
       { name: "Permanent crops", color: "var(--agriculture-900)", percentage: 0.025 },
       { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.037 },
     ],
-    labels: [],
+    labels: [
+      {
+        label: "Water",
+        displayLabel: true,
+        labelTarget: { x: 630, y: 80 },
+        labelPosition: { x: 685, y: 55 },
+      },
+      {
+        label: "Nature",
+        displayLabel: true,
+        labelTarget: { x: 630, y: 200 },
+        labelPosition: { x: 685, y: 180 },
+      },
+      {
+        label: "Cities",
+        displayLabel: true,
+        labelTarget: { x: 630, y: 360 },
+        labelPosition: { x: 685, y: 360 },
+      },
+      {
+        label: "Agriculture",
+        displayLabel: true,
+        labelTarget: { x: 580, y: 560 },
+        labelPosition: { x: 630, y: 585 },
+      },
+    ],
   },
   greece: {
     title: "Land Use in Greece",
@@ -1680,7 +1705,32 @@ const countryConfigs = {
       { name: "Olive trees", color: "var(--agriculture-850)", percentage: 0.083 },
       { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.033 },
     ],
-    labels: [],
+    labels: [
+      {
+        label: "Water",
+        displayLabel: true,
+        labelTarget: { x: 650, y: 85 },
+        labelPosition: { x: 705, y: 60 },
+      },
+      {
+        label: "Nature",
+        displayLabel: true,
+        labelTarget: { x: 620, y: 250 },
+        labelPosition: { x: 675, y: 230 },
+      },
+      {
+        label: "Cities",
+        displayLabel: true,
+        labelTarget: { x: 580, y: 380 },
+        labelPosition: { x: 635, y: 385 },
+      },
+      {
+        label: "Agriculture",
+        displayLabel: true,
+        labelTarget: { x: 540, y: 550 },
+        labelPosition: { x: 590, y: 575 },
+      },
+    ],
   },
   luxembourg: {
     title: "Land Use in Luxembourg",
@@ -1700,6 +1750,31 @@ const countryConfigs = {
       { name: "Vineyard", color: "var(--agriculture-850)", percentage: 0.005 },
       { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.019 },
     ],
-    labels: [],
+    labels: [
+      {
+        label: "Water",
+        displayLabel: true,
+        labelTarget: { x: 615, y: 75 },
+        labelPosition: { x: 670, y: 50 },
+      },
+      {
+        label: "Nature",
+        displayLabel: true,
+        labelTarget: { x: 605, y: 210 },
+        labelPosition: { x: 660, y: 195 },
+      },
+      {
+        label: "Cities",
+        displayLabel: true,
+        labelTarget: { x: 570, y: 350 },
+        labelPosition: { x: 625, y: 355 },
+      },
+      {
+        label: "Agriculture",
+        displayLabel: true,
+        labelTarget: { x: 540, y: 580 },
+        labelPosition: { x: 590, y: 605 },
+      },
+    ],
   },
 };
