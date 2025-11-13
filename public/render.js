@@ -11,11 +11,13 @@ const validCountries = [
   "finland",
   "france",
   "germany",
+  "greece",
   "hungary",
   "ireland",
   "italy",
   "latvia",
   "lithuania",
+  "luxembourg",
   "netherlands",
   "poland",
   "portugal",
@@ -38,11 +40,13 @@ const countryNames = {
   finland: "Finland",
   france: "France",
   germany: "Germany",
+  greece: "Greece",
   hungary: "Hungary",
   ireland: "Ireland",
   italy: "Italy",
   latvia: "Latvia",
   lithuania: "Lithuania",
+  luxembourg: "Luxembourg",
   netherlands: "The Netherlands",
   poland: "Poland",
   portugal: "Portugal",
@@ -74,11 +78,6 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
     .scale(config.scale)
     .translate([width / 2, height / 2]);
 
-  const countries = topojson.feature(worldData, worldData.objects.countries);
-  const countryFeature = countries.features.find((d) => d.id === config.isoCode);
-
-  if (!countryFeature) return;
-
   const hexbin = d3
     .hexbin()
     .radius(hexRadius)
@@ -86,6 +85,11 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
       [0, 0],
       [width, height],
     ]);
+
+  const countries = topojson.feature(worldData, worldData.objects.countries);
+  const countryFeature = countries.features.find((d) => d.id === config.isoCode);
+
+  if (!countryFeature) return;
 
   const hexCenters = [];
   for (let y = hexRadius; y < height; y += hexRadius * 1.5) {
@@ -96,6 +100,7 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
 
   const hexPoints = hexCenters.filter((center) => d3.geoContains(countryFeature, projection.invert(center)));
   const hexData = hexbin(hexPoints);
+
   const totalHexagons = hexData.length;
 
   const colorScale = d3

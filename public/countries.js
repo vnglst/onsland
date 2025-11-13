@@ -1640,4 +1640,143 @@ const countryConfigs = {
       },
     ],
   },
+  greece: {
+    title: "Land Use in Greece",
+    isoCode: "300",
+    center: [22, 39],
+    scale: 3500,
+    categories: [
+      { name: "Water", color: "var(--water-400)", percentage: 0.013 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.388 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.007 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.212 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.025 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.04 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.117 },
+      { name: "Cereals", color: "var(--agriculture-700)", percentage: 0.04 },
+      { name: "Cotton", color: "var(--agriculture-750)", percentage: 0.018 },
+      { name: "Fruit trees", color: "var(--agriculture-800)", percentage: 0.022 },
+      { name: "Olive trees", color: "var(--agriculture-850)", percentage: 0.083 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.033 },
+    ],
+    labels: [
+      {
+        label: "Water",
+        displayLabel: true,
+        labelTarget: {
+          x: 571,
+          y: 159,
+        },
+        labelPosition: {
+          x: 615,
+          y: 120,
+        },
+      },
+      {
+        label: "Nature",
+        displayLabel: true,
+        labelTarget: {
+          x: 674,
+          y: 281,
+        },
+        labelPosition: {
+          x: 704,
+          y: 310,
+        },
+      },
+      {
+        label: "Cities",
+        displayLabel: true,
+        labelTarget: {
+          x: 682,
+          y: 436,
+        },
+        labelPosition: {
+          x: 717,
+          y: 420,
+        },
+      },
+      {
+        label: "Agriculture",
+        displayLabel: true,
+        labelTarget: {
+          x: 658,
+          y: 726,
+        },
+        labelPosition: {
+          x: 693,
+          y: 745,
+        },
+      },
+    ],
+  },
+  luxembourg: {
+    title: "Land Use in Luxembourg",
+    isoCode: "442",
+    center: [6.13, 49.81],
+    scale: 18000,
+    categories: [
+      { name: "Water", color: "var(--water-400)", percentage: 0.011 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.367 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.002 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.011 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.014 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.092 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.302 },
+      { name: "Cereals", color: "var(--agriculture-700)", percentage: 0.127 },
+      { name: "Fodder crops", color: "var(--agriculture-800)", percentage: 0.05 },
+      { name: "Vineyard", color: "var(--agriculture-850)", percentage: 0.005 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.019 },
+    ],
+    labels: [
+      {
+        label: "Water",
+        displayLabel: true,
+        labelTarget: {
+          x: 379,
+          y: 211,
+        },
+        labelPosition: {
+          x: 431,
+          y: 151,
+        },
+      },
+      {
+        label: "Nature",
+        displayLabel: true,
+        labelTarget: {
+          x: 442,
+          y: 308,
+        },
+        labelPosition: {
+          x: 517,
+          y: 237,
+        },
+      },
+      {
+        label: "Cities",
+        displayLabel: true,
+        labelTarget: {
+          x: 527,
+          y: 397,
+        },
+        labelPosition: {
+          x: 595,
+          y: 346,
+        },
+      },
+      {
+        label: "Agriculture",
+        displayLabel: true,
+        labelTarget: {
+          x: 514,
+          y: 518,
+        },
+        labelPosition: {
+          x: 576,
+          y: 505,
+        },
+      },
+    ],
+  },
 };
