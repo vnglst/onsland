@@ -80,11 +80,6 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
     .scale(config.scale)
     .translate([width / 2, height / 2]);
 
-  const countries = topojson.feature(worldData, worldData.objects.countries);
-  const countryFeature = countries.features.find((d) => d.id === config.isoCode);
-
-  if (!countryFeature) return;
-
   const hexbin = d3
     .hexbin()
     .radius(hexRadius)
@@ -93,15 +88,30 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
       [width, height],
     ]);
 
-  const hexCenters = [];
-  for (let y = hexRadius; y < height; y += hexRadius * 1.5) {
-    for (let x = hexRadius; x < width; x += hexRadius * Math.sqrt(3)) {
-      hexCenters.push([x, y]);
+  let hexData;
+
+  // Special handling for Europa (EU aggregate) - use square grid instead of geographic boundaries
+  if (countryKey === "europa") {
+    const totalHexagons = 500; // Smaller for preview
+    const squarePositions = calculateSquarePositions(totalHexagons);
+    hexData = squarePositions.map(pos => ({ x: pos.x, y: pos.y }));
+  } else {
+    const countries = topojson.feature(worldData, worldData.objects.countries);
+    const countryFeature = countries.features.find((d) => d.id === config.isoCode);
+
+    if (!countryFeature) return;
+
+    const hexCenters = [];
+    for (let y = hexRadius; y < height; y += hexRadius * 1.5) {
+      for (let x = hexRadius; x < width; x += hexRadius * Math.sqrt(3)) {
+        hexCenters.push([x, y]);
+      }
     }
+
+    const hexPoints = hexCenters.filter((center) => d3.geoContains(countryFeature, projection.invert(center)));
+    hexData = hexbin(hexPoints);
   }
 
-  const hexPoints = hexCenters.filter((center) => d3.geoContains(countryFeature, projection.invert(center)));
-  const hexData = hexbin(hexPoints);
   const totalHexagons = hexData.length;
 
   const colorScale = d3

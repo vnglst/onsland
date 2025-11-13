@@ -228,14 +228,7 @@
 
         const path = d3.geoPath().projection(projection);
 
-        const countries = topojson.feature(worldData, worldData.objects.countries);
-        const countryFeature = countries.features.find((d) => d.id === config.isoCode);
-
-        if (!countryFeature) {
-          console.error(`Country ${countryKey} not found in dataset`);
-          return;
-        }
-
+        // Create hexbin for rendering (needed for both geographic and square layouts)
         const hexbin = d3
           .hexbin()
           .radius(hexRadius)
@@ -244,16 +237,39 @@
             [width, height],
           ]);
 
-        const hexCenters = [];
-        for (let y = hexRadius; y < height; y += hexRadius * 1.5) {
-          for (let x = hexRadius; x < width; x += hexRadius * Math.sqrt(3)) {
-            hexCenters.push([x, y]);
-          }
-        }
+        let hexData;
+        let countryFeature = null;
 
-        const hexPoints = hexCenters.filter((center) => d3.geoContains(countryFeature, projection.invert(center)));
-        const hexData = hexbin(hexPoints);
-        hexDataGlobal = hexData;
+        // Special handling for Europa (EU aggregate) - use square grid instead of geographic boundaries
+        if (countryKey === "europa") {
+          // Calculate number of hexagons needed to represent 100% (using 1000 hexagons for good resolution)
+          const totalHexagons = 1000;
+          const squarePositions = calculateSquarePositions(totalHexagons);
+
+          // Create mock hexData with positions from square grid
+          hexData = squarePositions.map(pos => ({ x: pos.x, y: pos.y }));
+          hexDataGlobal = hexData;
+        } else {
+          // Normal geographic rendering for other countries
+          const countries = topojson.feature(worldData, worldData.objects.countries);
+          countryFeature = countries.features.find((d) => d.id === config.isoCode);
+
+          if (!countryFeature) {
+            console.error(`Country ${countryKey} not found in dataset`);
+            return;
+          }
+
+          const hexCenters = [];
+          for (let y = hexRadius; y < height; y += hexRadius * 1.5) {
+            for (let x = hexRadius; x < width; x += hexRadius * Math.sqrt(3)) {
+              hexCenters.push([x, y]);
+            }
+          }
+
+          const hexPoints = hexCenters.filter((center) => d3.geoContains(countryFeature, projection.invert(center)));
+          hexData = hexbin(hexPoints);
+          hexDataGlobal = hexData;
+        }
 
         const totalHexagons = hexData.length;
 
