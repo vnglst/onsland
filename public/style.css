@@ -556,33 +556,53 @@ a {
   background: var(--bg-dark);
   border: 2px solid rgba(255, 255, 255, 0.2);
   color: var(--text-light);
-  padding: 10px 16px;
+  padding: 10px 32px 10px 16px;
   border-radius: 8px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  min-width: 60px;
-  text-align: center;
+  min-width: 120px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23e8f5e3' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
 }
 
 .language-switcher:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.3);
+}
+
+.language-switcher:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.language-switcher option {
+  background: var(--bg-dark);
+  color: var(--text-light);
 }
 
 @media (max-width: 768px) {
   .language-switcher {
     font-size: 14px;
-    padding: 7px 12px;
-    min-width: 50px;
+    padding: 7px 28px 7px 12px;
+    min-width: 100px;
+    background-position: right 8px center;
+    background-size: 10px;
   }
 }
 
 @media (max-width: 480px) {
   .language-switcher {
     font-size: 13px;
-    padding: 6px 10px;
-    min-width: 44px;
+    padding: 6px 24px 6px 10px;
+    min-width: 90px;
+    background-position: right 6px center;
+    background-size: 10px;
   }
 }

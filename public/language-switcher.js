@@ -1,31 +1,33 @@
 // Language Switcher Component
-// Creates a simple language toggle button
+// Creates a dropdown for language selection
 
 function createLanguageSwitcher() {
   const currentLang = i18n.getCurrentLanguage();
-  const languages = ['en', 'nl', 'fr'];
-  const languageNames = { en: 'EN', nl: 'NL', fr: 'FR' };
-  const languageTitles = {
-    en: 'Switch to English',
-    nl: 'Switch to Dutch',
-    fr: 'Switch to French'
-  };
+  const languages = [
+    { code: 'en', name: 'English' },
+    { code: 'nl', name: 'Nederlands' },
+    { code: 'fr', name: 'Français' }
+  ];
 
-  // Find next language in cycle
-  const currentIndex = languages.indexOf(currentLang);
-  const nextIndex = (currentIndex + 1) % languages.length;
-  const nextLang = languages[nextIndex];
+  const select = document.createElement('select');
+  select.className = 'language-switcher';
+  select.title = 'Select language';
 
-  const button = document.createElement('button');
-  button.className = 'language-switcher';
-  button.textContent = languageNames[nextLang];
-  button.title = languageTitles[nextLang];
-
-  button.addEventListener('click', () => {
-    switchLanguage(nextLang);
+  languages.forEach(lang => {
+    const option = document.createElement('option');
+    option.value = lang.code;
+    option.textContent = lang.name;
+    if (lang.code === currentLang) {
+      option.selected = true;
+    }
+    select.appendChild(option);
   });
 
-  return button;
+  select.addEventListener('change', (e) => {
+    switchLanguage(e.target.value);
+  });
+
+  return select;
 }
 
 async function switchLanguage(lang) {
