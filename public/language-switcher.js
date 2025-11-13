@@ -107,23 +107,44 @@ async function switchLanguage(lang) {
 function initLanguageSwitcher() {
   // Find the header and add the language switcher
   const header = document.querySelector('header');
-  if (header) {
-    const switcher = createLanguageSwitcher();
+  if (!header) {
+    console.warn('Header not found for language switcher');
+    return;
+  }
 
-    // Insert in the header content
-    const headerContent = header.querySelector('.homepage-header, #countryHeader');
-    if (headerContent) {
-      // Check if there's a spacer div (rankings page) and replace it
-      const spacer = headerContent.querySelector('div[style*="min-width"]');
-      if (spacer) {
-        spacer.replaceWith(switcher);
-      } else {
-        // Otherwise append it to the header
-        headerContent.appendChild(switcher);
-      }
-    } else {
-      header.appendChild(switcher);
-    }
+  const switcher = createLanguageSwitcher();
+  const headerContent = header.querySelector('.homepage-header, #countryHeader');
+
+  if (!headerContent) {
+    console.warn('Header content not found');
+    header.appendChild(switcher);
+    return;
+  }
+
+  // Check if there's a spacer div (rankings page) and replace it
+  const spacer = headerContent.querySelector('div[style*="min-width"]');
+  if (spacer) {
+    spacer.replaceWith(switcher);
+    return;
+  }
+
+  // For homepage and country pages, check if there's already a toggle button
+  const toggleButton = headerContent.querySelector('.toggle-button, #layoutToggle');
+  if (toggleButton) {
+    // Create a container for the buttons to keep them together
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'header-actions';
+    buttonContainer.style.display = 'flex';
+    buttonContainer.style.gap = '12px';
+    buttonContainer.style.alignItems = 'center';
+
+    // Replace the toggle button with the container
+    toggleButton.parentNode.insertBefore(buttonContainer, toggleButton);
+    buttonContainer.appendChild(toggleButton);
+    buttonContainer.appendChild(switcher);
+  } else {
+    // No toggle button, just append
+    headerContent.appendChild(switcher);
   }
 }
 
