@@ -483,15 +483,15 @@ a {
 
 @media (max-width: 480px) {
   .rankings-info {
-    flex-direction: column;
-    gap: 6px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
     margin: 20px auto 36px auto;
   }
 
   .ranking-badge {
-    width: 100%;
     justify-content: center;
-    padding: 6px 10px;
+    padding: 6px 8px;
   }
 
   .ranking-position-number {
