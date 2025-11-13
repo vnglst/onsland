@@ -264,6 +264,48 @@
         return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
       }
 
+      function translateCategory(categoryName) {
+        // Map category names to translation keys
+        const categoryMap = {
+          'Water': 'categories.water',
+          'Woodland': 'categories.woodland',
+          'Wetland': 'categories.wetland',
+          'Shrubland': 'categories.shrubland',
+          'Bare land': 'categories.bareLand',
+          'Urban area': 'categories.urbanArea',
+          'Grassland': 'categories.grassland',
+          'Cereals': 'categories.cereals',
+          'Wheat': 'categories.wheat',
+          'Barley': 'categories.barley',
+          'Rye': 'categories.rye',
+          'Oats': 'categories.oats',
+          'Maize': 'categories.maize',
+          'Rice': 'categories.rice',
+          'Rape': 'categories.rape',
+          'Sunflower': 'categories.sunflower',
+          'Soya': 'categories.soya',
+          'Potatoes': 'categories.potatoes',
+          'Sugarbeet': 'categories.sugarbeet',
+          'Tobacco': 'categories.tobacco',
+          'Cotton': 'categories.cotton',
+          'Dry pulses': 'categories.dryPulses',
+          'Industrial crops': 'categories.industrialCrops',
+          'Vegetables': 'categories.vegetables',
+          'Flowers': 'categories.flowers',
+          'Vineyards': 'categories.vineyards',
+          'Orchards': 'categories.orchards',
+          'Olive groves': 'categories.oliveGroves',
+          'Nurseries': 'categories.nurseries',
+          'Arom. plants': 'categories.aromPlants',
+          'Temp. grassland': 'categories.tempGrassland',
+          'Permanent crops': 'categories.permanentCrops',
+          'Other cropland': 'categories.otherCropland'
+        };
+
+        const key = categoryMap[categoryName];
+        return key ? i18n.t(key) : categoryName;
+      }
+
       function renderRankings() {
         const categoryRankings = getAllCategoryRankings();
         const container = document.getElementById("rankingsContainer");
@@ -292,7 +334,7 @@
           colorBox.className = "category-color-box";
           colorBox.style.backgroundColor = data.color;
           heading.appendChild(colorBox);
-          heading.appendChild(document.createTextNode(categoryName));
+          heading.appendChild(document.createTextNode(translateCategory(categoryName)));
           section.appendChild(heading);
 
           const list = document.createElement("ol");
