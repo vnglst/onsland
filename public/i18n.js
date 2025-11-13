@@ -108,7 +108,7 @@ class I18n {
 
   // Get available languages
   getAvailableLanguages() {
-    return ['en', 'nl']; // English and Dutch
+    return ['en', 'nl', 'fr']; // English, Dutch, and French
   }
 }
 

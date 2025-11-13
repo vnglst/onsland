@@ -3,15 +3,26 @@
 
 function createLanguageSwitcher() {
   const currentLang = i18n.getCurrentLanguage();
+  const languages = ['en', 'nl', 'fr'];
+  const languageNames = { en: 'EN', nl: 'NL', fr: 'FR' };
+  const languageTitles = {
+    en: 'Switch to English',
+    nl: 'Switch to Dutch',
+    fr: 'Switch to French'
+  };
+
+  // Find next language in cycle
+  const currentIndex = languages.indexOf(currentLang);
+  const nextIndex = (currentIndex + 1) % languages.length;
+  const nextLang = languages[nextIndex];
 
   const button = document.createElement('button');
   button.className = 'language-switcher';
-  button.textContent = currentLang === 'en' ? 'NL' : 'EN';
-  button.title = currentLang === 'en' ? 'Switch to Dutch' : 'Switch to English';
+  button.textContent = languageNames[nextLang];
+  button.title = languageTitles[nextLang];
 
   button.addEventListener('click', () => {
-    const newLang = currentLang === 'en' ? 'nl' : 'en';
-    switchLanguage(newLang);
+    switchLanguage(nextLang);
   });
 
   return button;
