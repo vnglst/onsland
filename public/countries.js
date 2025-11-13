@@ -1333,10 +1333,54 @@ const countryConfigs = {
       { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.086 },
     ],
     labels: [
-      { label: "Water", displayLabel: true, labelTarget: { x: 400, y: 100 }, labelPosition: { x: 400, y: 100 } },
-      { label: "Nature", displayLabel: true, labelTarget: { x: 400, y: 200 }, labelPosition: { x: 400, y: 200 } },
-      { label: "Cities", displayLabel: true, labelTarget: { x: 400, y: 300 }, labelPosition: { x: 400, y: 300 } },
-      { label: "Agriculture", displayLabel: true, labelTarget: { x: 400, y: 500 }, labelPosition: { x: 400, y: 500 } },
+      {
+        label: "Water",
+        displayLabel: true,
+        labelTarget: {
+          x: 519,
+          y: 200,
+        },
+        labelPosition: {
+          x: 515,
+          y: 155,
+        },
+      },
+      {
+        label: "Nature",
+        displayLabel: true,
+        labelTarget: {
+          x: 653,
+          y: 244,
+        },
+        labelPosition: {
+          x: 695,
+          y: 210,
+        },
+      },
+      {
+        label: "Cities",
+        displayLabel: true,
+        labelTarget: {
+          x: 631,
+          y: 358,
+        },
+        labelPosition: {
+          x: 682,
+          y: 386,
+        },
+      },
+      {
+        label: "Agriculture",
+        displayLabel: true,
+        labelTarget: {
+          x: 579,
+          y: 474,
+        },
+        labelPosition: {
+          x: 635,
+          y: 525,
+        },
+      },
     ],
   },
   slovakia: {
