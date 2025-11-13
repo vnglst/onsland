@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Land Use Rankings - OnsLand</title>
-    <meta name="description" content="Rankings of European countries by land use categories - which countries have the most water, woodland, urban areas, and more." />
+    <meta
+      name="description"
+      content="Rankings of European countries by land use categories - which countries have the most water, woodland, urban areas, and more."
+    />
     <link rel="stylesheet" href="style.css" />
     <script defer data-domain="onsland.koenvangilst.nl" src="https://plausible.koenvangilst.nl/js/script.js"></script>
     <style>
@@ -179,14 +182,14 @@
     <header>
       <div class="homepage-header">
         <button class="back-button" onclick="window.location.href='/'">
-          <span class="back-text-full">← Back to Overview</span>
+          <span class="back-text-full">← Back</span>
           <span class="back-text-short">←</span>
         </button>
         <h1>
           <span class="title-full">Land Use Rankings</span>
           <span class="title-short">Rankings</span>
         </h1>
-        <div style="min-width: 120px;"></div>
+        <div style="min-width: 120px"></div>
       </div>
     </header>
 
@@ -196,8 +199,16 @@
 
     <footer class="page-footer">
       <div class="footer-content">
-        <div>Data: <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table">Eurostat Land Cover</a> | Code: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a></div>
-        <div>Visualisation by <a target="_blank" href="https://koenvangilst.nl/lab/european-land-use">Koen van Gilst</a></div>
+        <div>
+          Data:
+          <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table"
+            >Eurostat Land Cover</a
+          >
+          | Code: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a>
+        </div>
+        <div>
+          Visualisation by <a target="_blank" href="https://koenvangilst.nl/lab/european-land-use">Koen van Gilst</a>
+        </div>
       </div>
     </footer>
 
@@ -209,28 +220,28 @@
         const categoryData = {};
 
         // Iterate through all countries and collect category data
-        Object.keys(countryConfigs).forEach(countryKey => {
+        Object.keys(countryConfigs).forEach((countryKey) => {
           const config = countryConfigs[countryKey];
           const countryName = countryNames[countryKey];
 
-          config.categories.forEach(category => {
+          config.categories.forEach((category) => {
             if (!categoryData[category.name]) {
               categoryData[category.name] = {
                 color: category.color,
-                countries: []
+                countries: [],
               };
             }
 
             categoryData[category.name].countries.push({
               countryKey: countryKey,
               countryName: countryName,
-              percentage: category.percentage
+              percentage: category.percentage,
             });
           });
         });
 
         // Sort countries within each category by percentage (descending)
-        Object.keys(categoryData).forEach(categoryName => {
+        Object.keys(categoryData).forEach((categoryName) => {
           categoryData[categoryName].countries.sort((a, b) => b.percentage - a.percentage);
         });
 
@@ -238,17 +249,17 @@
       }
 
       function createCategorySlug(categoryName) {
-        return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
       }
 
       function renderRankings() {
         const categoryRankings = getAllCategoryRankings();
-        const container = document.getElementById('rankingsContainer');
+        const container = document.getElementById("rankingsContainer");
 
         // Sort categories by name for consistent display
         const sortedCategories = Object.keys(categoryRankings).sort();
 
-        sortedCategories.forEach(categoryName => {
+        sortedCategories.forEach((categoryName) => {
           const data = categoryRankings[categoryName];
 
           // Skip categories with 3 or fewer countries
@@ -260,47 +271,47 @@
           // Find the maximum percentage for this category (for bar scaling)
           const maxPercentage = data.countries[0]?.percentage || 0;
 
-          const section = document.createElement('div');
-          section.className = 'category-ranking';
+          const section = document.createElement("div");
+          section.className = "category-ranking";
           section.id = categorySlug;
 
-          const heading = document.createElement('h2');
-          const colorBox = document.createElement('span');
-          colorBox.className = 'category-color-box';
+          const heading = document.createElement("h2");
+          const colorBox = document.createElement("span");
+          colorBox.className = "category-color-box";
           colorBox.style.backgroundColor = data.color;
           heading.appendChild(colorBox);
           heading.appendChild(document.createTextNode(categoryName));
           section.appendChild(heading);
 
-          const list = document.createElement('ol');
-          list.className = 'ranking-list';
+          const list = document.createElement("ol");
+          list.className = "ranking-list";
 
           data.countries.forEach((country, index) => {
-            const item = document.createElement('li');
-            item.className = 'ranking-item';
+            const item = document.createElement("li");
+            item.className = "ranking-item";
 
-            const position = document.createElement('span');
-            position.className = 'ranking-position';
+            const position = document.createElement("span");
+            position.className = "ranking-position";
             position.textContent = `${index + 1}.`;
             item.appendChild(position);
 
-            const countryName = document.createElement('span');
-            countryName.className = 'ranking-country';
-            const link = document.createElement('a');
+            const countryName = document.createElement("span");
+            countryName.className = "ranking-country";
+            const link = document.createElement("a");
             link.href = `country?country=${country.countryKey}`;
             link.textContent = country.countryName;
             countryName.appendChild(link);
             item.appendChild(countryName);
 
-            const percentage = document.createElement('span');
-            percentage.className = 'ranking-percentage';
+            const percentage = document.createElement("span");
+            percentage.className = "ranking-percentage";
             percentage.textContent = `${(country.percentage * 100).toFixed(2)}%`;
             item.appendChild(percentage);
 
-            const bar = document.createElement('div');
-            bar.className = 'ranking-bar';
-            const barFill = document.createElement('div');
-            barFill.className = 'ranking-bar-fill';
+            const bar = document.createElement("div");
+            bar.className = "ranking-bar";
+            const barFill = document.createElement("div");
+            barFill.className = "ranking-bar-fill";
             barFill.style.backgroundColor = data.color;
             barFill.style.width = `${(country.percentage / maxPercentage) * 100}%`;
             bar.appendChild(barFill);
@@ -322,7 +333,7 @@
         setTimeout(() => {
           const element = document.querySelector(window.location.hash);
           if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+            element.scrollIntoView({ behavior: "smooth" });
           }
         }, 100);
       }
