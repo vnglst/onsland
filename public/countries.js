@@ -1193,10 +1193,54 @@ const countryConfigs = {
       { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.076 },
     ],
     labels: [
-      { label: "Water", displayLabel: true, labelTarget: { x: 400, y: 100 }, labelPosition: { x: 400, y: 100 } },
-      { label: "Nature", displayLabel: true, labelTarget: { x: 400, y: 200 }, labelPosition: { x: 400, y: 200 } },
-      { label: "Cities", displayLabel: true, labelTarget: { x: 400, y: 300 }, labelPosition: { x: 400, y: 300 } },
-      { label: "Agriculture", displayLabel: true, labelTarget: { x: 400, y: 500 }, labelPosition: { x: 400, y: 500 } },
+      {
+        label: "Water",
+        displayLabel: true,
+        labelTarget: {
+          x: 249,
+          y: 241,
+        },
+        labelPosition: {
+          x: 265,
+          y: 196,
+        },
+      },
+      {
+        label: "Nature",
+        displayLabel: true,
+        labelTarget: {
+          x: 631,
+          y: 280,
+        },
+        labelPosition: {
+          x: 641,
+          y: 252,
+        },
+      },
+      {
+        label: "Cities",
+        displayLabel: true,
+        labelTarget: {
+          x: 647,
+          y: 451,
+        },
+        labelPosition: {
+          x: 662,
+          y: 466,
+        },
+      },
+      {
+        label: "Agriculture",
+        displayLabel: true,
+        labelTarget: {
+          x: 562,
+          y: 541,
+        },
+        labelPosition: {
+          x: 620,
+          y: 567,
+        },
+      },
     ],
   },
   czechia: {
