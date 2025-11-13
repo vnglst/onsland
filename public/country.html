@@ -74,6 +74,9 @@
 
         // Initialize language switcher
         initLanguageSwitcher();
+
+        // Display rankings after translations are loaded
+        displayRankings();
       });
 
       // Calculate rankings for this country
@@ -249,9 +252,6 @@
           container.appendChild(badge);
         });
       }
-
-      // Display rankings when page loads
-      displayRankings();
 
       let worldData = null;
       let isSquareLayout = false;

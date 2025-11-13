@@ -225,6 +225,19 @@
 
         // Initialize language switcher
         initLanguageSwitcher();
+
+        // Render rankings after translations are loaded
+        renderRankings();
+
+        // Scroll to category if hash is present in URL
+        if (window.location.hash) {
+          setTimeout(() => {
+            const element = document.querySelector(window.location.hash);
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }, 100);
+        }
       });
 
       // Extract all categories and their data from all countries
@@ -377,19 +390,6 @@
           section.appendChild(list);
           container.appendChild(section);
         });
-      }
-
-      // Render rankings when page loads
-      renderRankings();
-
-      // Scroll to category if hash is present in URL
-      if (window.location.hash) {
-        setTimeout(() => {
-          const element = document.querySelector(window.location.hash);
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-          }
-        }, 100);
       }
     </script>
   </body>
