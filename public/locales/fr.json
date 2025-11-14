@@ -7,6 +7,14 @@
     "visualisationBy": "Visualisation par",
     "loading": "Chargement..."
   },
+  "menu": {
+    "navigation": "Navigation",
+    "home": "Accueil",
+    "rankings": "Classements",
+    "about": "À propos",
+    "language": "Langue",
+    "view": "Vue"
+  },
   "homepage": {
     "title": "OnsLand - Utilisation des sols en Europe",
     "metaDescription": "Visualisation interactive comparant l'utilisation des sols dans les pays européens. Découvrez comment différentes nations utilisent leurs terres pour l'agriculture, la nature, les zones urbaines et plus encore.",
@@ -124,5 +132,50 @@
     "islands": "Îles",
     "alps": "Alpes",
     "cropland": "Terres cultivées"
+  },
+  "about": {
+    "title": "À propos - OnsLand",
+    "metaDescription": "Découvrez le projet OnsLand - une visualisation interactive de l'utilisation des sols en Europe. Explorez les sources de données, la technologie et comment contribuer.",
+    "heading": "À propos d'OnsLand",
+    "what": {
+      "heading": "Qu'est-ce qu'OnsLand ?",
+      "description": "OnsLand est un projet de visualisation interactive qui explore l'utilisation des sols dans les pays européens. En utilisant les données d'Eurostat, il présente les modèles d'utilisation des sols à travers de magnifiques visualisations hexagonales, rendant les données agricoles et environnementales complexes accessibles et captivantes."
+    },
+    "data": {
+      "heading": "Source des données",
+      "description": "Toutes les données d'utilisation des sols proviennent des Statistiques de couverture des sols 2022 d'Eurostat, qui fournissent des informations complètes sur l'utilisation des terres dans les États membres de l'Union européenne. Les données incluent des catégories telles que les terres agricoles, les forêts, les zones urbaines, les étendues d'eau et bien plus encore.",
+      "source": "Source des données :"
+    },
+    "tech": {
+      "heading": "Technologie",
+      "d3": "Visualisation de données et rendu hexagonal",
+      "vanilla": "Sans frameworks, JavaScript pur",
+      "topojson": "Encodage efficace des données géographiques",
+      "css": "Mises en page réactives"
+    },
+    "contribute": {
+      "heading": "Comment contribuer",
+      "intro": "OnsLand est un projet open source, et nous accueillons les contributions ! Voici comment vous pouvez aider :",
+      "bugs": "Signaler des bugs :",
+      "bugsDesc": "Vous avez trouvé un problème ? Signalez-le sur GitHub",
+      "features": "Suggérer des fonctionnalités :",
+      "featuresDesc": "Vous avez une idée d'amélioration ? Nous serions ravis de l'entendre",
+      "translations": "Ajouter des traductions :",
+      "translationsDesc": "Aidez à traduire l'interface dans d'autres langues",
+      "data": "Mettre à jour les données :",
+      "dataDesc": "Aidez à maintenir les visualisations à jour avec les dernières données d'Eurostat",
+      "code": "Contribuer au code :",
+      "codeDesc": "Soumettez des pull requests pour améliorer le code",
+      "github": "Dépôt GitHub :"
+    },
+    "author": {
+      "heading": "À propos de l'auteur",
+      "description": "OnsLand a été créé par Koen van Gilst comme une exploration des modèles d'utilisation des sols européens et des techniques de visualisation de données. Le projet vise à rendre les données environnementales complexes plus accessibles et captivantes grâce à des visualisations interactives.",
+      "website": "Site web :"
+    },
+    "license": {
+      "heading": "Licence",
+      "description": "Ce projet est open source et disponible sous la licence MIT. Vous êtes libre d'utiliser, modifier et distribuer le code tant que vous incluez la licence originale et la mention de copyright."
+    }
   }
 }

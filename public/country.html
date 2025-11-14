@@ -16,6 +16,7 @@
     <script src="lib/topojson-client.v3.min.js"></script>
     <script src="i18n.js"></script>
     <script src="language-switcher.js"></script>
+    <script src="menu.js"></script>
   </head>
   <body>
     <header>
@@ -28,10 +29,6 @@
           <span class="title-prefix" data-i18n="country.titlePrefix">Land Use in </span>
           <span class="title-country"></span>
         </h1>
-        <button class="toggle-button" id="layoutToggle">
-          <span class="toggle-text-full" data-i18n="country.squareView">Square View</span>
-          <span class="toggle-text-short" data-i18n="country.squareViewShort">Square</span>
-        </button>
       </div>
     </header>
 
@@ -72,9 +69,6 @@
         document.getElementById("pageTitle").textContent = `${i18n.t('country.titlePrefix')}${countryName} - OnsLand`;
         document.querySelector(".title-country").textContent = countryName;
         document.querySelector('meta[name="description"]').setAttribute('content', i18n.t('country.metaDescription'));
-
-        // Initialize language switcher
-        initLanguageSwitcher();
 
         // Display rankings after translations are loaded
         displayRankings();
@@ -205,10 +199,71 @@
         })
         .catch((error) => console.error("Error loading data:", error));
 
+      // Toggle layout function
+      function toggleLayout() {
+        isSquareLayout = !isSquareLayout;
+        const svg = d3.select("#countrySvg");
+        const hexRadius = 6;
+        const squareSize = 10;
+
+        if (isSquareLayout) {
+          const squarePositions = calculateSquarePositions(hexDataGlobal.length);
+
+          svg
+            .selectAll(".hexagon")
+            .transition()
+            .duration(1000)
+            .ease(d3.easeCubicInOut)
+            .attr("transform", (d, i) => {
+              const pos = squarePositions[i];
+              return `translate(${pos.x},${pos.y})`;
+            })
+            .attr("d", squarePath(squareSize))
+            .attr("stroke-width", 0);
+
+          svg
+            .selectAll("text[data-label], line[data-label], circle[data-label]")
+            .transition()
+            .duration(500)
+            .attr("opacity", 0);
+        } else {
+          const hexbin = d3.hexbin().radius(hexRadius);
+
+          svg
+            .selectAll(".hexagon")
+            .transition()
+            .duration(1000)
+            .ease(d3.easeCubicInOut)
+            .attr("transform", (d, i) => `translate(${hexDataGlobal[i].x},${hexDataGlobal[i].y})`)
+            .attr("d", hexbin.hexagon(hexRadius))
+            .attr("stroke-width", 0.1);
+
+          svg
+            .selectAll("text[data-label], line[data-label], circle[data-label]")
+            .transition()
+            .delay(500)
+            .duration(500)
+            .attr("opacity", 1);
+        }
+      }
+
+      function getViewToggleText() {
+        return isSquareLayout ? i18n.t('country.mapView') : i18n.t('country.squareView');
+      }
+
       // Wait for both translations and map data before rendering
       Promise.all([initI18n(), mapDataPromise]).then(() => {
         // Initialize page UI elements with translations
         initializePage();
+
+        // Initialize menu with view toggle
+        initMenu({
+          showViewToggle: true,
+          onViewToggle: () => {
+            toggleLayout();
+          },
+          getViewToggleText: getViewToggleText
+        });
 
         // Render the country visualization
         if (worldData) {
@@ -222,11 +277,11 @@
           document.getElementById("pageTitle").textContent = `${i18n.t('country.titlePrefix')}${countryName} - OnsLand`;
           document.querySelector(".title-country").textContent = countryName;
 
-          // Update toggle button text
-          const fullText = isSquareLayout ? i18n.t('country.mapView') : i18n.t('country.squareView');
-          const shortText = isSquareLayout ? i18n.t('country.mapViewShort') : i18n.t('country.squareViewShort');
-          document.querySelector(".toggle-text-full").textContent = fullText;
-          document.querySelector(".toggle-text-short").textContent = shortText;
+          // Update menu toggle text
+          const menuToggle = document.querySelector('#menuViewToggle');
+          if (menuToggle) {
+            menuToggle.textContent = getViewToggleText();
+          }
 
           // Re-render country visualization (legend and labels)
           if (worldData) {
@@ -242,15 +297,6 @@
 
       document.getElementById("backButton").addEventListener("click", () => {
         window.location.href = "/";
-      });
-
-      document.getElementById("layoutToggle").addEventListener("click", () => {
-        isSquareLayout = !isSquareLayout;
-        const fullText = isSquareLayout ? i18n.t('country.mapView') : i18n.t('country.squareView');
-        const shortText = isSquareLayout ? i18n.t('country.mapViewShort') : i18n.t('country.squareViewShort');
-        document.querySelector(".toggle-text-full").textContent = fullText;
-        document.querySelector(".toggle-text-short").textContent = shortText;
-        toggleLayout();
       });
 
       function renderCountry(countryKey) {
@@ -584,52 +630,6 @@
           console.log(`\n=== ${countryKey} Label Coordinates (JSON) ===`);
           console.log(JSON.stringify(coordinates, null, 2));
           console.log("===============================================\n");
-        }
-      }
-
-      function toggleLayout() {
-        const svg = d3.select("#countrySvg");
-        const hexRadius = 6;
-        const squareSize = 10;
-
-        if (isSquareLayout) {
-          const squarePositions = calculateSquarePositions(hexDataGlobal.length);
-
-          svg
-            .selectAll(".hexagon")
-            .transition()
-            .duration(1000)
-            .ease(d3.easeCubicInOut)
-            .attr("transform", (d, i) => {
-              const pos = squarePositions[i];
-              return `translate(${pos.x},${pos.y})`;
-            })
-            .attr("d", squarePath(squareSize))
-            .attr("stroke-width", 0);
-
-          svg
-            .selectAll("text[data-label], line[data-label], circle[data-label]")
-            .transition()
-            .duration(500)
-            .attr("opacity", 0);
-        } else {
-          const hexbin = d3.hexbin().radius(hexRadius);
-
-          svg
-            .selectAll(".hexagon")
-            .transition()
-            .duration(1000)
-            .ease(d3.easeCubicInOut)
-            .attr("transform", (d, i) => `translate(${hexDataGlobal[i].x},${hexDataGlobal[i].y})`)
-            .attr("d", hexbin.hexagon(hexRadius))
-            .attr("stroke-width", 0.1);
-
-          svg
-            .selectAll("text[data-label], line[data-label], circle[data-label]")
-            .transition()
-            .delay(500)
-            .duration(500)
-            .attr("opacity", 1);
         }
       }
     </script>

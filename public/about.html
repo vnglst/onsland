@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - OnsLand</title>
+    <meta name="description" content="Learn about the OnsLand project - an interactive visualization of land use across Europe. Discover the data sources, technology, and how to contribute.">
+    <link rel="stylesheet" href="style.css" />
+    <script src="lib/d3.v7.min.js"></script>
+    <script src="lib/d3-hexbin.v0.2.min.js"></script>
+    <script src="lib/topojson-client.v3.min.js"></script>
+    <script src="i18n.js"></script>
+    <script src="language-switcher.js"></script>
+    <script src="menu.js"></script>
+    <style>
+      .about-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+
+      .about-container h1 {
+        color: var(--text-light);
+        margin-bottom: 40px;
+        font-size: 2.5rem;
+      }
+
+      .about-container h2 {
+        color: var(--text-light);
+        margin-top: 40px;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+      }
+
+      .about-container p {
+        color: var(--text-light);
+        line-height: 1.8;
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+      }
+
+      .about-container ul {
+        color: var(--text-light);
+        line-height: 1.8;
+        margin-bottom: 20px;
+        padding-left: 40px;
+      }
+
+      .about-container li {
+        margin-bottom: 10px;
+      }
+
+      .about-container a {
+        color: var(--primary);
+        text-decoration: underline;
+      }
+
+      .about-container a:hover {
+        color: var(--primary-light);
+      }
+
+      .about-container code {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: 'Courier New', monospace;
+      }
+
+      .tech-stack {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .tech-item {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 20px;
+        border-radius: 8px;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .tech-item h3 {
+        color: var(--primary);
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+      }
+
+      .tech-item p {
+        font-size: 0.95rem;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="homepage-header" id="countryHeader">
+        <h1>
+          <a href="/" style="color: inherit; text-decoration: none;">
+            <span data-i18n="common.back">←</span>
+            <span data-i18n="about.heading">About OnsLand</span>
+          </a>
+        </h1>
+      </div>
+    </header>
+
+    <div class="about-container">
+      <section>
+        <h2 data-i18n="about.what.heading">What is OnsLand?</h2>
+        <p data-i18n="about.what.description">
+          OnsLand is an interactive visualization project that explores how land is used across European countries. Using data from Eurostat, it presents land use patterns through beautiful hexagon-based visualizations, making complex agricultural and environmental data accessible and engaging.
+        </p>
+      </section>
+
+      <section>
+        <h2 data-i18n="about.data.heading">Data Source</h2>
+        <p data-i18n="about.data.description">
+          All land use data comes from Eurostat's Land Cover Statistics 2022, which provides comprehensive information about how land is utilized across European Union member states. The data includes categories such as agricultural land, forests, urban areas, water bodies, and more.
+        </p>
+        <p>
+          <strong data-i18n="about.data.source">Data source:</strong>
+          <a href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table" target="_blank" rel="noopener">
+            Eurostat Land Cover Statistics
+          </a>
+        </p>
+      </section>
+
+      <section>
+        <h2 data-i18n="about.tech.heading">Technology</h2>
+        <div class="tech-stack">
+          <div class="tech-item">
+            <h3>D3.js</h3>
+            <p data-i18n="about.tech.d3">Data visualization and hexagon rendering</p>
+          </div>
+          <div class="tech-item">
+            <h3>Vanilla JavaScript</h3>
+            <p data-i18n="about.tech.vanilla">No frameworks, pure JavaScript</p>
+          </div>
+          <div class="tech-item">
+            <h3>TopoJSON</h3>
+            <p data-i18n="about.tech.topojson">Efficient geographic data encoding</p>
+          </div>
+          <div class="tech-item">
+            <h3>CSS Grid</h3>
+            <p data-i18n="about.tech.css">Responsive layouts</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 data-i18n="about.contribute.heading">How to Contribute</h2>
+        <p data-i18n="about.contribute.intro">
+          OnsLand is an open-source project, and we welcome contributions! Here's how you can help:
+        </p>
+        <ul>
+          <li><strong data-i18n="about.contribute.bugs">Report bugs:</strong> <span data-i18n="about.contribute.bugsDesc">Found an issue? Report it on GitHub</span></li>
+          <li><strong data-i18n="about.contribute.features">Suggest features:</strong> <span data-i18n="about.contribute.featuresDesc">Have an idea for improvement? We'd love to hear it</span></li>
+          <li><strong data-i18n="about.contribute.translations">Add translations:</strong> <span data-i18n="about.contribute.translationsDesc">Help translate the interface to more languages</span></li>
+          <li><strong data-i18n="about.contribute.data">Update data:</strong> <span data-i18n="about.contribute.dataDesc">Help keep the visualizations current with latest Eurostat data</span></li>
+          <li><strong data-i18n="about.contribute.code">Contribute code:</strong> <span data-i18n="about.contribute.codeDesc">Submit pull requests to improve the codebase</span></li>
+        </ul>
+        <p>
+          <strong data-i18n="about.contribute.github">GitHub repository:</strong>
+          <a href="https://github.com/vnglst/onsland" target="_blank" rel="noopener">
+            github.com/vnglst/onsland
+          </a>
+        </p>
+      </section>
+
+      <section>
+        <h2 data-i18n="about.author.heading">About the Author</h2>
+        <p data-i18n="about.author.description">
+          OnsLand was created by Koen van Gilst as an exploration of European land use patterns and data visualization techniques. The project aims to make complex environmental data more accessible and engaging through interactive visualizations.
+        </p>
+        <p>
+          <strong data-i18n="about.author.website">Website:</strong>
+          <a href="https://koenvangilst.nl" target="_blank" rel="noopener">
+            koenvangilst.nl
+          </a>
+        </p>
+      </section>
+
+      <section>
+        <h2 data-i18n="about.license.heading">License</h2>
+        <p data-i18n="about.license.description">
+          This project is open source and available under the MIT License. You are free to use, modify, and distribute the code as long as you include the original license and copyright notice.
+        </p>
+      </section>
+    </div>
+
+    <footer class="page-footer">
+      <div class="footer-content">
+        <div><span data-i18n="common.data">Data</span>: <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table">Eurostat Land Cover</a> | <span data-i18n="common.code">Code</span>: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a></div>
+        <div><span data-i18n="common.visualisationBy">Visualisation by</span> <a target="_blank" href="https://koenvangilst.nl/lab/european-land-use">Koen van Gilst</a></div>
+      </div>
+    </footer>
+
+    <script>
+      initI18n().then(() => {
+        document.title = i18n.t('about.title');
+        document.querySelector('meta[name="description"]').setAttribute('content', i18n.t('about.metaDescription'));
+        initMenu();
+      });
+    </script>
+  </body>
+</html>

@@ -19,14 +19,8 @@ function createLanguageSwitcher() {
     select.appendChild(option);
   });
 
-  select.addEventListener('change', async (e) => {
-    console.log('[LanguageSwitcher] Language selected:', e.target.value);
-    try {
-      await i18n.changeLanguage(e.target.value);
-      console.log('[LanguageSwitcher] Language change successful');
-    } catch (error) {
-      console.error('[LanguageSwitcher] Error changing language:', error);
-    }
+  select.addEventListener('change', (e) => {
+    i18n.changeLanguage(e.target.value);
   });
 
   return select;
@@ -35,8 +29,6 @@ function createLanguageSwitcher() {
 // Initialize language switcher on page load
 function initLanguageSwitcher() {
   const headerContent = document.querySelector('.homepage-header, #countryHeader');
-  if (!headerContent) return;
-
   const switcher = createLanguageSwitcher();
   headerContent.appendChild(switcher);
 }

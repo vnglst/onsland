@@ -13,6 +13,7 @@
     <script src="lib/topojson-client.v3.min.js"></script>
     <script src="i18n.js"></script>
     <script src="language-switcher.js"></script>
+    <script src="menu.js"></script>
   </head>
   <body>
     <header>
@@ -21,10 +22,6 @@
           <span class="title-full" data-i18n="homepage.heading">Land Use in Europe</span>
           <span class="title-short" data-i18n="homepage.headingShort">Europe</span>
         </h1>
-        <button class="toggle-button" id="viewToggle">
-          <span class="toggle-text-full" data-i18n="homepage.squareView">Square View</span>
-          <span class="toggle-text-short" data-i18n="homepage.squareViewShort">Square</span>
-        </button>
       </div>
     </header>
     <div id="homepage" class="homepage-grid"></div>
@@ -43,61 +40,9 @@
       let isSquareView = false;
       let currentObserver = null;
 
-      // Initialize i18n and language switcher
-      initI18n().then(() => {
-        // Update page title and meta description
-        document.title = i18n.t('homepage.title');
-        document.querySelector('meta[name="description"]').setAttribute('content', i18n.t('homepage.metaDescription'));
-
-        // Initialize language switcher
-        initLanguageSwitcher();
-
-        // Listen for language changes and update country titles
-        window.addEventListener('languageChanged', () => {
-          console.log('[Homepage] languageChanged event received');
-
-          // Update page title
-          document.title = i18n.t('homepage.title');
-
-          // Update toggle button text
-          const fullText = isSquareView ? i18n.t('homepage.mapView') : i18n.t('homepage.squareView');
-          const shortText = isSquareView ? i18n.t('homepage.mapViewShort') : i18n.t('homepage.squareViewShort');
-          document.querySelector(".toggle-text-full").textContent = fullText;
-          document.querySelector(".toggle-text-short").textContent = shortText;
-
-          // Update all country cards
-          const cards = document.querySelectorAll('.country-card');
-          console.log('[Homepage] Updating', cards.length, 'country cards');
-
-          cards.forEach(card => {
-            const countryKey = card.getAttribute('data-country');
-            if (countryKey) {
-              const titleElement = card.querySelector('h2');
-              if (titleElement) {
-                const translatedName = i18n.t(`countries.${countryKey}`) || countryNames[countryKey];
-                console.log('[Homepage] Updating', countryKey, 'to', translatedName);
-                titleElement.textContent = translatedName;
-              }
-            }
-          });
-        });
-      });
-
-      fetch("lib/countries-50m.json")
-        .then((response) => response.json())
-        .then((world) => {
-          worldData = world;
-          showHomepage();
-        })
-        .catch((error) => console.error("Error loading data:", error));
-
-      document.getElementById("viewToggle").addEventListener("click", () => {
+      // Toggle view function
+      function toggleView() {
         isSquareView = !isSquareView;
-        const fullText = isSquareView ? i18n.t('homepage.mapView') : i18n.t('homepage.squareView');
-        const shortText = isSquareView ? i18n.t('homepage.mapViewShort') : i18n.t('homepage.squareViewShort');
-        document.querySelector("#viewToggle .toggle-text-full").textContent = fullText;
-        document.querySelector("#viewToggle .toggle-text-short").textContent = shortText;
-
         const homepage = document.getElementById("homepage");
         const loadedCards = homepage.querySelectorAll(".country-card:not(.loading)");
 
@@ -112,7 +57,52 @@
             }
           }
         });
+      }
+
+      // Get view toggle text
+      function getViewToggleText() {
+        return isSquareView ? i18n.t('homepage.mapView') : i18n.t('homepage.squareView');
+      }
+
+      // Initialize i18n and menu
+      initI18n().then(() => {
+        document.title = i18n.t('homepage.title');
+        document.querySelector('meta[name="description"]').setAttribute('content', i18n.t('homepage.metaDescription'));
+
+        // Initialize menu with view toggle
+        initMenu({
+          showViewToggle: true,
+          onViewToggle: toggleView,
+          getViewToggleText: getViewToggleText
+        });
+
+        // Listen for language changes and update country titles
+        window.addEventListener('languageChanged', () => {
+          document.title = i18n.t('homepage.title');
+
+          // Update menu view toggle text
+          const menuToggle = document.querySelector('#menuViewToggle');
+          if (menuToggle) {
+            menuToggle.textContent = getViewToggleText();
+          }
+
+          // Update all country cards
+          document.querySelectorAll('.country-card').forEach(card => {
+            const countryKey = card.getAttribute('data-country');
+            const titleElement = card.querySelector('h2');
+            const translatedName = i18n.t(`countries.${countryKey}`) || countryNames[countryKey];
+            titleElement.textContent = translatedName;
+          });
+        });
       });
+
+      fetch("lib/countries-50m.json")
+        .then((response) => response.json())
+        .then((world) => {
+          worldData = world;
+          showHomepage();
+        })
+        .catch((error) => console.error("Error loading data:", error));
 
       function showHomepage() {
         const homepage = document.getElementById("homepage");
