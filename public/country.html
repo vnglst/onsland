@@ -207,10 +207,10 @@
         isSquareLayout = !isSquareLayout;
         const svg = d3.select("#countrySvg");
         const hexRadius = 6;
-        const squareSize = 10;
 
         if (isSquareLayout) {
-          const squarePositions = calculateSquarePositions(hexDataGlobal.length);
+          const hexagonPositions = calculateHexagonGridPositions(hexDataGlobal.length);
+          const hexbin = d3.hexbin().radius(hexRadius);
 
           svg
             .selectAll(".hexagon")
@@ -218,10 +218,10 @@
             .duration(1000)
             .ease(d3.easeCubicInOut)
             .attr("transform", (d, i) => {
-              const pos = squarePositions[i];
+              const pos = hexagonPositions[i];
               return `translate(${pos.x},${pos.y})`;
             })
-            .attr("d", squarePath(squareSize))
+            .attr("d", hexbin.hexagon(hexRadius))
             .attr("stroke-width", 0);
 
           svg
@@ -248,6 +248,39 @@
             .duration(500)
             .attr("opacity", 1);
         }
+      }
+
+      function calculateHexagonGridPositions(totalHexagons) {
+        const width = 800;
+        const height = 800;
+        const hexRadius = 6;
+        const padding = 50;
+
+        // Hexagon dimensions
+        const hexWidth = hexRadius * 2 * Math.sin(Math.PI / 3);
+        const hexHeight = hexRadius * 1.5;
+
+        const availableWidth = width - padding * 2;
+        const availableHeight = height - padding * 2;
+
+        const cols = Math.ceil(Math.sqrt(totalHexagons * (availableWidth / availableHeight) * (hexWidth / hexHeight)));
+        const rows = Math.ceil(totalHexagons / cols);
+
+        const gridWidth = cols * hexWidth;
+        const gridHeight = rows * hexHeight;
+        const offsetX = (width - gridWidth) / 1.5 + hexWidth / 2;
+        const offsetY = hexRadius * 2;
+
+        const positions = [];
+        for (let i = 0; i < totalHexagons; i++) {
+          const row = Math.floor(i / cols);
+          const col = i % cols;
+          const x = offsetX + col * hexWidth + (row % 2) * (hexWidth / 2);
+          const y = offsetY + row * hexHeight;
+          positions.push({ x, y });
+        }
+
+        return positions;
       }
 
       function getViewToggleText() {
