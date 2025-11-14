@@ -11,55 +11,40 @@
     />
     <link rel="stylesheet" href="style.css" />
     <script defer data-domain="onsland.koenvangilst.nl" src="https://plausible.koenvangilst.nl/js/script.js"></script>
+    <!-- D3 and visualization libraries -->
     <script src="lib/d3.v7.min.js"></script>
     <script src="lib/d3-hexbin.v0.2.min.js"></script>
     <script src="lib/topojson-client.v3.min.js"></script>
-    <script src="i18n.js"></script>
-    <script src="language-switcher.js"></script>
-    <script src="menu.js"></script>
+    <!-- Legacy scripts needed by Preact components -->
+    <script src="countries.js"></script>
+    <script src="render.js"></script>
+    <script src="translation-utils.js"></script>
+    <script src="page-init.js"></script>
+    <!-- Keep legacy country-page.js for D3 integration -->
+    <script src="country-page.js"></script>
   </head>
   <body>
-    <header>
-      <div id="countryHeader">
-        <a href="/" class="back-button">
-          <span class="back-text-full"><span data-i18n="common.back">Back</span></span>
-          <span class="back-text-short" data-i18n="common.backShort">←</span>
-        </a>
-        <h1 id="countryTitle">
-          <span class="title-prefix" data-i18n="country.titlePrefix">Land Use in </span>
-          <span class="title-country"></span>
-        </h1>
-        <span class="spacer"></span>
-      </div>
-    </header>
-
-    <svg id="countrySvg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid"></svg>
-
-    <div id="rankingsInfo" class="rankings-info">
-      <!-- Rankings information will be dynamically inserted here -->
-    </div>
+    <!-- Preact app root -->
+    <div id="app"></div>
 
     <footer class="page-footer">
       <div class="footer-content">
         <div>
-          <span data-i18n="common.data">Data</span>:
+          <span>Data</span>:
           <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table"
             >Eurostat Land Cover</a
           >
-          | <span data-i18n="common.code">Code</span>:
+          | <span>Code</span>:
           <a target="_blank" href="https://github.com/vnglst/onsland">Github</a>
         </div>
         <div>
-          <span data-i18n="common.visualisationBy">Visualisation by</span>
+          <span>Visualisation by</span>
           <a target="_blank" href="https://koenvangilst.nl/lab/european-land-use">Koen van Gilst</a>
         </div>
       </div>
     </footer>
 
-    <script src="countries.js"></script>
-    <script src="render.js"></script>
-    <script src="translation-utils.js"></script>
-    <script src="page-init.js"></script>
-    <script src="country-page.js"></script>
+    <!-- Preact entry point -->
+    <script type="module" src="/src/main-country.jsx"></script>
   </body>
 </html>
