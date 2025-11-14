@@ -406,7 +406,7 @@ a {
   padding: 8px 12px;
   transition: all 0.2s ease;
   display: flex;
-  align-items: center;
+  align-items: space-between;
   gap: 6px;
   opacity: 0.85;
 }
@@ -491,7 +491,6 @@ a {
   }
 
   .ranking-badge {
-    justify-content: center;
     padding: 6px 8px;
   }
 
