@@ -103,6 +103,7 @@ h2 {
   min-width: 120px;
   text-decoration: none;
   display: inline-block;
+  text-align: center;
 }
 
 .toggle-button:hover,
