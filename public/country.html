@@ -14,22 +14,22 @@
     <script src="lib/d3.v7.min.js"></script>
     <script src="lib/d3-hexbin.v0.2.min.js"></script>
     <script src="lib/topojson-client.v3.min.js"></script>
+    <script src="i18n.js"></script>
+    <script src="language-switcher.js"></script>
+    <script src="menu.js"></script>
   </head>
   <body>
     <header>
       <div id="countryHeader">
-        <button class="back-button" id="backButton">
-          <span class="back-text-full">← Back</span>
-          <span class="back-text-short">←</span>
-        </button>
+        <a href="/" class="back-button">
+          <span class="back-text-full"><span data-i18n="common.back">Back</span></span>
+          <span class="back-text-short" data-i18n="common.backShort">←</span>
+        </a>
         <h1 id="countryTitle">
-          <span class="title-prefix">Land Use in </span>
+          <span class="title-prefix" data-i18n="country.titlePrefix">Land Use in </span>
           <span class="title-country"></span>
         </h1>
-        <button class="toggle-button" id="layoutToggle">
-          <span class="toggle-text-full">Square View</span>
-          <span class="toggle-text-short">Square</span>
-        </button>
+        <span class="spacer"></span>
       </div>
     </header>
 
@@ -42,29 +42,40 @@
     <footer class="page-footer">
       <div class="footer-content">
         <div>
-          Data:
+          <span data-i18n="common.data">Data</span>:
           <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table"
             >Eurostat Land Cover</a
           >
-          | Code: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a>
+          | <span data-i18n="common.code">Code</span>:
+          <a target="_blank" href="https://github.com/vnglst/onsland">Github</a>
         </div>
         <div>
-          Visualisation by <a target="_blank" href="https://koenvangilst.nl/lab/european-land-use">Koen van Gilst</a>
+          <span data-i18n="common.visualisationBy">Visualisation by</span>
+          <a target="_blank" href="https://koenvangilst.nl/lab/european-land-use">Koen van Gilst</a>
         </div>
       </div>
     </footer>
 
     <script src="countries.js"></script>
     <script src="render.js"></script>
+    <script src="translation-utils.js"></script>
     <script>
-      const DEV_MODE = true;
+      const DEV_MODE = false;
 
       const urlParams = new URLSearchParams(window.location.search);
       const countryFromUrl = urlParams.get("country");
       const currentCountry = validCountries.includes(countryFromUrl) ? countryFromUrl : "netherlands";
 
-      document.getElementById("pageTitle").textContent = `Land Use in ${countryNames[currentCountry]} - OnsLand`;
-      document.querySelector(".title-country").textContent = countryNames[currentCountry];
+      // Initialize page after translations are loaded
+      function initializePage() {
+        const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
+        document.getElementById("pageTitle").textContent = `${i18n.t("country.titlePrefix")}${countryName} - OnsLand`;
+        document.querySelector(".title-country").textContent = countryName;
+        document.querySelector('meta[name="description"]').setAttribute("content", i18n.t("country.metaDescription"));
+
+        // Display rankings after translations are loaded
+        displayRankings();
+      }
 
       // Calculate rankings for this country
       function calculateCountryRankings() {
@@ -114,7 +125,7 @@
         return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
       }
 
-      function createRankingBadge(ranking, label, isTopRank) {
+      function createRankingBadge(ranking, labelKey, isTopRank) {
         const badge = document.createElement("div");
         badge.className = "ranking-badge";
 
@@ -130,11 +141,11 @@
 
         const category = document.createElement("div");
         category.className = "ranking-badge-category";
-        category.textContent = ranking.categoryName;
+        category.textContent = translateCategory(ranking.categoryName);
 
         const labelDiv = document.createElement("div");
         labelDiv.className = "ranking-badge-label";
-        labelDiv.textContent = label;
+        labelDiv.textContent = i18n.t(labelKey);
 
         content.appendChild(category);
         content.appendChild(labelDiv);
@@ -164,46 +175,160 @@
 
         // Create top ranking badges
         topRankings.forEach((ranking, index) => {
-          const label = index === 0 ? "Highest ranking" : "Second highest";
-          const badge = createRankingBadge(ranking, label, true);
+          const labelKey = index === 0 ? "country.highestRanking" : "country.secondHighest";
+          const badge = createRankingBadge(ranking, labelKey, true);
           container.appendChild(badge);
         });
 
         // Create bottom ranking badges
         bottomRankings.forEach((ranking, index) => {
-          const label = index === 0 ? "Lowest ranking" : "Second lowest";
-          const badge = createRankingBadge(ranking, label, false);
+          const labelKey = index === 0 ? "country.lowestRanking" : "country.secondLowest";
+          const badge = createRankingBadge(ranking, labelKey, false);
           container.appendChild(badge);
         });
       }
-
-      // Display rankings when page loads
-      displayRankings();
 
       let worldData = null;
       let isSquareLayout = false;
       let hexDataGlobal = null;
       let hexColorsGlobal = null;
 
-      fetch("lib/countries-50m.json")
+      // Load map data
+      const mapDataPromise = fetch("lib/countries-50m.json")
         .then((response) => response.json())
         .then((world) => {
           worldData = world;
-          renderCountry(currentCountry);
+          return world;
         })
         .catch((error) => console.error("Error loading data:", error));
 
-      document.getElementById("backButton").addEventListener("click", () => {
-        window.location.href = "/";
-      });
-
-      document.getElementById("layoutToggle").addEventListener("click", () => {
+      // Toggle layout function
+      function toggleLayout() {
         isSquareLayout = !isSquareLayout;
-        const fullText = isSquareLayout ? "Map View" : "Square View";
-        const shortText = isSquareLayout ? "Map" : "Square";
-        document.querySelector(".toggle-text-full").textContent = fullText;
-        document.querySelector(".toggle-text-short").textContent = shortText;
-        toggleLayout();
+        const svg = d3.select("#countrySvg");
+        const hexRadius = 6;
+
+        if (isSquareLayout) {
+          const hexagonPositions = calculateHexagonGridPositions(hexDataGlobal.length);
+          const hexbin = d3.hexbin().radius(hexRadius);
+
+          svg
+            .selectAll(".hexagon")
+            .transition()
+            .duration(1000)
+            .ease(d3.easeCubicInOut)
+            .attr("transform", (d, i) => {
+              const pos = hexagonPositions[i];
+              return `translate(${pos.x},${pos.y})`;
+            })
+            .attr("d", hexbin.hexagon(hexRadius))
+            .attr("stroke-width", 0);
+
+          svg
+            .selectAll("text[data-label], line[data-label], circle[data-label]")
+            .transition()
+            .duration(500)
+            .attr("opacity", 0);
+        } else {
+          const hexbin = d3.hexbin().radius(hexRadius);
+
+          svg
+            .selectAll(".hexagon")
+            .transition()
+            .duration(1000)
+            .ease(d3.easeCubicInOut)
+            .attr("transform", (d, i) => `translate(${hexDataGlobal[i].x},${hexDataGlobal[i].y})`)
+            .attr("d", hexbin.hexagon(hexRadius))
+            .attr("stroke-width", 0.1);
+
+          svg
+            .selectAll("text[data-label], line[data-label], circle[data-label]")
+            .transition()
+            .delay(500)
+            .duration(500)
+            .attr("opacity", 1);
+        }
+      }
+
+      function calculateHexagonGridPositions(totalHexagons) {
+        const width = 800;
+        const height = 800;
+        const hexRadius = 6;
+        const padding = 50;
+
+        // Hexagon dimensions
+        const hexWidth = hexRadius * 2 * Math.sin(Math.PI / 3);
+        const hexHeight = hexRadius * 1.5;
+
+        const availableWidth = width - padding * 2;
+        const availableHeight = height - padding * 2;
+
+        const cols = Math.ceil(Math.sqrt(totalHexagons * (availableWidth / availableHeight) * (hexWidth / hexHeight)));
+        const rows = Math.ceil(totalHexagons / cols);
+
+        const gridWidth = cols * hexWidth;
+        const gridHeight = rows * hexHeight;
+        const offsetX = (width - gridWidth) / 1.5 + hexWidth / 2;
+        const offsetY = hexRadius * 2;
+
+        const positions = [];
+        for (let i = 0; i < totalHexagons; i++) {
+          const row = Math.floor(i / cols);
+          const col = i % cols;
+          const x = offsetX + col * hexWidth + (row % 2) * (hexWidth / 2);
+          const y = offsetY + row * hexHeight;
+          positions.push({ x, y });
+        }
+
+        return positions;
+      }
+
+      function getViewToggleText() {
+        return isSquareLayout ? i18n.t("country.mapView") : i18n.t("country.squareView");
+      }
+
+      // Wait for both translations and map data before rendering
+      Promise.all([initI18n(), mapDataPromise]).then(() => {
+        // Initialize page UI elements with translations
+        initializePage();
+
+        // Initialize menu with view toggle
+        initMenu({
+          showViewToggle: true,
+          onViewToggle: () => {
+            toggleLayout();
+          },
+          getViewToggleText: getViewToggleText,
+        });
+
+        // Render the country visualization
+        if (worldData) {
+          renderCountry(currentCountry);
+        }
+
+        // Listen for language changes and re-render dynamic content
+        window.addEventListener("languageChanged", () => {
+          // Update page title and country name
+          const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
+          document.getElementById("pageTitle").textContent = `${i18n.t("country.titlePrefix")}${countryName} - OnsLand`;
+          document.querySelector(".title-country").textContent = countryName;
+
+          // Update menu toggle text
+          const menuToggle = document.querySelector("#menuViewToggle");
+          if (menuToggle) {
+            menuToggle.textContent = getViewToggleText();
+          }
+
+          // Re-render country visualization (legend and labels)
+          if (worldData) {
+            renderCountry(currentCountry);
+          }
+
+          // Re-render rankings
+          const container = document.getElementById("rankingsInfo");
+          container.innerHTML = "";
+          displayRankings();
+        });
       });
 
       function renderCountry(countryKey) {
@@ -378,7 +503,7 @@
             .append("text")
             .attr("x", 20)
             .attr("y", 10)
-            .text(`${category.name}, ${(category.percentage * 100).toFixed(2)}%`)
+            .text(`${translateCategory(category.name)}, ${(category.percentage * 100).toFixed(2)}%`)
             .attr("font-size", "14px")
             .attr("fill", "var(--text-light)")
             .attr("opacity", 0)
@@ -397,7 +522,7 @@
               .append("text")
               .attr("x", category.labelPosition.x)
               .attr("y", category.labelPosition.y)
-              .text(category.label)
+              .text(translateLabel(category.label))
               .attr("font-size", "18px")
               .attr("fill", "var(--text-light)")
               .attr("font-weight", "bold")
@@ -534,89 +659,12 @@
             }
           });
 
-          console.log(`\n=== ${countryKey} Label Coordinates (JSON) ===`);
-          console.log(JSON.stringify(coordinates, null, 2));
-          console.log("===============================================\n");
+          if (DEV_MODE) {
+            console.log(`\n=== ${countryKey} Label Coordinates (JSON) ===`);
+            console.log(JSON.stringify(coordinates, null, 2));
+            console.log("===============================================\n");
+          }
         }
-      }
-
-      function toggleLayout() {
-        const svg = d3.select("#countrySvg");
-        const hexRadius = 6;
-
-        if (isSquareLayout) {
-          const hexagonPositions = calculateHexagonGridPositions(hexDataGlobal.length);
-          const hexbin = d3.hexbin().radius(hexRadius);
-
-          svg
-            .selectAll(".hexagon")
-            .transition()
-            .duration(1000)
-            .ease(d3.easeCubicInOut)
-            .attr("transform", (d, i) => {
-              const pos = hexagonPositions[i];
-              return `translate(${pos.x},${pos.y})`;
-            })
-            .attr("d", hexbin.hexagon(hexRadius))
-            .attr("stroke-width", 0);
-
-          svg
-            .selectAll("text[data-label], line[data-label], circle[data-label]")
-            .transition()
-            .duration(500)
-            .attr("opacity", 0);
-        } else {
-          const hexbin = d3.hexbin().radius(hexRadius);
-
-          svg
-            .selectAll(".hexagon")
-            .transition()
-            .duration(1000)
-            .ease(d3.easeCubicInOut)
-            .attr("transform", (d, i) => `translate(${hexDataGlobal[i].x},${hexDataGlobal[i].y})`)
-            .attr("d", hexbin.hexagon(hexRadius))
-            .attr("stroke-width", 0.1);
-
-          svg
-            .selectAll("text[data-label], line[data-label], circle[data-label]")
-            .transition()
-            .delay(500)
-            .duration(500)
-            .attr("opacity", 1);
-        }
-      }
-
-      function calculateHexagonGridPositions(totalHexagons) {
-        const width = 800;
-        const height = 800;
-        const hexRadius = 6;
-        const padding = 50;
-
-        // Hexagon dimensions
-        const hexWidth = hexRadius * 2 * Math.sin(Math.PI / 3);
-        const hexHeight = hexRadius * 1.5;
-
-        const availableWidth = width - padding * 2;
-        const availableHeight = height - padding * 2;
-
-        const cols = Math.ceil(Math.sqrt(totalHexagons * (availableWidth / availableHeight) * (hexWidth / hexHeight)));
-        const rows = Math.ceil(totalHexagons / cols);
-
-        const gridWidth = cols * hexWidth;
-        const gridHeight = rows * hexHeight;
-        const offsetX = (width - gridWidth) / 1.5 + hexWidth / 2;
-        const offsetY = hexRadius * 2;
-
-        const positions = [];
-        for (let i = 0; i < totalHexagons; i++) {
-          const row = Math.floor(i / cols);
-          const col = i % cols;
-          const x = offsetX + col * hexWidth + (row % 2) * (hexWidth / 2);
-          const y = offsetY + row * hexHeight;
-          positions.push({ x, y });
-        }
-
-        return positions;
       }
     </script>
   </body>

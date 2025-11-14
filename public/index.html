@@ -11,26 +11,25 @@
     <script src="lib/d3.v7.min.js"></script>
     <script src="lib/d3-hexbin.v0.2.min.js"></script>
     <script src="lib/topojson-client.v3.min.js"></script>
+    <script src="i18n.js"></script>
+    <script src="language-switcher.js"></script>
+    <script src="menu.js"></script>
   </head>
   <body>
     <header>
       <div class="homepage-header">
         <h1>
-          <span class="title-full">Land Use in Europe</span>
-          <span class="title-short">Europe</span>
+          <span class="title-full" data-i18n="homepage.heading">Land Use in Europe</span>
+          <span class="title-short" data-i18n="homepage.headingShort">Europe</span>
         </h1>
-        <button class="toggle-button" id="viewToggle">
-          <span class="toggle-text-full">Square View</span>
-          <span class="toggle-text-short">Square</span>
-        </button>
       </div>
     </header>
     <div id="homepage" class="homepage-grid"></div>
 
     <footer class="page-footer">
       <div class="footer-content">
-        <div>Data: <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table">Eurostat Land Cover</a> | Code: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a></div>
-        <div>Visualisation by <a target="_blank" href="https://koenvangilst.nl/lab/european-land-use">Koen van Gilst</a></div>
+        <div><span data-i18n="common.data">Data</span>: <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table">Eurostat Land Cover</a> | <span data-i18n="common.code">Code</span>: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a></div>
+        <div><span data-i18n="common.visualisationBy">Visualisation by</span> <a target="_blank" href="https://koenvangilst.nl/lab/european-land-use">Koen van Gilst</a></div>
       </div>
     </footer>
 
@@ -41,21 +40,9 @@
       let isSquareView = false;
       let currentObserver = null;
 
-      fetch("lib/countries-50m.json")
-        .then((response) => response.json())
-        .then((world) => {
-          worldData = world;
-          showHomepage();
-        })
-        .catch((error) => console.error("Error loading data:", error));
-
-      document.getElementById("viewToggle").addEventListener("click", () => {
+      // Toggle view function
+      function toggleView() {
         isSquareView = !isSquareView;
-        const fullText = isSquareView ? "Map View" : "Square View";
-        const shortText = isSquareView ? "Map" : "Square";
-        document.querySelector("#viewToggle .toggle-text-full").textContent = fullText;
-        document.querySelector("#viewToggle .toggle-text-short").textContent = shortText;
-
         const homepage = document.getElementById("homepage");
         const loadedCards = homepage.querySelectorAll(".country-card:not(.loading)");
 
@@ -70,7 +57,54 @@
             }
           }
         });
+      }
+
+      // Get view toggle text
+      function getViewToggleText() {
+        return isSquareView ? i18n.t('homepage.mapView') : i18n.t('homepage.squareView');
+      }
+
+      // Initialize i18n and menu
+      initI18n().then(() => {
+        document.title = i18n.t('homepage.title');
+        document.querySelector('meta[name="description"]').setAttribute('content', i18n.t('homepage.metaDescription'));
+
+        // Initialize menu with view toggle
+        initMenu({
+          showViewToggle: true,
+          onViewToggle: toggleView,
+          getViewToggleText: getViewToggleText
+        });
+
+        // Listen for language changes and update country titles
+        window.addEventListener('languageChanged', () => {
+          document.title = i18n.t('homepage.title');
+
+          // Update menu view toggle text
+          const menuToggle = document.querySelector('#menuViewToggle');
+          if (menuToggle) {
+            menuToggle.textContent = getViewToggleText();
+          }
+
+          // Update all country cards
+          document.querySelectorAll('.country-card').forEach(card => {
+            const countryKey = card.getAttribute('data-country');
+            const titleElement = card.querySelector('.country-card-title');
+            if (titleElement) {
+              const translatedName = i18n.t(`countries.${countryKey}`) || countryNames[countryKey];
+              titleElement.textContent = translatedName;
+            }
+          });
+        });
       });
+
+      fetch("lib/countries-50m.json")
+        .then((response) => response.json())
+        .then((world) => {
+          worldData = world;
+          showHomepage();
+        })
+        .catch((error) => console.error("Error loading data:", error));
 
       function showHomepage() {
         const homepage = document.getElementById("homepage");
@@ -84,14 +118,14 @@
 
           const title = document.createElement("div");
           title.className = "country-card-title";
-          title.textContent = countryNames[countryKey];
+          title.textContent = i18n.t(`countries.${countryKey}`) || countryNames[countryKey];
 
           const placeholder = document.createElement("div");
           placeholder.className = "loading-placeholder";
 
           const loadingText = document.createElement("div");
           loadingText.className = "loading-text";
-          loadingText.textContent = "Loading...";
+          loadingText.textContent = i18n.t('common.loading');
 
           countryCard.appendChild(title);
           countryCard.appendChild(placeholder);
