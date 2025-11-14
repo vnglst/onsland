@@ -92,7 +92,6 @@ h2 {
 .toggle-button,
 .back-button {
   background: var(--bg-dark);
-  border: 2px solid rgba(255, 255, 255, 0.2);
   color: var(--text-light);
   padding: 10px 20px;
   font-size: 16px;
@@ -109,12 +108,14 @@ h2 {
     12px 100%,
     0% 50%
   );
+  /* Border effect using box-shadow (respects clip-path) */
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.2);
 }
 
 .toggle-button:hover,
 .back-button:hover {
   background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.3);
 }
 
 .toggle-button:active,
@@ -125,7 +126,7 @@ h2 {
 .toggle-button:focus,
 .back-button:focus {
   outline: none;
-  border-color: var(--text-light);
+  box-shadow: inset 0 0 0 2px var(--text-light);
 }
 
 /* Text variants for responsive design */
@@ -180,7 +181,6 @@ a {
 
 .country-card {
   background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(255, 255, 255, 0.1);
   padding: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -199,13 +199,14 @@ a {
     0% calc(100% - 20px),
     0% 20px
   );
+  /* Border effect using box-shadow (respects clip-path) */
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 .country-card:hover {
   background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.3), 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .country-card-title {
@@ -246,9 +247,8 @@ a {
 
 .country-card.loading:hover {
   transform: none;
-  box-shadow: none;
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 .loading-placeholder {
@@ -438,7 +438,6 @@ a {
 
 .ranking-badge {
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 8px 12px;
   transition: all 0.2s ease;
   display: flex;
@@ -454,11 +453,13 @@ a {
     8px 100%,
     0% 50%
   );
+  /* Border effect using box-shadow (respects clip-path) */
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .ranking-badge:hover {
   background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
   opacity: 1;
   transform: translateY(-1px);
 }
