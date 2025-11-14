@@ -150,14 +150,20 @@ function renderCountrySquarePreview(countryKey, svgElement, worldData) {
 
   const width = 800;
   const height = 800;
-  const squareSize = 10;
+  const hexRadius = 8;
   const padding = 50;
-  const totalSquares = 2500;
-  const cols = Math.ceil(Math.sqrt(totalSquares));
-  const rows = Math.ceil(totalSquares / cols);
+  const totalHexagons = 2500;
 
-  const gridWidth = cols * squareSize;
-  const gridHeight = rows * squareSize;
+  // Hexagon dimensions
+  const hexWidth = hexRadius * 2 * Math.sin(Math.PI / 3); // horizontal distance between hex centers
+  const hexHeight = hexRadius * 1.5; // vertical distance between hex centers
+
+  // Calculate grid dimensions
+  const cols = Math.ceil(Math.sqrt(totalHexagons * (hexWidth / hexHeight)));
+  const rows = Math.ceil(totalHexagons / cols);
+
+  const gridWidth = cols * hexWidth;
+  const gridHeight = rows * hexHeight + hexRadius * 0.5;
   const offsetX = (width - gridWidth) / 2;
   const offsetY = (height - gridHeight) / 2;
 
@@ -166,33 +172,40 @@ function renderCountrySquarePreview(countryKey, svgElement, worldData) {
     .domain(categories.map((c) => c.name))
     .range(categories.map((c) => c.color));
 
-  let squareColors = [];
-  let remainingSquares = totalSquares;
+  let hexColors = [];
+  let remainingHexagons = totalHexagons;
 
   categories.forEach((category, index) => {
-    let squaresPerCategory;
+    let hexagonsPerCategory;
     if (index === categories.length - 1) {
-      squaresPerCategory = remainingSquares;
+      hexagonsPerCategory = remainingHexagons;
     } else {
-      squaresPerCategory = Math.round(totalSquares * category.percentage);
-      remainingSquares -= squaresPerCategory;
+      hexagonsPerCategory = Math.round(totalHexagons * category.percentage);
+      remainingHexagons -= hexagonsPerCategory;
     }
-    for (let i = 0; i < squaresPerCategory; i++) {
-      squareColors.push(category.name);
+    for (let i = 0; i < hexagonsPerCategory; i++) {
+      hexColors.push(category.name);
     }
   });
 
+  // Create hexagon path generator
+  const hexbin = d3.hexbin().radius(hexRadius);
+
   svg
     .append("g")
-    .selectAll("rect")
-    .data(d3.range(totalSquares))
+    .selectAll("path")
+    .data(d3.range(totalHexagons))
     .enter()
-    .append("rect")
-    .attr("x", (d, i) => offsetX + (i % cols) * squareSize)
-    .attr("y", (d, i) => offsetY + Math.floor(i / cols) * squareSize)
-    .attr("width", squareSize)
-    .attr("height", squareSize)
-    .attr("fill", (d, i) => squareColors[i] ? colorScale(squareColors[i]) : "var(--bg-light)")
+    .append("path")
+    .attr("d", hexbin.hexagon())
+    .attr("transform", (d, i) => {
+      const row = Math.floor(i / cols);
+      const col = i % cols;
+      const x = offsetX + col * hexWidth + (row % 2) * (hexWidth / 2);
+      const y = offsetY + row * hexHeight;
+      return `translate(${x},${y})`;
+    })
+    .attr("fill", (d, i) => hexColors[i] ? colorScale(hexColors[i]) : "var(--bg-light)")
     .attr("stroke", "var(--bg-light)")
     .attr("stroke-width", 0.5);
 }
