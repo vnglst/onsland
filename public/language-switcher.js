@@ -2,12 +2,8 @@
 // Creates a dropdown for language selection
 
 function createLanguageSwitcher() {
-  const currentLang = i18n.getCurrentLanguage();
-  const languages = [
-    { code: 'en', name: 'English' },
-    { code: 'nl', name: 'Nederlands' },
-    { code: 'fr', name: 'Français' }
-  ];
+  const currentLang = i18n.currentLanguage;
+  const languages = i18n.getAvailableLanguages();
 
   const select = document.createElement('select');
   select.className = 'language-switcher';
@@ -24,17 +20,10 @@ function createLanguageSwitcher() {
   });
 
   select.addEventListener('change', (e) => {
-    switchLanguage(e.target.value);
+    i18n.changeLanguage(e.target.value);
   });
 
   return select;
-}
-
-async function switchLanguage(lang) {
-  if (lang === i18n.getCurrentLanguage()) return;
-
-  // Show loading state (optional)
-  await i18n.changeLanguage(lang);
 }
 
 // Initialize language switcher on page load

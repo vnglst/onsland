@@ -93,14 +93,13 @@ class I18n {
     };
   }
 
-  // Get current language
-  getCurrentLanguage() {
-    return this.currentLanguage;
-  }
-
-  // Get available languages
+  // Get available languages with display names
   getAvailableLanguages() {
-    return ['en', 'nl', 'fr']; // English, Dutch, and French
+    return [
+      { code: 'en', name: 'English' },
+      { code: 'nl', name: 'Nederlands' },
+      { code: 'fr', name: 'Français' }
+    ];
   }
 }
 
