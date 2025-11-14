@@ -2,16 +2,6 @@
 // Consolidates translation mapping logic used across multiple pages
 
 /**
- * Converts a display name to camelCase for translation key lookup
- * Example: "Bare land" -> "bareLand", "Olive trees" -> "oliveTrees"
- */
-function toCamelCase(str) {
-  return str
-    .replace(/\s+(.)/g, (_, char) => char.toUpperCase())
-    .replace(/^(.)/, (_, char) => char.toLowerCase());
-}
-
-/**
  * Translates a category name using the i18n system
  * Maps category display names to translation keys
  */

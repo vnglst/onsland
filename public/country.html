@@ -60,7 +60,7 @@
     <script src="render.js"></script>
     <script src="translation-utils.js"></script>
     <script>
-      const DEV_MODE = true;
+      const DEV_MODE = false;
 
       const urlParams = new URLSearchParams(window.location.search);
       const countryFromUrl = urlParams.get("country");
@@ -659,9 +659,11 @@
             }
           });
 
-          console.log(`\n=== ${countryKey} Label Coordinates (JSON) ===`);
-          console.log(JSON.stringify(coordinates, null, 2));
-          console.log("===============================================\n");
+          if (DEV_MODE) {
+            console.log(`\n=== ${countryKey} Label Coordinates (JSON) ===`);
+            console.log(JSON.stringify(coordinates, null, 2));
+            console.log("===============================================\n");
+          }
         }
       }
     </script>
