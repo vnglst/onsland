@@ -89,7 +89,7 @@
           // Update all country cards
           document.querySelectorAll('.country-card').forEach(card => {
             const countryKey = card.getAttribute('data-country');
-            const titleElement = card.querySelector('h2');
+            const titleElement = card.querySelector('.country-card-title');
             if (titleElement) {
               const translatedName = i18n.t(`countries.${countryKey}`) || countryNames[countryKey];
               titleElement.textContent = translatedName;
