@@ -111,6 +111,11 @@ function initMenu(options = {}) {
   const menu = createMenu();
   document.body.appendChild(menu);
 
+  // Update translations for menu items
+  if (window.updateTranslations) {
+    window.updateTranslations();
+  }
+
   // Show view toggle if enabled
   if (options.showViewToggle) {
     const viewSection = menu.querySelector('.menu-view-section');
