@@ -19,8 +19,14 @@ function createLanguageSwitcher() {
     select.appendChild(option);
   });
 
-  select.addEventListener('change', (e) => {
-    i18n.changeLanguage(e.target.value);
+  select.addEventListener('change', async (e) => {
+    console.log('[LanguageSwitcher] Language selected:', e.target.value);
+    try {
+      await i18n.changeLanguage(e.target.value);
+      console.log('[LanguageSwitcher] Language change successful');
+    } catch (error) {
+      console.error('[LanguageSwitcher] Error changing language:', error);
+    }
   });
 
   return select;

@@ -77,12 +77,21 @@ class I18n {
 
   // Change language and notify listeners
   async changeLanguage(language) {
-    if (language === this.currentLanguage) return;
+    console.log('[i18n] changeLanguage called:', language, 'current:', this.currentLanguage);
 
+    if (language === this.currentLanguage) {
+      console.log('[i18n] Language already selected, skipping');
+      return;
+    }
+
+    console.log('[i18n] Loading translations for:', language);
     await this.init(language);
+    console.log('[i18n] Translations loaded, notifying', this.listeners.length, 'listeners');
 
     // Notify all listeners about language change
     this.listeners.forEach(callback => callback(language));
+
+    console.log('[i18n] Language change complete');
   }
 
   // Subscribe to language changes
@@ -140,7 +149,9 @@ async function initI18n() {
 
     // Listen for language changes and update page
     i18n.onLanguageChange((language) => {
+      console.log('[i18n] Language changed callback fired for:', language);
       updateTranslations();
+      console.log('[i18n] Emitting languageChanged event');
       // Emit custom event for dynamic content updates
       window.dispatchEvent(new CustomEvent('languageChanged', {
         detail: { language }
