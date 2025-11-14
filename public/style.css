@@ -617,6 +617,8 @@ a {
 }
 
 .hamburger {
+  position: relative;
+  z-index: 1001;
   background: var(--bg-dark);
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
@@ -667,6 +669,7 @@ a {
   height: 100vh;
   background: var(--bg-dark);
   border-left: 2px solid rgba(255, 255, 255, 0.1);
+  z-index: 999;
   transition: right 0.3s ease;
   overflow-y: auto;
   padding: 80px 30px 30px;
