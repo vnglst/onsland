@@ -97,12 +97,7 @@
       </div>
     </footer>
 
-    <script>
-      initI18n().then(() => {
-        document.title = i18n.t("about.title");
-        document.querySelector('meta[name="description"]').setAttribute("content", i18n.t("about.metaDescription"));
-        initMenu();
-      });
-    </script>
+    <script src="page-init.js"></script>
+    <script src="about-page.js"></script>
   </body>
 </html>
