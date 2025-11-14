@@ -21,18 +21,14 @@
     "heading": "Land Use in Europe",
     "headingShort": "Europe",
     "squareView": "Square View",
-    "squareViewShort": "Square",
-    "mapView": "Map View",
-    "mapViewShort": "Map"
+    "mapView": "Map View"
   },
   "country": {
     "title": "Land Use - OnsLand",
     "metaDescription": "Interactive visualization of land use showing agriculture, nature, urban areas, and more.",
     "titlePrefix": "Land Use in ",
     "squareView": "Square View",
-    "squareViewShort": "Square",
     "mapView": "Map View",
-    "mapViewShort": "Map",
     "highestRanking": "Highest ranking",
     "secondHighest": "Second highest",
     "lowestRanking": "Lowest ranking",
@@ -141,18 +137,6 @@
       "heading": "What is OnsLand?",
       "description": "OnsLand is an interactive visualization project that explores how land is used across European countries. Using data from Eurostat, it presents land use patterns through beautiful hexagon-based visualizations, making complex agricultural and environmental data accessible and engaging."
     },
-    "data": {
-      "heading": "Data Source",
-      "description": "All land use data comes from Eurostat's Land Cover Statistics 2022, which provides comprehensive information about how land is utilized across European Union member states. The data includes categories such as agricultural land, forests, urban areas, water bodies, and more.",
-      "source": "Data source:"
-    },
-    "tech": {
-      "heading": "Technology",
-      "d3": "Data visualization and hexagon rendering",
-      "vanilla": "No frameworks, pure JavaScript",
-      "topojson": "Efficient geographic data encoding",
-      "css": "Responsive layouts"
-    },
     "contribute": {
       "heading": "How to Contribute",
       "intro": "OnsLand is an open-source project, and we welcome contributions! Here's how you can help:",
@@ -167,11 +151,6 @@
       "code": "Contribute code:",
       "codeDesc": "Submit pull requests to improve the codebase",
       "github": "GitHub repository:"
-    },
-    "author": {
-      "heading": "About the Author",
-      "description": "OnsLand was created by Koen van Gilst as an exploration of European land use patterns and data visualization techniques. The project aims to make complex environmental data more accessible and engaging through interactive visualizations.",
-      "website": "Website:"
     },
     "license": {
       "heading": "License",

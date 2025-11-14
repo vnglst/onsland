@@ -21,18 +21,14 @@
     "heading": "Landgebruik in Europa",
     "headingShort": "Europa",
     "squareView": "Vierkant",
-    "squareViewShort": "Vierkant",
-    "mapView": "Kaart",
-    "mapViewShort": "Kaart"
+    "mapView": "Kaart"
   },
   "country": {
     "title": "Landgebruik - OnsLand",
     "metaDescription": "Interactieve visualisatie van landgebruik met landbouw, natuur, stedelijke gebieden en meer.",
     "titlePrefix": "Landgebruik in ",
     "squareView": "Vierkant",
-    "squareViewShort": "Vierkant",
     "mapView": "Kaart",
-    "mapViewShort": "Kaart",
     "highestRanking": "Hoogste ranking",
     "secondHighest": "Op één na hoogste",
     "lowestRanking": "Laagste ranking",
@@ -141,18 +137,6 @@
       "heading": "Wat is OnsLand?",
       "description": "OnsLand is een interactief visualisatieproject dat onderzoekt hoe grond wordt gebruikt in Europese landen. Met gegevens van Eurostat toont het landgebruikspatronen door middel van prachtige zeshoek-visualisaties, waardoor complexe landbouw- en milieugegevens toegankelijk en boeiend worden gemaakt."
     },
-    "data": {
-      "heading": "Gegevensbron",
-      "description": "Alle landgebruiksgegevens komen van Eurostat's Landbedekkingsstatistieken 2022, die uitgebreide informatie bieden over hoe land wordt gebruikt in de lidstaten van de Europese Unie. De gegevens omvatten categorieën zoals landbouwgrond, bossen, stedelijke gebieden, waterlichamen en meer.",
-      "source": "Gegevensbron:"
-    },
-    "tech": {
-      "heading": "Technologie",
-      "d3": "Datavisualisatie en zeshoekweergave",
-      "vanilla": "Geen frameworks, pure JavaScript",
-      "topojson": "Efficiënte geografische datacodering",
-      "css": "Responsieve layouts"
-    },
     "contribute": {
       "heading": "Hoe bijdragen",
       "intro": "OnsLand is een open-source project en we verwelkomen bijdragen! Zo kun je helpen:",
@@ -167,11 +151,6 @@
       "code": "Draag code bij:",
       "codeDesc": "Dien pull requests in om de codebase te verbeteren",
       "github": "GitHub repository:"
-    },
-    "author": {
-      "heading": "Over de maker",
-      "description": "OnsLand is gemaakt door Koen van Gilst als een verkenning van Europese landgebruikspatronen en datavisualisatietechnieken. Het project heeft als doel complexe milieugegevens toegankelijker en boeiender te maken door middel van interactieve visualisaties.",
-      "website": "Website:"
     },
     "license": {
       "heading": "Licentie",

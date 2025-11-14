@@ -21,18 +21,14 @@
     "heading": "Utilisation des sols en Europe",
     "headingShort": "Europe",
     "squareView": "Vue Carrée",
-    "squareViewShort": "Carrée",
-    "mapView": "Vue Carte",
-    "mapViewShort": "Carte"
+    "mapView": "Vue Carte"
   },
   "country": {
     "title": "Utilisation des sols - OnsLand",
     "metaDescription": "Visualisation interactive de l'utilisation des sols montrant l'agriculture, la nature, les zones urbaines et plus encore.",
     "titlePrefix": "Utilisation des sols en ",
     "squareView": "Vue Carrée",
-    "squareViewShort": "Carrée",
     "mapView": "Vue Carte",
-    "mapViewShort": "Carte",
     "highestRanking": "Classement le plus élevé",
     "secondHighest": "Deuxième plus élevé",
     "lowestRanking": "Classement le plus bas",
@@ -141,18 +137,6 @@
       "heading": "Qu'est-ce qu'OnsLand ?",
       "description": "OnsLand est un projet de visualisation interactive qui explore l'utilisation des sols dans les pays européens. En utilisant les données d'Eurostat, il présente les modèles d'utilisation des sols à travers de magnifiques visualisations hexagonales, rendant les données agricoles et environnementales complexes accessibles et captivantes."
     },
-    "data": {
-      "heading": "Source des données",
-      "description": "Toutes les données d'utilisation des sols proviennent des Statistiques de couverture des sols 2022 d'Eurostat, qui fournissent des informations complètes sur l'utilisation des terres dans les États membres de l'Union européenne. Les données incluent des catégories telles que les terres agricoles, les forêts, les zones urbaines, les étendues d'eau et bien plus encore.",
-      "source": "Source des données :"
-    },
-    "tech": {
-      "heading": "Technologie",
-      "d3": "Visualisation de données et rendu hexagonal",
-      "vanilla": "Sans frameworks, JavaScript pur",
-      "topojson": "Encodage efficace des données géographiques",
-      "css": "Mises en page réactives"
-    },
     "contribute": {
       "heading": "Comment contribuer",
       "intro": "OnsLand est un projet open source, et nous accueillons les contributions ! Voici comment vous pouvez aider :",
@@ -167,11 +151,6 @@
       "code": "Contribuer au code :",
       "codeDesc": "Soumettez des pull requests pour améliorer le code",
       "github": "Dépôt GitHub :"
-    },
-    "author": {
-      "heading": "À propos de l'auteur",
-      "description": "OnsLand a été créé par Koen van Gilst comme une exploration des modèles d'utilisation des sols européens et des techniques de visualisation de données. Le projet vise à rendre les données environnementales complexes plus accessibles et captivantes grâce à des visualisations interactives.",
-      "website": "Site web :"
     },
     "license": {
       "heading": "Licence",
