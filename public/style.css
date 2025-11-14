@@ -101,6 +101,8 @@ h2 {
   cursor: pointer;
   transition: all 0.2s ease;
   min-width: 120px;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .toggle-button:hover,

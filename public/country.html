@@ -21,10 +21,10 @@
   <body>
     <header>
       <div id="countryHeader">
-        <button class="back-button" id="backButton">
+        <a href="/" class="back-button">
           <span class="back-text-full"><span data-i18n="common.back">Back</span></span>
           <span class="back-text-short" data-i18n="common.backShort">←</span>
-        </button>
+        </a>
         <h1 id="countryTitle">
           <span class="title-prefix" data-i18n="country.titlePrefix">Land Use in </span>
           <span class="title-country"></span>
@@ -296,10 +296,6 @@
           container.innerHTML = "";
           displayRankings();
         });
-      });
-
-      document.getElementById("backButton").addEventListener("click", () => {
-        window.location.href = "/";
       });
 
       function renderCountry(countryKey) {
