@@ -15,85 +15,6 @@
     <script src="i18n.js"></script>
     <script src="language-switcher.js"></script>
     <script src="menu.js"></script>
-    <style>
-      .about-container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 40px 20px;
-      }
-
-      .about-container h1 {
-        color: var(--text-light);
-        margin-bottom: 40px;
-        font-size: 2.5rem;
-      }
-
-      .about-container h2 {
-        color: var(--text-light);
-        margin-top: 40px;
-        margin-bottom: 20px;
-        font-size: 1.8rem;
-      }
-
-      .about-container p {
-        color: var(--text-light);
-        line-height: 1.8;
-        margin-bottom: 20px;
-        font-size: 1.1rem;
-      }
-
-      .about-container ul {
-        color: var(--text-light);
-        line-height: 1.8;
-        margin-bottom: 20px;
-        padding-left: 40px;
-      }
-
-      .about-container li {
-        margin-bottom: 10px;
-      }
-
-      .about-container a {
-        color: var(--primary);
-        text-decoration: underline;
-      }
-
-      .about-container a:hover {
-        color: var(--primary-light);
-      }
-
-      .about-container code {
-        background: rgba(255, 255, 255, 0.1);
-        padding: 2px 6px;
-        border-radius: 3px;
-        font-family: "Courier New", monospace;
-      }
-
-      .tech-stack {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-        margin: 30px 0;
-      }
-
-      .tech-item {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 20px;
-        border-radius: 8px;
-        border: 2px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .tech-item h3 {
-        color: var(--primary);
-        margin-bottom: 10px;
-        font-size: 1.2rem;
-      }
-
-      .tech-item p {
-        font-size: 0.95rem;
-        margin: 0;
-      }
-    </style>
   </head>
   <body>
     <header>
@@ -176,12 +97,7 @@
       </div>
     </footer>
 
-    <script>
-      initI18n().then(() => {
-        document.title = i18n.t("about.title");
-        document.querySelector('meta[name="description"]').setAttribute("content", i18n.t("about.metaDescription"));
-        initMenu();
-      });
-    </script>
+    <script src="page-init.js"></script>
+    <script src="about-page.js"></script>
   </body>
 </html>
