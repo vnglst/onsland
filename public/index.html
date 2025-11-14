@@ -51,6 +51,27 @@
 
         // Initialize language switcher
         initLanguageSwitcher();
+
+        // Listen for language changes and update country titles
+        window.addEventListener('languageChanged', () => {
+          // Update page title
+          document.title = i18n.t('homepage.title');
+
+          // Update toggle button text
+          const fullText = isSquareView ? i18n.t('homepage.mapView') : i18n.t('homepage.squareView');
+          const shortText = isSquareView ? i18n.t('homepage.mapViewShort') : i18n.t('homepage.squareViewShort');
+          document.querySelector(".toggle-text-full").textContent = fullText;
+          document.querySelector(".toggle-text-short").textContent = shortText;
+
+          // Update all country tiles
+          document.querySelectorAll('.country-tile').forEach(tile => {
+            const countryKey = tile.querySelector('a').href.split('country=')[1];
+            if (countryKey) {
+              const titleElement = tile.querySelector('h2');
+              titleElement.textContent = i18n.t(`countries.${countryKey}`) || countryNames[countryKey];
+            }
+          });
+        });
       });
 
       fetch("lib/countries-50m.json")

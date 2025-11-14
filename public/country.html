@@ -58,6 +58,7 @@
 
     <script src="countries.js"></script>
     <script src="render.js"></script>
+    <script src="translation-utils.js"></script>
     <script>
       const DEV_MODE = true;
 
@@ -125,80 +126,6 @@
 
       function createCategorySlug(categoryName) {
         return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-      }
-
-      function translateCategory(categoryName) {
-        // Map category names to translation keys
-        const categoryMap = {
-          'Water': 'categories.water',
-          'Woodland': 'categories.woodland',
-          'Wetland': 'categories.wetland',
-          'Shrubland': 'categories.shrubland',
-          'Bare land': 'categories.bareLand',
-          'Urban area': 'categories.urbanArea',
-          'Grassland': 'categories.grassland',
-          'Cereals': 'categories.cereals',
-          'Wheat': 'categories.wheat',
-          'Barley': 'categories.barley',
-          'Rye': 'categories.rye',
-          'Oats': 'categories.oats',
-          'Maize': 'categories.maize',
-          'Rice': 'categories.rice',
-          'Rape': 'categories.rape',
-          'Sunflower': 'categories.sunflower',
-          'Soya': 'categories.soya',
-          'Potatoes': 'categories.potatoes',
-          'Sugarbeet': 'categories.sugarbeet',
-          'Tobacco': 'categories.tobacco',
-          'Cotton': 'categories.cotton',
-          'Dry pulses': 'categories.dryPulses',
-          'Industrial crops': 'categories.industrialCrops',
-          'Vegetables': 'categories.vegetables',
-          'Flowers': 'categories.flowers',
-          'Vineyards': 'categories.vineyards',
-          'Orchards': 'categories.orchards',
-          'Olive groves': 'categories.oliveGroves',
-          'Nurseries': 'categories.nurseries',
-          'Arom. plants': 'categories.aromPlants',
-          'Temp. grassland': 'categories.tempGrassland',
-          'Permanent crops': 'categories.permanentCrops',
-          'Other cropland': 'categories.otherCropland',
-          'Mountains': 'categories.mountains',
-          'Olive trees': 'categories.oliveTrees',
-          'Vineyard': 'categories.vineyard',
-          'Fruit trees': 'categories.fruitTrees',
-          'Fodder crops': 'categories.fodderCrops',
-          'Lichens and moss': 'categories.lichensAndMoss',
-          'Rocks and stones': 'categories.rocksAndStones',
-          'Root vegetables': 'categories.rootVegetables',
-          'Other cereals': 'categories.otherCereals',
-          'Triticale': 'categories.triticale'
-        };
-
-        const key = categoryMap[categoryName];
-        return key ? i18n.t(key) : categoryName;
-      }
-
-      function translateLabel(labelName) {
-        // Map label names to translation keys
-        const labelMap = {
-          'Water': 'labels.water',
-          'Nature': 'labels.nature',
-          'Cities': 'labels.cities',
-          'Farmland': 'labels.farmland',
-          'Mountains': 'labels.mountains',
-          'Forests': 'labels.forests',
-          'Lakes': 'labels.lakes',
-          'Agriculture': 'labels.agriculture',
-          'Pasture': 'labels.pasture',
-          'Coastline': 'labels.coastline',
-          'Islands': 'labels.islands',
-          'Alps': 'labels.alps',
-          'Cropland': 'labels.cropland'
-        };
-
-        const key = labelMap[labelName];
-        return key ? i18n.t(key) : labelName;
       }
 
       function createRankingBadge(ranking, labelKey, isTopRank) {
@@ -287,6 +214,30 @@
         if (worldData) {
           renderCountry(currentCountry);
         }
+
+        // Listen for language changes and re-render dynamic content
+        window.addEventListener('languageChanged', () => {
+          // Update page title and country name
+          const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
+          document.getElementById("pageTitle").textContent = `${i18n.t('country.titlePrefix')}${countryName} - OnsLand`;
+          document.querySelector(".title-country").textContent = countryName;
+
+          // Update toggle button text
+          const fullText = isSquareLayout ? i18n.t('country.mapView') : i18n.t('country.squareView');
+          const shortText = isSquareLayout ? i18n.t('country.mapViewShort') : i18n.t('country.squareViewShort');
+          document.querySelector(".toggle-text-full").textContent = fullText;
+          document.querySelector(".toggle-text-short").textContent = shortText;
+
+          // Re-render country visualization (legend and labels)
+          if (worldData) {
+            renderCountry(currentCountry);
+          }
+
+          // Re-render rankings
+          const container = document.getElementById("rankingsInfo");
+          container.innerHTML = '';
+          displayRankings();
+        });
       });
 
       document.getElementById("backButton").addEventListener("click", () => {

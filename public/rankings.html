@@ -216,6 +216,7 @@
 
     <script src="countries.js"></script>
     <script src="render.js"></script>
+    <script src="translation-utils.js"></script>
     <script>
       // Initialize i18n and language switcher
       initI18n().then(() => {
@@ -228,6 +229,27 @@
 
         // Render rankings after translations are loaded
         renderRankings();
+
+        // Listen for language changes and re-render rankings
+        window.addEventListener('languageChanged', () => {
+          // Update page title
+          document.title = i18n.t('rankings.title');
+
+          // Clear and re-render rankings
+          const container = document.getElementById("rankingsContainer");
+          container.innerHTML = '';
+          renderRankings();
+
+          // Preserve scroll to hash if present
+          if (window.location.hash) {
+            setTimeout(() => {
+              const element = document.querySelector(window.location.hash);
+              if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+              }
+            }, 100);
+          }
+        });
 
         // Scroll to category if hash is present in URL
         if (window.location.hash) {
@@ -275,58 +297,6 @@
 
       function createCategorySlug(categoryName) {
         return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-      }
-
-      function translateCategory(categoryName) {
-        // Map category names to translation keys
-        const categoryMap = {
-          'Water': 'categories.water',
-          'Woodland': 'categories.woodland',
-          'Wetland': 'categories.wetland',
-          'Shrubland': 'categories.shrubland',
-          'Bare land': 'categories.bareLand',
-          'Urban area': 'categories.urbanArea',
-          'Grassland': 'categories.grassland',
-          'Cereals': 'categories.cereals',
-          'Wheat': 'categories.wheat',
-          'Barley': 'categories.barley',
-          'Rye': 'categories.rye',
-          'Oats': 'categories.oats',
-          'Maize': 'categories.maize',
-          'Rice': 'categories.rice',
-          'Rape': 'categories.rape',
-          'Sunflower': 'categories.sunflower',
-          'Soya': 'categories.soya',
-          'Potatoes': 'categories.potatoes',
-          'Sugarbeet': 'categories.sugarbeet',
-          'Tobacco': 'categories.tobacco',
-          'Cotton': 'categories.cotton',
-          'Dry pulses': 'categories.dryPulses',
-          'Industrial crops': 'categories.industrialCrops',
-          'Vegetables': 'categories.vegetables',
-          'Flowers': 'categories.flowers',
-          'Vineyards': 'categories.vineyards',
-          'Orchards': 'categories.orchards',
-          'Olive groves': 'categories.oliveGroves',
-          'Nurseries': 'categories.nurseries',
-          'Arom. plants': 'categories.aromPlants',
-          'Temp. grassland': 'categories.tempGrassland',
-          'Permanent crops': 'categories.permanentCrops',
-          'Other cropland': 'categories.otherCropland',
-          'Mountains': 'categories.mountains',
-          'Olive trees': 'categories.oliveTrees',
-          'Vineyard': 'categories.vineyard',
-          'Fruit trees': 'categories.fruitTrees',
-          'Fodder crops': 'categories.fodderCrops',
-          'Lichens and moss': 'categories.lichensAndMoss',
-          'Rocks and stones': 'categories.rocksAndStones',
-          'Root vegetables': 'categories.rootVegetables',
-          'Other cereals': 'categories.otherCereals',
-          'Triticale': 'categories.triticale'
-        };
-
-        const key = categoryMap[categoryName];
-        return key ? i18n.t(key) : categoryName;
       }
 
       function renderRankings() {
