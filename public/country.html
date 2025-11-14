@@ -29,6 +29,7 @@
           <span class="title-prefix" data-i18n="country.titlePrefix">Land Use in </span>
           <span class="title-country"></span>
         </h1>
+        <span class="spacer"></span>
       </div>
     </header>
 
@@ -45,10 +46,12 @@
           <a target="_blank" href="https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table"
             >Eurostat Land Cover</a
           >
-          | <span data-i18n="common.code">Code</span>: <a target="_blank" href="https://github.com/vnglst/onsland">Github</a>
+          | <span data-i18n="common.code">Code</span>:
+          <a target="_blank" href="https://github.com/vnglst/onsland">Github</a>
         </div>
         <div>
-          <span data-i18n="common.visualisationBy">Visualisation by</span> <a target="_blank" href="https://koenvangilst.nl/lab/european-land-use">Koen van Gilst</a>
+          <span data-i18n="common.visualisationBy">Visualisation by</span>
+          <a target="_blank" href="https://koenvangilst.nl/lab/european-land-use">Koen van Gilst</a>
         </div>
       </div>
     </footer>
@@ -66,9 +69,9 @@
       // Initialize page after translations are loaded
       function initializePage() {
         const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
-        document.getElementById("pageTitle").textContent = `${i18n.t('country.titlePrefix')}${countryName} - OnsLand`;
+        document.getElementById("pageTitle").textContent = `${i18n.t("country.titlePrefix")}${countryName} - OnsLand`;
         document.querySelector(".title-country").textContent = countryName;
-        document.querySelector('meta[name="description"]').setAttribute('content', i18n.t('country.metaDescription'));
+        document.querySelector('meta[name="description"]').setAttribute("content", i18n.t("country.metaDescription"));
 
         // Display rankings after translations are loaded
         displayRankings();
@@ -248,7 +251,7 @@
       }
 
       function getViewToggleText() {
-        return isSquareLayout ? i18n.t('country.mapView') : i18n.t('country.squareView');
+        return isSquareLayout ? i18n.t("country.mapView") : i18n.t("country.squareView");
       }
 
       // Wait for both translations and map data before rendering
@@ -262,7 +265,7 @@
           onViewToggle: () => {
             toggleLayout();
           },
-          getViewToggleText: getViewToggleText
+          getViewToggleText: getViewToggleText,
         });
 
         // Render the country visualization
@@ -271,14 +274,14 @@
         }
 
         // Listen for language changes and re-render dynamic content
-        window.addEventListener('languageChanged', () => {
+        window.addEventListener("languageChanged", () => {
           // Update page title and country name
           const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
-          document.getElementById("pageTitle").textContent = `${i18n.t('country.titlePrefix')}${countryName} - OnsLand`;
+          document.getElementById("pageTitle").textContent = `${i18n.t("country.titlePrefix")}${countryName} - OnsLand`;
           document.querySelector(".title-country").textContent = countryName;
 
           // Update menu toggle text
-          const menuToggle = document.querySelector('#menuViewToggle');
+          const menuToggle = document.querySelector("#menuViewToggle");
           if (menuToggle) {
             menuToggle.textContent = getViewToggleText();
           }
@@ -290,7 +293,7 @@
 
           // Re-render rankings
           const container = document.getElementById("rankingsInfo");
-          container.innerHTML = '';
+          container.innerHTML = "";
           displayRankings();
         });
       });
