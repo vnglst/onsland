@@ -62,8 +62,7 @@ function createMenu() {
 
   // View toggle section (only for homepage and country pages)
   const viewSection = document.createElement('div');
-  viewSection.className = 'menu-section menu-view-section';
-  viewSection.style.display = 'none'; // Hidden by default
+  viewSection.className = 'menu-section menu-view-section hidden';
 
   const viewTitle = document.createElement('h3');
   viewTitle.setAttribute('data-i18n', 'menu.view');
@@ -115,7 +114,7 @@ function initMenu(options = {}) {
   // Show view toggle if enabled
   if (options.showViewToggle) {
     const viewSection = menu.querySelector('.menu-view-section');
-    viewSection.style.display = 'block';
+    viewSection.classList.remove('hidden');
 
     const viewToggle = menu.querySelector('#menuViewToggle');
     if (options.onViewToggle) {
