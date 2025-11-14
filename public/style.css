@@ -95,12 +95,20 @@ h2 {
   border: 2px solid rgba(255, 255, 255, 0.2);
   color: var(--text-light);
   padding: 10px 20px;
-  border-radius: 8px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   min-width: 120px;
+  /* Hexagonal shape with cut corners */
+  clip-path: polygon(
+    12px 0%,
+    calc(100% - 12px) 0%,
+    100% 50%,
+    calc(100% - 12px) 100%,
+    12px 100%,
+    0% 50%
+  );
 }
 
 .toggle-button:hover,
@@ -173,7 +181,6 @@ a {
 .country-card {
   background: rgba(255, 255, 255, 0.05);
   border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
   padding: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -181,6 +188,17 @@ a {
   flex-direction: column;
   gap: 8px;
   min-height: 320px;
+  /* Hexagonal shape with chamfered corners */
+  clip-path: polygon(
+    20px 0%,
+    calc(100% - 20px) 0%,
+    100% 20px,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    20px 100%,
+    0% calc(100% - 20px),
+    0% 20px
+  );
 }
 
 .country-card:hover {
@@ -202,8 +220,18 @@ a {
 .country-preview {
   width: 100%;
   height: auto;
-  border-radius: 8px;
   aspect-ratio: 1 / 1;
+  /* Hexagonal shape for preview */
+  clip-path: polygon(
+    16px 0%,
+    calc(100% - 16px) 0%,
+    100% 16px,
+    100% calc(100% - 16px),
+    calc(100% - 16px) 100%,
+    16px 100%,
+    0% calc(100% - 16px),
+    0% 16px
+  );
 }
 
 .hexagon-preview {
@@ -234,7 +262,17 @@ a {
   );
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
-  border-radius: 8px;
+  /* Hexagonal shape for loading */
+  clip-path: polygon(
+    16px 0%,
+    calc(100% - 16px) 0%,
+    100% 16px,
+    100% calc(100% - 16px),
+    calc(100% - 16px) 100%,
+    16px 100%,
+    0% calc(100% - 16px),
+    0% 16px
+  );
 }
 
 @keyframes shimmer {
@@ -401,13 +439,21 @@ a {
 .ranking-badge {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 6px;
   padding: 8px 12px;
   transition: all 0.2s ease;
   display: flex;
   align-items: space-between;
   gap: 6px;
   opacity: 0.85;
+  /* Hexagonal shape for badges */
+  clip-path: polygon(
+    8px 0%,
+    calc(100% - 8px) 0%,
+    100% 50%,
+    calc(100% - 8px) 100%,
+    8px 100%,
+    0% 50%
+  );
 }
 
 .ranking-badge:hover {
