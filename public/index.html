@@ -90,8 +90,10 @@
           document.querySelectorAll('.country-card').forEach(card => {
             const countryKey = card.getAttribute('data-country');
             const titleElement = card.querySelector('h2');
-            const translatedName = i18n.t(`countries.${countryKey}`) || countryNames[countryKey];
-            titleElement.textContent = translatedName;
+            if (titleElement) {
+              const translatedName = i18n.t(`countries.${countryKey}`) || countryNames[countryKey];
+              titleElement.textContent = translatedName;
+            }
           });
         });
       });
