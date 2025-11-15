@@ -14,7 +14,7 @@ function initApp() {
   render(html`
     <${I18nProvider}>
       <${RankingsPage} />
-    <//>
+    </${I18nProvider}>
   `, root);
 }
 

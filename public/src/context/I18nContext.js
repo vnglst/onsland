@@ -100,6 +100,6 @@ export function I18nProvider({ children }) {
   return html`
     <${I18nContext.Provider} value=${value}>
       ${children}
-    <//>
+    </${I18nContext.Provider}>
   `;
 }

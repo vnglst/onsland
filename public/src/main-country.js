@@ -26,7 +26,7 @@ function initApp() {
   render(html`
     <${I18nProvider}>
       <${CountryPage} countryKey=${currentCountry} />
-    <//>
+    </${I18nProvider}>
   `, root);
 }
 

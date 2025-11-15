@@ -14,7 +14,7 @@ function initApp() {
   render(html`
     <${I18nProvider}>
       <${HomePage} />
-    <//>
+    </${I18nProvider}>
   `, root);
 }
 
