@@ -2,6 +2,7 @@ svg {
   padding: 25px;
   max-width: 800px;
   margin: auto;
+  min-height: calc(100vh - 300px); /* Prevent layout shift while content loads */
 }
 
 .hexagon {
