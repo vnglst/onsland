@@ -21,16 +21,6 @@ function updateMetaDescription(description) {
 }
 
 /**
- * Shows the page footer (used after content has loaded)
- */
-function showFooter() {
-  const footer = document.querySelector('.page-footer');
-  if (footer) {
-    footer.classList.add('visible');
-  }
-}
-
-/**
  * Initializes common page elements with translations
  * @param {Object} options - Configuration options
  * @param {string} options.titleKey - i18n key for the page title

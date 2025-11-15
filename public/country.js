@@ -24,8 +24,6 @@ function initializePageElements() {
   // Display rankings after translations are loaded
   displayRankings();
     
-    // Show footer after content has loaded
-    showFooter();
 }
 
 /**

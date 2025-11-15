@@ -174,8 +174,6 @@ function initHomepage() {
     .then((world) => {
       worldData = world;
       showHomepage();
-      // Show footer after content has started loading
-      showFooter();
     })
     .catch((error) => console.error("Error loading data:", error));
 }

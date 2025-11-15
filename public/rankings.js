@@ -151,8 +151,6 @@ function initRankingsPage() {
     // Render rankings after translations are loaded
     renderRankings();
     
-    // Show footer after content has loaded
-    showFooter();
 
     // Handle hash scrolling
     handleHashScroll();
