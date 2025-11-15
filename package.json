@@ -5,15 +5,10 @@
   "scripts": {
     "start": "serve public",
     "import-db": "node data/import-to-sqlite.js",
-    "query": "node data/query-country.js",
-    "query-denmark": "node data/query-country.js DK"
+    "query": "node data/query-country.js"
   },
   "dependencies": {
     "serve": "^14.2.5",
     "sqlite3": "^5.1.7"
-  },
-  "devDependencies": {
-    "playwright-core": "^1.56.1",
-    "sharp": "^0.34.5"
   }
 }
