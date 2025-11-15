@@ -11,6 +11,16 @@
     />
     <link rel="stylesheet" href="style.css" />
     <script defer data-domain="onsland.koenvangilst.nl" src="https://plausible.koenvangilst.nl/js/script.js"></script>
+    <!-- Import map for Preact from CDN -->
+    <script type="importmap">
+      {
+        "imports": {
+          "preact": "https://esm.sh/preact@10.27.2",
+          "preact/": "https://esm.sh/preact@10.27.2/",
+          "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
+        }
+      }
+    </script>
     <!-- D3 and visualization libraries -->
     <script src="lib/d3.v7.min.js"></script>
     <script src="lib/d3-hexbin.v0.2.min.js"></script>
@@ -42,6 +52,6 @@
     </footer>
 
     <!-- Preact entry point -->
-    <script type="module" src="/src/main-country.jsx"></script>
+    <script type="module" src="/src/main-country.js"></script>
   </body>
 </html>

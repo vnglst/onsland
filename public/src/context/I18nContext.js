@@ -1,5 +1,6 @@
 import { createContext } from 'preact';
 import { useState, useEffect, useCallback, useMemo } from 'preact/hooks';
+import { html } from 'htm/preact';
 
 // Create the i18n context
 export const I18nContext = createContext(null);
@@ -96,9 +97,9 @@ export function I18nProvider({ children }) {
     isLoading
   }), [currentLanguage, translations, t, changeLanguage, availableLanguages, isLoading]);
 
-  return (
-    <I18nContext.Provider value={value}>
-      {children}
-    </I18nContext.Provider>
-  );
+  return html`
+    <${I18nContext.Provider} value=${value}>
+      ${children}
+    <//>
+  `;
 }

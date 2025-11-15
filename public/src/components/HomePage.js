@@ -1,7 +1,8 @@
+import { html } from 'htm/preact';
 import { useState, useEffect } from 'preact/hooks';
 import { useI18n } from '../hooks/useI18n.js';
-import { Menu } from './Menu.jsx';
-import { CountryCard } from './CountryCard.jsx';
+import { Menu } from './Menu.js';
+import { CountryCard } from './CountryCard.js';
 
 const validCountries = [
   "austria", "belgium", "bulgaria", "croatia", "czechia", "denmark",
@@ -70,25 +71,25 @@ export function HomePage() {
     return isSquareView ? t('homepage.mapView') : t('homepage.squareView');
   };
 
-  return (
+  return html`
     <>
-      <Menu
-        showViewToggle={true}
-        onViewToggle={toggleView}
-        getViewToggleText={getViewToggleText}
+      <${Menu}
+        showViewToggle=${true}
+        onViewToggle=${toggleView}
+        getViewToggleText=${getViewToggleText}
       />
 
-      <div id="homepage" className="homepage-grid">
-        {validCountries.map(countryKey => (
-          <CountryCard
-            key={countryKey}
-            countryKey={countryKey}
-            worldData={worldData}
-            isSquareView={isSquareView}
-            countryNames={countryNames}
+      <div id="homepage" class="homepage-grid">
+        ${validCountries.map(countryKey => html`
+          <${CountryCard}
+            key=${countryKey}
+            countryKey=${countryKey}
+            worldData=${worldData}
+            isSquareView=${isSquareView}
+            countryNames=${countryNames}
           />
-        ))}
+        `)}
       </div>
     </>
-  );
+  `;
 }

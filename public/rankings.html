@@ -10,6 +10,16 @@
     />
     <link rel="stylesheet" href="style.css" />
     <script defer data-domain="onsland.koenvangilst.nl" src="https://plausible.koenvangilst.nl/js/script.js"></script>
+    <!-- Import map for Preact from CDN -->
+    <script type="importmap">
+      {
+        "imports": {
+          "preact": "https://esm.sh/preact@10.27.2",
+          "preact/": "https://esm.sh/preact@10.27.2/",
+          "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
+        }
+      }
+    </script>
     <!-- Data and rendering utilities -->
     <script src="countries.js"></script>
   </head>
@@ -47,6 +57,6 @@
     </footer>
 
     <!-- Preact entry point -->
-    <script type="module" src="/src/main-rankings.jsx"></script>
+    <script type="module" src="/src/main-rankings.js"></script>
   </body>
 </html>

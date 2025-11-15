@@ -1,6 +1,7 @@
 import { render } from 'preact';
-import { I18nProvider } from './context/I18nContext.jsx';
-import { CountryPage } from './components/CountryPage.jsx';
+import { html } from 'htm/preact';
+import { I18nProvider } from './context/I18nContext.js';
+import { CountryPage } from './components/CountryPage.js';
 
 // Get country from URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -22,12 +23,11 @@ function initApp() {
     return;
   }
 
-  render(
-    <I18nProvider>
-      <CountryPage countryKey={currentCountry} />
-    </I18nProvider>,
-    root
-  );
+  render(html`
+    <${I18nProvider}>
+      <${CountryPage} countryKey=${currentCountry} />
+    <//>
+  `, root);
 }
 
 // Initialize when DOM is ready

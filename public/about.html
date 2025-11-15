@@ -9,6 +9,16 @@
       content="Learn about the OnsLand project - an interactive visualization of land use across Europe. Discover the data sources, technology, and how to contribute."
     />
     <link rel="stylesheet" href="style.css" />
+    <!-- Import map for Preact from CDN -->
+    <script type="importmap">
+      {
+        "imports": {
+          "preact": "https://esm.sh/preact@10.27.2",
+          "preact/": "https://esm.sh/preact@10.27.2/",
+          "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
+        }
+      }
+    </script>
   </head>
   <body>
     <!-- Preact app root -->
@@ -94,6 +104,6 @@
     </footer>
 
     <!-- Preact entry point -->
-    <script type="module" src="/src/main-about.jsx"></script>
+    <script type="module" src="/src/main-about.js"></script>
   </body>
 </html>

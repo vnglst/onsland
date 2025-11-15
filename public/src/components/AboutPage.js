@@ -1,6 +1,7 @@
+import { html } from 'htm/preact';
 import { useEffect } from 'preact/hooks';
 import { useI18n } from '../hooks/useI18n.js';
-import { Menu } from './Menu.jsx';
+import { Menu } from './Menu.js';
 
 export function AboutPage() {
   const { t } = useI18n();
@@ -14,12 +15,12 @@ export function AboutPage() {
     }
   }, [t]);
 
-  return (
+  return html`
     <>
-      <Menu />
+      <${Menu} />
       <div id="aboutContent">
-        {/* About page content will be in the HTML */}
+        <!-- About page content will be in the HTML -->
       </div>
     </>
-  );
+  `;
 }

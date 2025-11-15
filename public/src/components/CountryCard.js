@@ -1,3 +1,4 @@
+import { html } from 'htm/preact';
 import { useEffect, useRef } from 'preact/hooks';
 import { useI18n } from '../hooks/useI18n.js';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver.js';
@@ -38,28 +39,28 @@ export function CountryCard({ countryKey, worldData, isSquareView, countryNames 
     window.location.href = `country?country=${countryKey}`;
   };
 
-  return (
+  return html`
     <div
-      ref={cardRef}
-      className={`country-card ${!hasIntersected ? 'loading' : ''}`}
-      data-country={countryKey}
-      onClick={hasIntersected ? handleClick : undefined}
+      ref=${cardRef}
+      class="country-card ${!hasIntersected ? 'loading' : ''}"
+      data-country=${countryKey}
+      onClick=${hasIntersected ? handleClick : undefined}
     >
-      <div className="country-card-title">{translatedName}</div>
+      <div class="country-card-title">${translatedName}</div>
 
-      {!hasIntersected ? (
+      ${!hasIntersected ? html`
         <>
-          <div className="loading-placeholder"></div>
-          <div className="loading-text">{t('common.loading')}</div>
+          <div class="loading-placeholder"></div>
+          <div class="loading-text">${t('common.loading')}</div>
         </>
-      ) : (
+      ` : html`
         <svg
-          ref={svgRef}
+          ref=${svgRef}
           viewBox="0 0 800 800"
           preserveAspectRatio="xMidYMid"
-          className="country-preview"
+          class="country-preview"
         />
-      )}
+      `}
     </div>
-  );
+  `;
 }

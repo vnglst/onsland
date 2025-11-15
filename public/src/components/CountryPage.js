@@ -1,8 +1,9 @@
+import { html } from 'htm/preact';
 import { useEffect, useState, useRef } from 'preact/hooks';
 import { useI18n } from '../hooks/useI18n.js';
 import { useCountryRankings } from '../hooks/useCountryRankings.js';
-import { Menu } from './Menu.jsx';
-import { RankingBadge } from './RankingBadge.jsx';
+import { Menu } from './Menu.js';
+import { RankingBadge } from './RankingBadge.js';
 
 export function CountryPage({ countryKey }) {
   const [worldData, setWorldData] = useState(null);
@@ -59,50 +60,50 @@ export function CountryPage({ countryKey }) {
   const topRankings = sortedRankings.slice(0, 2);
   const bottomRankings = sortedRankings.slice(-2).reverse();
 
-  return (
+  return html`
     <>
-      <Menu
-        showViewToggle={true}
-        onViewToggle={toggleLayout}
-        getViewToggleText={getViewToggleText}
+      <${Menu}
+        showViewToggle=${true}
+        onViewToggle=${toggleLayout}
+        getViewToggleText=${getViewToggleText}
       />
 
       <div id="pageContent">
-        <div id="countryHeader" className="title-container">
+        <div id="countryHeader" class="title-container">
           <h1>
-            <a href="/" className="back-link">←</a>
-            <span className="title-country">{countryName}</span>
+            <a href="/" class="back-link">←</a>
+            <span class="title-country">${countryName}</span>
           </h1>
         </div>
 
         <div id="countryVisualization">
           <svg
-            ref={svgRef}
+            ref=${svgRef}
             id="countrySvg"
             viewBox="0 0 800 800"
             preserveAspectRatio="xMidYMid"
           />
         </div>
 
-        <div id="rankingsInfo" className="rankings-info">
-          {topRankings.map((ranking, index) => (
-            <RankingBadge
-              key={`top-${ranking.categoryName}`}
-              ranking={ranking}
-              labelKey={index === 0 ? "country.highestRanking" : "country.secondHighest"}
-              isTopRank={true}
+        <div id="rankingsInfo" class="rankings-info">
+          ${topRankings.map((ranking, index) => html`
+            <${RankingBadge}
+              key=${'top-' + ranking.categoryName}
+              ranking=${ranking}
+              labelKey=${index === 0 ? "country.highestRanking" : "country.secondHighest"}
+              isTopRank=${true}
             />
-          ))}
-          {bottomRankings.map((ranking, index) => (
-            <RankingBadge
-              key={`bottom-${ranking.categoryName}`}
-              ranking={ranking}
-              labelKey={index === 0 ? "country.lowestRanking" : "country.secondLowest"}
-              isTopRank={false}
+          `)}
+          ${bottomRankings.map((ranking, index) => html`
+            <${RankingBadge}
+              key=${'bottom-' + ranking.categoryName}
+              ranking=${ranking}
+              labelKey=${index === 0 ? "country.lowestRanking" : "country.secondLowest"}
+              isTopRank=${false}
             />
-          ))}
+          `)}
         </div>
       </div>
     </>
-  );
+  `;
 }

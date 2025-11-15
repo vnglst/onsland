@@ -1,7 +1,8 @@
+import { html } from 'htm/preact';
 import { useEffect, useMemo } from 'preact/hooks';
 import { useI18n } from '../hooks/useI18n.js';
-import { Menu } from './Menu.jsx';
-import { CategoryRanking } from './CategoryRanking.jsx';
+import { Menu } from './Menu.js';
+import { CategoryRanking } from './CategoryRanking.js';
 
 export function RankingsPage() {
   const { t } = useI18n();
@@ -78,19 +79,19 @@ export function RankingsPage() {
       });
   }, [categoryRankings]);
 
-  return (
+  return html`
     <>
-      <Menu />
+      <${Menu} />
 
       <div id="rankingsContainer">
-        {sortedCategories.map(categoryName => (
-          <CategoryRanking
-            key={categoryName}
-            categoryName={categoryName}
-            data={categoryRankings[categoryName]}
+        ${sortedCategories.map(categoryName => html`
+          <${CategoryRanking}
+            key=${categoryName}
+            categoryName=${categoryName}
+            data=${categoryRankings[categoryName]}
           />
-        ))}
+        `)}
       </div>
     </>
-  );
+  `;
 }

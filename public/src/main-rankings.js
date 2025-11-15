@@ -1,8 +1,9 @@
 import { render } from 'preact';
-import { I18nProvider } from './context/I18nContext.jsx';
-import { AboutPage } from './components/AboutPage.jsx';
+import { html } from 'htm/preact';
+import { I18nProvider } from './context/I18nContext.js';
+import { RankingsPage } from './components/RankingsPage.js';
 
-// Mount the AboutPage component
+// Mount the RankingsPage component
 function initApp() {
   const root = document.getElementById('app');
   if (!root) {
@@ -10,12 +11,11 @@ function initApp() {
     return;
   }
 
-  render(
-    <I18nProvider>
-      <AboutPage />
-    </I18nProvider>,
-    root
-  );
+  render(html`
+    <${I18nProvider}>
+      <${RankingsPage} />
+    <//>
+  `, root);
 }
 
 // Initialize when DOM is ready

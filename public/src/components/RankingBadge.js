@@ -1,5 +1,5 @@
+import { html } from 'htm/preact';
 import { useI18n } from '../hooks/useI18n.js';
-import { RankingItem } from './RankingItem.jsx';
 
 const CATEGORY_MAP = {
   'Water': 'categories.water',
@@ -51,37 +51,24 @@ function createCategorySlug(categoryName) {
   return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 }
 
-export function CategoryRanking({ categoryName, data }) {
+export function RankingBadge({ ranking, labelKey, isTopRank }) {
   const { t } = useI18n();
 
-  const categorySlug = createCategorySlug(categoryName);
-  const maxPercentage = data.countries[0]?.percentage || 0;
+  const translatedCategory = CATEGORY_MAP[ranking.categoryName]
+    ? t(CATEGORY_MAP[ranking.categoryName])
+    : ranking.categoryName;
 
-  const translatedCategory = CATEGORY_MAP[categoryName]
-    ? t(CATEGORY_MAP[categoryName])
-    : categoryName;
-
-  return (
-    <div className="category-ranking" id={categorySlug}>
-      <h2>
-        <span
-          className="category-color-box"
-          style={{ backgroundColor: data.color }}
-        />
-        {translatedCategory}
-      </h2>
-
-      <ol className="ranking-list">
-        {data.countries.map((country, index) => (
-          <RankingItem
-            key={country.countryKey}
-            country={country}
-            index={index}
-            maxPercentage={maxPercentage}
-            color={data.color}
-          />
-        ))}
-      </ol>
+  return html`
+    <div class="ranking-badge">
+      <a href=${'rankings#' + createCategorySlug(ranking.categoryName)}>
+        <div class="ranking-position-number ${isTopRank ? "top-rank" : "bottom-rank"}">
+          #${ranking.position}
+        </div>
+        <div class="ranking-badge-content">
+          <div class="ranking-badge-category">${translatedCategory}</div>
+          <div class="ranking-badge-label">${t(labelKey)}</div>
+        </div>
+      </a>
     </div>
-  );
+  `;
 }

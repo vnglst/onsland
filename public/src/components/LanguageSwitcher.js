@@ -1,3 +1,4 @@
+import { html } from 'htm/preact';
 import { useI18n } from '../hooks/useI18n.js';
 
 export function LanguageSwitcher({ className = 'language-switcher' }) {
@@ -7,18 +8,18 @@ export function LanguageSwitcher({ className = 'language-switcher' }) {
     changeLanguage(e.target.value);
   };
 
-  return (
+  return html`
     <select
-      className={className}
-      value={currentLanguage}
-      onChange={handleChange}
+      class=${className}
+      value=${currentLanguage}
+      onChange=${handleChange}
       title="Select language"
     >
-      {availableLanguages.map(lang => (
-        <option key={lang.code} value={lang.code}>
-          {lang.name}
+      ${availableLanguages.map(lang => html`
+        <option key=${lang.code} value=${lang.code}>
+          ${lang.name}
         </option>
-      ))}
+      `)}
     </select>
-  );
+  `;
 }

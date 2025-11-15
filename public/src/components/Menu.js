@@ -1,6 +1,7 @@
+import { html } from 'htm/preact';
 import { useState, useEffect } from 'preact/hooks';
 import { useI18n } from '../hooks/useI18n.js';
-import { LanguageSwitcher } from './LanguageSwitcher.jsx';
+import { LanguageSwitcher } from './LanguageSwitcher.js';
 
 export function Menu({ showViewToggle = false, onViewToggle, getViewToggleText }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,11 +47,11 @@ export function Menu({ showViewToggle = false, onViewToggle, getViewToggleText }
     }
   };
 
-  return (
-    <div className="menu-container">
+  return html`
+    <div class="menu-container">
       <button
-        className={`hamburger ${isOpen ? 'open' : ''}`}
-        onClick={toggleMenu}
+        class="hamburger ${isOpen ? 'open' : ''}"
+        onClick=${toggleMenu}
         aria-label="Menu"
       >
         <span></span>
@@ -59,45 +60,45 @@ export function Menu({ showViewToggle = false, onViewToggle, getViewToggleText }
       </button>
 
       <div
-        className={`menu-panel ${isOpen ? 'open' : ''}`}
-        onClick={handlePanelClick}
+        class="menu-panel ${isOpen ? 'open' : ''}"
+        onClick=${handlePanelClick}
       >
-        <div className="menu-content">
-          {/* Navigation section */}
-          <div className="menu-section">
-            <h3>{t('menu.navigation')}</h3>
-            {navLinks.map(link => (
+        <div class="menu-content">
+          <!-- Navigation section -->
+          <div class="menu-section">
+            <h3>${t('menu.navigation')}</h3>
+            ${navLinks.map(link => html`
               <a
-                key={link.key}
-                href={link.href}
-                className="menu-link"
-                onClick={closeMenu}
+                key=${link.key}
+                href=${link.href}
+                class="menu-link"
+                onClick=${closeMenu}
               >
-                {t(link.key)}
+                ${t(link.key)}
               </a>
-            ))}
+            `)}
           </div>
 
-          {/* Language section */}
-          <div className="menu-section">
-            <h3>{t('menu.language')}</h3>
-            <LanguageSwitcher className="language-switcher menu-language-switcher" />
+          <!-- Language section -->
+          <div class="menu-section">
+            <h3>${t('menu.language')}</h3>
+            <${LanguageSwitcher} className="language-switcher menu-language-switcher" />
           </div>
 
-          {/* View toggle section (conditional) */}
-          {showViewToggle && (
-            <div className="menu-section menu-view-section">
-              <h3>{t('menu.view')}</h3>
+          <!-- View toggle section (conditional) -->
+          ${showViewToggle && html`
+            <div class="menu-section menu-view-section">
+              <h3>${t('menu.view')}</h3>
               <button
-                className="menu-button menu-view-toggle"
-                onClick={handleViewToggle}
+                class="menu-button menu-view-toggle"
+                onClick=${handleViewToggle}
               >
-                {getViewToggleText ? getViewToggleText() : t('menu.toggleView')}
+                ${getViewToggleText ? getViewToggleText() : t('menu.toggleView')}
               </button>
             </div>
-          )}
+          `}
         </div>
       </div>
     </div>
-  );
+  `;
 }
