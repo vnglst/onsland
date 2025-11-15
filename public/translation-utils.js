@@ -1,12 +1,8 @@
 // Shared translation utilities for OnsLand
 // Consolidates translation mapping logic used across multiple pages
 
-/**
- * Translates a category name using the i18n system
- * Maps category display names to translation keys
- */
-function translateCategory(categoryName) {
-  const categoryMap = {
+// Category and label mappings
+const categoryMap = {
     'Water': 'categories.water',
     'Woodland': 'categories.woodland',
     'Wetland': 'categories.wetland',
@@ -50,18 +46,9 @@ function translateCategory(categoryName) {
     'Root vegetables': 'categories.rootVegetables',
     'Other cereals': 'categories.otherCereals',
     'Triticale': 'categories.triticale'
-  };
+};
 
-  const key = categoryMap[categoryName];
-  return key ? i18n.t(key) : categoryName;
-}
-
-/**
- * Translates a label name using the i18n system
- * Maps label display names to translation keys
- */
-function translateLabel(labelName) {
-  const labelMap = {
+const labelMap = {
     'Water': 'labels.water',
     'Nature': 'labels.nature',
     'Cities': 'labels.cities',
@@ -75,12 +62,36 @@ function translateLabel(labelName) {
     'Islands': 'labels.islands',
     'Alps': 'labels.alps',
     'Cropland': 'labels.cropland'
-  };
+};
 
-  const key = labelMap[labelName];
-  return key ? i18n.t(key) : labelName;
+/**
+ * Translates a category name using the i18n system
+ * Maps category display names to translation keys
+ */
+function translateCategory(categoryName) {
+  const key = categoryMap[categoryName];
+  // Try to get from window.i18nTranslate if available, otherwise return the key or categoryName
+  if (window.i18nTranslate) {
+    return window.i18nTranslate(key) || categoryName;
+  }
+  return categoryName;
 }
 
-// Export functions to global scope
+/**
+ * Translates a label name using the i18n system
+ * Maps label display names to translation keys
+ */
+function translateLabel(labelName) {
+  const key = labelMap[labelName];
+  // Try to get from window.i18nTranslate if available, otherwise return the key or labelName
+  if (window.i18nTranslate) {
+    return window.i18nTranslate(key) || labelName;
+  }
+  return labelName;
+}
+
+// Export functions and maps to global scope
 window.translateCategory = translateCategory;
 window.translateLabel = translateLabel;
+window.categoryMap = categoryMap;
+window.labelMap = labelMap;

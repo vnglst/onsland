@@ -97,6 +97,14 @@ export function I18nProvider({ children }) {
     isLoading
   }), [currentLanguage, translations, t, changeLanguage, availableLanguages, isLoading]);
 
+  // Expose translate function globally for D3 and legacy code
+  useEffect(() => {
+    window.i18nTranslate = t;
+    return () => {
+      delete window.i18nTranslate;
+    };
+  }, [t]);
+
   return html`
     <${I18nContext.Provider} value=${value}>
       ${children}
