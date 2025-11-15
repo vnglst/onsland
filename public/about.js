@@ -9,6 +9,7 @@ function initAboutPage() {
     updatePageTitle(i18n.t("about.title"));
     updateMetaDescription(i18n.t("about.metaDescription"));
     initMenu();
+    
   });
 }
 

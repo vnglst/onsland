@@ -150,6 +150,7 @@ function initRankingsPage() {
 
     // Render rankings after translations are loaded
     renderRankings();
+    
 
     // Handle hash scrolling
     handleHashScroll();
