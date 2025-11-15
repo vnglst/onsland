@@ -18,9 +18,7 @@ export function AboutPage() {
   return html`
     <div>
       <${Menu} />
-      <div id="aboutContent">
-        <!-- About page content will be in the HTML -->
-      </div>
+      <div id="aboutContent"></div>
     </div>
   `;
 }
