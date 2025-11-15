@@ -80,7 +80,7 @@ export function RankingsPage() {
   }, [categoryRankings]);
 
   return html`
-    <>
+    <div>
       <${Menu} />
 
       <div id="rankingsContainer">
@@ -92,6 +92,6 @@ export function RankingsPage() {
           />
         `)}
       </div>
-    </>
+    </div>
   `;
 }

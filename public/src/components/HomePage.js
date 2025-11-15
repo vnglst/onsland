@@ -72,7 +72,7 @@ export function HomePage() {
   };
 
   return html`
-    <>
+    <div>
       <${Menu}
         showViewToggle=${true}
         onViewToggle=${toggleView}
@@ -90,6 +90,6 @@ export function HomePage() {
           />
         `)}
       </div>
-    </>
+    </div>
   `;
 }

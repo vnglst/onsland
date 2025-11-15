@@ -16,11 +16,11 @@ export function AboutPage() {
   }, [t]);
 
   return html`
-    <>
+    <div>
       <${Menu} />
       <div id="aboutContent">
         <!-- About page content will be in the HTML -->
       </div>
-    </>
+    </div>
   `;
 }

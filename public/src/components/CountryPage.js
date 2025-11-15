@@ -61,7 +61,7 @@ export function CountryPage({ countryKey }) {
   const bottomRankings = sortedRankings.slice(-2).reverse();
 
   return html`
-    <>
+    <div>
       <${Menu}
         showViewToggle=${true}
         onViewToggle=${toggleLayout}
@@ -104,6 +104,6 @@ export function CountryPage({ countryKey }) {
           `)}
         </div>
       </div>
-    </>
+    </div>
   `;
 }

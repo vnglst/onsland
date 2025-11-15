@@ -49,10 +49,10 @@ export function CountryCard({ countryKey, worldData, isSquareView, countryNames 
       <div class="country-card-title">${translatedName}</div>
 
       ${!hasIntersected ? html`
-        <>
+        <div>
           <div class="loading-placeholder"></div>
           <div class="loading-text">${t('common.loading')}</div>
-        </>
+        </div>
       ` : html`
         <svg
           ref=${svgRef}
