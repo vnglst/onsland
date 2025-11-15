@@ -1,5 +1,5 @@
 import { useContext } from 'preact/hooks';
-import { I18nContext } from '../context/I18nContext.jsx';
+import { I18nContext } from '../context/I18nContext.js';
 
 export function useI18n() {
   const context = useContext(I18nContext);
