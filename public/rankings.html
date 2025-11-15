@@ -8,11 +8,39 @@
       name="description"
       content="Rankings of European countries by land use categories - which countries have the most water, woodland, urban areas, and more."
     />
-    <link rel="stylesheet" href="style.css" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://onsland.koenvangilst.nl" />
+    <meta property="og:title" content="Land Use Rankings - OnsLand" />
+    <meta property="og:description" content="Rankings of European countries by land use categories - which countries have the most water, woodland, urban areas, and more." />
+    <meta property="og:image" content="https://onsland.koenvangilst.nl/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://onsland.koenvangilst.nl" />
+    <meta name="twitter:title" content="Land Use Rankings - OnsLand" />
+    <meta name="twitter:description" content="Rankings of European countries by land use categories - which countries have the most water, woodland, urban areas, and more." />
+    <meta name="twitter:image" content="https://onsland.koenvangilst.nl/twitter-image.png" />
+
+    <link rel="stylesheet" href="shared/base.css" />
+    <link rel="stylesheet" href="shared/menu.css" />
+    <link rel="stylesheet" href="shared/language-switcher.css" />
+    <link rel="stylesheet" href="rankings.css" />
     <script defer data-domain="onsland.koenvangilst.nl" src="https://plausible.koenvangilst.nl/js/script.js"></script>
-    <script src="i18n.js"></script>
-    <script src="language-switcher.js"></script>
-    <script src="menu.js"></script>
+    <script src="shared/i18n.js"></script>
+    <script src="shared/language-switcher.js"></script>
+    <script src="shared/menu.js"></script>
   </head>
   <body>
     <header>
@@ -48,10 +76,10 @@
       </div>
     </footer>
 
-    <script src="countries.js"></script>
-    <script src="render.js"></script>
-    <script src="translation-utils.js"></script>
-    <script src="page-init.js"></script>
-    <script src="rankings-page.js"></script>
+    <script src="shared/countries.js"></script>
+    <script src="shared/render.js"></script>
+    <script src="shared/translation-utils.js"></script>
+    <script src="shared/page-init.js"></script>
+    <script src="rankings.js"></script>
   </body>
 </html>

@@ -596,7 +596,7 @@ function renderCountry(countryKey) {
  */
 function initCountryPage() {
   // Load map data
-  const mapDataPromise = fetch("lib/countries-50m.json")
+  const mapDataPromise = fetch("vendor/countries-50m.json")
     .then((response) => response.json())
     .then((world) => {
       worldData = world;
