@@ -11,5 +11,8 @@
   "dependencies": {
     "serve": "^14.2.5",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
   }
 }
