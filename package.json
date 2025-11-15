@@ -6,14 +6,13 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "serve public",
+    "start": "vite",
     "import-db": "node data/import-to-sqlite.js",
     "query": "node data/query-country.js",
     "query-denmark": "node data/query-country.js DK"
   },
   "dependencies": {
     "preact": "^10.27.2",
-    "serve": "^14.2.5",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {

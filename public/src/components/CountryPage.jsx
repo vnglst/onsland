@@ -1,12 +1,15 @@
 import { useEffect, useState, useRef } from 'preact/hooks';
 import { useI18n } from '../hooks/useI18n.js';
+import { useCountryRankings } from '../hooks/useCountryRankings.js';
 import { Menu } from './Menu.jsx';
+import { RankingBadge } from './RankingBadge.jsx';
 
 export function CountryPage({ countryKey }) {
   const [worldData, setWorldData] = useState(null);
   const [isSquareLayout, setIsSquareLayout] = useState(false);
   const { t } = useI18n();
   const svgRef = useRef(null);
+  const rankings = useCountryRankings(countryKey);
 
   // Load world map data
   useEffect(() => {
@@ -50,6 +53,12 @@ export function CountryPage({ countryKey }) {
   const countryNames = window.countryNames || {};
   const countryName = t(`countries.${countryKey}`) || countryNames[countryKey];
 
+  // Filter and sort rankings
+  const multiCountryRankings = rankings.filter((r) => r.totalCountries > 3);
+  const sortedRankings = [...multiCountryRankings].sort((a, b) => a.position - b.position);
+  const topRankings = sortedRankings.slice(0, 2);
+  const bottomRankings = sortedRankings.slice(-2).reverse();
+
   return (
     <>
       <Menu
@@ -75,8 +84,23 @@ export function CountryPage({ countryKey }) {
           />
         </div>
 
-        <div id="rankingsInfo" className="rankings-container">
-          {/* Rankings will be rendered by D3/legacy code for now */}
+        <div id="rankingsInfo" className="rankings-info">
+          {topRankings.map((ranking, index) => (
+            <RankingBadge
+              key={`top-${ranking.categoryName}`}
+              ranking={ranking}
+              labelKey={index === 0 ? "country.highestRanking" : "country.secondHighest"}
+              isTopRank={true}
+            />
+          ))}
+          {bottomRankings.map((ranking, index) => (
+            <RankingBadge
+              key={`bottom-${ranking.categoryName}`}
+              ranking={ranking}
+              labelKey={index === 0 ? "country.lowestRanking" : "country.secondLowest"}
+              isTopRank={false}
+            />
+          ))}
         </div>
       </div>
     </>
