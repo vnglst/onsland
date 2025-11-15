@@ -53,20 +53,6 @@ npx serve public
 Enable drag-and-drop label positioning by setting `DEV_MODE = true` in [public/country.js](public/country.js).
 Check the browser console for the current label positions to update the configuration.
 
-## Planned Features
-
-Based on user feedback from our community, here are features I'm considering:
-
-- **Absolute Values** - Display hectares/m² alongside percentages for better context when comparing countries of different sizes
-- **Enhanced Country Comparisons** - Side-by-side view showing two countries simultaneously
-- **Bug Fix** - Square view animation rendering issue when switching views during country transitions
-- **Interactive Legend** - Hover over legend items to highlight corresponding hexagons on the map
-- **Detailed Categories** - Separate pasture land from other agriculture and distinguish forest types (pending data availability)
-- **More Languages** - Expand translation support beyond current languages (EN, NL, FR, ES, DE)
-- **Export Options** - Download visualizations as images or share custom configurations
-
-Want to contribute or discuss these features? Open an issue or submit a PR.
-
 ## Technology
 
 Built with D3.js, d3-hexbin, and TopoJSON. Data from [Eurostat Land Cover Statistics 2022](https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table).
