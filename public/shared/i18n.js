@@ -96,7 +96,9 @@ class I18n {
     return [
       { code: 'en', name: 'English' },
       { code: 'nl', name: 'Nederlands' },
-      { code: 'fr', name: 'Français' }
+      { code: 'fr', name: 'Français' },
+      { code: 'de', name: 'Deutsch' },
+      { code: 'es', name: 'Español' }
     ];
   }
 }
