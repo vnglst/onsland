@@ -9,6 +9,9 @@ function initAboutPage() {
     updatePageTitle(i18n.t("about.title"));
     updateMetaDescription(i18n.t("about.metaDescription"));
     initMenu();
+    
+    // Show footer after page has loaded
+    showFooter();
   });
 }
 
