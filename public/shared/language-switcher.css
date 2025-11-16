@@ -36,8 +36,8 @@
 
 @media (max-width: 768px) {
   .language-switcher {
-    font-size: 14px;
-    padding: 13.5px 28px 13.5px 12px;
+    font-size: var(--ui-font-size-tablet);
+    padding: var(--ui-padding-y-tablet) 28px var(--ui-padding-y-tablet) var(--ui-padding-x-tablet);
     min-width: 100px;
     background-position: right 8px center;
     background-size: 10px;
@@ -46,8 +46,8 @@
 
 @media (max-width: 480px) {
   .language-switcher {
-    font-size: 13px;
-    padding: 11.5px 24px 11.5px 10px;
+    font-size: var(--ui-font-size-mobile);
+    padding: var(--ui-padding-y-mobile) 24px var(--ui-padding-y-mobile) var(--ui-padding-x-mobile);
     min-width: 90px;
     background-position: right 6px center;
     background-size: 10px;

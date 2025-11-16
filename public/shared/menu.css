@@ -152,8 +152,8 @@ body.menu-open {
   }
 
   .menu-button {
-    font-size: 14px;
-    padding: 13.5px 12px;
+    font-size: var(--ui-font-size-tablet);
+    padding: var(--ui-padding-y-tablet) var(--ui-padding-x-tablet);
   }
 }
 
@@ -179,7 +179,7 @@ body.menu-open {
   }
 
   .menu-button {
-    font-size: 13px;
-    padding: 11.5px 10px;
+    font-size: var(--ui-font-size-mobile);
+    padding: var(--ui-padding-y-mobile) var(--ui-padding-x-mobile);
   }
 }
