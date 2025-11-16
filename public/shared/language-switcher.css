@@ -37,7 +37,7 @@
 @media (max-width: 768px) {
   .language-switcher {
     font-size: 14px;
-    padding: 8px 28px 8px 12px;
+    padding: 13.5px 28px 13.5px 12px;
     min-width: 100px;
     background-position: right 8px center;
     background-size: 10px;
@@ -47,7 +47,7 @@
 @media (max-width: 480px) {
   .language-switcher {
     font-size: 13px;
-    padding: 6px 24px 6px 10px;
+    padding: 11.5px 24px 11.5px 10px;
     min-width: 90px;
     background-position: right 6px center;
     background-size: 10px;
