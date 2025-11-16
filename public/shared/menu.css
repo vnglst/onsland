@@ -105,11 +105,11 @@
 .menu-button {
   width: 100%;
   background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: var(--ui-border-width) solid rgba(255, 255, 255, 0.2);
   color: var(--text-light);
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-size: 16px;
+  padding: var(--ui-padding-y) var(--ui-padding-x);
+  border-radius: var(--ui-border-radius);
+  font-size: var(--ui-font-size);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -150,6 +150,11 @@ body.menu-open {
   .menu-link {
     font-size: 1.1rem;
   }
+
+  .menu-button {
+    font-size: var(--ui-font-size-tablet);
+    padding: var(--ui-padding-y-tablet) var(--ui-padding-x-tablet);
+  }
 }
 
 @media (max-width: 480px) {
@@ -171,5 +176,10 @@ body.menu-open {
 
   .menu-panel {
     padding: 60px 20px 20px;
+  }
+
+  .menu-button {
+    font-size: var(--ui-font-size-mobile);
+    padding: var(--ui-padding-y-mobile) var(--ui-padding-x-mobile);
   }
 }

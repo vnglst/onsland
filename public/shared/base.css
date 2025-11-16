@@ -33,6 +33,25 @@
   --bare-300: hsl(0, 0%, 75%);
   --bare-400: hsl(0, 0%, 65%);
   --bare-500: hsl(0, 0%, 55%);
+
+  /* Standardized UI control sizing - matches hamburger menu height (50px) */
+  /* Desktop values */
+  --ui-padding-y: 15px;
+  --ui-padding-x: 16px;
+  --ui-font-size: 16px;
+  --ui-border-radius: 8px;
+  --ui-border-width: 2px;
+
+  /* Tablet values (768px) - matches hamburger menu height (45px) */
+  --ui-padding-y-tablet: 13.5px;
+  --ui-padding-x-tablet: 12px;
+  --ui-padding-x-narrow-tablet: 10px;
+  --ui-font-size-tablet: 14px;
+
+  /* Mobile values (480px) - matches hamburger menu height (40px) */
+  --ui-padding-y-mobile: 11.5px;
+  --ui-padding-x-mobile: 10px;
+  --ui-font-size-mobile: 13px;
 }
 
 * {
@@ -91,11 +110,11 @@ h2 {
 
 .back-button {
   background: var(--bg-dark);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: var(--ui-border-width) solid rgba(255, 255, 255, 0.2);
   color: var(--text-light);
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 16px;
+  padding: var(--ui-padding-y) 20px;
+  border-radius: var(--ui-border-radius);
+  font-size: var(--ui-font-size);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -195,9 +214,9 @@ a {
   }
 
   .back-button {
-    font-size: 14px;
-    padding: 7px 12px;
-    min-width: 80px;
+    font-size: var(--ui-font-size-tablet);
+    padding: var(--ui-padding-y-tablet) var(--ui-padding-x-narrow-tablet);
+    min-width: 45px;
   }
 
   .back-text-full {
@@ -207,11 +226,6 @@ a {
   .back-text-short {
     display: inline;
     font-size: 16px;
-  }
-
-  .back-button {
-    min-width: 44px;
-    padding: 7px 10px;
   }
 
   .page-footer {
@@ -256,8 +270,8 @@ a {
   }
 
   .back-button {
-    font-size: 14px;
-    padding: 6px 8px;
+    font-size: var(--ui-font-size-mobile);
+    padding: var(--ui-padding-y-mobile) var(--ui-padding-x-mobile);
     min-width: 40px;
   }
 
