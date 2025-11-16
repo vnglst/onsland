@@ -89,7 +89,6 @@ h2 {
   padding: 0 20px;
 }
 
-.toggle-button,
 .back-button {
   background: var(--bg-dark);
   border: 2px solid rgba(255, 255, 255, 0.2);
@@ -106,18 +105,15 @@ h2 {
   text-align: center;
 }
 
-.toggle-button:hover,
 .back-button:hover {
   background-color: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.3);
 }
 
-.toggle-button:active,
 .back-button:active {
   transform: scale(0.98);
 }
 
-.toggle-button:focus,
 .back-button:focus {
   outline: none;
   border-color: var(--text-light);
@@ -125,13 +121,11 @@ h2 {
 
 /* Text variants for responsive design */
 .back-text-short,
-.toggle-text-short,
 .title-short {
   display: none;
 }
 
 .back-text-full,
-.toggle-text-full,
 .title-full,
 .title-prefix {
   display: inline;
@@ -200,20 +194,17 @@ a {
     gap: 12px;
   }
 
-  .toggle-button,
   .back-button {
     font-size: 14px;
     padding: 7px 12px;
     min-width: 80px;
   }
 
-  .back-text-full,
-  .toggle-text-full {
+  .back-text-full {
     display: none;
   }
 
-  .back-text-short,
-  .toggle-text-short {
+  .back-text-short {
     display: inline;
     font-size: 16px;
   }
@@ -264,20 +255,13 @@ a {
     display: inline;
   }
 
-  .toggle-button {
-    font-size: 13px;
-    padding: 6px 10px;
-    min-width: 70px;
-  }
-
   .back-button {
     font-size: 14px;
     padding: 6px 8px;
     min-width: 40px;
   }
 
-  .back-text-short,
-  .toggle-text-short {
+  .back-text-short {
     font-size: 15px;
   }
 
