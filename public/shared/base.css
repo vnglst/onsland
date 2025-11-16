@@ -33,6 +33,13 @@
   --bare-300: hsl(0, 0%, 75%);
   --bare-400: hsl(0, 0%, 65%);
   --bare-500: hsl(0, 0%, 55%);
+
+  /* Standardized UI control sizing - matches hamburger menu height (50px) */
+  --ui-padding-y: 15px;
+  --ui-padding-x: 16px;
+  --ui-font-size: 16px;
+  --ui-border-radius: 8px;
+  --ui-border-width: 2px;
 }
 
 * {
@@ -91,11 +98,11 @@ h2 {
 
 .back-button {
   background: var(--bg-dark);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: var(--ui-border-width) solid rgba(255, 255, 255, 0.2);
   color: var(--text-light);
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 16px;
+  padding: var(--ui-padding-y) 20px;
+  border-radius: var(--ui-border-radius);
+  font-size: var(--ui-font-size);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -196,7 +203,7 @@ a {
 
   .back-button {
     font-size: 14px;
-    padding: 7px 12px;
+    padding: 13.5px 12px;
     min-width: 80px;
   }
 
@@ -210,8 +217,8 @@ a {
   }
 
   .back-button {
-    min-width: 44px;
-    padding: 7px 10px;
+    min-width: 45px;
+    padding: 13.5px 10px;
   }
 
   .page-footer {
@@ -256,8 +263,8 @@ a {
   }
 
   .back-button {
-    font-size: 14px;
-    padding: 6px 8px;
+    font-size: 13px;
+    padding: 11.5px 10px;
     min-width: 40px;
   }
 

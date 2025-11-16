@@ -1,11 +1,11 @@
 /* Language Switcher */
 .language-switcher {
   background: var(--bg-dark);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: var(--ui-border-width) solid rgba(255, 255, 255, 0.2);
   color: var(--text-light);
-  padding: 10px 32px 10px 16px;
-  border-radius: 8px;
-  font-size: 16px;
+  padding: var(--ui-padding-y) 32px var(--ui-padding-y) var(--ui-padding-x);
+  border-radius: var(--ui-border-radius);
+  font-size: var(--ui-font-size);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -37,7 +37,7 @@
 @media (max-width: 768px) {
   .language-switcher {
     font-size: 14px;
-    padding: 7px 28px 7px 12px;
+    padding: 13.5px 28px 13.5px 12px;
     min-width: 100px;
     background-position: right 8px center;
     background-size: 10px;
@@ -47,7 +47,7 @@
 @media (max-width: 480px) {
   .language-switcher {
     font-size: 13px;
-    padding: 6px 24px 6px 10px;
+    padding: 11.5px 24px 11.5px 10px;
     min-width: 90px;
     background-position: right 6px center;
     background-size: 10px;
