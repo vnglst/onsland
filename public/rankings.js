@@ -43,7 +43,7 @@ function getAllCategoryRankings() {
  * @returns {string} URL-friendly slug
  */
 function createCategorySlug(categoryName) {
-  return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 }
 
 /**
@@ -51,7 +51,7 @@ function createCategorySlug(categoryName) {
  */
 function renderRankings() {
   const categoryRankings = getAllCategoryRankings();
-  const container = document.getElementById("rankingsContainer");
+  const container = document.getElementById('rankingsContainer');
 
   // Sort categories by name for consistent display
   const sortedCategories = Object.keys(categoryRankings).sort();
@@ -68,47 +68,47 @@ function renderRankings() {
     // Find the maximum percentage for this category (for bar scaling)
     const maxPercentage = data.countries[0]?.percentage || 0;
 
-    const section = document.createElement("div");
-    section.className = "category-ranking";
+    const section = document.createElement('div');
+    section.className = 'category-ranking';
     section.id = categorySlug;
 
-    const heading = document.createElement("h2");
-    const colorBox = document.createElement("span");
-    colorBox.className = "category-color-box";
+    const heading = document.createElement('h2');
+    const colorBox = document.createElement('span');
+    colorBox.className = 'category-color-box';
     colorBox.style.backgroundColor = data.color;
     heading.appendChild(colorBox);
     heading.appendChild(document.createTextNode(translateCategory(categoryName)));
     section.appendChild(heading);
 
-    const list = document.createElement("ol");
-    list.className = "ranking-list";
+    const list = document.createElement('ol');
+    list.className = 'ranking-list';
 
     data.countries.forEach((country, index) => {
-      const item = document.createElement("li");
-      item.className = "ranking-item";
+      const item = document.createElement('li');
+      item.className = 'ranking-item';
 
-      const position = document.createElement("span");
-      position.className = "ranking-position";
+      const position = document.createElement('span');
+      position.className = 'ranking-position';
       position.textContent = `${index + 1}.`;
       item.appendChild(position);
 
-      const countryName = document.createElement("span");
-      countryName.className = "ranking-country";
-      const link = document.createElement("a");
+      const countryName = document.createElement('span');
+      countryName.className = 'ranking-country';
+      const link = document.createElement('a');
       link.href = `country?country=${country.countryKey}`;
       link.textContent = i18n.t(`countries.${country.countryKey}`) || country.countryName;
       countryName.appendChild(link);
       item.appendChild(countryName);
 
-      const percentage = document.createElement("span");
-      percentage.className = "ranking-percentage";
+      const percentage = document.createElement('span');
+      percentage.className = 'ranking-percentage';
       percentage.textContent = `${(country.percentage * 100).toFixed(2)}%`;
       item.appendChild(percentage);
 
-      const bar = document.createElement("div");
-      bar.className = "ranking-bar";
-      const barFill = document.createElement("div");
-      barFill.className = "ranking-bar-fill";
+      const bar = document.createElement('div');
+      bar.className = 'ranking-bar';
+      const barFill = document.createElement('div');
+      barFill.className = 'ranking-bar-fill';
       barFill.style.backgroundColor = data.color;
       barFill.style.width = `${(country.percentage / maxPercentage) * 100}%`;
       bar.appendChild(barFill);
@@ -130,7 +130,7 @@ function handleHashScroll() {
     setTimeout(() => {
       const element = document.querySelector(window.location.hash);
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        element.scrollIntoView({ behavior: 'smooth' });
       }
     }, 100);
   }
@@ -150,7 +150,6 @@ function initRankingsPage() {
 
     // Render rankings after translations are loaded
     renderRankings();
-    
 
     // Handle hash scrolling
     handleHashScroll();
@@ -161,7 +160,7 @@ function initRankingsPage() {
       updatePageTitle(i18n.t('rankings.title'));
 
       // Clear and re-render rankings
-      const container = document.getElementById("rankingsContainer");
+      const container = document.getElementById('rankingsContainer');
       container.innerHTML = '';
       renderRankings();
 

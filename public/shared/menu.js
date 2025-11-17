@@ -31,10 +31,10 @@ function createMenu() {
   const navLinks = [
     { href: '/', key: 'menu.home', text: 'Home' },
     { href: '/rankings.html', key: 'menu.rankings', text: 'Rankings' },
-    { href: '/about.html', key: 'menu.about', text: 'About' }
+    { href: '/about.html', key: 'menu.about', text: 'About' },
   ];
 
-  navLinks.forEach(link => {
+  navLinks.forEach((link) => {
     const a = document.createElement('a');
     a.href = link.href;
     a.className = 'menu-link';
@@ -93,7 +93,7 @@ function createMenu() {
   });
 
   // Close menu when clicking a link
-  menuPanel.querySelectorAll('.menu-link').forEach(link => {
+  menuPanel.querySelectorAll('.menu-link').forEach((link) => {
     link.addEventListener('click', () => {
       menuPanel.classList.remove('open');
       hamburger.classList.remove('open');

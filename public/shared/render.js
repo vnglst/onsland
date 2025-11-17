@@ -1,61 +1,61 @@
 // Shared rendering utilities for OnsLand visualizations
 
 const validCountries = [
-  "austria",
-  "belgium",
-  "bulgaria",
-  "croatia",
-  "czechia",
-  "denmark",
-  "estonia",
-  "finland",
-  "france",
-  "germany",
-  "greece",
-  "hungary",
-  "ireland",
-  "italy",
-  "latvia",
-  "lithuania",
-  "luxembourg",
-  "netherlands",
-  "poland",
-  "portugal",
-  "romania",
-  "slovakia",
-  "slovenia",
-  "spain",
-  "sweden",
-  "uk",
+  'austria',
+  'belgium',
+  'bulgaria',
+  'croatia',
+  'czechia',
+  'denmark',
+  'estonia',
+  'finland',
+  'france',
+  'germany',
+  'greece',
+  'hungary',
+  'ireland',
+  'italy',
+  'latvia',
+  'lithuania',
+  'luxembourg',
+  'netherlands',
+  'poland',
+  'portugal',
+  'romania',
+  'slovakia',
+  'slovenia',
+  'spain',
+  'sweden',
+  'uk',
 ];
 
 const countryNames = {
-  austria: "Austria",
-  belgium: "Belgium",
-  bulgaria: "Bulgaria",
-  croatia: "Croatia",
-  czechia: "Czechia",
-  denmark: "Denmark",
-  estonia: "Estonia",
-  finland: "Finland",
-  france: "France",
-  germany: "Germany",
-  greece: "Greece",
-  hungary: "Hungary",
-  ireland: "Ireland",
-  italy: "Italy",
-  latvia: "Latvia",
-  lithuania: "Lithuania",
-  luxembourg: "Luxembourg",
-  netherlands: "The Netherlands",
-  poland: "Poland",
-  portugal: "Portugal",
-  romania: "Romania",
-  slovakia: "Slovakia",
-  slovenia: "Slovenia",
-  spain: "Spain",
-  sweden: "Sweden",
-  uk: "United Kingdom",
+  austria: 'Austria',
+  belgium: 'Belgium',
+  bulgaria: 'Bulgaria',
+  croatia: 'Croatia',
+  czechia: 'Czechia',
+  denmark: 'Denmark',
+  estonia: 'Estonia',
+  finland: 'Finland',
+  france: 'France',
+  germany: 'Germany',
+  greece: 'Greece',
+  hungary: 'Hungary',
+  ireland: 'Ireland',
+  italy: 'Italy',
+  latvia: 'Latvia',
+  lithuania: 'Lithuania',
+  luxembourg: 'Luxembourg',
+  netherlands: 'The Netherlands',
+  poland: 'Poland',
+  portugal: 'Portugal',
+  romania: 'Romania',
+  slovakia: 'Slovakia',
+  slovenia: 'Slovenia',
+  spain: 'Spain',
+  sweden: 'Sweden',
+  uk: 'United Kingdom',
 };
 
 // Render small preview version of a country (no animations, no interactions)
@@ -66,7 +66,7 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
   const categories = config.categories;
 
   const svg = d3.select(svgElement);
-  svg.selectAll("*").remove();
+  svg.selectAll('*').remove();
 
   const width = 800;
   const height = 800;
@@ -98,7 +98,9 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
     }
   }
 
-  const hexPoints = hexCenters.filter((center) => d3.geoContains(countryFeature, projection.invert(center)));
+  const hexPoints = hexCenters.filter((center) =>
+    d3.geoContains(countryFeature, projection.invert(center))
+  );
   const hexData = hexbin(hexPoints);
 
   const totalHexagons = hexData.length;
@@ -125,17 +127,17 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
   });
 
   svg
-    .append("g")
-    .selectAll("path")
+    .append('g')
+    .selectAll('path')
     .data(hexData)
     .enter()
-    .append("path")
-    .attr("class", "hexagon-preview")
-    .attr("d", (d) => hexbin.hexagon(hexRadius))
-    .attr("transform", (d) => `translate(${d.x},${d.y})`)
-    .attr("fill", (d, i) => colorScale(hexColors[i]))
-    .attr("stroke", "var(--bg-light)")
-    .attr("stroke-width", 0.1);
+    .append('path')
+    .attr('class', 'hexagon-preview')
+    .attr('d', (d) => hexbin.hexagon(hexRadius))
+    .attr('transform', (d) => `translate(${d.x},${d.y})`)
+    .attr('fill', (d, i) => colorScale(hexColors[i]))
+    .attr('stroke', 'var(--bg-light)')
+    .attr('stroke-width', 0.1);
 }
 
 // Render square preview with uniform grid (no country shape, just data viz)
@@ -146,7 +148,7 @@ function renderCountrySquarePreview(countryKey, svgElement, worldData) {
   const categories = config.categories;
 
   const svg = d3.select(svgElement);
-  svg.selectAll("*").remove();
+  svg.selectAll('*').remove();
 
   const width = 800;
   const height = 800;
@@ -192,22 +194,22 @@ function renderCountrySquarePreview(countryKey, svgElement, worldData) {
   const hexbin = d3.hexbin().radius(hexRadius);
 
   svg
-    .append("g")
-    .selectAll("path")
+    .append('g')
+    .selectAll('path')
     .data(d3.range(totalHexagons))
     .enter()
-    .append("path")
-    .attr("d", hexbin.hexagon())
-    .attr("transform", (d, i) => {
+    .append('path')
+    .attr('d', hexbin.hexagon())
+    .attr('transform', (d, i) => {
       const row = Math.floor(i / cols);
       const col = i % cols;
       const x = offsetX + col * hexWidth + (row % 2) * (hexWidth / 2);
       const y = offsetY + row * hexHeight;
       return `translate(${x},${y})`;
     })
-    .attr("fill", (d, i) => hexColors[i] ? colorScale(hexColors[i]) : "var(--bg-light)")
-    .attr("stroke", "var(--bg-light)")
-    .attr("stroke-width", 0.5);
+    .attr('fill', (d, i) => (hexColors[i] ? colorScale(hexColors[i]) : 'var(--bg-light)'))
+    .attr('stroke', 'var(--bg-light)')
+    .attr('stroke-width', 0.5);
 }
 
 function squarePath(size) {

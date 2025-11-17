@@ -6,10 +6,9 @@
  */
 function initAboutPage() {
   initI18n().then(() => {
-    updatePageTitle(i18n.t("about.title"));
-    updateMetaDescription(i18n.t("about.metaDescription"));
+    updatePageTitle(i18n.t('about.title'));
+    updateMetaDescription(i18n.t('about.metaDescription'));
     initMenu();
-    
   });
 }
 

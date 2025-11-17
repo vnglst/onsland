@@ -6,13 +6,13 @@
  * Data source: https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table?lang=en
  */
 
-const sqlite3 = require("sqlite3").verbose();
-const fs = require("fs");
-const readline = require("readline");
-const path = require("path");
+const sqlite3 = require('sqlite3').verbose();
+const fs = require('fs');
+const readline = require('readline');
+const path = require('path');
 
-const CSV_FILE = path.join(__dirname, "./lan_lcv_ovw_linear_2_0.csv");
-const DB_FILE = path.join(__dirname, "./land-cover.db");
+const CSV_FILE = path.join(__dirname, './lan_lcv_ovw_linear_2_0.csv');
+const DB_FILE = path.join(__dirname, './land-cover.db');
 
 // Ensure data directory exists
 const dataDir = path.dirname(DB_FILE);
@@ -23,14 +23,14 @@ if (!fs.existsSync(dataDir)) {
 // Delete existing database to start fresh
 if (fs.existsSync(DB_FILE)) {
   fs.unlinkSync(DB_FILE);
-  console.log("Deleted existing database");
+  console.log('Deleted existing database');
 }
 
 const db = new sqlite3.Database(DB_FILE);
 
 // Create table
 db.serialize(() => {
-  console.log("Creating table...");
+  console.log('Creating table...');
 
   db.run(`
     CREATE TABLE land_cover (
@@ -51,8 +51,8 @@ db.serialize(() => {
     )
   `);
 
-  console.log("Table created successfully");
-  console.log("Importing data from CSV...");
+  console.log('Table created successfully');
+  console.log('Importing data from CSV...');
 
   const rl = readline.createInterface({
     input: fs.createReadStream(CSV_FILE),
@@ -71,7 +71,7 @@ db.serialize(() => {
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
-  rl.on("line", (line) => {
+  rl.on('line', (line) => {
     lineCount++;
 
     // Skip header
@@ -82,7 +82,7 @@ db.serialize(() => {
 
     // Parse CSV line (accounting for quoted fields with commas)
     const fields = [];
-    let field = "";
+    let field = '';
     let inQuotes = false;
 
     for (let i = 0; i < line.length; i++) {
@@ -90,9 +90,9 @@ db.serialize(() => {
 
       if (char === '"') {
         inQuotes = !inQuotes;
-      } else if (char === "," && !inQuotes) {
+      } else if (char === ',' && !inQuotes) {
         fields.push(field);
-        field = "";
+        field = '';
       } else {
         field += char;
       }
@@ -138,7 +138,7 @@ db.serialize(() => {
     }
   });
 
-  rl.on("close", () => {
+  rl.on('close', () => {
     stmt.finalize();
 
     console.log(`\nImport complete!`);
@@ -146,13 +146,13 @@ db.serialize(() => {
     console.log(`Records imported: ${importCount}`);
 
     // Create indexes for better query performance
-    console.log("\nCreating indexes...");
+    console.log('\nCreating indexes...');
 
-    db.run("CREATE INDEX idx_country_year ON land_cover(country_code, year)");
-    db.run("CREATE INDEX idx_land_cover_code ON land_cover(land_cover_code)");
-    db.run("CREATE INDEX idx_unit_code ON land_cover(unit_code)");
+    db.run('CREATE INDEX idx_country_year ON land_cover(country_code, year)');
+    db.run('CREATE INDEX idx_land_cover_code ON land_cover(land_cover_code)');
+    db.run('CREATE INDEX idx_unit_code ON land_cover(unit_code)');
 
-    console.log("Indexes created successfully");
+    console.log('Indexes created successfully');
 
     // Show some statistics
     db.get(`SELECT COUNT(*) as count FROM land_cover`, (err, row) => {
@@ -165,7 +165,7 @@ db.serialize(() => {
           console.log(`Unique years: ${row.count}`);
 
           db.close();
-          console.log("\nDatabase closed");
+          console.log('\nDatabase closed');
         });
       });
     });

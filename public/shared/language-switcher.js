@@ -9,7 +9,7 @@ function createLanguageSwitcher() {
   select.className = 'language-switcher';
   select.title = 'Select language';
 
-  languages.forEach(lang => {
+  languages.forEach((lang) => {
     const option = document.createElement('option');
     option.value = lang.code;
     option.textContent = lang.name;

@@ -80,14 +80,14 @@ class I18n {
     if (language === this.currentLanguage) return;
 
     await this.init(language);
-    this.listeners.forEach(callback => callback(language));
+    this.listeners.forEach((callback) => callback(language));
   }
 
   // Subscribe to language changes
   onLanguageChange(callback) {
     this.listeners.push(callback);
     return () => {
-      this.listeners = this.listeners.filter(cb => cb !== callback);
+      this.listeners = this.listeners.filter((cb) => cb !== callback);
     };
   }
 
@@ -98,7 +98,7 @@ class I18n {
       { code: 'nl', name: 'Nederlands' },
       { code: 'fr', name: 'Français' },
       { code: 'de', name: 'Deutsch' },
-      { code: 'es', name: 'Español' }
+      { code: 'es', name: 'Español' },
     ];
   }
 }
@@ -109,27 +109,29 @@ const i18n = new I18n();
 // Helper function to update all elements with data-i18n attribute
 function updateTranslations() {
   // Single DOM query for all translation elements
-  document.querySelectorAll('[data-i18n], [data-i18n-html], [data-i18n-title]').forEach(element => {
-    // Check which attribute is present and update accordingly
-    let key, translation;
+  document
+    .querySelectorAll('[data-i18n], [data-i18n-html], [data-i18n-title]')
+    .forEach((element) => {
+      // Check which attribute is present and update accordingly
+      let key, translation;
 
-    if (element.hasAttribute('data-i18n-title')) {
-      key = element.getAttribute('data-i18n-title');
-      document.title = i18n.t(key);
-    } else if (element.hasAttribute('data-i18n-html')) {
-      key = element.getAttribute('data-i18n-html');
-      element.innerHTML = i18n.t(key);
-    } else if (element.hasAttribute('data-i18n')) {
-      key = element.getAttribute('data-i18n');
-      translation = i18n.t(key);
+      if (element.hasAttribute('data-i18n-title')) {
+        key = element.getAttribute('data-i18n-title');
+        document.title = i18n.t(key);
+      } else if (element.hasAttribute('data-i18n-html')) {
+        key = element.getAttribute('data-i18n-html');
+        element.innerHTML = i18n.t(key);
+      } else if (element.hasAttribute('data-i18n')) {
+        key = element.getAttribute('data-i18n');
+        translation = i18n.t(key);
 
-      if (element.hasAttribute('data-i18n-placeholder')) {
-        element.placeholder = translation;
-      } else {
-        element.textContent = translation;
+        if (element.hasAttribute('data-i18n-placeholder')) {
+          element.placeholder = translation;
+        } else {
+          element.textContent = translation;
+        }
       }
-    }
-  });
+    });
 }
 
 // Initialize i18n and update page
@@ -141,9 +143,11 @@ async function initI18n() {
     // Listen for language changes and update page
     i18n.onLanguageChange((language) => {
       updateTranslations();
-      window.dispatchEvent(new CustomEvent('languageChanged', {
-        detail: { language }
-      }));
+      window.dispatchEvent(
+        new CustomEvent('languageChanged', {
+          detail: { language },
+        })
+      );
     });
   } catch (error) {
     console.error('Failed to initialize i18n:', error);

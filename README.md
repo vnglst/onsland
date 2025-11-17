@@ -29,7 +29,6 @@ Want to add more countries? The map rendering is already there, and land use dat
    ```
 
 2. Add the country configuration to [public/shared/countries.js](public/shared/countries.js)
-
    - Add the `isoCode` by checking the Wikipedia "[List of ISO 3166 country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)" to get the country's **NUM**eric code
    - Add the geographic `center` coordinates (longitude and then latitude) for proper map centering
    - Play with the `scale` value to get the best fit for the hex map
@@ -37,7 +36,6 @@ Want to add more countries? The map rendering is already there, and land use dat
    - Adjust the `labels` for better readability (use the instructions in the [Development](#development) section for help)
 
 3. Add the country name translation to the locale files in [public/locales/](public/locales/)
-
    - Add the country name to the `countries` section in each language file (en.json, nl.json, fr.json, es.json, de.json)
 
 The country will automatically appear on the home page grid and in the rankings once added to the configuration. See existing country configurations for examples.

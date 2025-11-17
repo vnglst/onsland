@@ -10,12 +10,12 @@ let currentObserver = null;
  */
 function toggleView() {
   isSquareView = !isSquareView;
-  const homepage = document.getElementById("homepage");
-  const loadedCards = homepage.querySelectorAll(".country-card:not(.loading)");
+  const homepage = document.getElementById('homepage');
+  const loadedCards = homepage.querySelectorAll('.country-card:not(.loading)');
 
   loadedCards.forEach((card) => {
-    const countryKey = card.getAttribute("data-country");
-    const svg = card.querySelector("svg");
+    const countryKey = card.getAttribute('data-country');
+    const svg = card.querySelector('svg');
     if (svg && countryKey) {
       if (isSquareView) {
         renderCountrySquarePreview(countryKey, svg, worldData);
@@ -31,16 +31,16 @@ function toggleView() {
  * @returns {string} Translated button text
  */
 function getViewToggleText() {
-  return isSquareView ? i18n.t("homepage.mapView") : i18n.t("homepage.squareView");
+  return isSquareView ? i18n.t('homepage.mapView') : i18n.t('homepage.squareView');
 }
 
 /**
  * Update all country card titles with translations
  */
 function updateCountryCardTitles() {
-  document.querySelectorAll(".country-card").forEach((card) => {
-    const countryKey = card.getAttribute("data-country");
-    const titleElement = card.querySelector(".country-card-title");
+  document.querySelectorAll('.country-card').forEach((card) => {
+    const countryKey = card.getAttribute('data-country');
+    const titleElement = card.querySelector('.country-card-title');
     if (titleElement) {
       const translatedName = i18n.t(`countries.${countryKey}`) || countryNames[countryKey];
       titleElement.textContent = translatedName;
@@ -52,25 +52,25 @@ function updateCountryCardTitles() {
  * Display the homepage grid with all country cards
  */
 function showHomepage() {
-  const homepage = document.getElementById("homepage");
-  homepage.innerHTML = "";
+  const homepage = document.getElementById('homepage');
+  homepage.innerHTML = '';
 
   // Create all cards with loading placeholders first to prevent layout shift
   validCountries.forEach((countryKey) => {
-    const countryCard = document.createElement("div");
-    countryCard.className = "country-card loading";
-    countryCard.setAttribute("data-country", countryKey);
+    const countryCard = document.createElement('div');
+    countryCard.className = 'country-card loading';
+    countryCard.setAttribute('data-country', countryKey);
 
-    const title = document.createElement("div");
-    title.className = "country-card-title";
+    const title = document.createElement('div');
+    title.className = 'country-card-title';
     title.textContent = i18n.t(`countries.${countryKey}`) || countryNames[countryKey];
 
-    const placeholder = document.createElement("div");
-    placeholder.className = "loading-placeholder";
+    const placeholder = document.createElement('div');
+    placeholder.className = 'loading-placeholder';
 
-    const loadingText = document.createElement("div");
-    loadingText.className = "loading-text";
-    loadingText.textContent = i18n.t("common.loading");
+    const loadingText = document.createElement('div');
+    loadingText.className = 'loading-text';
+    loadingText.textContent = i18n.t('common.loading');
 
     countryCard.appendChild(title);
     countryCard.appendChild(placeholder);
@@ -80,7 +80,7 @@ function showHomepage() {
 
   const observerOptions = {
     root: null,
-    rootMargin: "200px",
+    rootMargin: '200px',
     threshold: 0,
   };
 
@@ -88,9 +88,9 @@ function showHomepage() {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const countryCard = entry.target;
-        const countryKey = countryCard.getAttribute("data-country");
+        const countryKey = countryCard.getAttribute('data-country');
 
-        if (countryCard.classList.contains("loading")) {
+        if (countryCard.classList.contains('loading')) {
           renderCountryCard(countryCard, countryKey);
         }
 
@@ -113,16 +113,16 @@ function showHomepage() {
  * @param {string} countryKey - The country identifier
  */
 function renderCountryCard(countryCard, countryKey) {
-  countryCard.classList.remove("loading");
-  const placeholder = countryCard.querySelector(".loading-placeholder");
-  const loadingText = countryCard.querySelector(".loading-text");
+  countryCard.classList.remove('loading');
+  const placeholder = countryCard.querySelector('.loading-placeholder');
+  const loadingText = countryCard.querySelector('.loading-text');
   if (placeholder) placeholder.remove();
   if (loadingText) loadingText.remove();
 
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("viewBox", "0 0 800 800");
-  svg.setAttribute("preserveAspectRatio", "xMidYMid");
-  svg.classList.add("country-preview");
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 800 800');
+  svg.setAttribute('preserveAspectRatio', 'xMidYMid');
+  svg.classList.add('country-preview');
 
   countryCard.appendChild(svg);
 
@@ -143,8 +143,8 @@ function renderCountryCard(countryCard, countryKey) {
 function initHomepage() {
   // Initialize i18n and menu
   initI18n().then(() => {
-    updatePageTitle(i18n.t("homepage.title"));
-    updateMetaDescription(i18n.t("homepage.metaDescription"));
+    updatePageTitle(i18n.t('homepage.title'));
+    updateMetaDescription(i18n.t('homepage.metaDescription'));
 
     // Initialize menu with view toggle
     initMenu({
@@ -154,11 +154,11 @@ function initHomepage() {
     });
 
     // Listen for language changes and update country titles
-    window.addEventListener("languageChanged", () => {
-      updatePageTitle(i18n.t("homepage.title"));
+    window.addEventListener('languageChanged', () => {
+      updatePageTitle(i18n.t('homepage.title'));
 
       // Update menu view toggle text
-      const menuToggle = document.querySelector("#menuViewToggle");
+      const menuToggle = document.querySelector('#menuViewToggle');
       if (menuToggle) {
         menuToggle.textContent = getViewToggleText();
       }
@@ -169,18 +169,18 @@ function initHomepage() {
   });
 
   // Load map data and render homepage
-  fetch("vendor/countries-50m.json")
+  fetch('vendor/countries-50m.json')
     .then((response) => response.json())
     .then((world) => {
       worldData = world;
       showHomepage();
     })
-    .catch((error) => console.error("Error loading data:", error));
+    .catch((error) => console.error('Error loading data:', error));
 }
 
 // Initialize page when DOM is ready
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initHomepage);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initHomepage);
 } else {
   initHomepage();
 }
