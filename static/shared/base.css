@@ -127,6 +127,7 @@ h2 {
 
 .back-button {
   background: var(--bg-dark);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   color: var(--text-light);
   padding: var(--ui-padding-y) 20px;
   border-radius: var(--ui-border-radius);
@@ -136,13 +137,21 @@ h2 {
   transition: all 0.2s ease;
   min-width: 120px;
   text-decoration: none;
-  display: inline-block;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.back-button::before {
+  content: '←';
+  font-size: 1.2em;
+  font-weight: bold;
 }
 
 .back-button:hover {
   background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .back-button:active {
