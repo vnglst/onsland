@@ -203,6 +203,12 @@ function toggleLayout() {
       .duration(500)
       .attr('opacity', 1);
   }
+
+  // Update view toggle button text
+  const menuToggle = document.getElementById('menuViewToggle');
+  if (menuToggle) {
+    menuToggle.textContent = getViewToggleText();
+  }
 }
 
 /**
@@ -617,6 +623,12 @@ function initCountryPage() {
     window.toggleLayout = toggleLayout;
     window.getViewToggleText = getViewToggleText;
 
+    // Set initial view toggle button text
+    const menuToggle = document.getElementById('menuViewToggle');
+    if (menuToggle) {
+      menuToggle.textContent = getViewToggleText();
+    }
+
     // Render the country visualization
     if (worldData) {
       renderCountry(currentCountry);
@@ -628,6 +640,12 @@ function initCountryPage() {
       const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
       document.title = `${i18n.t('country.titlePrefix')}${countryName} - OnsLand`;
       document.querySelector('.title-country').textContent = countryName;
+
+      // Update view toggle button text
+      const menuToggle = document.getElementById('menuViewToggle');
+      if (menuToggle) {
+        menuToggle.textContent = getViewToggleText();
+      }
 
       // Re-render country visualization (legend and labels)
       if (worldData) {

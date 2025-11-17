@@ -24,6 +24,12 @@ function toggleView() {
       }
     }
   });
+
+  // Update view toggle button text
+  const menuToggle = document.getElementById('menuViewToggle');
+  if (menuToggle) {
+    menuToggle.textContent = getViewToggleText();
+  }
 }
 
 /**
@@ -150,9 +156,21 @@ function initHomepage() {
     window.toggleView = toggleView;
     window.getViewToggleText = getViewToggleText;
 
+    // Set initial view toggle button text
+    const menuToggle = document.getElementById('menuViewToggle');
+    if (menuToggle) {
+      menuToggle.textContent = getViewToggleText();
+    }
+
     // Listen for language changes and update country titles
     window.addEventListener('languageChanged', () => {
       updatePageTitle(i18n.t('homepage.title'));
+
+      // Update view toggle button text
+      const menuToggle = document.getElementById('menuViewToggle');
+      if (menuToggle) {
+        menuToggle.textContent = getViewToggleText();
+      }
 
       // Update all country cards
       updateCountryCardTitles();

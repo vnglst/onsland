@@ -1,5 +1,4 @@
 import { useSignal } from "@preact/signals";
-import { useEffect } from "preact/hooks";
 
 interface MenuProps {
   showViewToggle?: boolean;
@@ -33,15 +32,6 @@ export default function Menu({ showViewToggle = false }: MenuProps) {
     return (window as any).__LANG__ || "en";
   };
 
-  const getViewToggleText = (): string => {
-    // Don't call if translations aren't loaded yet
-    if (typeof window === "undefined") return "";
-    if (!(window as any).__TRANSLATIONS__) return "";
-    if (!(window as any).getViewToggleText) return "";
-
-    return (window as any).getViewToggleText();
-  };
-
   const closeMenu = () => {
     isOpen.value = false;
     document.body.classList.remove("menu-open");
@@ -56,10 +46,8 @@ export default function Menu({ showViewToggle = false }: MenuProps) {
     const select = e.target as HTMLSelectElement;
     const newLang = select.value;
 
-    // Store in localStorage and dispatch event
     localStorage.setItem("language", newLang);
 
-    // Let the existing i18n system handle the language change
     fetch(`/locales/${newLang}.json`)
       .then((response) => response.json())
       .then((data) => {
@@ -90,33 +78,16 @@ export default function Menu({ showViewToggle = false }: MenuProps) {
 
         // Dispatch event for other components
         window.dispatchEvent(new CustomEvent("languageChanged"));
-
-        // Update view toggle button text if it exists
-        setTimeout(() => {
-          const button = document.getElementById("menuViewToggle");
-          if (button && (window as any).getViewToggleText) {
-            button.textContent = (window as any).getViewToggleText();
-          }
-        }, 50);
       });
   };
 
   const handleViewToggle = () => {
-    // Call window toggle functions if they exist
     if (typeof window !== "undefined") {
       if ((window as any).toggleView) {
         (window as any).toggleView();
       } else if ((window as any).toggleLayout) {
         (window as any).toggleLayout();
       }
-
-      // Update button text after toggle
-      setTimeout(() => {
-        const button = document.getElementById("menuViewToggle");
-        if (button && (window as any).getViewToggleText) {
-          button.textContent = (window as any).getViewToggleText();
-        }
-      }, 50);
     }
   };
 
@@ -130,26 +101,6 @@ export default function Menu({ showViewToggle = false }: MenuProps) {
       closeMenu();
     }
   };
-
-  // Update view toggle text once translations are loaded
-  useEffect(() => {
-    if (!showViewToggle) return;
-
-    const updateButtonText = () => {
-      const button = document.getElementById("menuViewToggle");
-      if (button && (window as any).getViewToggleText && (window as any).__TRANSLATIONS__) {
-        button.textContent = (window as any).getViewToggleText();
-      }
-    };
-
-    // Try updating immediately
-    updateButtonText();
-
-    // Also try after a short delay in case translations aren't loaded yet
-    const timeout = setTimeout(updateButtonText, 200);
-
-    return () => clearTimeout(timeout);
-  }, [showViewToggle]);
 
   return (
     <>
@@ -225,9 +176,7 @@ export default function Menu({ showViewToggle = false }: MenuProps) {
               class="menu-button menu-view-toggle"
               id="menuViewToggle"
               onClick={handleViewToggle}
-              data-i18n-dynamic="true"
             >
-              {getViewToggleText()}
             </button>
           </div>
         )}
