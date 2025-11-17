@@ -1,3 +1,10 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 svg {
   padding: 25px;
   max-width: 800px;
