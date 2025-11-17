@@ -16,7 +16,7 @@
   },
   "exclude": ["**/_fresh/*"],
   "imports": {
-    "$fresh/": "https://deno.land/x/fresh@2.1.4/",
+    "$fresh/": "https://deno.land/x/fresh@1.7.3/",
     "$std/": "https://deno.land/std@0.224.0/",
     "preact": "https://esm.sh/preact@10.22.1",
     "preact/": "https://esm.sh/preact@10.22.1/",

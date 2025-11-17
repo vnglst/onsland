@@ -22,10 +22,14 @@ Want to add more countries? The map rendering is already there, and land use dat
 
 ### Adding a New Country
 
-1. Query the data using the country's 2-letter ISO code:
+1. Query the data using the country's 2-letter ISO code (requires Node.js and npm for data scripts):
 
    ```bash
-   npm run query <COUNTRY_CODE>  # e.g., PL, RO, GR
+   # Install dependencies (only needed for data scripts)
+   cd data && npm install
+
+   # Query country data
+   node query-country.js <COUNTRY_CODE>  # e.g., PL, RO, GR
    ```
 
 2. Add the country configuration to [static/shared/countries.js](static/shared/countries.js)
