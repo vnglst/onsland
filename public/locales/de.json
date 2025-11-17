@@ -135,21 +135,19 @@
     "heading": "Über OnsLand",
     "what": {
       "heading": "Was ist OnsLand?",
-      "description": "OnsLand ist ein interaktives Visualisierungsprojekt, das untersucht, wie Land in europäischen Ländern genutzt wird. Mit Daten von Eurostat präsentiert es Landnutzungsmuster durch schöne hexagonbasierte Visualisierungen und macht komplexe landwirtschaftliche und Umweltdaten zugänglich und ansprechend."
+      "description": "OnsLand ist ein interaktives Visualisierungsprojekt, das untersucht, wie Land in europäischen Ländern genutzt wird. Mit Daten von Eurostat präsentiert es Landnutzungsmuster durch hexagonbasierte Visualisierungen und macht komplexe landwirtschaftliche und Umweltdaten zugänglich und ansprechend."
     },
     "contribute": {
       "heading": "Wie man beitragen kann",
-      "intro": "OnsLand ist ein Open-Source-Projekt und wir begrüßen Beiträge! So können Sie helfen:",
+      "intro": "OnsLand ist ein Open-Source-Projekt und Beiträge sind willkommen! So können Sie helfen:",
       "bugs": "Fehler melden:",
       "bugsDesc": "Ein Problem gefunden? Melden Sie es auf GitHub",
-      "features": "Funktionen vorschlagen:",
-      "featuresDesc": "Haben Sie eine Verbesserungsidee? Wir würden gerne davon hören",
-      "translations": "Übersetzungen hinzufügen:",
-      "translationsDesc": "Helfen Sie, die Benutzeroberfläche in weitere Sprachen zu übersetzen",
-      "data": "Daten aktualisieren:",
-      "dataDesc": "Helfen Sie, die Visualisierungen mit den neuesten Eurostat-Daten aktuell zu halten",
-      "code": "Code beitragen:",
-      "codeDesc": "Reichen Sie Pull Requests ein, um die Codebasis zu verbessern",
+      "features": "Eine Funktion vorschlagen:",
+      "featuresDesc": "Haben Sie eine Verbesserungsidee? Ich würde gerne davon hören",
+      "translations": "Übersetzungen korrigieren oder hinzufügen:",
+      "translationsDesc": "Helfen Sie, die Benutzeroberfläche in weitere Sprachen zu übersetzen. Derzeit wurde dies von KI gemacht, also noch nicht perfekt.",
+      "data": "Mehr Länder hinzufügen:",
+      "dataDesc": "Es basiert derzeit auf Eurostat-Daten, aber wenn Sie andere zuverlässige Quellen kennen, teilen Sie sie bitte.",
       "github": "GitHub-Repository:"
     },
     "license": {

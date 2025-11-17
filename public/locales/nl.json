@@ -135,21 +135,19 @@
     "heading": "Over OnsLand",
     "what": {
       "heading": "Wat is OnsLand?",
-      "description": "OnsLand is een interactief visualisatieproject dat onderzoekt hoe grond wordt gebruikt in Europese landen. Met gegevens van Eurostat toont het landgebruikspatronen door middel van prachtige zeshoek-visualisaties, waardoor complexe landbouw- en milieugegevens toegankelijk en boeiend worden gemaakt."
+      "description": "OnsLand is een interactief visualisatieproject dat onderzoekt hoe grond wordt gebruikt in Europese landen. Met gegevens van Eurostat toont het landgebruikspatronen door middel van zeshoek-visualisaties, waardoor complexe landbouw- en milieugegevens toegankelijk en boeiend worden gemaakt."
     },
     "contribute": {
       "heading": "Hoe bijdragen",
-      "intro": "OnsLand is een open-source project en we verwelkomen bijdragen! Zo kun je helpen:",
+      "intro": "OnsLand is een open-source project en bijdragen zijn welkom! Zo kun je helpen:",
       "bugs": "Meld bugs:",
       "bugsDesc": "Een probleem gevonden? Meld het op GitHub",
-      "features": "Stel functies voor:",
-      "featuresDesc": "Heb je een idee voor verbetering? We horen het graag",
-      "translations": "Voeg vertalingen toe:",
-      "translationsDesc": "Help de interface naar meer talen te vertalen",
-      "data": "Update gegevens:",
-      "dataDesc": "Help de visualisaties actueel te houden met de nieuwste Eurostat-gegevens",
-      "code": "Draag code bij:",
-      "codeDesc": "Dien pull requests in om de codebase te verbeteren",
+      "features": "Stel een functie voor:",
+      "featuresDesc": "Heb je een idee voor verbetering? Ik hoor het graag",
+      "translations": "Corrigeer of voeg vertalingen toe:",
+      "translationsDesc": "Help de interface naar meer talen te vertalen. Momenteel is dit gedaan door AI, dus nog niet perfect.",
+      "data": "Voeg meer landen toe:",
+      "dataDesc": "Het is momenteel gebaseerd op Eurostat-gegevens, maar als je andere betrouwbare bronnen kent, deel ze dan.",
       "github": "GitHub repository:"
     },
     "license": {

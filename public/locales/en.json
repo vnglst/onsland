@@ -135,21 +135,19 @@
     "heading": "About OnsLand",
     "what": {
       "heading": "What is OnsLand?",
-      "description": "OnsLand is an interactive visualization project that explores how land is used across European countries. Using data from Eurostat, it presents land use patterns through beautiful hexagon-based visualizations, making complex agricultural and environmental data accessible and engaging."
+      "description": "OnsLand is an interactive visualization project that explores how land is used across European countries. Using data from Eurostat, it presents land use patterns through hexagon-based visualizations, making complex agricultural and environmental data accessible and engaging."
     },
     "contribute": {
       "heading": "How to Contribute",
-      "intro": "OnsLand is an open-source project, and we welcome contributions! Here's how you can help:",
+      "intro": "OnsLand is an open-source project and contributions are welcome! Here's how you can help:",
       "bugs": "Report bugs:",
       "bugsDesc": "Found an issue? Report it on GitHub",
-      "features": "Suggest features:",
-      "featuresDesc": "Have an idea for improvement? We'd love to hear it",
-      "translations": "Add translations:",
-      "translationsDesc": "Help translate the interface to more languages",
-      "data": "Update data:",
-      "dataDesc": "Help keep the visualizations current with latest Eurostat data",
-      "code": "Contribute code:",
-      "codeDesc": "Submit pull requests to improve the codebase",
+      "features": "Suggest a feature:",
+      "featuresDesc": "Have an idea for improvement? I'd love to hear it",
+      "translations": "Correct or add translations:",
+      "translationsDesc": "Help translate the interface to more languages. Currently this was done by AI, so not perfect yet.",
+      "data": "Add more countries:",
+      "dataDesc": "It's currently based on Eurostat data, but if you know of other reliable sources, please share them.",
       "github": "GitHub repository:"
     },
     "license": {
