@@ -35,8 +35,8 @@ function createMenu() {
 
   const navLinks = [
     { href: '/', key: 'menu.home', text: 'Home' },
-    { href: '/rankings.html', key: 'menu.rankings', text: 'Rankings' },
-    { href: '/about.html', key: 'menu.about', text: 'About' },
+    { href: '/rankings', key: 'menu.rankings', text: 'Rankings' },
+    { href: '/about', key: 'menu.about', text: 'About' },
   ];
 
   navLinks.forEach((link) => {
