@@ -5,9 +5,9 @@ interface MenuProps {
 }
 
 const NAV_LINKS = [
-  { href: "/", key: "menu.home", text: "Home" },
-  { href: "/rankings", key: "menu.rankings", text: "Rankings" },
-  { href: "/about", key: "menu.about", text: "About" },
+  { href: "/", key: "menu.home" },
+  { href: "/rankings", key: "menu.rankings" },
+  { href: "/about", key: "menu.about" },
 ];
 
 const LANGUAGES = [
@@ -23,13 +23,12 @@ export default function Menu({ showViewToggle = false }: MenuProps) {
 
   const t = (key: string): string => {
     if (typeof window === "undefined") return key;
-    const translations = (window as any).__TRANSLATIONS__ || {};
-    return translations[key] || key;
+    return (window as any).i18n?.t(key) || key;
   };
 
   const getCurrentLang = (): string => {
     if (typeof window === "undefined") return "en";
-    return (window as any).__LANG__ || "en";
+    return (window as any).i18n?.currentLanguage || "en";
   };
 
   const closeMenu = () => {
@@ -46,39 +45,10 @@ export default function Menu({ showViewToggle = false }: MenuProps) {
     const select = e.target as HTMLSelectElement;
     const newLang = select.value;
 
-    localStorage.setItem("language", newLang);
-
-    fetch(`/locales/${newLang}.json`)
-      .then((response) => response.json())
-      .then((data) => {
-        const flat: Record<string, string> = {};
-        function flatten(obj: any, prefix = "") {
-          for (const key in obj) {
-            const value = obj[key];
-            const newKey = prefix ? `${prefix}.${key}` : key;
-            if (typeof value === "object" && value !== null) {
-              flatten(value, newKey);
-            } else {
-              flat[newKey] = value;
-            }
-          }
-        }
-        flatten(data);
-
-        (window as any).__TRANSLATIONS__ = flat;
-        (window as any).__LANG__ = newLang;
-
-        // Update all data-i18n elements
-        document.querySelectorAll("[data-i18n]").forEach((el) => {
-          const key = el.getAttribute("data-i18n");
-          if (key) {
-            el.textContent = flat[key] || key;
-          }
-        });
-
-        // Dispatch event for other components
-        window.dispatchEvent(new CustomEvent("languageChanged"));
-      });
+    // Use the existing i18n system
+    if (typeof window !== "undefined" && (window as any).i18n) {
+      (window as any).i18n.changeLanguage(newLang);
+    }
   };
 
   const handleViewToggle = () => {

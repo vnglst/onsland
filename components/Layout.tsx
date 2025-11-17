@@ -5,7 +5,6 @@ interface LayoutProps {
   title: string;
   description: string;
   children: ComponentChildren;
-  pageClass?: string;
   pageSpecificCss?: string[];
   pageSpecificScripts?: string[];
   inlineScript?: string;
@@ -15,7 +14,6 @@ export default function Layout({
   title,
   description,
   children,
-  pageClass = "",
   pageSpecificCss = [],
   pageSpecificScripts = [],
   inlineScript = "",
@@ -23,7 +21,7 @@ export default function Layout({
   const baseUrl = "https://onsland.koenvangilst.nl";
 
   return (
-    <div class={pageClass}>
+    <>
       <Head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -81,7 +79,6 @@ export default function Layout({
         {/* Base CSS */}
         <link rel="stylesheet" href="/shared/base.css" />
         <link rel="stylesheet" href="/shared/menu.css" />
-        <link rel="stylesheet" href="/shared/language-switcher.css" />
 
         {/* Page-specific CSS */}
         {pageSpecificCss.map((css) => (
@@ -126,7 +123,7 @@ export default function Layout({
       {pageSpecificScripts.map((script) => (
         <script key={script} src={script} />
       ))}
-    </div>
+    </>
   );
 }
 
