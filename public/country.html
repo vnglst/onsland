@@ -61,17 +61,19 @@
   </head>
   <body>
     <header>
-      <div id="countryHeader">
-        <a href="/" class="back-button">
-          <span class="back-text-full"><span data-i18n="common.back">Back</span></span>
-          <span class="back-text-short" data-i18n="common.backShort">←</span>
-        </a>
-        <h1 id="countryTitle">
-          <span class="title-prefix" data-i18n="country.titlePrefix">Land Use in </span>
-          <span class="title-country"></span>
-        </h1>
-        <span class="spacer"></span>
-      </div>
+      <nav class="navbar">
+        <div id="countryHeader">
+          <a href="/" class="back-button">
+            <span class="back-text-full"><span data-i18n="common.back">Back</span></span>
+            <span class="back-text-short" data-i18n="common.backShort">←</span>
+          </a>
+          <h1 id="countryTitle">
+            <span class="title-prefix" data-i18n="country.titlePrefix">Land Use in </span>
+            <span class="title-country"></span>
+          </h1>
+          <!-- Hamburger menu will be added here by menu.js -->
+        </div>
+      </nav>
     </header>
 
     <svg id="countrySvg" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid"></svg>

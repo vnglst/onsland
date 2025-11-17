@@ -2,13 +2,11 @@
 // Creates a hamburger menu for navigation, language switching, and view toggling
 
 function createMenu() {
-  const menuContainer = document.createElement('div');
-  menuContainer.className = 'menu-container';
-
-  // Hamburger button
+  // Hamburger button (will be added to navbar by initMenu)
   const hamburger = document.createElement('button');
   hamburger.className = 'hamburger';
   hamburger.setAttribute('aria-label', 'Menu');
+  hamburger.setAttribute('id', 'menu-hamburger');
   hamburger.innerHTML = `
     <span></span>
     <span></span>
@@ -18,6 +16,13 @@ function createMenu() {
   // Menu panel
   const menuPanel = document.createElement('div');
   menuPanel.className = 'menu-panel';
+
+  // Close button
+  const closeButton = document.createElement('button');
+  closeButton.className = 'menu-close';
+  closeButton.setAttribute('aria-label', 'Close menu');
+  closeButton.innerHTML = '×';
+  menuPanel.appendChild(closeButton);
 
   // Navigation section
   const navSection = document.createElement('div');
@@ -84,9 +89,16 @@ function createMenu() {
     document.body.classList.toggle('menu-open', isOpen);
   });
 
+  // Close button
+  closeButton.addEventListener('click', () => {
+    menuPanel.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.classList.remove('menu-open');
+  });
+
   // Close menu when clicking outside
   document.addEventListener('click', (e) => {
-    if (!menuContainer.contains(e.target) && menuPanel.classList.contains('open')) {
+    if (!hamburger.contains(e.target) && !menuPanel.contains(e.target) && menuPanel.classList.contains('open')) {
       menuPanel.classList.remove('open');
       hamburger.classList.remove('open');
       document.body.classList.remove('menu-open');
@@ -102,15 +114,20 @@ function createMenu() {
     });
   });
 
-  menuContainer.appendChild(hamburger);
-  menuContainer.appendChild(menuPanel);
-
-  return menuContainer;
+  return { hamburger, menuPanel };
 }
 
 function initMenu(options = {}) {
-  const menu = createMenu();
-  document.body.appendChild(menu);
+  const { hamburger, menuPanel } = createMenu();
+
+  // Add hamburger to navbar
+  const navbar = document.querySelector('.navbar');
+  if (navbar) {
+    navbar.appendChild(hamburger);
+  }
+
+  // Add menu panel to body
+  document.body.appendChild(menuPanel);
 
   // Update translations for menu items
   if (window.updateTranslations) {
@@ -119,10 +136,10 @@ function initMenu(options = {}) {
 
   // Show view toggle if enabled
   if (options.showViewToggle) {
-    const viewSection = menu.querySelector('.menu-view-section');
+    const viewSection = menuPanel.querySelector('.menu-view-section');
     viewSection.classList.remove('hidden');
 
-    const viewToggle = menu.querySelector('#menuViewToggle');
+    const viewToggle = menuPanel.querySelector('#menuViewToggle');
     if (options.onViewToggle) {
       viewToggle.addEventListener('click', () => {
         options.onViewToggle();
@@ -139,7 +156,7 @@ function initMenu(options = {}) {
     }
   }
 
-  return menu;
+  return { hamburger, menuPanel };
 }
 
 window.initMenu = initMenu;
