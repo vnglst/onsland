@@ -77,15 +77,16 @@ function createMenu() {
   menuPanel.appendChild(viewSection);
 
   // Toggle menu
-  hamburger.addEventListener('click', () => {
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
     const isOpen = menuPanel.classList.toggle('open');
     hamburger.classList.toggle('open');
     document.body.classList.toggle('menu-open', isOpen);
   });
 
   // Close menu when clicking outside
-  menuPanel.addEventListener('click', (e) => {
-    if (e.target === menuPanel) {
+  document.addEventListener('click', (e) => {
+    if (!menuContainer.contains(e.target) && menuPanel.classList.contains('open')) {
       menuPanel.classList.remove('open');
       hamburger.classList.remove('open');
       document.body.classList.remove('menu-open');
