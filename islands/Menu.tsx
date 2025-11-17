@@ -1,4 +1,5 @@
 import { useSignal } from "@preact/signals";
+import { useEffect } from "preact/hooks";
 
 interface MenuProps {
   showViewToggle?: boolean;
@@ -33,10 +34,12 @@ export default function Menu({ showViewToggle = false }: MenuProps) {
   };
 
   const getViewToggleText = (): string => {
-    if (typeof window !== "undefined" && (window as any).getViewToggleText) {
-      return (window as any).getViewToggleText();
-    }
-    return "";
+    // Don't call if translations aren't loaded yet
+    if (typeof window === "undefined") return "";
+    if (!(window as any).__TRANSLATIONS__) return "";
+    if (!(window as any).getViewToggleText) return "";
+
+    return (window as any).getViewToggleText();
   };
 
   const closeMenu = () => {
@@ -127,6 +130,26 @@ export default function Menu({ showViewToggle = false }: MenuProps) {
       closeMenu();
     }
   };
+
+  // Update view toggle text once translations are loaded
+  useEffect(() => {
+    if (!showViewToggle) return;
+
+    const updateButtonText = () => {
+      const button = document.getElementById("menuViewToggle");
+      if (button && (window as any).getViewToggleText && (window as any).__TRANSLATIONS__) {
+        button.textContent = (window as any).getViewToggleText();
+      }
+    };
+
+    // Try updating immediately
+    updateButtonText();
+
+    // Also try after a short delay in case translations aren't loaded yet
+    const timeout = setTimeout(updateButtonText, 200);
+
+    return () => clearTimeout(timeout);
+  }, [showViewToggle]);
 
   return (
     <>

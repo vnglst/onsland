@@ -626,8 +626,7 @@ function initCountryPage() {
     window.addEventListener('languageChanged', () => {
       // Update page title and country name
       const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
-      document.getElementById('pageTitle').textContent =
-        `${i18n.t('country.titlePrefix')}${countryName} - OnsLand`;
+      document.title = `${i18n.t('country.titlePrefix')}${countryName} - OnsLand`;
       document.querySelector('.title-country').textContent = countryName;
 
       // Re-render country visualization (legend and labels)
