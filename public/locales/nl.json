@@ -135,19 +135,19 @@
     "heading": "Over OnsLand",
     "what": {
       "heading": "Wat is OnsLand?",
-      "description": "OnsLand is een interactief visualisatieproject dat onderzoekt hoe grond wordt gebruikt in Europese landen. Met gegevens van Eurostat toont het landgebruikspatronen door middel van zeshoek-visualisaties, waardoor complexe landbouw- en milieugegevens toegankelijk en boeiend worden gemaakt."
+      "description": "OnsLand is een interactief visualisatieproject dat onderzoekt hoe grond wordt gebruikt in Europese landen. Met gegevens van Eurostat toont het landgebruikspatronen met een geanimeerde zeshoekvisualisatie. Hiermee worden complexe landbouw- en milieugegevens toegankelijk en boeiend gemaakt."
     },
     "contribute": {
-      "heading": "Hoe bijdragen",
-      "intro": "OnsLand is een open-source project en bijdragen zijn welkom! Zo kun je helpen:",
+      "heading": "Bijdragen?",
+      "intro": "OnsLand is een open-source project en bijdragen zijn welkom! Helpen kan:",
       "bugs": "Meld bugs:",
-      "bugsDesc": "Een probleem gevonden? Meld het op GitHub",
+      "bugsDesc": "probleem gevonden? Meld het op GitHub",
       "features": "Stel een functie voor:",
       "featuresDesc": "Heb je een idee voor verbetering? Ik hoor het graag",
       "translations": "Corrigeer of voeg vertalingen toe:",
-      "translationsDesc": "Help de interface naar meer talen te vertalen. Momenteel is dit gedaan door AI, dus nog niet perfect.",
+      "translationsDesc": "help de interface naar meer talen te vertalen. Momenteel is dit gedaan door AI, dus nog niet perfect.",
       "data": "Voeg meer landen toe:",
-      "dataDesc": "Het is momenteel gebaseerd op Eurostat-gegevens, maar als je andere betrouwbare bronnen kent, deel ze dan.",
+      "dataDesc": "momenteel is de app gebaseerd op Eurostat-gegevens, maar als je andere betrouwbare bronnen weet, deel ze dan.",
       "github": "GitHub repository:"
     },
     "license": {
