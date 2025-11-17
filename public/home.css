@@ -93,6 +93,14 @@
   margin-top: 8px;
 }
 
+/* Large screen styles */
+@media (min-width: 1600px) {
+  .homepage-grid {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 32px;
+  }
+}
+
 /* Mobile responsive styles */
 @media (max-width: 1200px) {
   .homepage-grid {
