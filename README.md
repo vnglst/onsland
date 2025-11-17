@@ -22,15 +22,7 @@ Want to add more countries? The map rendering is already there, and land use dat
 
 ### Adding a New Country
 
-1. Query the data using the country's 2-letter ISO code (requires Node.js and npm for data scripts):
-
-   ```bash
-   # Install dependencies (only needed for data scripts)
-   cd data && npm install
-
-   # Query country data
-   node query-country.js <COUNTRY_CODE>  # e.g., PL, RO, GR
-   ```
+1. Query the data from the SQLite database in `data/land-cover.db` to get the land use percentages for your country
 
 2. Add the country configuration to [static/shared/countries.js](static/shared/countries.js)
    - Add the `isoCode` by checking the Wikipedia "[List of ISO 3166 country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)" to get the country's **NUM**eric code
