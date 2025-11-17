@@ -145,9 +145,6 @@ function initRankingsPage() {
     updatePageTitle(i18n.t('rankings.title'));
     updateMetaDescription(i18n.t('rankings.metaDescription'));
 
-    // Initialize menu
-    initMenu();
-
     // Render rankings after translations are loaded
     renderRankings();
 

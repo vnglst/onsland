@@ -613,14 +613,9 @@ function initCountryPage() {
     // Initialize page UI elements with translations
     initializePageElements();
 
-    // Initialize menu with view toggle
-    initMenu({
-      showViewToggle: true,
-      onViewToggle: () => {
-        toggleLayout();
-      },
-      getViewToggleText: getViewToggleText,
-    });
+    // Expose view toggle functions for Menu island
+    window.toggleLayout = toggleLayout;
+    window.getViewToggleText = getViewToggleText;
 
     // Render the country visualization
     if (worldData) {
@@ -634,12 +629,6 @@ function initCountryPage() {
       document.getElementById('pageTitle').textContent =
         `${i18n.t('country.titlePrefix')}${countryName} - OnsLand`;
       document.querySelector('.title-country').textContent = countryName;
-
-      // Update menu toggle text
-      const menuToggle = document.querySelector('#menuViewToggle');
-      if (menuToggle) {
-        menuToggle.textContent = getViewToggleText();
-      }
 
       // Re-render country visualization (legend and labels)
       if (worldData) {

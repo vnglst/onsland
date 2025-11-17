@@ -1,5 +1,5 @@
 import Layout from "../components/Layout.tsx";
-import { Head } from "$fresh/runtime.ts";
+import Menu from "../islands/Menu.tsx";
 
 export default function Rankings() {
   return (
@@ -31,7 +31,7 @@ export default function Rankings() {
                 Rankings
               </span>
             </h1>
-            {/* Hamburger menu will be added here by menu.js */}
+            <Menu />
           </div>
         </nav>
       </header>

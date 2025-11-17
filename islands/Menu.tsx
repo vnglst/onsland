@@ -1,10 +1,7 @@
-import { useSignal, useSignalEffect } from "@preact/signals";
-import { useEffect } from "preact/hooks";
+import { useSignal } from "@preact/signals";
 
 interface MenuProps {
   showViewToggle?: boolean;
-  viewToggleText?: string;
-  onViewToggle?: () => void;
 }
 
 const NAV_LINKS = [
@@ -21,109 +18,115 @@ const LANGUAGES = [
   { code: "de", name: "Deutsch" },
 ];
 
-export default function Menu(
-  { showViewToggle = false, viewToggleText = "", onViewToggle }: MenuProps,
-) {
+export default function Menu({ showViewToggle = false }: MenuProps) {
   const isOpen = useSignal(false);
-  const currentLang = useSignal("en");
-  const translations = useSignal<Record<string, string>>({});
-
-  // Load translations from window object
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      translations.value = (window as any).__TRANSLATIONS__ || {};
-      currentLang.value = (window as any).__LANG__ || "en";
-    }
-  }, []);
 
   const t = (key: string): string => {
-    return translations.value[key] || key;
+    if (typeof window === "undefined") return key;
+    const translations = (window as any).__TRANSLATIONS__ || {};
+    return translations[key] || key;
+  };
+
+  const getCurrentLang = (): string => {
+    if (typeof window === "undefined") return "en";
+    return (window as any).__LANG__ || "en";
+  };
+
+  const getViewToggleText = (): string => {
+    if (typeof window !== "undefined" && (window as any).getViewToggleText) {
+      return (window as any).getViewToggleText();
+    }
+    return "";
   };
 
   const closeMenu = () => {
     isOpen.value = false;
-    if (typeof document !== "undefined") {
-      document.body.classList.remove("menu-open");
-    }
+    document.body.classList.remove("menu-open");
   };
 
   const openMenu = () => {
     isOpen.value = true;
-    if (typeof document !== "undefined") {
-      document.body.classList.add("menu-open");
-    }
+    document.body.classList.add("menu-open");
   };
 
   const handleLanguageChange = (e: Event) => {
     const select = e.target as HTMLSelectElement;
     const newLang = select.value;
 
-    if (typeof window !== "undefined") {
-      // Store in localStorage
-      localStorage.setItem("language", newLang);
+    // Store in localStorage and dispatch event
+    localStorage.setItem("language", newLang);
 
-      // Reload translations
-      fetch(`/locales/${newLang}.json`)
-        .then((response) => response.json())
-        .then((data) => {
-          // Flatten translations
-          const flat: Record<string, string> = {};
-          function flatten(obj: any, prefix = "") {
-            for (const key in obj) {
-              const value = obj[key];
-              const newKey = prefix ? `${prefix}.${key}` : key;
-              if (typeof value === "object" && value !== null) {
-                flatten(value, newKey);
-              } else {
-                flat[newKey] = value;
-              }
+    // Let the existing i18n system handle the language change
+    fetch(`/locales/${newLang}.json`)
+      .then((response) => response.json())
+      .then((data) => {
+        const flat: Record<string, string> = {};
+        function flatten(obj: any, prefix = "") {
+          for (const key in obj) {
+            const value = obj[key];
+            const newKey = prefix ? `${prefix}.${key}` : key;
+            if (typeof value === "object" && value !== null) {
+              flatten(value, newKey);
+            } else {
+              flat[newKey] = value;
             }
           }
-          flatten(data);
+        }
+        flatten(data);
 
-          translations.value = flat;
-          currentLang.value = newLang;
-          (window as any).__TRANSLATIONS__ = flat;
-          (window as any).__LANG__ = newLang;
+        (window as any).__TRANSLATIONS__ = flat;
+        (window as any).__LANG__ = newLang;
 
-          // Update all data-i18n elements
-          document.querySelectorAll("[data-i18n]").forEach((el) => {
-            const key = el.getAttribute("data-i18n");
-            if (key) {
-              el.textContent = flat[key] || key;
-            }
-          });
-
-          // Dispatch event for other components
-          window.dispatchEvent(new CustomEvent("languageChanged"));
+        // Update all data-i18n elements
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (key) {
+            el.textContent = flat[key] || key;
+          }
         });
-    }
+
+        // Dispatch event for other components
+        window.dispatchEvent(new CustomEvent("languageChanged"));
+
+        // Update view toggle button text if it exists
+        setTimeout(() => {
+          const button = document.getElementById("menuViewToggle");
+          if (button && (window as any).getViewToggleText) {
+            button.textContent = (window as any).getViewToggleText();
+          }
+        }, 50);
+      });
   };
 
   const handleViewToggle = () => {
-    if (onViewToggle) {
-      onViewToggle();
+    // Call window toggle functions if they exist
+    if (typeof window !== "undefined") {
+      if ((window as any).toggleView) {
+        (window as any).toggleView();
+      } else if ((window as any).toggleLayout) {
+        (window as any).toggleLayout();
+      }
+
+      // Update button text after toggle
+      setTimeout(() => {
+        const button = document.getElementById("menuViewToggle");
+        if (button && (window as any).getViewToggleText) {
+          button.textContent = (window as any).getViewToggleText();
+        }
+      }, 50);
     }
   };
 
-  // Handle click outside to close menu
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-
-    const handleClickOutside = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        isOpen.value &&
-        !target.closest(".menu-panel") &&
-        !target.closest(".hamburger")
-      ) {
-        closeMenu();
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+  const handleClickOutside = (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (
+      isOpen.value &&
+      !target.closest(".menu-panel") &&
+      !target.closest(".hamburger")
+    ) {
+      closeMenu();
+    }
+  };
 
   return (
     <>
@@ -132,7 +135,13 @@ export default function Menu(
         aria-label="Menu"
         onClick={(e) => {
           e.stopPropagation();
-          isOpen.value ? closeMenu() : openMenu();
+          if (!isOpen.value) {
+            openMenu();
+            document.addEventListener("click", handleClickOutside);
+          } else {
+            closeMenu();
+            document.removeEventListener("click", handleClickOutside);
+          }
         }}
       >
         <span></span>
@@ -144,7 +153,10 @@ export default function Menu(
         <button
           class="menu-close"
           aria-label="Close menu"
-          onClick={closeMenu}
+          onClick={() => {
+            closeMenu();
+            document.removeEventListener("click", handleClickOutside);
+          }}
         >
           ×
         </button>
@@ -171,7 +183,7 @@ export default function Menu(
           <select
             class="language-switcher menu-language-switcher"
             title="Select language"
-            value={currentLang.value}
+            value={getCurrentLang()}
             onChange={handleLanguageChange}
           >
             {LANGUAGES.map((lang) => (
@@ -190,8 +202,9 @@ export default function Menu(
               class="menu-button menu-view-toggle"
               id="menuViewToggle"
               onClick={handleViewToggle}
+              data-i18n-dynamic="true"
             >
-              {viewToggleText}
+              {getViewToggleText()}
             </button>
           </div>
         )}

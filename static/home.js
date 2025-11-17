@@ -146,22 +146,13 @@ function initHomepage() {
     updatePageTitle(i18n.t('homepage.title'));
     updateMetaDescription(i18n.t('homepage.metaDescription'));
 
-    // Initialize menu with view toggle
-    initMenu({
-      showViewToggle: true,
-      onViewToggle: toggleView,
-      getViewToggleText: getViewToggleText,
-    });
+    // Expose view toggle functions for Menu island
+    window.toggleView = toggleView;
+    window.getViewToggleText = getViewToggleText;
 
     // Listen for language changes and update country titles
     window.addEventListener('languageChanged', () => {
       updatePageTitle(i18n.t('homepage.title'));
-
-      // Update menu view toggle text
-      const menuToggle = document.querySelector('#menuViewToggle');
-      if (menuToggle) {
-        menuToggle.textContent = getViewToggleText();
-      }
 
       // Update all country cards
       updateCountryCardTitles();

@@ -33,7 +33,7 @@ export default function Country({ params }: PageProps) {
               </span>
               <span class="title-country"></span>
             </h1>
-            <Menu showViewToggle={false} />
+            <Menu showViewToggle={true} />
           </div>
         </nav>
       </header>
