@@ -17,8 +17,7 @@ let hexColorsGlobal = null;
  */
 function initializePageElements() {
   const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
-  document.getElementById('pageTitle').textContent =
-    `${i18n.t('country.titlePrefix')}${countryName} - OnsLand`;
+  document.title = `${i18n.t('country.titlePrefix')}${countryName} - OnsLand`;
   document.querySelector('.title-country').textContent = countryName;
   updateMetaDescription(i18n.t('country.metaDescription'));
 
@@ -601,7 +600,7 @@ function renderCountry(countryKey) {
  */
 function initCountryPage() {
   // Load map data
-  const mapDataPromise = fetch('vendor/countries-50m.json')
+  const mapDataPromise = fetch('/vendor/countries-50m.json')
     .then((response) => response.json())
     .then((world) => {
       worldData = world;

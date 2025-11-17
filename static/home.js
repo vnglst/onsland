@@ -169,7 +169,7 @@ function initHomepage() {
   });
 
   // Load map data and render homepage
-  fetch('vendor/countries-50m.json')
+  fetch('/vendor/countries-50m.json')
     .then((response) => response.json())
     .then((world) => {
       worldData = world;
