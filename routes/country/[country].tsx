@@ -1,5 +1,6 @@
 import { PageProps } from "$fresh/server.ts";
 import Layout from "../../components/Layout.tsx";
+import Menu from "../../islands/Menu.tsx";
 
 export default function Country({ params }: PageProps) {
   const country = params.country;
@@ -15,7 +16,6 @@ export default function Country({ params }: PageProps) {
       ]}
       inlineScript={`window.__COUNTRY__ = "${country}";`}
     >
-
       <header>
         <nav class="navbar">
           <div id="countryHeader">
@@ -33,7 +33,7 @@ export default function Country({ params }: PageProps) {
               </span>
               <span class="title-country"></span>
             </h1>
-            {/* Hamburger menu will be added here by menu.js */}
+            <Menu showViewToggle={false} />
           </div>
         </nav>
       </header>

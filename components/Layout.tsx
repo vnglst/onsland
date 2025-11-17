@@ -102,8 +102,6 @@ export default function Layout({
 
         {/* Shared scripts */}
         <script src="/shared/i18n.js" />
-        <script src="/shared/language-switcher.js" />
-        <script src="/shared/menu.js" />
 
         {/* Inline script if provided */}
         {inlineScript && (

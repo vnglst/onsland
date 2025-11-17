@@ -1,4 +1,5 @@
 import Layout from "../components/Layout.tsx";
+import Menu from "../islands/Menu.tsx";
 
 export default function Home() {
   return (
@@ -20,7 +21,7 @@ export default function Home() {
                 Land Use
               </span>
             </h1>
-            {/* Hamburger menu will be added here by menu.js */}
+            <Menu showViewToggle={false} />
           </div>
         </nav>
       </header>

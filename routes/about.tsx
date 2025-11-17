@@ -1,4 +1,5 @@
 import Layout from "../components/Layout.tsx";
+import Menu from "../islands/Menu.tsx";
 
 export default function About() {
   return (
@@ -22,7 +23,7 @@ export default function About() {
             <h1>
               <span data-i18n="about.heading">About OnsLand</span>
             </h1>
-            {/* Hamburger menu will be added here by menu.js */}
+            <Menu />
           </div>
         </nav>
       </header>
