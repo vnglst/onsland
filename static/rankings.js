@@ -95,7 +95,7 @@ function renderRankings() {
       const countryName = document.createElement('span');
       countryName.className = 'ranking-country';
       const link = document.createElement('a');
-      link.href = `country?country=${country.countryKey}`;
+      link.href = `/country/${country.countryKey}`;
       link.textContent = i18n.t(`countries.${country.countryKey}`) || country.countryName;
       countryName.appendChild(link);
       item.appendChild(countryName);

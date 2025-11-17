@@ -8,6 +8,7 @@ interface LayoutProps {
   pageClass?: string;
   pageSpecificCss?: string[];
   pageSpecificScripts?: string[];
+  inlineScript?: string;
 }
 
 export default function Layout({
@@ -17,6 +18,7 @@ export default function Layout({
   pageClass = "",
   pageSpecificCss = [],
   pageSpecificScripts = [],
+  inlineScript = "",
 }: LayoutProps) {
   const baseUrl = "https://onsland.koenvangilst.nl";
 
@@ -102,6 +104,15 @@ export default function Layout({
         <script src="/shared/i18n.js" />
         <script src="/shared/language-switcher.js" />
         <script src="/shared/menu.js" />
+
+        {/* Inline script if provided */}
+        {inlineScript && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: inlineScript,
+            }}
+          />
+        )}
       </Head>
 
       {children}

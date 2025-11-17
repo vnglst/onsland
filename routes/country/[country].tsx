@@ -1,6 +1,5 @@
 import { PageProps } from "$fresh/server.ts";
 import Layout from "../../components/Layout.tsx";
-import { Head } from "$fresh/runtime.ts";
 
 export default function Country({ params }: PageProps) {
   const country = params.country;
@@ -14,15 +13,8 @@ export default function Country({ params }: PageProps) {
         "/shared/translation-utils.js",
         "/country.js",
       ]}
+      inlineScript={`window.__COUNTRY__ = "${country}";`}
     >
-      {/* Pass country to client-side script via data attribute */}
-      <Head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.__COUNTRY__ = "${country}";`,
-          }}
-        />
-      </Head>
 
       <header>
         <nav class="navbar">
