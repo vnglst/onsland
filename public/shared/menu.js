@@ -2,16 +2,8 @@
 // Creates a hamburger menu for navigation, language switching, and view toggling
 
 function createMenu() {
-  // Hamburger button (will be added to navbar by initMenu)
-  const hamburger = document.createElement('button');
-  hamburger.className = 'hamburger';
-  hamburger.setAttribute('aria-label', 'Menu');
-  hamburger.setAttribute('id', 'menu-hamburger');
-  hamburger.innerHTML = `
-    <span></span>
-    <span></span>
-    <span></span>
-  `;
+  // Get existing hamburger button from HTML
+  const hamburger = document.getElementById('menu-hamburger');
 
   // Menu panel
   const menuPanel = document.createElement('div');
@@ -119,12 +111,6 @@ function createMenu() {
 
 function initMenu(options = {}) {
   const { hamburger, menuPanel } = createMenu();
-
-  // Add hamburger to navbar
-  const navbar = document.querySelector('.navbar');
-  if (navbar) {
-    navbar.appendChild(hamburger);
-  }
 
   // Add menu panel to body
   document.body.appendChild(menuPanel);
