@@ -2,3 +2,9 @@ myenv
 .vite
 .DS_Store
 node_modules
+
+# Fresh / Deno
+_fresh/
+fresh.gen.ts
+.deno/
+deno.lock

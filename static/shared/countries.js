@@ -1,0 +1,1822 @@
+// Country configurations for land use visualizations
+// Data source: Eurostat Land Cover Statistics 2022
+// https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table?lang=en
+
+const countryConfigs = {
+  netherlands: {
+    title: 'Land Use in the Netherlands',
+    isoCode: '528',
+    center: [5.5, 52.2],
+    scale: 9000,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.108 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.143 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.011 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.018 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.04 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.13 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.333 },
+      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.087 },
+      { name: 'Maize', color: 'var(--agriculture-800)', percentage: 0.05 },
+      { name: 'Potatoes', color: 'var(--agriculture-850)', percentage: 0.033 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.047 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: { x: 665, y: 87 },
+        labelPosition: { x: 724, y: 58 },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: { x: 693, y: 229 },
+        labelPosition: { x: 732, y: 184 },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: { x: 650, y: 320 },
+        labelPosition: { x: 708, y: 340 },
+      },
+      {
+        label: 'Farmland',
+        displayLabel: true,
+        labelTarget: { x: 575, y: 553 },
+        labelPosition: { x: 634, y: 584 },
+      },
+    ],
+  },
+  denmark: {
+    title: 'Land Use in Denmark',
+    isoCode: '208',
+    center: [10, 56.0],
+    scale: 7000,
+    legendPosition: 'bottom',
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.017 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.201 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.011 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.019 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.043 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.069 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.192 },
+      { name: 'Barley', color: 'var(--agriculture-650)', percentage: 0.12 },
+      { name: 'Wheat', color: 'var(--agriculture-700)', percentage: 0.091 },
+      { name: 'Temp. grassland', color: 'var(--agriculture-750)', percentage: 0.051 },
+      { name: 'Rape', color: 'var(--agriculture-800)', percentage: 0.043 },
+      { name: 'Maize', color: 'var(--agriculture-825)', percentage: 0.041 },
+      { name: 'Rye', color: 'var(--agriculture-850)', percentage: 0.023 },
+      { name: 'Potatoes', color: 'var(--agriculture-900)', percentage: 0.014 },
+      { name: 'Oats', color: 'var(--agriculture-920)', percentage: 0.012 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.0535 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 493,
+          y: 43,
+        },
+        labelPosition: {
+          x: 558,
+          y: 35,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 491,
+          y: 183,
+        },
+        labelPosition: {
+          x: 596,
+          y: 163,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 538,
+          y: 314,
+        },
+        labelPosition: {
+          x: 609,
+          y: 258,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 529,
+          y: 404,
+        },
+        labelPosition: {
+          x: 638,
+          y: 342,
+        },
+      },
+    ],
+  },
+  sweden: {
+    title: 'Land Use in Sweden',
+    isoCode: '752',
+    center: [16.0, 63.0],
+    scale: 1500,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.089 },
+      { name: 'Rocks and stones', color: 'var(--bare-500)', percentage: 0.016 },
+      { name: 'Lichens and moss', color: 'var(--bare-300)', percentage: 0.022 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.617 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.059 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.077 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.005 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.019 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.058 },
+      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.021 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.017 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 614,
+          y: 51,
+        },
+        labelPosition: {
+          x: 668,
+          y: 21,
+        },
+      },
+      {
+        label: 'Mountains',
+        displayLabel: true,
+        labelTarget: {
+          x: 638,
+          y: 121,
+        },
+        labelPosition: {
+          x: 668,
+          y: 106,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 596,
+          y: 312,
+        },
+        labelPosition: {
+          x: 645,
+          y: 337,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 438,
+          y: 660,
+        },
+        labelPosition: {
+          x: 478,
+          y: 647,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 462,
+          y: 737,
+        },
+        labelPosition: {
+          x: 540,
+          y: 748,
+        },
+      },
+    ],
+  },
+  germany: {
+    title: 'Land Use in Germany',
+    isoCode: '276',
+    center: [10.5, 51.2],
+    scale: 3000,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.018 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.342 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.005 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.011 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.057 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.078 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.216 },
+      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.167 },
+      { name: 'Industrial crops', color: 'var(--agriculture-750)', percentage: 0.038 },
+      { name: 'Fodder crops', color: 'var(--agriculture-800)', percentage: 0.028 },
+      { name: 'Root vegetables', color: 'var(--agriculture-850)', percentage: 0.017 },
+      { name: 'Fruit trees', color: 'var(--agriculture-900)', percentage: 0.012 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.011 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 397,
+          y: 81,
+        },
+        labelPosition: {
+          x: 471,
+          y: 48,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 651,
+          y: 212,
+        },
+        labelPosition: {
+          x: 706,
+          y: 185,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 656,
+          y: 379,
+        },
+        labelPosition: {
+          x: 721,
+          y: 380,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 555,
+          y: 516,
+        },
+        labelPosition: {
+          x: 665,
+          y: 541,
+        },
+      },
+    ],
+  },
+  croatia: {
+    title: 'Land Use in Croatia',
+    isoCode: '191',
+    center: [16.0, 44.4],
+    legendPosition: 'bottom',
+    scale: 6000,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.01 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.478 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.003 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.127 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.04 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.031 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.167 },
+      { name: 'Maize', color: 'var(--agriculture-700)', percentage: 0.058 },
+      { name: 'Other cereals', color: 'var(--agriculture-750)', percentage: 0.022 },
+      { name: 'Industrial crops', color: 'var(--agriculture-800)', percentage: 0.021 },
+      { name: 'Fruit trees', color: 'var(--agriculture-850)', percentage: 0.013 },
+      { name: 'Fodder crops', color: 'var(--agriculture-900)', percentage: 0.011 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.019 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 490,
+          y: 79,
+        },
+        labelPosition: {
+          x: 534,
+          y: 62,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 605,
+          y: 155,
+        },
+        labelPosition: {
+          x: 681,
+          y: 116,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 405,
+          y: 316,
+        },
+        labelPosition: {
+          x: 446,
+          y: 358,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 499,
+          y: 453,
+        },
+        labelPosition: {
+          x: 612,
+          y: 464,
+        },
+      },
+    ],
+  },
+  belgium: {
+    title: 'Land Use in Belgium',
+    isoCode: '056',
+    center: [4.2, 50.5],
+    scale: 9000,
+    legendPosition: 'bottom',
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.017 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.262 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.003 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.01 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.042 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.12 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.293 },
+      { name: 'Other cereals', color: 'var(--agriculture-650)', percentage: 0.068 },
+      { name: 'Maize', color: 'var(--agriculture-700)', percentage: 0.054 },
+      { name: 'Root vegetables', color: 'var(--agriculture-750)', percentage: 0.045 },
+      { name: 'Temp. grassland', color: 'var(--agriculture-825)', percentage: 0.038 },
+      { name: 'Industrial crops', color: 'var(--agriculture-850)', percentage: 0.023 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.026 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 523,
+          y: 138,
+        },
+        labelPosition: {
+          x: 602,
+          y: 71,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 648,
+          y: 214,
+        },
+        labelPosition: {
+          x: 710,
+          y: 183,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 671,
+          y: 317,
+        },
+        labelPosition: {
+          x: 713,
+          y: 292,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 671,
+          y: 551,
+        },
+        labelPosition: {
+          x: 690,
+          y: 543,
+        },
+      },
+    ],
+  },
+  france: {
+    title: 'Land Use in France',
+    isoCode: '250',
+    center: [0.5, 46.5],
+    scale: 2500,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.013 },
+      { name: 'Mountains', color: 'var(--bare-500)', percentage: 0.011 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.337 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.002 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.029 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.041 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.056 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.238 },
+      { name: 'Wheat', color: 'var(--agriculture-600)', percentage: 0.065 },
+      { name: 'Maize', color: 'var(--agriculture-650)', percentage: 0.044 },
+      { name: 'Rape', color: 'var(--agriculture-700)', percentage: 0.025 },
+      { name: 'Temp. grassland', color: 'var(--agriculture-750)', percentage: 0.023 },
+      { name: 'Barley', color: 'var(--agriculture-800)', percentage: 0.022 },
+      { name: 'Other cereals', color: 'var(--agriculture-825)', percentage: 0.018 },
+      { name: 'Sunflower', color: 'var(--agriculture-850)', percentage: 0.015 },
+      { name: 'Vineyard', color: 'var(--agriculture-900)', percentage: 0.015 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.046 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 505,
+          y: 82,
+        },
+        labelPosition: {
+          x: 531,
+          y: 23,
+        },
+      },
+      {
+        label: 'Mountains',
+        displayLabel: true,
+        labelTarget: {
+          x: 563,
+          y: 133,
+        },
+        labelPosition: {
+          x: 606,
+          y: 61,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 661,
+          y: 180,
+        },
+        labelPosition: {
+          x: 711,
+          y: 103,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 708,
+          y: 387,
+        },
+        labelPosition: {
+          x: 727,
+          y: 415,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 571,
+          y: 630,
+        },
+        labelPosition: {
+          x: 610,
+          y: 691,
+        },
+      },
+    ],
+  },
+  uk: {
+    title: 'Land Use in United Kingdom',
+    isoCode: '826',
+    center: [-2.0, 54.5],
+    scale: 2500,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.02 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.138 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.026 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.116 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.038 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.064 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.423 },
+      { name: 'Wheat', color: 'var(--agriculture-700)', percentage: 0.04 },
+      { name: 'Barley', color: 'var(--agriculture-800)', percentage: 0.027 },
+      { name: 'Temp. grassland', color: 'var(--agriculture-850)', percentage: 0.027 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.081 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 397,
+          y: 76,
+        },
+        labelPosition: {
+          x: 490,
+          y: 41,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 436,
+          y: 241,
+        },
+        labelPosition: {
+          x: 578,
+          y: 217,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 473,
+          y: 364,
+        },
+        labelPosition: {
+          x: 607,
+          y: 332,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 553,
+          y: 490,
+        },
+        labelPosition: {
+          x: 642,
+          y: 474,
+        },
+      },
+    ],
+  },
+  spain: {
+    title: 'Land Use in Spain',
+    isoCode: '724',
+    center: [-2.5, 38.0],
+    scale: 2500,
+    legendPosition: 'bottom',
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.012 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.351 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.002 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.145 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.063 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.039 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.121 },
+      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.107 },
+      { name: 'Olive trees', color: 'var(--agriculture-750)', percentage: 0.059 },
+      { name: 'Fruit trees', color: 'var(--agriculture-800)', percentage: 0.035 },
+      { name: 'Vineyard', color: 'var(--agriculture-850)', percentage: 0.023 },
+      { name: 'Industrial crops', color: 'var(--agriculture-900)', percentage: 0.022 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.021 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 238,
+          y: 59,
+        },
+        labelPosition: {
+          x: 329,
+          y: 27,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 535,
+          y: 105,
+        },
+        labelPosition: {
+          x: 621,
+          y: 77,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 549,
+          y: 295,
+        },
+        labelPosition: {
+          x: 611,
+          y: 262,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 408,
+          y: 527,
+        },
+        labelPosition: {
+          x: 505,
+          y: 573,
+        },
+      },
+    ],
+  },
+  italy: {
+    title: 'Land Use in Italy',
+    isoCode: '380',
+    center: [12.0, 41.5],
+    legendPosition: 'bottom',
+    scale: 2500,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.017 },
+      { name: 'Mountains', color: 'var(--bare-500)', percentage: 0.021 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.359 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.002 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.062 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.026 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.065 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.168 },
+      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.103 },
+      { name: 'Olive trees', color: 'var(--agriculture-750)', percentage: 0.057 },
+      { name: 'Fodder crops', color: 'var(--agriculture-800)', percentage: 0.047 },
+      { name: 'Vineyard', color: 'var(--agriculture-850)', percentage: 0.026 },
+      { name: 'Fruit trees', color: 'var(--agriculture-900)', percentage: 0.021 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.026 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 432,
+          y: 56,
+        },
+        labelPosition: {
+          x: 480,
+          y: 28,
+        },
+      },
+      {
+        label: 'Mountains',
+        displayLabel: true,
+        labelTarget: {
+          x: 505,
+          y: 95,
+        },
+        labelPosition: {
+          x: 561,
+          y: 72,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 485,
+          y: 209,
+        },
+        labelPosition: {
+          x: 595,
+          y: 148,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 528,
+          y: 293,
+        },
+        labelPosition: {
+          x: 607,
+          y: 267,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 618,
+          y: 386,
+        },
+        labelPosition: {
+          x: 657,
+          y: 359,
+        },
+      },
+    ],
+  },
+  portugal: {
+    title: 'Land Use in Portugal',
+    isoCode: '620',
+    center: [-8.0, 39.5],
+    scale: 5400,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.016 },
+      { name: 'Mountains', color: 'var(--bare-500)', percentage: 0.014 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.353 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.002 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.178 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.04 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.063 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.171 },
+      { name: 'Olive trees', color: 'var(--agriculture-700)', percentage: 0.046 },
+      { name: 'Fruit trees', color: 'var(--agriculture-750)', percentage: 0.028 },
+      { name: 'Vineyard', color: 'var(--agriculture-800)', percentage: 0.018 },
+      { name: 'Cereals', color: 'var(--agriculture-850)', percentage: 0.044 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.027 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 461,
+          y: 69,
+        },
+        labelPosition: {
+          x: 510,
+          y: 53,
+        },
+      },
+      {
+        label: 'Mountains',
+        displayLabel: true,
+        labelTarget: {
+          x: 567,
+          y: 108,
+        },
+        labelPosition: {
+          x: 623,
+          y: 96,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 552,
+          y: 278,
+        },
+        labelPosition: {
+          x: 622,
+          y: 277,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 521,
+          y: 439,
+        },
+        labelPosition: {
+          x: 607,
+          y: 438,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 527,
+          y: 572,
+        },
+        labelPosition: {
+          x: 588,
+          y: 572,
+        },
+      },
+    ],
+  },
+  ireland: {
+    title: 'Land Use in Ireland',
+    isoCode: '372',
+    center: [-8.0, 53.3],
+    scale: 6000,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.024 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.129 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.024 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.119 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.011 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.046 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.596 },
+      { name: 'Barley', color: 'var(--agriculture-700)', percentage: 0.017 },
+      { name: 'Wheat', color: 'var(--agriculture-800)', percentage: 0.009 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.025 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 537,
+          y: 53,
+        },
+        labelPosition: {
+          x: 575,
+          y: 53,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 573,
+          y: 207,
+        },
+        labelPosition: {
+          x: 670,
+          y: 150,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 629,
+          y: 344,
+        },
+        labelPosition: {
+          x: 682,
+          y: 330,
+        },
+      },
+      {
+        label: 'Pasture',
+        displayLabel: true,
+        labelTarget: {
+          x: 627,
+          y: 522,
+        },
+        labelPosition: {
+          x: 666,
+          y: 525,
+        },
+      },
+    ],
+  },
+  austria: {
+    title: 'Land Use in Austria',
+    isoCode: '040',
+    center: [13.5, 47.5],
+    scale: 5100,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.015 },
+      { name: 'Mountains', color: 'var(--bare-500)', percentage: 0.054 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.433 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.003 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.053 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.046 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.238 },
+      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.082 },
+      { name: 'Fodder crops', color: 'var(--agriculture-800)', percentage: 0.033 },
+      { name: 'Industrial crops', color: 'var(--agriculture-850)', percentage: 0.024 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.019 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 576,
+          y: 178,
+        },
+        labelPosition: {
+          x: 594,
+          y: 125,
+        },
+      },
+      {
+        label: 'Mountains',
+        displayLabel: true,
+        labelTarget: {
+          x: 678,
+          y: 220,
+        },
+        labelPosition: {
+          x: 696,
+          y: 196,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 720,
+          y: 290,
+        },
+        labelPosition: {
+          x: 733,
+          y: 295,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 704,
+          y: 436,
+        },
+        labelPosition: {
+          x: 731,
+          y: 461,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 605,
+          y: 540,
+        },
+        labelPosition: {
+          x: 667,
+          y: 560,
+        },
+      },
+    ],
+  },
+  finland: {
+    title: 'Land Use in Finland',
+    isoCode: '246',
+    center: [26.0, 64.5],
+    scale: 1600,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.102 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.66 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.053 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.052 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.02 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.021 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.054 },
+      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.027 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.011 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 529,
+          y: 59,
+        },
+        labelPosition: {
+          x: 598,
+          y: 30,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 554,
+          y: 289,
+        },
+        labelPosition: {
+          x: 621,
+          y: 271,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 533,
+          y: 604,
+        },
+        labelPosition: {
+          x: 571,
+          y: 613,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 465,
+          y: 673,
+        },
+        labelPosition: {
+          x: 518,
+          y: 714,
+        },
+      },
+    ],
+  },
+  romania: {
+    title: 'Land Use in Romania',
+    isoCode: '642',
+    center: [25, 46],
+    scale: 4600,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.016 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.351 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.014 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.028 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.033 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.028 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.213 },
+      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.187 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.13 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 582,
+          y: 148,
+        },
+        labelPosition: {
+          x: 635,
+          y: 116,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 656,
+          y: 274,
+        },
+        labelPosition: {
+          x: 700,
+          y: 251,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 672,
+          y: 400,
+        },
+        labelPosition: {
+          x: 709,
+          y: 368,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 678,
+          y: 469,
+        },
+        labelPosition: {
+          x: 696,
+          y: 443,
+        },
+      },
+    ],
+  },
+  poland: {
+    title: 'Land Use in Poland',
+    isoCode: '616',
+    center: [19.0, 52.0],
+    scale: 2500,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.017 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.366 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.008 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.007 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.034 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.039 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.203 },
+      { name: 'Wheat', color: 'var(--agriculture-700)', percentage: 0.066 },
+      { name: 'Maize', color: 'var(--agriculture-750)', percentage: 0.059 },
+      { name: 'Rape', color: 'var(--agriculture-800)', percentage: 0.034 },
+      { name: 'Triticale', color: 'var(--agriculture-825)', percentage: 0.031 },
+      { name: 'Rye', color: 'var(--agriculture-850)', percentage: 0.024 },
+      { name: 'Oats', color: 'var(--agriculture-900)', percentage: 0.02 },
+      { name: 'Barley', color: 'var(--agriculture-920)', percentage: 0.019 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.072 },
+    ],
+    labels: [
+      [
+        {
+          label: 'Water',
+          displayLabel: true,
+          labelTarget: {
+            x: 424,
+            y: 181,
+          },
+          labelPosition: {
+            x: 458,
+            y: 157,
+          },
+        },
+        {
+          label: 'Nature',
+          displayLabel: true,
+          labelTarget: {
+            x: 634,
+            y: 269,
+          },
+          labelPosition: {
+            x: 696,
+            y: 258,
+          },
+        },
+        {
+          label: 'Cities',
+          displayLabel: true,
+          labelTarget: {
+            x: 634,
+            y: 379,
+          },
+          labelPosition: {
+            x: 674,
+            y: 396,
+          },
+        },
+        {
+          label: 'Agriculture',
+          displayLabel: true,
+          labelTarget: {
+            x: 631,
+            y: 535,
+          },
+          labelPosition: {
+            x: 661,
+            y: 532,
+          },
+        },
+      ],
+    ],
+  },
+  bulgaria: {
+    title: 'Land Use in Bulgaria',
+    isoCode: '100',
+    center: [25.0, 43.0],
+    scale: 4500,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.01 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.447 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.002 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.05 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.018 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.024 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.138 },
+      { name: 'Wheat', color: 'var(--agriculture-700)', percentage: 0.102 },
+      { name: 'Sunflower', color: 'var(--agriculture-750)', percentage: 0.07 },
+      { name: 'Maize', color: 'var(--agriculture-800)', percentage: 0.047 },
+      { name: 'Barley', color: 'var(--agriculture-850)', percentage: 0.016 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.076 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 249,
+          y: 241,
+        },
+        labelPosition: {
+          x: 265,
+          y: 196,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 631,
+          y: 280,
+        },
+        labelPosition: {
+          x: 641,
+          y: 252,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 647,
+          y: 451,
+        },
+        labelPosition: {
+          x: 662,
+          y: 466,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 562,
+          y: 541,
+        },
+        labelPosition: {
+          x: 620,
+          y: 567,
+        },
+      },
+    ],
+  },
+  czechia: {
+    title: 'Land Use in Czechia',
+    isoCode: '203',
+    center: [15.5, 49.8],
+    scale: 5000,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.012 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.367 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.002 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.008 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.029 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.047 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.234 },
+      { name: 'Wheat', color: 'var(--agriculture-700)', percentage: 0.081 },
+      { name: 'Rape', color: 'var(--agriculture-750)', percentage: 0.048 },
+      { name: 'Maize', color: 'var(--agriculture-800)', percentage: 0.036 },
+      { name: 'Barley', color: 'var(--agriculture-850)', percentage: 0.029 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.107 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 332,
+          y: 210,
+        },
+        labelPosition: {
+          x: 322,
+          y: 134,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 490,
+          y: 271,
+        },
+        labelPosition: {
+          x: 502,
+          y: 181,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 683,
+          y: 380,
+        },
+        labelPosition: {
+          x: 716,
+          y: 349,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 661,
+          y: 500,
+        },
+        labelPosition: {
+          x: 696,
+          y: 519,
+        },
+      },
+    ],
+  },
+  hungary: {
+    title: 'Land Use in Hungary',
+    isoCode: '348',
+    center: [19.5, 47.0],
+    scale: 4500,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.02 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.273 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.011 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.017 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.044 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.04 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.175 },
+      { name: 'Maize', color: 'var(--agriculture-700)', percentage: 0.131 },
+      { name: 'Wheat', color: 'var(--agriculture-750)', percentage: 0.105 },
+      { name: 'Sunflower', color: 'var(--agriculture-800)', percentage: 0.07 },
+      { name: 'Barley', color: 'var(--agriculture-850)', percentage: 0.028 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.086 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 519,
+          y: 200,
+        },
+        labelPosition: {
+          x: 515,
+          y: 155,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 653,
+          y: 244,
+        },
+        labelPosition: {
+          x: 695,
+          y: 210,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 631,
+          y: 358,
+        },
+        labelPosition: {
+          x: 682,
+          y: 386,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 579,
+          y: 474,
+        },
+        labelPosition: {
+          x: 635,
+          y: 525,
+        },
+      },
+    ],
+  },
+  slovakia: {
+    title: 'Land Use in Slovakia',
+    isoCode: '703',
+    center: [19.5, 48.7],
+    scale: 6500,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.01 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.459 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.002 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.043 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.028 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.031 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.179 },
+      { name: 'Wheat', color: 'var(--agriculture-700)', percentage: 0.062 },
+      { name: 'Maize', color: 'var(--agriculture-750)', percentage: 0.05 },
+      { name: 'Rape', color: 'var(--agriculture-800)', percentage: 0.027 },
+      { name: 'Barley', color: 'var(--agriculture-850)', percentage: 0.019 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.09 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 418,
+          y: 222,
+        },
+        labelPosition: {
+          x: 452,
+          y: 172,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 671,
+          y: 271,
+        },
+        labelPosition: {
+          x: 698,
+          y: 207,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 739,
+          y: 419,
+        },
+        labelPosition: {
+          x: 737,
+          y: 457,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 499,
+          y: 509,
+        },
+        labelPosition: {
+          x: 538,
+          y: 543,
+        },
+      },
+    ],
+  },
+  estonia: {
+    title: 'Land Use in Estonia',
+    isoCode: '233',
+    center: [25.5, 58.7],
+    scale: 6000,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.05 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.557 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.038 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.027 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.013 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.019 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.162 },
+      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.081 },
+      { name: 'Rape', color: 'var(--agriculture-800)', percentage: 0.017 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.036 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: { x: 400, y: 100 },
+        labelPosition: { x: 400, y: 100 },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: { x: 400, y: 200 },
+        labelPosition: { x: 400, y: 200 },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: { x: 400, y: 300 },
+        labelPosition: { x: 400, y: 300 },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: { x: 400, y: 500 },
+        labelPosition: { x: 400, y: 500 },
+      },
+    ],
+  },
+  latvia: {
+    title: 'Land Use in Latvia',
+    isoCode: '428',
+    center: [25.0, 57.0],
+    scale: 5500,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.025 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.534 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.016 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.023 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.019 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.019 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.197 },
+      { name: 'Wheat', color: 'var(--agriculture-700)', percentage: 0.07 },
+      { name: 'Rape', color: 'var(--agriculture-800)', percentage: 0.033 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.064 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: { x: 400, y: 100 },
+        labelPosition: { x: 400, y: 100 },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: { x: 400, y: 200 },
+        labelPosition: { x: 400, y: 200 },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: { x: 400, y: 300 },
+        labelPosition: { x: 400, y: 300 },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: { x: 400, y: 500 },
+        labelPosition: { x: 400, y: 500 },
+      },
+    ],
+  },
+  lithuania: {
+    title: 'Land Use in Lithuania',
+    isoCode: '440',
+    center: [24.0, 55.3],
+    scale: 5500,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.025 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.377 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.012 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.005 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.028 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.022 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.208 },
+      { name: 'Wheat', color: 'var(--agriculture-700)', percentage: 0.139 },
+      { name: 'Rape', color: 'var(--agriculture-750)', percentage: 0.062 },
+      { name: 'Barley', color: 'var(--agriculture-800)', percentage: 0.029 },
+      { name: 'Oats', color: 'var(--agriculture-850)', percentage: 0.014 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.079 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 334,
+          y: 181,
+        },
+        labelPosition: {
+          x: 437,
+          y: 130,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 649,
+          y: 279,
+        },
+        labelPosition: {
+          x: 690,
+          y: 231,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 681,
+          y: 377,
+        },
+        labelPosition: {
+          x: 747,
+          y: 376,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 603,
+          y: 610,
+        },
+        labelPosition: {
+          x: 650,
+          y: 637,
+        },
+      },
+    ],
+  },
+  slovenia: {
+    title: 'Land Use in Slovenia',
+    isoCode: '705',
+    center: [14.8, 46.1],
+    scale: 8000,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.009 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.613 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.001 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.024 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.015 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.038 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.205 },
+      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.049 },
+      { name: 'Fruit trees', color: 'var(--agriculture-800)', percentage: 0.015 },
+      { name: 'Vineyard', color: 'var(--agriculture-850)', percentage: 0.007 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.024 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 597,
+          y: 223,
+        },
+        labelPosition: {
+          x: 601,
+          y: 173,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 610,
+          y: 365,
+        },
+        labelPosition: {
+          x: 639,
+          y: 378,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 557,
+          y: 439,
+        },
+        labelPosition: {
+          x: 605,
+          y: 450,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 510,
+          y: 509,
+        },
+        labelPosition: {
+          x: 549,
+          y: 534,
+        },
+      },
+    ],
+  },
+  greece: {
+    title: 'Land Use in Greece',
+    isoCode: '300',
+    center: [22, 39],
+    scale: 3500,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.013 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.388 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.007 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.212 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.025 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.04 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.117 },
+      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.04 },
+      { name: 'Cotton', color: 'var(--agriculture-750)', percentage: 0.018 },
+      { name: 'Fruit trees', color: 'var(--agriculture-800)', percentage: 0.022 },
+      { name: 'Olive trees', color: 'var(--agriculture-850)', percentage: 0.083 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.033 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 571,
+          y: 159,
+        },
+        labelPosition: {
+          x: 615,
+          y: 120,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 674,
+          y: 281,
+        },
+        labelPosition: {
+          x: 704,
+          y: 310,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 682,
+          y: 436,
+        },
+        labelPosition: {
+          x: 717,
+          y: 420,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 658,
+          y: 726,
+        },
+        labelPosition: {
+          x: 693,
+          y: 745,
+        },
+      },
+    ],
+  },
+  luxembourg: {
+    title: 'Land Use in Luxembourg',
+    isoCode: '442',
+    center: [6.13, 49.81],
+    scale: 18000,
+    categories: [
+      { name: 'Water', color: 'var(--water-400)', percentage: 0.011 },
+      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.367 },
+      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.002 },
+      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.011 },
+      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.014 },
+      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.092 },
+      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.302 },
+      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.127 },
+      { name: 'Fodder crops', color: 'var(--agriculture-800)', percentage: 0.05 },
+      { name: 'Vineyard', color: 'var(--agriculture-850)', percentage: 0.005 },
+      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.019 },
+    ],
+    labels: [
+      {
+        label: 'Water',
+        displayLabel: true,
+        labelTarget: {
+          x: 379,
+          y: 211,
+        },
+        labelPosition: {
+          x: 431,
+          y: 151,
+        },
+      },
+      {
+        label: 'Nature',
+        displayLabel: true,
+        labelTarget: {
+          x: 442,
+          y: 308,
+        },
+        labelPosition: {
+          x: 517,
+          y: 237,
+        },
+      },
+      {
+        label: 'Cities',
+        displayLabel: true,
+        labelTarget: {
+          x: 527,
+          y: 397,
+        },
+        labelPosition: {
+          x: 595,
+          y: 346,
+        },
+      },
+      {
+        label: 'Agriculture',
+        displayLabel: true,
+        labelTarget: {
+          x: 514,
+          y: 518,
+        },
+        labelPosition: {
+          x: 576,
+          y: 505,
+        },
+      },
+    ],
+  },
+};

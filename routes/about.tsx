@@ -1,0 +1,107 @@
+import Layout from "../components/Layout.tsx";
+
+export default function About() {
+  return (
+    <Layout
+      title="About - OnsLand"
+      description="Learn about the OnsLand project - an interactive visualization of land use across Europe. Discover the data sources, technology, and how to contribute."
+      pageSpecificCss={["/about.css"]}
+      pageSpecificScripts={["/about.js"]}
+    >
+      <header>
+        <nav class="navbar">
+          <div id="countryHeader">
+            <a href="/" class="back-button">
+              <span class="back-text-full">
+                <span data-i18n="common.back">Back</span>
+              </span>
+              <span class="back-text-short" data-i18n="common.backShort">
+                ←
+              </span>
+            </a>
+            <h1>
+              <span data-i18n="about.heading">About OnsLand</span>
+            </h1>
+            {/* Hamburger menu will be added here by menu.js */}
+          </div>
+        </nav>
+      </header>
+
+      <main class="about-container">
+        <section>
+          <h2 data-i18n="about.what.heading">What is OnsLand?</h2>
+          <p data-i18n="about.what.description">
+            OnsLand is an interactive visualization project that explores how
+            land is used across European countries. Using data from Eurostat, it
+            presents land use patterns through hexagon-based visualizations,
+            making complex agricultural and environmental data accessible and
+            engaging.
+          </p>
+        </section>
+
+        <section>
+          <h2 data-i18n="about.contribute.heading">How to Contribute</h2>
+          <p data-i18n="about.contribute.intro">
+            OnsLand is an open-source project and contributions are welcome!
+            Here's how you can help:
+          </p>
+          <ul>
+            <li>
+              <strong data-i18n="about.contribute.bugs">Report bugs:</strong>
+              <span data-i18n="about.contribute.bugsDesc">
+                Found an issue? Report it on GitHub
+              </span>
+            </li>
+            <li>
+              <strong data-i18n="about.contribute.features">
+                Suggest a feature:
+              </strong>
+              <span data-i18n="about.contribute.featuresDesc">
+                Have an idea for improvement? I'd love to hear it
+              </span>
+            </li>
+            <li>
+              <strong data-i18n="about.contribute.translations">
+                Correct or add translations:
+              </strong>
+              <span data-i18n="about.contribute.translationsDesc">
+                Help translate the interface to more languages. Currently this
+                was done by AI, so not perfect yet.
+              </span>
+            </li>
+            <li>
+              <strong data-i18n="about.contribute.data">
+                Add more countries:
+              </strong>
+              <span data-i18n="about.contribute.dataDesc">
+                It's currently based on Eurostat data, but if you know of other
+                reliable sources, please share them.
+              </span>
+            </li>
+          </ul>
+          <p>
+            <strong data-i18n="about.contribute.github">
+              GitHub repository:
+            </strong>
+            <a
+              href="https://github.com/vnglst/onsland"
+              target="_blank"
+              rel="noopener"
+            >
+              github.com/vnglst/onsland
+            </a>
+          </p>
+        </section>
+
+        <section>
+          <h2 data-i18n="about.license.heading">License</h2>
+          <p data-i18n="about.license.description">
+            This project is open source and available under the MIT License. You
+            are free to use, modify, and distribute the code as long as you
+            include the original license and copyright notice.
+          </p>
+        </section>
+      </main>
+    </Layout>
+  );
+}

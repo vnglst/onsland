@@ -28,32 +28,64 @@ Want to add more countries? The map rendering is already there, and land use dat
    npm run query <COUNTRY_CODE>  # e.g., PL, RO, GR
    ```
 
-2. Add the country configuration to [public/shared/countries.js](public/shared/countries.js)
+2. Add the country configuration to [static/shared/countries.js](static/shared/countries.js)
    - Add the `isoCode` by checking the Wikipedia "[List of ISO 3166 country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)" to get the country's **NUM**eric code
    - Add the geographic `center` coordinates (longitude and then latitude) for proper map centering
    - Play with the `scale` value to get the best fit for the hex map
    - Populate the `categories` percentages from the "Land Cover Categories" of the command's output
    - Adjust the `labels` for better readability (use the instructions in the [Development](#development) section for help)
 
-3. Add the country name translation to the locale files in [public/locales/](public/locales/)
+3. Add the country name translation to the locale files in [static/locales/](static/locales/)
    - Add the country name to the `countries` section in each language file (en.json, nl.json, fr.json, es.json, de.json)
 
 The country will automatically appear on the home page grid and in the rankings once added to the configuration. See existing country configurations for examples.
 
 ## Development
 
+This project uses [Fresh](https://fresh.deno.dev/), a modern web framework for Deno.
+
+### Prerequisites
+
+- [Deno](https://deno.land/) installed on your machine
+
+### Running Locally
+
 Start the development server:
 
 ```bash
-npx serve public
+deno task start
 ```
 
-Enable drag-and-drop label positioning by setting `DEV_MODE = true` in [public/country.js](public/country.js).
+The site will be available at `http://localhost:8000`
+
+### Building for Production
+
+```bash
+deno task build
+```
+
+### Docker Deployment
+
+Build and run with Docker:
+
+```bash
+docker build -t onsland .
+docker run -p 8000:8000 onsland
+```
+
+Or deploy to Coolify using the included Dockerfile.
+
+### Development Tips
+
+Enable drag-and-drop label positioning by setting `DEV_MODE = true` in [static/country.js](static/country.js).
 Check the browser console for the current label positions to update the configuration.
 
 ## Technology
 
-Built with D3.js, d3-hexbin, and TopoJSON. Data from [Eurostat Land Cover Statistics 2022](https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table).
+- **Framework**: Fresh (Deno) - Server-side rendering with file-based routing
+- **Visualization**: D3.js, d3-hexbin, and TopoJSON
+- **Data**: [Eurostat Land Cover Statistics 2022](https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table)
+- **Deployment**: Docker-ready for Coolify and other platforms
 
 ## Author
 
