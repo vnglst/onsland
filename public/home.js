@@ -13,7 +13,7 @@ function toggleView() {
   const homepage = document.getElementById("homepage");
   const loadedCards = homepage.querySelectorAll(".country-card:not(.loading)");
 
-  loadedCards.forEach(card => {
+  loadedCards.forEach((card) => {
     const countryKey = card.getAttribute("data-country");
     const svg = card.querySelector("svg");
     if (svg && countryKey) {
@@ -31,16 +31,16 @@ function toggleView() {
  * @returns {string} Translated button text
  */
 function getViewToggleText() {
-  return isSquareView ? i18n.t('homepage.mapView') : i18n.t('homepage.squareView');
+  return isSquareView ? i18n.t("homepage.mapView") : i18n.t("homepage.squareView");
 }
 
 /**
  * Update all country card titles with translations
  */
 function updateCountryCardTitles() {
-  document.querySelectorAll('.country-card').forEach(card => {
-    const countryKey = card.getAttribute('data-country');
-    const titleElement = card.querySelector('.country-card-title');
+  document.querySelectorAll(".country-card").forEach((card) => {
+    const countryKey = card.getAttribute("data-country");
+    const titleElement = card.querySelector(".country-card-title");
     if (titleElement) {
       const translatedName = i18n.t(`countries.${countryKey}`) || countryNames[countryKey];
       titleElement.textContent = translatedName;
@@ -70,7 +70,7 @@ function showHomepage() {
 
     const loadingText = document.createElement("div");
     loadingText.className = "loading-text";
-    loadingText.textContent = i18n.t('common.loading');
+    loadingText.textContent = i18n.t("common.loading");
 
     countryCard.appendChild(title);
     countryCard.appendChild(placeholder);
@@ -81,11 +81,11 @@ function showHomepage() {
   const observerOptions = {
     root: null,
     rootMargin: "200px",
-    threshold: 0
+    threshold: 0,
   };
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const countryCard = entry.target;
         const countryKey = countryCard.getAttribute("data-country");
@@ -143,22 +143,22 @@ function renderCountryCard(countryCard, countryKey) {
 function initHomepage() {
   // Initialize i18n and menu
   initI18n().then(() => {
-    updatePageTitle(i18n.t('homepage.title'));
-    updateMetaDescription(i18n.t('homepage.metaDescription'));
+    updatePageTitle(i18n.t("homepage.title"));
+    updateMetaDescription(i18n.t("homepage.metaDescription"));
 
     // Initialize menu with view toggle
     initMenu({
       showViewToggle: true,
       onViewToggle: toggleView,
-      getViewToggleText: getViewToggleText
+      getViewToggleText: getViewToggleText,
     });
 
     // Listen for language changes and update country titles
-    window.addEventListener('languageChanged', () => {
-      updatePageTitle(i18n.t('homepage.title'));
+    window.addEventListener("languageChanged", () => {
+      updatePageTitle(i18n.t("homepage.title"));
 
       // Update menu view toggle text
-      const menuToggle = document.querySelector('#menuViewToggle');
+      const menuToggle = document.querySelector("#menuViewToggle");
       if (menuToggle) {
         menuToggle.textContent = getViewToggleText();
       }
@@ -179,8 +179,8 @@ function initHomepage() {
 }
 
 // Initialize page when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initHomepage);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initHomepage);
 } else {
   initHomepage();
 }
