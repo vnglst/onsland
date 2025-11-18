@@ -1,0 +1,34 @@
+<header>
+  <nav class="navbar">
+    <div id="countryHeader">
+      <a href="/" class="back-button">
+        <span class="back-text-full">
+          <span data-i18n="common.back">Back</span>
+        </span>
+        <span class="back-text-short" data-i18n="common.backShort">
+          ←
+        </span>
+      </a>
+      <h1 id="countryTitle">
+        <span class="title-prefix" data-i18n="country.titlePrefix">
+          Land Use in{" "}
+        </span>
+        <span class="title-country"></span>
+      </h1>
+      {{> menu showViewToggle=true}}
+    </div>
+  </nav>
+</header>
+
+<main>
+  <svg
+    id="countrySvg"
+    viewBox="0 0 800 800"
+    preserveAspectRatio="xMidYMid"
+  >
+  </svg>
+
+  <div id="rankingsInfo" class="rankings-info">
+    <!-- Rankings information will be dynamically inserted here -->
+  </div>
+</main>

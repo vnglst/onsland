@@ -1,20 +1,20 @@
-# Use official Deno image
-FROM denoland/deno:2.0.6
+FROM node:20-alpine
 
-# Set working directory
 WORKDIR /app
 
-# Copy dependency files
-COPY deno.json deno.lock* ./
+# Copy package files
+COPY package*.json ./
 
-# Copy application files (needed for manifest generation)
-COPY . .
+# Install dependencies
+RUN npm ci --only=production
 
-# Build the Fresh project (generates fresh.gen.ts and caches dependencies)
-RUN deno task build
+# Copy application files
+COPY server.js ./
+COPY views ./views
+COPY public ./public
 
 # Expose port
 EXPOSE 8000
 
-# Run the application
-CMD ["deno", "run", "-A", "main.ts"]
+# Start the application
+CMD ["node", "server.js"]

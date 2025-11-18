@@ -1,9 +1,6 @@
-# Node modules (legacy)
+# Dependencies
 node_modules/
 npm-debug.log
-
-# Deno cache
-.deno/
 
 # Git
 .git/
@@ -26,11 +23,17 @@ Thumbs.db
 !README.md
 .prettierrc.json
 
-# Fresh build
+# Deno/Fresh (legacy)
+.deno/
 _fresh/
-
-# Public directory (legacy - now in static/)
-public/
+deno.json
+deno.lock
+dev.ts
+main.ts
+fresh.gen.ts
+routes/
+components/
+static/
 
 # Local environment
 .env.local
@@ -39,3 +42,6 @@ public/
 # Data files (SQLite databases)
 data/land-cover.db
 data/*.csv
+
+# Migration docs
+MIGRATION_PROMPT.md
