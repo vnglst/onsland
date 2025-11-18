@@ -24,41 +24,41 @@ Want to add more countries? The map rendering is already there, and land use dat
 
 1. Query the data from the SQLite database in `data/land-cover.db` to get the land use percentages for your country
 
-2. Add the country configuration to [static/shared/countries.js](static/shared/countries.js)
+2. Add the country configuration to [public/shared/countries.js](public/shared/countries.js)
    - Add the `isoCode` by checking the Wikipedia "[List of ISO 3166 country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)" to get the country's **NUM**eric code
    - Add the geographic `center` coordinates (longitude and then latitude) for proper map centering
    - Play with the `scale` value to get the best fit for the hex map
    - Populate the `categories` percentages from the "Land Cover Categories" of the command's output
    - Adjust the `labels` for better readability (use the instructions in the [Development](#development) section for help)
 
-3. Add the country name translation to the locale files in [static/locales/](static/locales/)
+3. Add the country name translation to the locale files in [public/locales/](public/locales/)
    - Add the country name to the `countries` section in each language file (en.json, nl.json, fr.json, es.json, de.json)
 
 The country will automatically appear on the home page grid and in the rankings once added to the configuration. See existing country configurations for examples.
 
 ## Development
 
-This project uses [Fresh](https://fresh.deno.dev/), a modern web framework for Deno.
+This project uses Express.js, a minimal Node.js web framework.
 
 ### Prerequisites
 
-- [Deno](https://deno.land/) installed on your machine
+- [Node.js](https://nodejs.org/) 24+ installed on your machine
 
 ### Running Locally
 
 Start the development server:
 
 ```bash
-deno task start
+npm run dev
+```
+
+Or for production mode:
+
+```bash
+npm start
 ```
 
 The site will be available at `http://localhost:8000`
-
-### Building for Production
-
-```bash
-deno task build
-```
 
 ### Docker Deployment
 
@@ -73,20 +73,20 @@ Or deploy to Coolify using the included Dockerfile.
 
 ### Development Tips
 
-Enable drag-and-drop label positioning by setting `DEV_MODE = true` in [static/country.js](static/country.js).
+Enable drag-and-drop label positioning by setting `DEV_MODE = true` in [public/country.js](public/country.js).
 Check the browser console for the current label positions to update the configuration.
 
 ## Technology
 
-- **Framework**: Fresh (Deno) - Used primarily as a web server with server-side rendering and file-based routing (no islands architecture)
-- **Client-side**: Vanilla JavaScript loaded as separate modules - no framework-specific hydration or client-side routing
+- **Backend**: Express.js (Node.js 24+) - Minimal web server with Handlebars templating for server-side rendering
+- **Client-side**: Vanilla JavaScript - No framework dependencies, all interactivity handled in the browser
 - **Visualization**: D3.js, d3-hexbin, and TopoJSON
 - **Data**: [Eurostat Land Cover Statistics 2022](https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table)
 - **Deployment**: Docker-ready for Coolify and other platforms
 
 ### Architecture Notes
 
-This project uses Fresh as a simple web server rather than a full-stack framework. All interactivity is handled through vanilla JavaScript files loaded directly in the browser, keeping things simple and avoiding the complexity of islands architecture or client-side hydration.
+This project uses a simple Express server for routing and templating. All interactivity is handled through vanilla JavaScript files loaded directly in the browser, keeping the stack minimal and avoiding framework complexity.
 
 ## Author
 
