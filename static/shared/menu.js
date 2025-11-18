@@ -49,6 +49,13 @@ const handleViewToggle = () => {
   }
 };
 
+const updateLanguageSelect = () => {
+  const languageSwitcher = document.querySelector('.menu-language-switcher');
+  if (languageSwitcher && globalThis.i18n) {
+    languageSwitcher.value = globalThis.i18n.currentLanguage;
+  }
+};
+
 // Initialize menu when DOM is ready
 const initMenu = () => {
   const hamburger = document.querySelector('.hamburger');
@@ -73,6 +80,12 @@ const initMenu = () => {
 
   languageSwitcher?.addEventListener('change', handleLanguageChange);
   viewToggle?.addEventListener('click', handleViewToggle);
+
+  // Update language select to match current language
+  updateLanguageSelect();
+
+  // Listen for language changes to update the select value
+  window.addEventListener('languageChanged', updateLanguageSelect);
 };
 
 // Run when DOM is ready
