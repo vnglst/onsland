@@ -1,13 +1,10 @@
 /**
- * Homepage functionality
- * Handles the grid of country cards with lazy loading and view toggling
- * ES6 Module
+ * Homepage functionality - lazy loading country cards with view toggling
  */
 
 import { validCountries, countryNames } from './shared/countries.js';
 import { renderCountryPreview, renderCountrySquarePreview } from './shared/render.js';
 
-// Configuration for intersection observer
 const OBSERVER_CONFIG = {
   root: null,
   rootMargin: "200px",

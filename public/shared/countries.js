@@ -1,14 +1,10 @@
 /**
- * Country configurations for land use visualizations
- * ES6 Module - Modern 2025 approach
+ * Country configurations - loads from JSON
  * Data source: Eurostat Land Cover Statistics 2022
  */
 
 let countriesData = null;
 
-/**
- * Load and cache countries data from JSON
- */
 async function loadData() {
   if (countriesData) return countriesData;
 
@@ -21,15 +17,6 @@ async function loadData() {
   return countriesData;
 }
 
-/**
- * Initialize countries data - call this early in your app
- * @returns {Promise<void>}
- */
-export async function initCountriesData() {
-  await loadData();
-}
-
-// Export getters for data access
 export const validCountries = await (async () => {
   const data = await loadData();
   return data.validCountries;
@@ -45,7 +32,6 @@ export const countryConfigs = await (async () => {
   return data.countries;
 })();
 
-// For convenience - get specific country data
 export function getCountryConfig(countryKey) {
   return countryConfigs[countryKey];
 }

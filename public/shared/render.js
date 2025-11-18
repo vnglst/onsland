@@ -1,11 +1,9 @@
 /**
  * Shared rendering utilities for OnsLand visualizations
- * ES6 Module - Modern 2025 approach
  */
 
 import { validCountries, countryNames, countryConfigs } from './countries.js';
 
-// Configuration constants for previews
 const PREVIEW_CONFIG = {
   MAP: {
     width: 800,
@@ -21,7 +19,6 @@ const PREVIEW_CONFIG = {
   }
 };
 
-// Re-export for backwards compatibility
 export { validCountries, countryNames };
 
 
