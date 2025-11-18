@@ -93,7 +93,7 @@ function createRankingBadge(ranking, labelKey, isTopRank) {
   badge.className = "ranking-badge";
 
   const link = document.createElement("a");
-  link.href = `rankings#${createCategorySlug(ranking.categoryName)}`;
+  link.href = `/rankings#${createCategorySlug(ranking.categoryName)}`;
 
   const positionNumber = document.createElement("div");
   positionNumber.className = `ranking-position-number ${isTopRank ? "top-rank" : "bottom-rank"}`;
