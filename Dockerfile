@@ -10,6 +10,9 @@ COPY deno.json deno.lock* ./
 # Copy application files (needed for manifest generation)
 COPY . .
 
+# Cache dependencies (creates node_modules with auto mode)
+RUN deno cache main.ts vite.config.ts
+
 # Build the Fresh project (generates _fresh directory with production assets)
 RUN deno task build
 
