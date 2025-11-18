@@ -40,7 +40,6 @@ export default function Menu({ showViewToggle = false }: MenuProps) {
               class="menu-link"
               data-i18n={link.key}
             >
-              {link.key}
             </a>
           ))}
         </div>
@@ -56,7 +55,6 @@ export default function Menu({ showViewToggle = false }: MenuProps) {
               <option
                 key={lang.code}
                 value={lang.code}
-                selected={lang.code === "en"}
               >
                 {lang.name}
               </option>

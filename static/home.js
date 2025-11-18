@@ -147,42 +147,43 @@ function renderCountryCard(countryCard, countryKey) {
  * Initialize the homepage
  */
 function initHomepage() {
-  // Initialize i18n and menu
-  initI18n().then(() => {
-    updatePageTitle(i18n.t("homepage.title"));
-    updateMetaDescription(i18n.t("homepage.metaDescription"));
+  // Load both i18n and map data in parallel, then render
+  Promise.all([
+    initI18n(),
+    fetch("/vendor/countries-50m.json").then((response) => response.json()),
+  ])
+    .then(([_, world]) => {
+      worldData = world;
 
-    // Expose view toggle functions for Menu island
-    window.toggleView = toggleView;
-    window.getViewToggleText = getViewToggleText;
-
-    // Set initial view toggle button text
-    const menuToggle = document.getElementById("menuViewToggle");
-    if (menuToggle) {
-      menuToggle.textContent = getViewToggleText();
-    }
-
-    // Listen for language changes and update country titles
-    window.addEventListener("languageChanged", () => {
       updatePageTitle(i18n.t("homepage.title"));
+      updateMetaDescription(i18n.t("homepage.metaDescription"));
 
-      // Update view toggle button text
+      // Expose view toggle functions for Menu island
+      window.toggleView = toggleView;
+      window.getViewToggleText = getViewToggleText;
+
+      // Set initial view toggle button text
       const menuToggle = document.getElementById("menuViewToggle");
       if (menuToggle) {
         menuToggle.textContent = getViewToggleText();
       }
 
-      // Update all country cards
-      updateCountryCardTitles();
-    });
-  });
-
-  // Load map data and render homepage
-  fetch("/vendor/countries-50m.json")
-    .then((response) => response.json())
-    .then((world) => {
-      worldData = world;
+      // Render homepage now that both i18n and map data are ready
       showHomepage();
+
+      // Listen for language changes and update country titles
+      window.addEventListener("languageChanged", () => {
+        updatePageTitle(i18n.t("homepage.title"));
+
+        // Update view toggle button text
+        const menuToggle = document.getElementById("menuViewToggle");
+        if (menuToggle) {
+          menuToggle.textContent = getViewToggleText();
+        }
+
+        // Update all country cards
+        updateCountryCardTitles();
+      });
     })
     .catch((error) => console.error("Error loading data:", error));
 }
