@@ -3,6 +3,30 @@
 
 const DEV_MODE = false;
 
+// Constants for visualization
+const VIZ_CONFIG = {
+  SVG_WIDTH: 800,
+  SVG_HEIGHT: 800,
+  HEX_RADIUS: 6,
+  LEGEND_ITEM_HEIGHT: 20,
+  LEGEND_PADDING: 5,
+  LEGEND_BOTTOM_OFFSET: 120,
+  LABEL_OFFSET: {
+    x: 10,
+    y: 5
+  },
+  LABEL_LINE_OFFSET: 10
+};
+
+const ANIMATION_CONFIG = {
+  DURATION_SHORT: 500,
+  DURATION_MEDIUM: 750,
+  DURATION_LONG: 1000,
+  DELAY_PER_HEX: 0.7,
+  DELAY_PER_LEGEND: 40,
+  DELAY_PER_LABEL: 300
+};
+
 // Get country from Fresh route parameter (set in [country].tsx)
 const countryFromRoute = window.__COUNTRY__;
 const currentCountry = validCountries.includes(countryFromRoute) ? countryFromRoute : "netherlands";
@@ -161,58 +185,51 @@ function displayRankings() {
 function toggleLayout() {
   isSquareLayout = !isSquareLayout;
   const svg = d3.select("#countrySvg");
-  const hexRadius = 6;
 
   // Get color scale to ensure proper colors
   const config = countryConfigs[currentCountry];
-  const categories = config.categories;
-  const colorScale = d3
-    .scaleOrdinal()
-    .domain(categories.map((c) => c.name))
-    .range(categories.map((c) => c.color));
+  const colorScale = createColorScale(config.categories);
+  const hexbin = d3.hexbin().radius(VIZ_CONFIG.HEX_RADIUS);
 
   if (isSquareLayout) {
     const hexagonPositions = calculateHexagonGridPositions(hexDataGlobal.length);
-    const hexbin = d3.hexbin().radius(hexRadius);
 
     svg
       .selectAll(".hexagon")
       .interrupt() // Stop any ongoing transitions
       .attr("fill", (d, i) => colorScale(hexColorsGlobal[i])) // Ensure correct color immediately
       .transition()
-      .duration(1000)
+      .duration(ANIMATION_CONFIG.DURATION_LONG)
       .ease(d3.easeCubicInOut)
       .attr("transform", (d, i) => {
         const pos = hexagonPositions[i];
         return `translate(${pos.x},${pos.y})`;
       })
-      .attr("d", hexbin.hexagon(hexRadius))
+      .attr("d", hexbin.hexagon(VIZ_CONFIG.HEX_RADIUS))
       .attr("stroke-width", 0);
 
     svg
       .selectAll("text[data-label], line[data-label], circle[data-label]")
       .transition()
-      .duration(500)
+      .duration(ANIMATION_CONFIG.DURATION_SHORT)
       .attr("opacity", 0);
   } else {
-    const hexbin = d3.hexbin().radius(hexRadius);
-
     svg
       .selectAll(".hexagon")
       .interrupt() // Stop any ongoing transitions
       .attr("fill", (d, i) => colorScale(hexColorsGlobal[i])) // Ensure correct color immediately
       .transition()
-      .duration(1000)
+      .duration(ANIMATION_CONFIG.DURATION_LONG)
       .ease(d3.easeCubicInOut)
       .attr("transform", (d, i) => `translate(${hexDataGlobal[i].x},${hexDataGlobal[i].y})`)
-      .attr("d", hexbin.hexagon(hexRadius))
+      .attr("d", hexbin.hexagon(VIZ_CONFIG.HEX_RADIUS))
       .attr("stroke-width", 0.1);
 
     svg
       .selectAll("text[data-label], line[data-label], circle[data-label]")
       .transition()
-      .delay(500)
-      .duration(500)
+      .delay(ANIMATION_CONFIG.DURATION_SHORT)
+      .duration(ANIMATION_CONFIG.DURATION_SHORT)
       .attr("opacity", 1);
   }
 
@@ -229,25 +246,22 @@ function toggleLayout() {
  * @returns {Array} Array of {x, y} position objects
  */
 function calculateHexagonGridPositions(totalHexagons) {
-  const width = 800;
-  const height = 800;
-  const hexRadius = 6;
   const padding = 50;
 
   // Hexagon dimensions
-  const hexWidth = hexRadius * 2 * Math.sin(Math.PI / 3);
-  const hexHeight = hexRadius * 1.5;
+  const hexWidth = VIZ_CONFIG.HEX_RADIUS * 2 * Math.sin(Math.PI / 3);
+  const hexHeight = VIZ_CONFIG.HEX_RADIUS * 1.5;
 
-  const availableWidth = width - padding * 2;
-  const availableHeight = height - padding * 2;
+  const availableWidth = VIZ_CONFIG.SVG_WIDTH - padding * 2;
+  const availableHeight = VIZ_CONFIG.SVG_HEIGHT - padding * 2;
 
   const cols = Math.ceil(Math.sqrt(totalHexagons * (availableWidth / availableHeight) * (hexWidth / hexHeight)));
   const rows = Math.ceil(totalHexagons / cols);
 
   const gridWidth = cols * hexWidth;
   const gridHeight = rows * hexHeight;
-  const offsetX = (width - gridWidth) / 1.5 + hexWidth / 2;
-  const offsetY = hexRadius * 2;
+  const offsetX = (VIZ_CONFIG.SVG_WIDTH - gridWidth) / 1.5 + hexWidth / 2;
+  const offsetY = VIZ_CONFIG.HEX_RADIUS * 2;
 
   const positions = [];
   for (let i = 0; i < totalHexagons; i++) {
@@ -270,67 +284,79 @@ function getViewToggleText() {
 }
 
 /**
- * Render the country visualization
- * @param {string} countryKey - The country identifier
+ * Setup D3 projection and hexbin for a country
+ * @param {Object} config - Country configuration
+ * @returns {Object} Object containing projection and hexbin
  */
-function renderCountry(countryKey) {
-  if (!worldData) return;
-
-  const config = countryConfigs[countryKey];
-  const categories = config.categories;
-  const labels = config.labels;
-
-  const svg = d3.select("#countrySvg");
-  svg.selectAll("*").remove();
-
-  const width = 800;
-  const height = 800;
-  const hexRadius = 6;
-
+function setupProjectionAndHexbin(config) {
   const projection = d3
     .geoMercator()
     .center(config.center)
     .scale(config.scale)
-    .translate([width / 2, height / 2]);
+    .translate([VIZ_CONFIG.SVG_WIDTH / 2, VIZ_CONFIG.SVG_HEIGHT / 2]);
 
-  const path = d3.geoPath().projection(projection);
-
-  // Create hexbin for rendering (needed for both geographic and square layouts)
   const hexbin = d3
     .hexbin()
-    .radius(hexRadius)
+    .radius(VIZ_CONFIG.HEX_RADIUS)
     .extent([
       [0, 0],
-      [width, height],
+      [VIZ_CONFIG.SVG_WIDTH, VIZ_CONFIG.SVG_HEIGHT],
     ]);
 
+  return { projection, hexbin };
+}
+
+/**
+ * Get country feature from world data
+ * @param {Object} worldData - TopoJSON world data
+ * @param {Object} config - Country configuration
+ * @returns {Object|null} Country feature or null if not found
+ */
+function getCountryFeature(worldData, config) {
   const countries = topojson.feature(worldData, worldData.objects.countries);
-  const countryFeature = countries.features.find((d) => d.id === config.isoCode);
+  return countries.features.find((d) => d.id === config.isoCode) || null;
+}
 
-  if (!countryFeature) {
-    console.error(`Country ${countryKey} not found in dataset`);
-    return;
-  }
-
+/**
+ * Generate hexagon grid centers for the visualization
+ * @returns {Array} Array of [x, y] coordinate pairs
+ */
+function generateHexagonGrid() {
   const hexCenters = [];
-  for (let y = hexRadius; y < height; y += hexRadius * 1.5) {
-    for (let x = hexRadius; x < width; x += hexRadius * Math.sqrt(3)) {
+  const hexRadius = VIZ_CONFIG.HEX_RADIUS;
+
+  for (let y = hexRadius; y < VIZ_CONFIG.SVG_HEIGHT; y += hexRadius * 1.5) {
+    for (let x = hexRadius; x < VIZ_CONFIG.SVG_WIDTH; x += hexRadius * Math.sqrt(3)) {
       hexCenters.push([x, y]);
     }
   }
 
-  const hexPoints = hexCenters.filter((center) => d3.geoContains(countryFeature, projection.invert(center)));
-  const hexData = hexbin(hexPoints);
-  hexDataGlobal = hexData;
+  return hexCenters;
+}
 
-  const totalHexagons = hexData.length;
+/**
+ * Generate hexagon data for a country based on its geographic shape
+ * @param {Object} countryFeature - Country GeoJSON feature
+ * @param {Function} projection - D3 projection function
+ * @param {Function} hexbin - D3 hexbin function
+ * @returns {Array} Hexbin data
+ */
+function generateCountryHexagons(countryFeature, projection, hexbin) {
+  const hexCenters = generateHexagonGrid();
+  const hexPoints = hexCenters.filter((center) =>
+    d3.geoContains(countryFeature, projection.invert(center))
+  );
+  return hexbin(hexPoints);
+}
 
-  const colorScale = d3
-    .scaleOrdinal()
-    .domain(categories.map((c) => c.name))
-    .range(categories.map((c) => c.color));
-
-  let hexColors = [];
+/**
+ * Assign colors to hexagons based on category percentages
+ * @param {number} totalHexagons - Total number of hexagons
+ * @param {Array} categories - Array of category objects with percentages
+ * @returns {Array} Array of category names for each hexagon
+ */
+function assignHexagonColors(totalHexagons, categories) {
+  const hexColors = [];
   let remainingHexagons = totalHexagons;
 
   categories.forEach((category, index) => {
@@ -346,11 +372,32 @@ function renderCountry(countryKey) {
     }
   });
 
-  hexColorsGlobal = hexColors;
+  return hexColors;
+}
 
+/**
+ * Create D3 color scale from categories
+ * @param {Array} categories - Array of category objects
+ * @returns {Function} D3 color scale function
+ */
+function createColorScale(categories) {
+  return d3
+    .scaleOrdinal()
+    .domain(categories.map((c) => c.name))
+    .range(categories.map((c) => c.color));
+}
+
+/**
+ * Create interaction handlers for hexagon highlighting and selection
+ * @param {Object} svg - D3 SVG selection
+ * @param {Array} hexColors - Array of category names for each hexagon
+ * @param {Array} categories - Array of category objects
+ * @returns {Object} Object with handler functions
+ */
+function createInteractionHandlers(svg, hexColors, categories) {
   let selectedCategory = null;
 
-  function highlightHexagons(category) {
+  const highlightHexagons = (category) => {
     svg
       .selectAll(".hexagon")
       .filter((_, i) => hexColors[i] === category)
@@ -363,14 +410,32 @@ function renderCountry(countryKey) {
       .selectAll(".legend-item")
       .filter((_, i) => categories[i].name === category)
       .classed("dimmed", false);
-  }
+  };
 
-  function deselectHexagons() {
+  const deselectHexagons = () => {
     svg.selectAll(".hexagon").classed("highlight", false);
     svg.selectAll(".legend-item").classed("dimmed", false);
     selectedCategory = null;
-  }
+  };
 
+  return {
+    highlightHexagons,
+    deselectHexagons,
+    getSelectedCategory: () => selectedCategory,
+    setSelectedCategory: (cat) => { selectedCategory = cat; }
+  };
+}
+
+/**
+ * Render hexagons with animations and interactions
+ * @param {Object} svg - D3 SVG selection
+ * @param {Array} hexData - Hexbin data
+ * @param {Array} hexColors - Array of category names for each hexagon
+ * @param {Function} hexbin - D3 hexbin function
+ * @param {Function} colorScale - D3 color scale function
+ * @param {Object} handlers - Interaction handler functions
+ */
+function renderHexagons(svg, hexData, hexColors, hexbin, colorScale, handlers) {
   svg
     .append("g")
     .selectAll("path")
@@ -378,67 +443,74 @@ function renderCountry(countryKey) {
     .enter()
     .append("path")
     .attr("class", "hexagon")
-    .attr("d", (d) => hexbin.hexagon(0))
+    .attr("d", () => hexbin.hexagon(0))
     .attr("transform", (d) => `translate(${d.x},${d.y - Math.random() * 200})`)
     .attr("fill", "var(--bg-light)")
     .on("mouseenter", function (event, d) {
       const category = hexColors[hexData.indexOf(d)];
-      highlightHexagons(category);
+      handlers.highlightHexagons(category);
     })
-    .on("mouseleave", function (event, d) {
-      if (!selectedCategory) {
-        deselectHexagons();
+    .on("mouseleave", function () {
+      if (!handlers.getSelectedCategory()) {
+        handlers.deselectHexagons();
       }
     })
     .on("click", function (event, d) {
       const category = hexColors[hexData.indexOf(d)];
-      if (selectedCategory === category) {
-        deselectHexagons();
+      if (handlers.getSelectedCategory() === category) {
+        handlers.deselectHexagons();
       } else {
-        deselectHexagons();
-        highlightHexagons(category);
-        selectedCategory = category;
+        handlers.deselectHexagons();
+        handlers.highlightHexagons(category);
+        handlers.setSelectedCategory(category);
       }
       event.stopPropagation();
       event.preventDefault();
     })
     .transition()
-    .delay((d, i) => i * 0.7)
-    .duration(750)
+    .delay((d, i) => i * ANIMATION_CONFIG.DELAY_PER_HEX)
+    .duration(ANIMATION_CONFIG.DURATION_MEDIUM)
     .ease(d3.easeCubicOut)
     .attr("fill", (d, i) => colorScale(hexColors[i]))
     .attr("transform", (d) => `translate(${d.x},${d.y})`)
-    .attr("d", (d) => hexbin.hexagon(hexRadius));
+    .attr("d", () => hexbin.hexagon(VIZ_CONFIG.HEX_RADIUS));
+}
 
-  d3.select("body").on("click", function () {
-    if (selectedCategory !== null) {
-      deselectHexagons();
-    }
-  });
-
+/**
+ * Render legend with categories and percentages
+ * @param {Object} svg - D3 SVG selection
+ * @param {Array} categories - Array of category objects
+ * @param {Function} hexbin - D3 hexbin function
+ * @param {Object} config - Country configuration
+ */
+function renderLegend(svg, categories, hexbin, config) {
   const legendPosition = config.legendPosition || "top";
-  let legendY = 5;
+  let legendY = VIZ_CONFIG.LEGEND_PADDING;
+
   if (legendPosition === "bottom") {
-    legendY = height - categories.length * 20 - 120;
+    legendY = VIZ_CONFIG.SVG_HEIGHT -
+              categories.length * VIZ_CONFIG.LEGEND_ITEM_HEIGHT -
+              VIZ_CONFIG.LEGEND_BOTTOM_OFFSET;
   }
 
-  const legend = svg.append("g").attr("transform", `translate(5, ${legendY})`);
+  const legend = svg.append("g")
+    .attr("transform", `translate(${VIZ_CONFIG.LEGEND_PADDING}, ${legendY})`);
 
   categories.forEach((category, i) => {
     const legendItem = legend
       .append("g")
-      .attr("transform", `translate(0, ${i * 20})`)
+      .attr("transform", `translate(0, ${i * VIZ_CONFIG.LEGEND_ITEM_HEIGHT})`)
       .attr("class", `legend-item ${category.name.replace(/\s+/g, "-")}`);
 
     legendItem
       .append("path")
-      .attr("d", hexbin.hexagon(hexRadius))
+      .attr("d", hexbin.hexagon(VIZ_CONFIG.HEX_RADIUS))
       .attr("transform", "translate(5,5)")
       .style("fill", category.color)
       .attr("opacity", 0)
       .transition()
-      .delay(i * 40)
-      .duration(500)
+      .delay(i * ANIMATION_CONFIG.DELAY_PER_LEGEND)
+      .duration(ANIMATION_CONFIG.DURATION_SHORT)
       .attr("opacity", 1);
 
     legendItem
@@ -450,11 +522,20 @@ function renderCountry(countryKey) {
       .attr("fill", "var(--text-light)")
       .attr("opacity", 0)
       .transition()
-      .delay(i * 40)
-      .duration(500)
+      .delay(i * ANIMATION_CONFIG.DELAY_PER_LEGEND)
+      .duration(ANIMATION_CONFIG.DURATION_SHORT)
       .attr("opacity", 1);
   });
+}
 
+/**
+ * Render labels with lines pointing to locations
+ * @param {Object} svg - D3 SVG selection
+ * @param {Array} labels - Array of label objects
+ * @param {number} totalHexagons - Total number of hexagons (for animation delay)
+ * @param {string} countryKey - Country identifier (for dev mode)
+ */
+function renderLabels(svg, labels, totalHexagons, countryKey) {
   labels
     .filter((c) => c.displayLabel)
     .forEach((category, i) => {
@@ -474,26 +555,30 @@ function renderCountry(countryKey) {
 
       const line = labelGroup
         .append("line")
-        .attr("x1", category.labelPosition.x - 10)
-        .attr("y1", category.labelPosition.y - 5)
-        .attr("x2", category.labelTarget.x - 10)
-        .attr("y2", category.labelTarget.y - 5)
+        .attr("x1", category.labelPosition.x - VIZ_CONFIG.LABEL_LINE_OFFSET)
+        .attr("y1", category.labelPosition.y - VIZ_CONFIG.LABEL_OFFSET.y)
+        .attr("x2", category.labelTarget.x - VIZ_CONFIG.LABEL_LINE_OFFSET)
+        .attr("y2", category.labelTarget.y - VIZ_CONFIG.LABEL_OFFSET.y)
         .attr("stroke", "var(--text-light)")
         .attr("stroke-width", 2)
         .attr("stroke-dasharray", "2,2")
         .attr("opacity", 0)
         .attr("data-label", category.label);
 
+      const animationDelay = totalHexagons * ANIMATION_CONFIG.DELAY_PER_HEX +
+                            ANIMATION_CONFIG.DURATION_MEDIUM +
+                            i * ANIMATION_CONFIG.DELAY_PER_LABEL;
+
       line
         .transition()
-        .delay(totalHexagons * 0.7 + 750 + i * 300)
-        .duration(500)
+        .delay(animationDelay)
+        .duration(ANIMATION_CONFIG.DURATION_SHORT)
         .attr("opacity", 1);
 
       const targetCircle = labelGroup
         .append("circle")
-        .attr("cx", category.labelTarget.x - 10)
-        .attr("cy", category.labelTarget.y - 5)
+        .attr("cx", category.labelTarget.x - VIZ_CONFIG.LABEL_LINE_OFFSET)
+        .attr("cy", category.labelTarget.y - VIZ_CONFIG.LABEL_OFFSET.y)
         .attr("r", 5)
         .attr("fill", "var(--text-light)")
         .attr("opacity", 0)
@@ -502,14 +587,14 @@ function renderCountry(countryKey) {
 
       targetCircle
         .transition()
-        .delay(totalHexagons * 0.7 + 750 + i * 300)
-        .duration(500)
+        .delay(animationDelay)
+        .duration(ANIMATION_CONFIG.DURATION_SHORT)
         .attr("opacity", 1);
 
       const positionCircle = labelGroup
         .append("circle")
-        .attr("cx", category.labelPosition.x - 10)
-        .attr("cy", category.labelPosition.y - 5)
+        .attr("cx", category.labelPosition.x - VIZ_CONFIG.LABEL_LINE_OFFSET)
+        .attr("cy", category.labelPosition.y - VIZ_CONFIG.LABEL_OFFSET.y)
         .attr("r", 5)
         .attr("fill", "var(--text-light)")
         .attr("opacity", 0)
@@ -518,68 +603,34 @@ function renderCountry(countryKey) {
 
       positionCircle
         .transition()
-        .delay(totalHexagons * 0.7 + 750 + i * 300)
-        .duration(500)
+        .delay(animationDelay)
+        .duration(ANIMATION_CONFIG.DURATION_SHORT)
         .attr("opacity", 1);
 
       if (DEV_MODE) {
-        const dragPosition = d3
-          .drag()
-          .on("drag", function (event) {
-            const label = d3.select(this).attr("data-label");
-            const newX = event.x;
-            const newY = event.y;
-
-            svg
-              .selectAll(`circle[data-label="${label}"][data-type="position"]`)
-              .attr("cx", newX - 10)
-              .attr("cy", newY - 5);
-
-            svg.selectAll(`text[data-label="${label}"]`).attr("x", newX).attr("y", newY);
-
-            svg
-              .selectAll(`line[data-label="${label}"]`)
-              .attr("x1", newX - 10)
-              .attr("y1", newY - 5);
-          })
-          .on("end", function () {
-            printLabelCoordinates();
-          });
-
-        const dragTarget = d3
-          .drag()
-          .on("drag", function (event) {
-            const label = d3.select(this).attr("data-label");
-            const newX = event.x;
-            const newY = event.y;
-
-            svg
-              .selectAll(`circle[data-label="${label}"][data-type="target"]`)
-              .attr("cx", newX - 10)
-              .attr("cy", newY - 5);
-
-            svg
-              .selectAll(`line[data-label="${label}"]`)
-              .attr("x2", newX - 10)
-              .attr("y2", newY - 5);
-          })
-          .on("end", function () {
-            printLabelCoordinates();
-          });
-
-        labelText.attr("cursor", "move").call(dragPosition);
-        positionCircle.attr("cursor", "move").call(dragPosition);
-        targetCircle.attr("cursor", "move").call(dragTarget);
+        enableLabelDevMode(svg, labelText, positionCircle, targetCircle, category, labels, countryKey);
       }
 
       labelText
         .transition()
-        .delay(totalHexagons * 0.7 + 750 + i * 300)
-        .duration(500)
+        .delay(animationDelay)
+        .duration(ANIMATION_CONFIG.DURATION_SHORT)
         .attr("opacity", 1);
     });
+}
 
-  function printLabelCoordinates() {
+/**
+ * Enable development mode for label positioning
+ * @param {Object} svg - D3 SVG selection
+ * @param {Object} labelText - Label text element
+ * @param {Object} positionCircle - Position circle element
+ * @param {Object} targetCircle - Target circle element
+ * @param {Object} category - Category object
+ * @param {Array} labels - All labels array
+ * @param {string} countryKey - Country identifier
+ */
+function enableLabelDevMode(svg, labelText, positionCircle, targetCircle, category, labels, countryKey) {
+  const printLabelCoordinates = () => {
     const coordinates = [];
 
     labels.forEach((label) => {
@@ -589,8 +640,8 @@ function renderCountry(countryKey) {
       if (!textEl.empty() && !targetEl.empty()) {
         const posX = parseFloat(textEl.attr("x"));
         const posY = parseFloat(textEl.attr("y"));
-        const targetX = parseFloat(targetEl.attr("cx")) + 10;
-        const targetY = parseFloat(targetEl.attr("cy")) + 5;
+        const targetX = parseFloat(targetEl.attr("cx")) + VIZ_CONFIG.LABEL_LINE_OFFSET;
+        const targetY = parseFloat(targetEl.attr("cy")) + VIZ_CONFIG.LABEL_OFFSET.y;
 
         coordinates.push({
           label: label.label,
@@ -601,12 +652,108 @@ function renderCountry(countryKey) {
       }
     });
 
-    if (DEV_MODE) {
-      console.log(`\n=== ${countryKey} Label Coordinates (JSON) ===`);
-      console.log(JSON.stringify(coordinates, null, 2));
-      console.log("===============================================\n");
-    }
+    console.log(`\n=== ${countryKey} Label Coordinates (JSON) ===`);
+    console.log(JSON.stringify(coordinates, null, 2));
+    console.log("===============================================\n");
+  };
+
+  const dragPosition = d3
+    .drag()
+    .on("drag", function (event) {
+      const label = d3.select(this).attr("data-label");
+      const newX = event.x;
+      const newY = event.y;
+
+      svg
+        .selectAll(`circle[data-label="${label}"][data-type="position"]`)
+        .attr("cx", newX - VIZ_CONFIG.LABEL_LINE_OFFSET)
+        .attr("cy", newY - VIZ_CONFIG.LABEL_OFFSET.y);
+
+      svg.selectAll(`text[data-label="${label}"]`)
+        .attr("x", newX)
+        .attr("y", newY);
+
+      svg
+        .selectAll(`line[data-label="${label}"]`)
+        .attr("x1", newX - VIZ_CONFIG.LABEL_LINE_OFFSET)
+        .attr("y1", newY - VIZ_CONFIG.LABEL_OFFSET.y);
+    })
+    .on("end", printLabelCoordinates);
+
+  const dragTarget = d3
+    .drag()
+    .on("drag", function (event) {
+      const label = d3.select(this).attr("data-label");
+      const newX = event.x;
+      const newY = event.y;
+
+      svg
+        .selectAll(`circle[data-label="${label}"][data-type="target"]`)
+        .attr("cx", newX - VIZ_CONFIG.LABEL_LINE_OFFSET)
+        .attr("cy", newY - VIZ_CONFIG.LABEL_OFFSET.y);
+
+      svg
+        .selectAll(`line[data-label="${label}"]`)
+        .attr("x2", newX - VIZ_CONFIG.LABEL_LINE_OFFSET)
+        .attr("y2", newY - VIZ_CONFIG.LABEL_OFFSET.y);
+    })
+    .on("end", printLabelCoordinates);
+
+  labelText.attr("cursor", "move").call(dragPosition);
+  positionCircle.attr("cursor", "move").call(dragPosition);
+  targetCircle.attr("cursor", "move").call(dragTarget);
+}
+
+/**
+ * Render the country visualization
+ * @param {string} countryKey - The country identifier
+ */
+function renderCountry(countryKey) {
+  if (!worldData) return;
+
+  const config = countryConfigs[countryKey];
+  const svg = d3.select("#countrySvg");
+  svg.selectAll("*").remove();
+
+  // Setup projection and hexbin
+  const { projection, hexbin } = setupProjectionAndHexbin(config);
+
+  // Get country feature
+  const countryFeature = getCountryFeature(worldData, config);
+  if (!countryFeature) {
+    console.error(`Country ${countryKey} not found in dataset`);
+    return;
   }
+
+  // Generate hexagon data for the country shape
+  const hexData = generateCountryHexagons(countryFeature, projection, hexbin);
+  hexDataGlobal = hexData;
+
+  // Assign colors to hexagons based on categories
+  const hexColors = assignHexagonColors(hexData.length, config.categories);
+  hexColorsGlobal = hexColors;
+
+  // Create color scale
+  const colorScale = createColorScale(config.categories);
+
+  // Setup interaction handlers
+  const handlers = createInteractionHandlers(svg, hexColors, config.categories);
+
+  // Render hexagons with animations and interactions
+  renderHexagons(svg, hexData, hexColors, hexbin, colorScale, handlers);
+
+  // Setup body click handler to deselect
+  d3.select("body").on("click", function () {
+    if (handlers.getSelectedCategory() !== null) {
+      handlers.deselectHexagons();
+    }
+  });
+
+  // Render legend
+  renderLegend(svg, config.categories, hexbin, config);
+
+  // Render labels
+  renderLabels(svg, config.labels, hexData.length, countryKey);
 }
 
 /**
@@ -615,7 +762,15 @@ function renderCountry(countryKey) {
 async function initCountryPage() {
   try {
     // Load map data and translations in parallel
-    const [_, world] = await Promise.all([initI18n(), fetch("/vendor/countries-50m.json").then((res) => res.json())]);
+    const [_, world] = await Promise.all([
+      initI18n(),
+      fetch("/vendor/countries-50m.json").then((res) => {
+        if (!res.ok) {
+          throw new Error(`Failed to load map data: ${res.status}`);
+        }
+        return res.json();
+      })
+    ]);
 
     worldData = world;
 
@@ -637,25 +792,45 @@ async function initCountryPage() {
 
     // Listen for language changes and re-render dynamic content
     globalThis.addEventListener("languageChanged", () => {
-      // Update page title and country name
-      const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
-      document.title = `${i18n.t("country.titlePrefix")}${countryName} - OnsLand`;
-      document.querySelector(".title-country").textContent = countryName;
+      try {
+        // Update page title and country name
+        const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
+        document.title = `${i18n.t("country.titlePrefix")}${countryName} - OnsLand`;
 
-      // Update view toggle button text
-      const menuToggle = document.getElementById("menuViewToggle");
-      if (menuToggle) {
-        menuToggle.textContent = getViewToggleText();
+        const titleElement = document.querySelector(".title-country");
+        if (titleElement) {
+          titleElement.textContent = countryName;
+        }
+
+        // Update view toggle button text
+        const menuToggle = document.getElementById("menuViewToggle");
+        if (menuToggle) {
+          menuToggle.textContent = getViewToggleText();
+        }
+
+        // Re-render country visualization (legend and labels)
+        renderCountry(currentCountry);
+
+        // Re-render rankings
+        displayRankings();
+      } catch (error) {
+        console.error("Error handling language change:", error);
       }
-
-      // Re-render country visualization (legend and labels)
-      renderCountry(currentCountry);
-
-      // Re-render rankings
-      displayRankings();
     });
   } catch (error) {
     console.error("Error initializing country page:", error);
+
+    // Show user-friendly error message
+    const svg = d3.select("#countrySvg");
+    svg.selectAll("*").remove();
+
+    svg.append("text")
+      .attr("x", VIZ_CONFIG.SVG_WIDTH / 2)
+      .attr("y", VIZ_CONFIG.SVG_HEIGHT / 2)
+      .attr("text-anchor", "middle")
+      .attr("fill", "var(--text-light)")
+      .attr("font-size", "18px")
+      .text("Failed to load visualization. Please refresh the page.");
   }
 }
 
