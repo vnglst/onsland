@@ -10,11 +10,14 @@ COPY deno.json deno.lock* ./
 # Copy application files (needed for manifest generation)
 COPY . .
 
-# Build the Fresh project (generates fresh.gen.ts and caches dependencies)
+# Build the Fresh project (generates _fresh directory with production assets)
 RUN deno task build
+
+# Cache the server dependencies
+RUN deno cache _fresh/server.js
 
 # Expose port
 EXPOSE 8000
 
 # Run the application
-CMD ["deno", "run", "-A", "main.ts"]
+CMD ["serve", "-A", "_fresh/server.js"]
