@@ -7,16 +7,10 @@ WORKDIR /app
 # Copy dependency files
 COPY deno.json deno.lock* ./
 
-# Cache dependencies
-RUN deno cache --reload deno.json || true
-
-# Copy application files
+# Copy application files (needed for manifest generation)
 COPY . .
 
-# Cache all dependencies from imports
-RUN deno cache main.ts dev.ts
-
-# Build the Fresh project (generates fresh.gen.ts)
+# Build the Fresh project (generates fresh.gen.ts and caches dependencies)
 RUN deno task build
 
 # Expose port
