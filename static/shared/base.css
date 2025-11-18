@@ -127,8 +127,8 @@ h2 {
 
 .back-button {
   background: var(--bg-dark);
-  border: 2px solid rgba(255, 255, 255, 0.2);
   color: var(--text-light);
+  border: var(--ui-border-width) solid rgba(255, 255, 255, 0.2);
   padding: var(--ui-padding-y) 20px;
   border-radius: var(--ui-border-radius);
   font-size: var(--ui-font-size);
