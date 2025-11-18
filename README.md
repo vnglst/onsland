@@ -78,10 +78,15 @@ Check the browser console for the current label positions to update the configur
 
 ## Technology
 
-- **Framework**: Fresh (Deno) - Server-side rendering with file-based routing
+- **Framework**: Fresh (Deno) - Used primarily as a web server with server-side rendering and file-based routing (no islands architecture)
+- **Client-side**: Vanilla JavaScript loaded as separate modules - no framework-specific hydration or client-side routing
 - **Visualization**: D3.js, d3-hexbin, and TopoJSON
 - **Data**: [Eurostat Land Cover Statistics 2022](https://ec.europa.eu/eurostat/databrowser/view/lan_lcv_ovw/default/table)
 - **Deployment**: Docker-ready for Coolify and other platforms
+
+### Architecture Notes
+
+This project uses Fresh as a simple web server rather than a full-stack framework. All interactivity is handled through vanilla JavaScript files loaded directly in the browser, keeping things simple and avoiding the complexity of islands architecture or client-side hydration.
 
 ## Author
 
