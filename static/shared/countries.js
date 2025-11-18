@@ -4,44 +4,44 @@
 
 const countryConfigs = {
   netherlands: {
-    title: 'Land Use in the Netherlands',
-    isoCode: '528',
+    title: "Land Use in the Netherlands",
+    isoCode: "528",
     center: [5.5, 52.2],
     scale: 9000,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.108 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.143 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.011 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.018 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.04 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.13 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.333 },
-      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.087 },
-      { name: 'Maize', color: 'var(--agriculture-800)', percentage: 0.05 },
-      { name: 'Potatoes', color: 'var(--agriculture-850)', percentage: 0.033 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.047 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.108 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.143 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.011 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.018 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.04 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.13 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.333 },
+      { name: "Cereals", color: "var(--agriculture-700)", percentage: 0.087 },
+      { name: "Maize", color: "var(--agriculture-800)", percentage: 0.05 },
+      { name: "Potatoes", color: "var(--agriculture-850)", percentage: 0.033 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.047 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: { x: 665, y: 87 },
         labelPosition: { x: 724, y: 58 },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: { x: 693, y: 229 },
         labelPosition: { x: 732, y: 184 },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: { x: 650, y: 320 },
         labelPosition: { x: 708, y: 340 },
       },
       {
-        label: 'Farmland',
+        label: "Farmland",
         displayLabel: true,
         labelTarget: { x: 575, y: 553 },
         labelPosition: { x: 634, y: 584 },
@@ -49,32 +49,32 @@ const countryConfigs = {
     ],
   },
   denmark: {
-    title: 'Land Use in Denmark',
-    isoCode: '208',
+    title: "Land Use in Denmark",
+    isoCode: "208",
     center: [10, 56.0],
     scale: 7000,
-    legendPosition: 'bottom',
+    legendPosition: "bottom",
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.017 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.201 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.011 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.019 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.043 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.069 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.192 },
-      { name: 'Barley', color: 'var(--agriculture-650)', percentage: 0.12 },
-      { name: 'Wheat', color: 'var(--agriculture-700)', percentage: 0.091 },
-      { name: 'Temp. grassland', color: 'var(--agriculture-750)', percentage: 0.051 },
-      { name: 'Rape', color: 'var(--agriculture-800)', percentage: 0.043 },
-      { name: 'Maize', color: 'var(--agriculture-825)', percentage: 0.041 },
-      { name: 'Rye', color: 'var(--agriculture-850)', percentage: 0.023 },
-      { name: 'Potatoes', color: 'var(--agriculture-900)', percentage: 0.014 },
-      { name: 'Oats', color: 'var(--agriculture-920)', percentage: 0.012 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.0535 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.017 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.201 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.011 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.019 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.043 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.069 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.192 },
+      { name: "Barley", color: "var(--agriculture-650)", percentage: 0.12 },
+      { name: "Wheat", color: "var(--agriculture-700)", percentage: 0.091 },
+      { name: "Temp. grassland", color: "var(--agriculture-750)", percentage: 0.051 },
+      { name: "Rape", color: "var(--agriculture-800)", percentage: 0.043 },
+      { name: "Maize", color: "var(--agriculture-825)", percentage: 0.041 },
+      { name: "Rye", color: "var(--agriculture-850)", percentage: 0.023 },
+      { name: "Potatoes", color: "var(--agriculture-900)", percentage: 0.014 },
+      { name: "Oats", color: "var(--agriculture-920)", percentage: 0.012 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.0535 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 493,
@@ -86,7 +86,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 491,
@@ -98,7 +98,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 538,
@@ -110,7 +110,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 529,
@@ -124,26 +124,26 @@ const countryConfigs = {
     ],
   },
   sweden: {
-    title: 'Land Use in Sweden',
-    isoCode: '752',
+    title: "Land Use in Sweden",
+    isoCode: "752",
     center: [16.0, 63.0],
     scale: 1500,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.089 },
-      { name: 'Rocks and stones', color: 'var(--bare-500)', percentage: 0.016 },
-      { name: 'Lichens and moss', color: 'var(--bare-300)', percentage: 0.022 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.617 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.059 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.077 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.005 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.019 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.058 },
-      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.021 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.017 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.089 },
+      { name: "Rocks and stones", color: "var(--bare-500)", percentage: 0.016 },
+      { name: "Lichens and moss", color: "var(--bare-300)", percentage: 0.022 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.617 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.059 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.077 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.005 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.019 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.058 },
+      { name: "Cereals", color: "var(--agriculture-700)", percentage: 0.021 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.017 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 614,
@@ -155,7 +155,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Mountains',
+        label: "Mountains",
         displayLabel: true,
         labelTarget: {
           x: 638,
@@ -167,7 +167,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 596,
@@ -179,7 +179,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 438,
@@ -191,7 +191,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 462,
@@ -205,28 +205,28 @@ const countryConfigs = {
     ],
   },
   germany: {
-    title: 'Land Use in Germany',
-    isoCode: '276',
+    title: "Land Use in Germany",
+    isoCode: "276",
     center: [10.5, 51.2],
     scale: 3000,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.018 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.342 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.005 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.011 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.057 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.078 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.216 },
-      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.167 },
-      { name: 'Industrial crops', color: 'var(--agriculture-750)', percentage: 0.038 },
-      { name: 'Fodder crops', color: 'var(--agriculture-800)', percentage: 0.028 },
-      { name: 'Root vegetables', color: 'var(--agriculture-850)', percentage: 0.017 },
-      { name: 'Fruit trees', color: 'var(--agriculture-900)', percentage: 0.012 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.011 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.018 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.342 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.005 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.011 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.057 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.078 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.216 },
+      { name: "Cereals", color: "var(--agriculture-700)", percentage: 0.167 },
+      { name: "Industrial crops", color: "var(--agriculture-750)", percentage: 0.038 },
+      { name: "Fodder crops", color: "var(--agriculture-800)", percentage: 0.028 },
+      { name: "Root vegetables", color: "var(--agriculture-850)", percentage: 0.017 },
+      { name: "Fruit trees", color: "var(--agriculture-900)", percentage: 0.012 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.011 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 397,
@@ -238,7 +238,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 651,
@@ -250,7 +250,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 656,
@@ -262,7 +262,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 555,
@@ -276,29 +276,29 @@ const countryConfigs = {
     ],
   },
   croatia: {
-    title: 'Land Use in Croatia',
-    isoCode: '191',
+    title: "Land Use in Croatia",
+    isoCode: "191",
     center: [16.0, 44.4],
-    legendPosition: 'bottom',
+    legendPosition: "bottom",
     scale: 6000,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.01 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.478 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.003 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.127 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.04 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.031 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.167 },
-      { name: 'Maize', color: 'var(--agriculture-700)', percentage: 0.058 },
-      { name: 'Other cereals', color: 'var(--agriculture-750)', percentage: 0.022 },
-      { name: 'Industrial crops', color: 'var(--agriculture-800)', percentage: 0.021 },
-      { name: 'Fruit trees', color: 'var(--agriculture-850)', percentage: 0.013 },
-      { name: 'Fodder crops', color: 'var(--agriculture-900)', percentage: 0.011 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.019 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.01 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.478 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.003 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.127 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.04 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.031 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.167 },
+      { name: "Maize", color: "var(--agriculture-700)", percentage: 0.058 },
+      { name: "Other cereals", color: "var(--agriculture-750)", percentage: 0.022 },
+      { name: "Industrial crops", color: "var(--agriculture-800)", percentage: 0.021 },
+      { name: "Fruit trees", color: "var(--agriculture-850)", percentage: 0.013 },
+      { name: "Fodder crops", color: "var(--agriculture-900)", percentage: 0.011 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.019 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 490,
@@ -310,7 +310,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 605,
@@ -322,7 +322,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 405,
@@ -334,7 +334,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 499,
@@ -348,29 +348,29 @@ const countryConfigs = {
     ],
   },
   belgium: {
-    title: 'Land Use in Belgium',
-    isoCode: '056',
+    title: "Land Use in Belgium",
+    isoCode: "056",
     center: [4.2, 50.5],
     scale: 9000,
-    legendPosition: 'bottom',
+    legendPosition: "bottom",
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.017 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.262 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.003 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.01 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.042 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.12 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.293 },
-      { name: 'Other cereals', color: 'var(--agriculture-650)', percentage: 0.068 },
-      { name: 'Maize', color: 'var(--agriculture-700)', percentage: 0.054 },
-      { name: 'Root vegetables', color: 'var(--agriculture-750)', percentage: 0.045 },
-      { name: 'Temp. grassland', color: 'var(--agriculture-825)', percentage: 0.038 },
-      { name: 'Industrial crops', color: 'var(--agriculture-850)', percentage: 0.023 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.026 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.017 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.262 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.003 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.01 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.042 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.12 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.293 },
+      { name: "Other cereals", color: "var(--agriculture-650)", percentage: 0.068 },
+      { name: "Maize", color: "var(--agriculture-700)", percentage: 0.054 },
+      { name: "Root vegetables", color: "var(--agriculture-750)", percentage: 0.045 },
+      { name: "Temp. grassland", color: "var(--agriculture-825)", percentage: 0.038 },
+      { name: "Industrial crops", color: "var(--agriculture-850)", percentage: 0.023 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.026 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 523,
@@ -382,7 +382,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 648,
@@ -394,7 +394,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 671,
@@ -406,7 +406,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 671,
@@ -420,32 +420,32 @@ const countryConfigs = {
     ],
   },
   france: {
-    title: 'Land Use in France',
-    isoCode: '250',
+    title: "Land Use in France",
+    isoCode: "250",
     center: [0.5, 46.5],
     scale: 2500,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.013 },
-      { name: 'Mountains', color: 'var(--bare-500)', percentage: 0.011 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.337 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.002 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.029 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.041 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.056 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.238 },
-      { name: 'Wheat', color: 'var(--agriculture-600)', percentage: 0.065 },
-      { name: 'Maize', color: 'var(--agriculture-650)', percentage: 0.044 },
-      { name: 'Rape', color: 'var(--agriculture-700)', percentage: 0.025 },
-      { name: 'Temp. grassland', color: 'var(--agriculture-750)', percentage: 0.023 },
-      { name: 'Barley', color: 'var(--agriculture-800)', percentage: 0.022 },
-      { name: 'Other cereals', color: 'var(--agriculture-825)', percentage: 0.018 },
-      { name: 'Sunflower', color: 'var(--agriculture-850)', percentage: 0.015 },
-      { name: 'Vineyard', color: 'var(--agriculture-900)', percentage: 0.015 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.046 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.013 },
+      { name: "Mountains", color: "var(--bare-500)", percentage: 0.011 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.337 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.002 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.029 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.041 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.056 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.238 },
+      { name: "Wheat", color: "var(--agriculture-600)", percentage: 0.065 },
+      { name: "Maize", color: "var(--agriculture-650)", percentage: 0.044 },
+      { name: "Rape", color: "var(--agriculture-700)", percentage: 0.025 },
+      { name: "Temp. grassland", color: "var(--agriculture-750)", percentage: 0.023 },
+      { name: "Barley", color: "var(--agriculture-800)", percentage: 0.022 },
+      { name: "Other cereals", color: "var(--agriculture-825)", percentage: 0.018 },
+      { name: "Sunflower", color: "var(--agriculture-850)", percentage: 0.015 },
+      { name: "Vineyard", color: "var(--agriculture-900)", percentage: 0.015 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.046 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 505,
@@ -457,7 +457,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Mountains',
+        label: "Mountains",
         displayLabel: true,
         labelTarget: {
           x: 563,
@@ -469,7 +469,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 661,
@@ -481,7 +481,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 708,
@@ -493,7 +493,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 571,
@@ -507,26 +507,26 @@ const countryConfigs = {
     ],
   },
   uk: {
-    title: 'Land Use in United Kingdom',
-    isoCode: '826',
+    title: "Land Use in United Kingdom",
+    isoCode: "826",
     center: [-2.0, 54.5],
     scale: 2500,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.02 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.138 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.026 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.116 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.038 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.064 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.423 },
-      { name: 'Wheat', color: 'var(--agriculture-700)', percentage: 0.04 },
-      { name: 'Barley', color: 'var(--agriculture-800)', percentage: 0.027 },
-      { name: 'Temp. grassland', color: 'var(--agriculture-850)', percentage: 0.027 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.081 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.02 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.138 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.026 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.116 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.038 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.064 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.423 },
+      { name: "Wheat", color: "var(--agriculture-700)", percentage: 0.04 },
+      { name: "Barley", color: "var(--agriculture-800)", percentage: 0.027 },
+      { name: "Temp. grassland", color: "var(--agriculture-850)", percentage: 0.027 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.081 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 397,
@@ -538,7 +538,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 436,
@@ -550,7 +550,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 473,
@@ -562,7 +562,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 553,
@@ -576,29 +576,29 @@ const countryConfigs = {
     ],
   },
   spain: {
-    title: 'Land Use in Spain',
-    isoCode: '724',
+    title: "Land Use in Spain",
+    isoCode: "724",
     center: [-2.5, 38.0],
     scale: 2500,
-    legendPosition: 'bottom',
+    legendPosition: "bottom",
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.012 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.351 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.002 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.145 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.063 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.039 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.121 },
-      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.107 },
-      { name: 'Olive trees', color: 'var(--agriculture-750)', percentage: 0.059 },
-      { name: 'Fruit trees', color: 'var(--agriculture-800)', percentage: 0.035 },
-      { name: 'Vineyard', color: 'var(--agriculture-850)', percentage: 0.023 },
-      { name: 'Industrial crops', color: 'var(--agriculture-900)', percentage: 0.022 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.021 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.012 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.351 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.002 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.145 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.063 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.039 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.121 },
+      { name: "Cereals", color: "var(--agriculture-700)", percentage: 0.107 },
+      { name: "Olive trees", color: "var(--agriculture-750)", percentage: 0.059 },
+      { name: "Fruit trees", color: "var(--agriculture-800)", percentage: 0.035 },
+      { name: "Vineyard", color: "var(--agriculture-850)", percentage: 0.023 },
+      { name: "Industrial crops", color: "var(--agriculture-900)", percentage: 0.022 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.021 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 238,
@@ -610,7 +610,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 535,
@@ -622,7 +622,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 549,
@@ -634,7 +634,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 408,
@@ -648,30 +648,30 @@ const countryConfigs = {
     ],
   },
   italy: {
-    title: 'Land Use in Italy',
-    isoCode: '380',
+    title: "Land Use in Italy",
+    isoCode: "380",
     center: [12.0, 41.5],
-    legendPosition: 'bottom',
+    legendPosition: "bottom",
     scale: 2500,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.017 },
-      { name: 'Mountains', color: 'var(--bare-500)', percentage: 0.021 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.359 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.002 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.062 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.026 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.065 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.168 },
-      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.103 },
-      { name: 'Olive trees', color: 'var(--agriculture-750)', percentage: 0.057 },
-      { name: 'Fodder crops', color: 'var(--agriculture-800)', percentage: 0.047 },
-      { name: 'Vineyard', color: 'var(--agriculture-850)', percentage: 0.026 },
-      { name: 'Fruit trees', color: 'var(--agriculture-900)', percentage: 0.021 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.026 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.017 },
+      { name: "Mountains", color: "var(--bare-500)", percentage: 0.021 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.359 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.002 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.062 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.026 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.065 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.168 },
+      { name: "Cereals", color: "var(--agriculture-700)", percentage: 0.103 },
+      { name: "Olive trees", color: "var(--agriculture-750)", percentage: 0.057 },
+      { name: "Fodder crops", color: "var(--agriculture-800)", percentage: 0.047 },
+      { name: "Vineyard", color: "var(--agriculture-850)", percentage: 0.026 },
+      { name: "Fruit trees", color: "var(--agriculture-900)", percentage: 0.021 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.026 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 432,
@@ -683,7 +683,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Mountains',
+        label: "Mountains",
         displayLabel: true,
         labelTarget: {
           x: 505,
@@ -695,7 +695,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 485,
@@ -707,7 +707,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 528,
@@ -719,7 +719,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 618,
@@ -733,28 +733,28 @@ const countryConfigs = {
     ],
   },
   portugal: {
-    title: 'Land Use in Portugal',
-    isoCode: '620',
+    title: "Land Use in Portugal",
+    isoCode: "620",
     center: [-8.0, 39.5],
     scale: 5400,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.016 },
-      { name: 'Mountains', color: 'var(--bare-500)', percentage: 0.014 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.353 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.002 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.178 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.04 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.063 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.171 },
-      { name: 'Olive trees', color: 'var(--agriculture-700)', percentage: 0.046 },
-      { name: 'Fruit trees', color: 'var(--agriculture-750)', percentage: 0.028 },
-      { name: 'Vineyard', color: 'var(--agriculture-800)', percentage: 0.018 },
-      { name: 'Cereals', color: 'var(--agriculture-850)', percentage: 0.044 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.027 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.016 },
+      { name: "Mountains", color: "var(--bare-500)", percentage: 0.014 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.353 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.002 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.178 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.04 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.063 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.171 },
+      { name: "Olive trees", color: "var(--agriculture-700)", percentage: 0.046 },
+      { name: "Fruit trees", color: "var(--agriculture-750)", percentage: 0.028 },
+      { name: "Vineyard", color: "var(--agriculture-800)", percentage: 0.018 },
+      { name: "Cereals", color: "var(--agriculture-850)", percentage: 0.044 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.027 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 461,
@@ -766,7 +766,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Mountains',
+        label: "Mountains",
         displayLabel: true,
         labelTarget: {
           x: 567,
@@ -778,7 +778,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 552,
@@ -790,7 +790,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 521,
@@ -802,7 +802,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 527,
@@ -816,25 +816,25 @@ const countryConfigs = {
     ],
   },
   ireland: {
-    title: 'Land Use in Ireland',
-    isoCode: '372',
+    title: "Land Use in Ireland",
+    isoCode: "372",
     center: [-8.0, 53.3],
     scale: 6000,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.024 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.129 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.024 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.119 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.011 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.046 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.596 },
-      { name: 'Barley', color: 'var(--agriculture-700)', percentage: 0.017 },
-      { name: 'Wheat', color: 'var(--agriculture-800)', percentage: 0.009 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.025 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.024 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.129 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.024 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.119 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.011 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.046 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.596 },
+      { name: "Barley", color: "var(--agriculture-700)", percentage: 0.017 },
+      { name: "Wheat", color: "var(--agriculture-800)", percentage: 0.009 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.025 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 537,
@@ -846,7 +846,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 573,
@@ -858,7 +858,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 629,
@@ -870,7 +870,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Pasture',
+        label: "Pasture",
         displayLabel: true,
         labelTarget: {
           x: 627,
@@ -884,26 +884,26 @@ const countryConfigs = {
     ],
   },
   austria: {
-    title: 'Land Use in Austria',
-    isoCode: '040',
+    title: "Land Use in Austria",
+    isoCode: "040",
     center: [13.5, 47.5],
     scale: 5100,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.015 },
-      { name: 'Mountains', color: 'var(--bare-500)', percentage: 0.054 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.433 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.003 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.053 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.046 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.238 },
-      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.082 },
-      { name: 'Fodder crops', color: 'var(--agriculture-800)', percentage: 0.033 },
-      { name: 'Industrial crops', color: 'var(--agriculture-850)', percentage: 0.024 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.019 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.015 },
+      { name: "Mountains", color: "var(--bare-500)", percentage: 0.054 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.433 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.003 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.053 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.046 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.238 },
+      { name: "Cereals", color: "var(--agriculture-700)", percentage: 0.082 },
+      { name: "Fodder crops", color: "var(--agriculture-800)", percentage: 0.033 },
+      { name: "Industrial crops", color: "var(--agriculture-850)", percentage: 0.024 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.019 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 576,
@@ -915,7 +915,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Mountains',
+        label: "Mountains",
         displayLabel: true,
         labelTarget: {
           x: 678,
@@ -927,7 +927,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 720,
@@ -939,7 +939,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 704,
@@ -951,7 +951,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 605,
@@ -965,24 +965,24 @@ const countryConfigs = {
     ],
   },
   finland: {
-    title: 'Land Use in Finland',
-    isoCode: '246',
+    title: "Land Use in Finland",
+    isoCode: "246",
     center: [26.0, 64.5],
     scale: 1600,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.102 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.66 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.053 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.052 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.02 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.021 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.054 },
-      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.027 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.011 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.102 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.66 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.053 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.052 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.02 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.021 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.054 },
+      { name: "Cereals", color: "var(--agriculture-700)", percentage: 0.027 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.011 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 529,
@@ -994,7 +994,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 554,
@@ -1006,7 +1006,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 533,
@@ -1018,7 +1018,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 465,
@@ -1032,24 +1032,24 @@ const countryConfigs = {
     ],
   },
   romania: {
-    title: 'Land Use in Romania',
-    isoCode: '642',
+    title: "Land Use in Romania",
+    isoCode: "642",
     center: [25, 46],
     scale: 4600,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.016 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.351 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.014 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.028 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.033 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.028 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.213 },
-      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.187 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.13 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.016 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.351 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.014 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.028 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.033 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.028 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.213 },
+      { name: "Cereals", color: "var(--agriculture-700)", percentage: 0.187 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.13 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 582,
@@ -1061,7 +1061,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 656,
@@ -1073,7 +1073,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 672,
@@ -1085,7 +1085,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 678,
@@ -1099,31 +1099,31 @@ const countryConfigs = {
     ],
   },
   poland: {
-    title: 'Land Use in Poland',
-    isoCode: '616',
+    title: "Land Use in Poland",
+    isoCode: "616",
     center: [19.0, 52.0],
     scale: 2500,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.017 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.366 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.008 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.007 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.034 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.039 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.203 },
-      { name: 'Wheat', color: 'var(--agriculture-700)', percentage: 0.066 },
-      { name: 'Maize', color: 'var(--agriculture-750)', percentage: 0.059 },
-      { name: 'Rape', color: 'var(--agriculture-800)', percentage: 0.034 },
-      { name: 'Triticale', color: 'var(--agriculture-825)', percentage: 0.031 },
-      { name: 'Rye', color: 'var(--agriculture-850)', percentage: 0.024 },
-      { name: 'Oats', color: 'var(--agriculture-900)', percentage: 0.02 },
-      { name: 'Barley', color: 'var(--agriculture-920)', percentage: 0.019 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.072 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.017 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.366 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.008 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.007 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.034 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.039 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.203 },
+      { name: "Wheat", color: "var(--agriculture-700)", percentage: 0.066 },
+      { name: "Maize", color: "var(--agriculture-750)", percentage: 0.059 },
+      { name: "Rape", color: "var(--agriculture-800)", percentage: 0.034 },
+      { name: "Triticale", color: "var(--agriculture-825)", percentage: 0.031 },
+      { name: "Rye", color: "var(--agriculture-850)", percentage: 0.024 },
+      { name: "Oats", color: "var(--agriculture-900)", percentage: 0.02 },
+      { name: "Barley", color: "var(--agriculture-920)", percentage: 0.019 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.072 },
     ],
     labels: [
       [
         {
-          label: 'Water',
+          label: "Water",
           displayLabel: true,
           labelTarget: {
             x: 424,
@@ -1135,7 +1135,7 @@ const countryConfigs = {
           },
         },
         {
-          label: 'Nature',
+          label: "Nature",
           displayLabel: true,
           labelTarget: {
             x: 634,
@@ -1147,7 +1147,7 @@ const countryConfigs = {
           },
         },
         {
-          label: 'Cities',
+          label: "Cities",
           displayLabel: true,
           labelTarget: {
             x: 634,
@@ -1159,7 +1159,7 @@ const countryConfigs = {
           },
         },
         {
-          label: 'Agriculture',
+          label: "Agriculture",
           displayLabel: true,
           labelTarget: {
             x: 631,
@@ -1174,27 +1174,27 @@ const countryConfigs = {
     ],
   },
   bulgaria: {
-    title: 'Land Use in Bulgaria',
-    isoCode: '100',
+    title: "Land Use in Bulgaria",
+    isoCode: "100",
     center: [25.0, 43.0],
     scale: 4500,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.01 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.447 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.002 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.05 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.018 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.024 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.138 },
-      { name: 'Wheat', color: 'var(--agriculture-700)', percentage: 0.102 },
-      { name: 'Sunflower', color: 'var(--agriculture-750)', percentage: 0.07 },
-      { name: 'Maize', color: 'var(--agriculture-800)', percentage: 0.047 },
-      { name: 'Barley', color: 'var(--agriculture-850)', percentage: 0.016 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.076 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.01 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.447 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.002 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.05 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.018 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.024 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.138 },
+      { name: "Wheat", color: "var(--agriculture-700)", percentage: 0.102 },
+      { name: "Sunflower", color: "var(--agriculture-750)", percentage: 0.07 },
+      { name: "Maize", color: "var(--agriculture-800)", percentage: 0.047 },
+      { name: "Barley", color: "var(--agriculture-850)", percentage: 0.016 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.076 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 249,
@@ -1206,7 +1206,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 631,
@@ -1218,7 +1218,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 647,
@@ -1230,7 +1230,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 562,
@@ -1244,27 +1244,27 @@ const countryConfigs = {
     ],
   },
   czechia: {
-    title: 'Land Use in Czechia',
-    isoCode: '203',
+    title: "Land Use in Czechia",
+    isoCode: "203",
     center: [15.5, 49.8],
     scale: 5000,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.012 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.367 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.002 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.008 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.029 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.047 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.234 },
-      { name: 'Wheat', color: 'var(--agriculture-700)', percentage: 0.081 },
-      { name: 'Rape', color: 'var(--agriculture-750)', percentage: 0.048 },
-      { name: 'Maize', color: 'var(--agriculture-800)', percentage: 0.036 },
-      { name: 'Barley', color: 'var(--agriculture-850)', percentage: 0.029 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.107 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.012 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.367 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.002 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.008 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.029 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.047 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.234 },
+      { name: "Wheat", color: "var(--agriculture-700)", percentage: 0.081 },
+      { name: "Rape", color: "var(--agriculture-750)", percentage: 0.048 },
+      { name: "Maize", color: "var(--agriculture-800)", percentage: 0.036 },
+      { name: "Barley", color: "var(--agriculture-850)", percentage: 0.029 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.107 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 332,
@@ -1276,7 +1276,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 490,
@@ -1288,7 +1288,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 683,
@@ -1300,7 +1300,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 661,
@@ -1314,27 +1314,27 @@ const countryConfigs = {
     ],
   },
   hungary: {
-    title: 'Land Use in Hungary',
-    isoCode: '348',
+    title: "Land Use in Hungary",
+    isoCode: "348",
     center: [19.5, 47.0],
     scale: 4500,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.02 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.273 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.011 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.017 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.044 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.04 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.175 },
-      { name: 'Maize', color: 'var(--agriculture-700)', percentage: 0.131 },
-      { name: 'Wheat', color: 'var(--agriculture-750)', percentage: 0.105 },
-      { name: 'Sunflower', color: 'var(--agriculture-800)', percentage: 0.07 },
-      { name: 'Barley', color: 'var(--agriculture-850)', percentage: 0.028 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.086 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.02 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.273 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.011 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.017 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.044 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.04 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.175 },
+      { name: "Maize", color: "var(--agriculture-700)", percentage: 0.131 },
+      { name: "Wheat", color: "var(--agriculture-750)", percentage: 0.105 },
+      { name: "Sunflower", color: "var(--agriculture-800)", percentage: 0.07 },
+      { name: "Barley", color: "var(--agriculture-850)", percentage: 0.028 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.086 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 519,
@@ -1346,7 +1346,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 653,
@@ -1358,7 +1358,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 631,
@@ -1370,7 +1370,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 579,
@@ -1384,27 +1384,27 @@ const countryConfigs = {
     ],
   },
   slovakia: {
-    title: 'Land Use in Slovakia',
-    isoCode: '703',
+    title: "Land Use in Slovakia",
+    isoCode: "703",
     center: [19.5, 48.7],
     scale: 6500,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.01 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.459 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.002 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.043 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.028 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.031 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.179 },
-      { name: 'Wheat', color: 'var(--agriculture-700)', percentage: 0.062 },
-      { name: 'Maize', color: 'var(--agriculture-750)', percentage: 0.05 },
-      { name: 'Rape', color: 'var(--agriculture-800)', percentage: 0.027 },
-      { name: 'Barley', color: 'var(--agriculture-850)', percentage: 0.019 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.09 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.01 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.459 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.002 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.043 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.028 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.031 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.179 },
+      { name: "Wheat", color: "var(--agriculture-700)", percentage: 0.062 },
+      { name: "Maize", color: "var(--agriculture-750)", percentage: 0.05 },
+      { name: "Rape", color: "var(--agriculture-800)", percentage: 0.027 },
+      { name: "Barley", color: "var(--agriculture-850)", percentage: 0.019 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.09 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 418,
@@ -1416,7 +1416,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 671,
@@ -1428,7 +1428,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 739,
@@ -1440,7 +1440,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 499,
@@ -1454,87 +1454,111 @@ const countryConfigs = {
     ],
   },
   estonia: {
-    title: 'Land Use in Estonia',
-    isoCode: '233',
+    title: "Land Use in Estonia",
+    isoCode: "233",
     center: [25.5, 58.7],
     scale: 6000,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.05 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.557 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.038 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.027 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.013 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.019 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.162 },
-      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.081 },
-      { name: 'Rape', color: 'var(--agriculture-800)', percentage: 0.017 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.036 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.05 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.557 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.038 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.027 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.013 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.019 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.162 },
+      { name: "Cereals", color: "var(--agriculture-700)", percentage: 0.081 },
+      { name: "Rape", color: "var(--agriculture-800)", percentage: 0.017 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.036 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
-        labelTarget: { x: 400, y: 100 },
-        labelPosition: { x: 400, y: 100 },
+        labelTarget: {
+          x: 466,
+          y: 177,
+        },
+        labelPosition: {
+          x: 490,
+          y: 132,
+        },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
-        labelTarget: { x: 400, y: 200 },
-        labelPosition: { x: 400, y: 200 },
+        labelTarget: {
+          x: 676,
+          y: 343,
+        },
+        labelPosition: {
+          x: 724,
+          y: 361,
+        },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
-        labelTarget: { x: 400, y: 300 },
-        labelPosition: { x: 400, y: 300 },
+        labelTarget: {
+          x: 643,
+          y: 463,
+        },
+        labelPosition: {
+          x: 703,
+          y: 483,
+        },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
-        labelTarget: { x: 400, y: 500 },
-        labelPosition: { x: 400, y: 500 },
+        labelTarget: {
+          x: 641,
+          y: 615,
+        },
+        labelPosition: {
+          x: 681,
+          y: 635,
+        },
       },
     ],
   },
   latvia: {
-    title: 'Land Use in Latvia',
-    isoCode: '428',
+    title: "Land Use in Latvia",
+    isoCode: "428",
     center: [25.0, 57.0],
     scale: 5500,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.025 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.534 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.016 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.023 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.019 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.019 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.197 },
-      { name: 'Wheat', color: 'var(--agriculture-700)', percentage: 0.07 },
-      { name: 'Rape', color: 'var(--agriculture-800)', percentage: 0.033 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.064 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.025 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.534 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.016 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.023 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.019 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.019 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.197 },
+      { name: "Wheat", color: "var(--agriculture-700)", percentage: 0.07 },
+      { name: "Rape", color: "var(--agriculture-800)", percentage: 0.033 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.064 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: { x: 400, y: 100 },
         labelPosition: { x: 400, y: 100 },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: { x: 400, y: 200 },
         labelPosition: { x: 400, y: 200 },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: { x: 400, y: 300 },
         labelPosition: { x: 400, y: 300 },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: { x: 400, y: 500 },
         labelPosition: { x: 400, y: 500 },
@@ -1542,27 +1566,27 @@ const countryConfigs = {
     ],
   },
   lithuania: {
-    title: 'Land Use in Lithuania',
-    isoCode: '440',
+    title: "Land Use in Lithuania",
+    isoCode: "440",
     center: [24.0, 55.3],
     scale: 5500,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.025 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.377 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.012 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.005 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.028 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.022 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.208 },
-      { name: 'Wheat', color: 'var(--agriculture-700)', percentage: 0.139 },
-      { name: 'Rape', color: 'var(--agriculture-750)', percentage: 0.062 },
-      { name: 'Barley', color: 'var(--agriculture-800)', percentage: 0.029 },
-      { name: 'Oats', color: 'var(--agriculture-850)', percentage: 0.014 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.079 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.025 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.377 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.012 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.005 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.028 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.022 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.208 },
+      { name: "Wheat", color: "var(--agriculture-700)", percentage: 0.139 },
+      { name: "Rape", color: "var(--agriculture-750)", percentage: 0.062 },
+      { name: "Barley", color: "var(--agriculture-800)", percentage: 0.029 },
+      { name: "Oats", color: "var(--agriculture-850)", percentage: 0.014 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.079 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 334,
@@ -1574,7 +1598,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 649,
@@ -1586,7 +1610,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 681,
@@ -1598,7 +1622,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 603,
@@ -1612,26 +1636,26 @@ const countryConfigs = {
     ],
   },
   slovenia: {
-    title: 'Land Use in Slovenia',
-    isoCode: '705',
+    title: "Land Use in Slovenia",
+    isoCode: "705",
     center: [14.8, 46.1],
     scale: 8000,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.009 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.613 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.001 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.024 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.015 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.038 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.205 },
-      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.049 },
-      { name: 'Fruit trees', color: 'var(--agriculture-800)', percentage: 0.015 },
-      { name: 'Vineyard', color: 'var(--agriculture-850)', percentage: 0.007 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.024 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.009 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.613 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.001 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.024 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.015 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.038 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.205 },
+      { name: "Cereals", color: "var(--agriculture-700)", percentage: 0.049 },
+      { name: "Fruit trees", color: "var(--agriculture-800)", percentage: 0.015 },
+      { name: "Vineyard", color: "var(--agriculture-850)", percentage: 0.007 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.024 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 597,
@@ -1643,7 +1667,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 610,
@@ -1655,7 +1679,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 557,
@@ -1667,7 +1691,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 510,
@@ -1681,27 +1705,27 @@ const countryConfigs = {
     ],
   },
   greece: {
-    title: 'Land Use in Greece',
-    isoCode: '300',
+    title: "Land Use in Greece",
+    isoCode: "300",
     center: [22, 39],
     scale: 3500,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.013 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.388 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.007 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.212 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.025 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.04 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.117 },
-      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.04 },
-      { name: 'Cotton', color: 'var(--agriculture-750)', percentage: 0.018 },
-      { name: 'Fruit trees', color: 'var(--agriculture-800)', percentage: 0.022 },
-      { name: 'Olive trees', color: 'var(--agriculture-850)', percentage: 0.083 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.033 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.013 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.388 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.007 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.212 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.025 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.04 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.117 },
+      { name: "Cereals", color: "var(--agriculture-700)", percentage: 0.04 },
+      { name: "Cotton", color: "var(--agriculture-750)", percentage: 0.018 },
+      { name: "Fruit trees", color: "var(--agriculture-800)", percentage: 0.022 },
+      { name: "Olive trees", color: "var(--agriculture-850)", percentage: 0.083 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.033 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 571,
@@ -1713,7 +1737,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 674,
@@ -1725,7 +1749,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 682,
@@ -1737,7 +1761,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 658,
@@ -1751,26 +1775,26 @@ const countryConfigs = {
     ],
   },
   luxembourg: {
-    title: 'Land Use in Luxembourg',
-    isoCode: '442',
+    title: "Land Use in Luxembourg",
+    isoCode: "442",
     center: [6.13, 49.81],
     scale: 18000,
     categories: [
-      { name: 'Water', color: 'var(--water-400)', percentage: 0.011 },
-      { name: 'Woodland', color: 'var(--nature-300)', percentage: 0.367 },
-      { name: 'Wetland', color: 'var(--nature-400)', percentage: 0.002 },
-      { name: 'Shrubland', color: 'var(--nature-500)', percentage: 0.011 },
-      { name: 'Bare land', color: 'var(--nature-600)', percentage: 0.014 },
-      { name: 'Urban area', color: 'var(--urban-500)', percentage: 0.092 },
-      { name: 'Grassland', color: 'var(--agriculture-500)', percentage: 0.302 },
-      { name: 'Cereals', color: 'var(--agriculture-700)', percentage: 0.127 },
-      { name: 'Fodder crops', color: 'var(--agriculture-800)', percentage: 0.05 },
-      { name: 'Vineyard', color: 'var(--agriculture-850)', percentage: 0.005 },
-      { name: 'Other cropland', color: 'var(--agriculture-950)', percentage: 0.019 },
+      { name: "Water", color: "var(--water-400)", percentage: 0.011 },
+      { name: "Woodland", color: "var(--nature-300)", percentage: 0.367 },
+      { name: "Wetland", color: "var(--nature-400)", percentage: 0.002 },
+      { name: "Shrubland", color: "var(--nature-500)", percentage: 0.011 },
+      { name: "Bare land", color: "var(--nature-600)", percentage: 0.014 },
+      { name: "Urban area", color: "var(--urban-500)", percentage: 0.092 },
+      { name: "Grassland", color: "var(--agriculture-500)", percentage: 0.302 },
+      { name: "Cereals", color: "var(--agriculture-700)", percentage: 0.127 },
+      { name: "Fodder crops", color: "var(--agriculture-800)", percentage: 0.05 },
+      { name: "Vineyard", color: "var(--agriculture-850)", percentage: 0.005 },
+      { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.019 },
     ],
     labels: [
       {
-        label: 'Water',
+        label: "Water",
         displayLabel: true,
         labelTarget: {
           x: 379,
@@ -1782,7 +1806,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Nature',
+        label: "Nature",
         displayLabel: true,
         labelTarget: {
           x: 442,
@@ -1794,7 +1818,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Cities',
+        label: "Cities",
         displayLabel: true,
         labelTarget: {
           x: 527,
@@ -1806,7 +1830,7 @@ const countryConfigs = {
         },
       },
       {
-        label: 'Agriculture',
+        label: "Agriculture",
         displayLabel: true,
         labelTarget: {
           x: 514,
