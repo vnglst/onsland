@@ -163,12 +163,22 @@ function toggleLayout() {
   const svg = d3.select("#countrySvg");
   const hexRadius = 6;
 
+  // Get color scale to ensure proper colors
+  const config = countryConfigs[currentCountry];
+  const categories = config.categories;
+  const colorScale = d3
+    .scaleOrdinal()
+    .domain(categories.map((c) => c.name))
+    .range(categories.map((c) => c.color));
+
   if (isSquareLayout) {
     const hexagonPositions = calculateHexagonGridPositions(hexDataGlobal.length);
     const hexbin = d3.hexbin().radius(hexRadius);
 
     svg
       .selectAll(".hexagon")
+      .interrupt() // Stop any ongoing transitions
+      .attr("fill", (d, i) => colorScale(hexColorsGlobal[i])) // Ensure correct color immediately
       .transition()
       .duration(1000)
       .ease(d3.easeCubicInOut)
@@ -189,6 +199,8 @@ function toggleLayout() {
 
     svg
       .selectAll(".hexagon")
+      .interrupt() // Stop any ongoing transitions
+      .attr("fill", (d, i) => colorScale(hexColorsGlobal[i])) // Ensure correct color immediately
       .transition()
       .duration(1000)
       .ease(d3.easeCubicInOut)
