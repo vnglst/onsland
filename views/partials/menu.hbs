@@ -1,0 +1,39 @@
+<button type="button" class="hamburger" aria-label="Menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<div class="menu-panel">
+  <button type="button" class="menu-close" aria-label="Close menu">
+    ×
+  </button>
+
+  <!-- Navigation Section -->
+  <div class="menu-section">
+    <h3 data-i18n="menu.navigation">Navigation</h3>
+    <a href="/" class="menu-link" data-i18n="menu.home"></a>
+    <a href="/rankings" class="menu-link" data-i18n="menu.rankings"></a>
+    <a href="/about" class="menu-link" data-i18n="menu.about"></a>
+  </div>
+
+  <!-- Language Section -->
+  <div class="menu-section">
+    <h3 data-i18n="menu.language">Language</h3>
+    <select class="language-switcher menu-language-switcher" title="Select language">
+      <option value="en">English</option>
+      <option value="nl">Nederlands</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+      <option value="de">Deutsch</option>
+    </select>
+  </div>
+
+  <!-- View Toggle Section -->
+  {{#if showViewToggle}}
+  <div class="menu-section menu-view-section">
+    <h3 data-i18n="menu.view">View</h3>
+    <button type="button" class="menu-button menu-view-toggle" id="menuViewToggle"></button>
+  </div>
+  {{/if}}
+</div>

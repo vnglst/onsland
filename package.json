@@ -1,0 +1,26 @@
+{
+  "name": "onsland",
+  "version": "1.0.0",
+  "description": "Interactive visualization of land use across European countries",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "data-visualization",
+    "d3",
+    "land-use",
+    "europe"
+  ],
+  "author": "Koen van Gilst",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.2"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}
