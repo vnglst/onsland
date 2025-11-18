@@ -25,6 +25,7 @@ Want to add more countries? The map rendering is already there, and land use dat
 1. Query the data from the SQLite database in `data/land-cover.db` to get the land use percentages for your country
 
 2. Add the country configuration to [public/shared/countries.js](public/shared/countries.js)
+
    - Add the `isoCode` by checking the Wikipedia "[List of ISO 3166 country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)" to get the country's **NUM**eric code
    - Add the geographic `center` coordinates (longitude and then latitude) for proper map centering
    - Play with the `scale` value to get the best fit for the hex map
@@ -68,8 +69,6 @@ Build and run with Docker:
 docker build -t onsland .
 docker run -p 8000:8000 onsland
 ```
-
-Or deploy to Coolify using the included Dockerfile.
 
 ### Development Tips
 
