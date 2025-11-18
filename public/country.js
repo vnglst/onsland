@@ -1,5 +1,11 @@
-// Country page functionality
-// Handles the detailed country visualization with D3.js and rankings display
+/**
+ * Country page functionality
+ * Handles the detailed country visualization with D3.js and rankings display
+ * ES6 Module
+ */
+
+import { validCountries, countryNames, countryConfigs } from './shared/countries.js';
+import { translateCategory, translateLabel } from './shared/translation-utils.js';
 
 const DEV_MODE = false;
 
@@ -27,8 +33,8 @@ const ANIMATION_CONFIG = {
   DELAY_PER_LABEL: 300
 };
 
-// Get country from Fresh route parameter (set in [country].tsx)
-const countryFromRoute = window.__COUNTRY__;
+// Get country from Fresh route parameter (set in server.js)
+const countryFromRoute = globalThis.__COUNTRY__;
 const currentCountry = validCountries.includes(countryFromRoute) ? countryFromRoute : "netherlands";
 
 let worldData = null;
@@ -40,10 +46,10 @@ let hexColorsGlobal = null;
  * Initialize page UI elements with translations
  */
 function initializePageElements() {
-  const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
-  document.title = `${i18n.t("country.titlePrefix")}${countryName} - OnsLand`;
+  const countryName = globalThis.i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
+  document.title = `${globalThis.i18n.t("country.titlePrefix")}${countryName} - OnsLand`;
   document.querySelector(".title-country").textContent = countryName;
-  updateMetaDescription(i18n.t("country.metaDescription"));
+  globalThis.updateMetaDescription(globalThis.i18n.t("country.metaDescription"));
 
   // Display rankings after translations are loaded
   displayRankings();
@@ -132,7 +138,7 @@ function createRankingBadge(ranking, labelKey, isTopRank) {
 
   const labelDiv = document.createElement("div");
   labelDiv.className = "ranking-badge-label";
-  labelDiv.textContent = i18n.t(labelKey);
+  labelDiv.textContent = globalThis.i18n.t(labelKey);
 
   content.appendChild(category);
   content.appendChild(labelDiv);
@@ -182,7 +188,7 @@ function displayRankings() {
 /**
  * Toggle between map layout and square layout
  */
-function toggleLayout() {
+export function toggleLayout() {
   isSquareLayout = !isSquareLayout;
   const svg = d3.select("#countrySvg");
 
@@ -279,8 +285,8 @@ function calculateHexagonGridPositions(totalHexagons) {
  * Get the current view toggle button text
  * @returns {string} Translated button text
  */
-function getViewToggleText() {
-  return isSquareLayout ? i18n.t("country.mapView") : i18n.t("country.squareView");
+export function getViewToggleText() {
+  return isSquareLayout ? globalThis.i18n.t("country.mapView") : globalThis.i18n.t("country.squareView");
 }
 
 /**
@@ -763,7 +769,7 @@ async function initCountryPage() {
   try {
     // Load map data and translations in parallel
     const [_, world] = await Promise.all([
-      initI18n(),
+      globalThis.initI18n(),
       fetch("/vendor/countries-50m.json").then((res) => {
         if (!res.ok) {
           throw new Error(`Failed to load map data: ${res.status}`);
@@ -794,8 +800,8 @@ async function initCountryPage() {
     globalThis.addEventListener("languageChanged", () => {
       try {
         // Update page title and country name
-        const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
-        document.title = `${i18n.t("country.titlePrefix")}${countryName} - OnsLand`;
+        const countryName = globalThis.i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
+        document.title = `${globalThis.i18n.t("country.titlePrefix")}${countryName} - OnsLand`;
 
         const titleElement = document.querySelector(".title-country");
         if (titleElement) {

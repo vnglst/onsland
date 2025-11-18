@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
     title: 'OnsLand - Land Use In Europe',
     description: 'Interactive visualization comparing land use across European countries. Explore how different nations utilize their land for agriculture, nature, urban areas, and more.',
     pageSpecificCss: ['/home.css'],
-    pageSpecificScripts: ['/home.js']
+    pageSpecificModules: ['/home.js']  // ES6 module
   });
 });
 
@@ -37,10 +37,7 @@ app.get('/country/:country', (req, res) => {
     title: 'Land Use - OnsLand',
     description: 'Interactive visualization of land use showing agriculture, nature, urban areas, and more.',
     pageSpecificCss: ['/country.css'],
-    pageSpecificScripts: [
-      '/shared/translation-utils.js',
-      '/country.js'
-    ],
+    pageSpecificModules: ['/country.js'],  // ES6 module
     inlineScript: `window.__COUNTRY__ = "${req.params.country}";`,
     showViewToggle: true
   });

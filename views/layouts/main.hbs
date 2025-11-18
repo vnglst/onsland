@@ -75,5 +75,10 @@
   {{#each pageSpecificScripts}}
   <script src="{{this}}"></script>
   {{/each}}
+
+  <!-- Page-specific ES6 modules -->
+  {{#each pageSpecificModules}}
+  <script type="module" src="{{this}}"></script>
+  {{/each}}
 </body>
 </html>

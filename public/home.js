@@ -1,5 +1,11 @@
-// Homepage functionality
-// Handles the grid of country cards with lazy loading and view toggling
+/**
+ * Homepage functionality
+ * Handles the grid of country cards with lazy loading and view toggling
+ * ES6 Module
+ */
+
+import { validCountries, countryNames } from './shared/countries.js';
+import { renderCountryPreview, renderCountrySquarePreview } from './shared/render.js';
 
 // Configuration for intersection observer
 const OBSERVER_CONFIG = {
@@ -40,11 +46,6 @@ const HomepageState = {
   }
 };
 
-// Legacy global variables for backward compatibility
-let worldData = null;
-let isSquareView = false;
-let currentObserver = null;
-
 /**
  * Re-render a single card with the current view
  * @param {HTMLElement} card - The card element
@@ -74,11 +75,8 @@ function updateViewToggleButton() {
 /**
  * Toggle between map view and square view
  */
-function toggleView() {
+export function toggleView() {
   HomepageState.toggleSquareView();
-
-  // Update legacy global for compatibility
-  isSquareView = HomepageState.getSquareView();
 
   const homepage = document.getElementById("homepage");
   const loadedCards = homepage.querySelectorAll(".country-card:not(.loading)");
@@ -95,10 +93,10 @@ function toggleView() {
  * Get the current view toggle button text
  * @returns {string} Translated button text
  */
-function getViewToggleText() {
+export function getViewToggleText() {
   return HomepageState.getSquareView()
-    ? i18n.t("homepage.mapView")
-    : i18n.t("homepage.squareView");
+    ? globalThis.i18n.t("homepage.mapView")
+    : globalThis.i18n.t("homepage.squareView");
 }
 
 /**
@@ -113,14 +111,14 @@ function createLoadingCard(countryKey) {
 
   const title = document.createElement("div");
   title.className = "country-card-title";
-  title.textContent = i18n.t(`countries.${countryKey}`) || countryNames[countryKey];
+  title.textContent = globalThis.i18n.t(`countries.${countryKey}`) || countryNames[countryKey];
 
   const placeholder = document.createElement("div");
   placeholder.className = "loading-placeholder";
 
   const loadingText = document.createElement("div");
   loadingText.className = "loading-text";
-  loadingText.textContent = i18n.t("common.loading");
+  loadingText.textContent = globalThis.i18n.t("common.loading");
 
   countryCard.appendChild(title);
   countryCard.appendChild(placeholder);
@@ -161,7 +159,7 @@ function updateCountryCardTitles() {
     const countryKey = card.getAttribute("data-country");
     const titleElement = card.querySelector(".country-card-title");
     if (titleElement) {
-      const translatedName = i18n.t(`countries.${countryKey}`) || countryNames[countryKey];
+      const translatedName = globalThis.i18n.t(`countries.${countryKey}`) || countryNames[countryKey];
       titleElement.textContent = translatedName;
     }
   });
@@ -235,7 +233,7 @@ async function initHomepage() {
   try {
     // Load both i18n and map data in parallel
     const [_, world] = await Promise.all([
-      initI18n(),
+      globalThis.initI18n(),
       fetch("/vendor/countries-50m.json").then((response) => {
         if (!response.ok) {
           throw new Error(`Failed to load map data: ${response.status}`);
@@ -246,15 +244,14 @@ async function initHomepage() {
 
     // Store world data in state
     HomepageState.setWorldData(world);
-    worldData = world; // Update legacy global
 
     // Update page metadata
-    updatePageTitle(i18n.t("homepage.title"));
-    updateMetaDescription(i18n.t("homepage.metaDescription"));
+    globalThis.updatePageTitle(globalThis.i18n.t("homepage.title"));
+    globalThis.updateMetaDescription(globalThis.i18n.t("homepage.metaDescription"));
 
     // Expose view toggle functions for Menu island
-    window.toggleView = toggleView;
-    window.getViewToggleText = getViewToggleText;
+    globalThis.toggleView = toggleView;
+    globalThis.getViewToggleText = getViewToggleText;
 
     // Set initial view toggle button text
     updateViewToggleButton();
@@ -263,8 +260,8 @@ async function initHomepage() {
     showHomepage();
 
     // Listen for language changes and update country titles
-    window.addEventListener("languageChanged", () => {
-      updatePageTitle(i18n.t("homepage.title"));
+    globalThis.addEventListener("languageChanged", () => {
+      globalThis.updatePageTitle(globalThis.i18n.t("homepage.title"));
       updateViewToggleButton();
       updateCountryCardTitles();
     });
