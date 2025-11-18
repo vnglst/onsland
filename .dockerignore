@@ -1,0 +1,41 @@
+# Node modules (legacy)
+node_modules/
+npm-debug.log
+
+# Deno cache
+.deno/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Development
+*.md
+!README.md
+.prettierrc.json
+
+# Fresh build
+_fresh/
+
+# Public directory (legacy - now in static/)
+public/
+
+# Local environment
+.env.local
+.env*.local
+
+# Data files (SQLite databases)
+data/land-cover.db
+data/*.csv

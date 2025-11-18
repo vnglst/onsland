@@ -3,9 +3,9 @@
 
 const DEV_MODE = false;
 
-const urlParams = new URLSearchParams(window.location.search);
-const countryFromUrl = urlParams.get('country');
-const currentCountry = validCountries.includes(countryFromUrl) ? countryFromUrl : 'netherlands';
+// Get country from Fresh route parameter (set in [country].tsx)
+const countryFromRoute = window.__COUNTRY__;
+const currentCountry = validCountries.includes(countryFromRoute) ? countryFromRoute : "netherlands";
 
 let worldData = null;
 let isSquareLayout = false;
@@ -17,10 +17,9 @@ let hexColorsGlobal = null;
  */
 function initializePageElements() {
   const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
-  document.getElementById('pageTitle').textContent =
-    `${i18n.t('country.titlePrefix')}${countryName} - OnsLand`;
-  document.querySelector('.title-country').textContent = countryName;
-  updateMetaDescription(i18n.t('country.metaDescription'));
+  document.title = `${i18n.t("country.titlePrefix")}${countryName} - OnsLand`;
+  document.querySelector(".title-country").textContent = countryName;
+  updateMetaDescription(i18n.t("country.metaDescription"));
 
   // Display rankings after translations are loaded
   displayRankings();
@@ -79,7 +78,7 @@ function calculateCountryRankings() {
  * @returns {string} URL-friendly slug
  */
 function createCategorySlug(categoryName) {
-  return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 }
 
 /**
@@ -90,25 +89,25 @@ function createCategorySlug(categoryName) {
  * @returns {HTMLElement} The ranking badge element
  */
 function createRankingBadge(ranking, labelKey, isTopRank) {
-  const badge = document.createElement('div');
-  badge.className = 'ranking-badge';
+  const badge = document.createElement("div");
+  badge.className = "ranking-badge";
 
-  const link = document.createElement('a');
+  const link = document.createElement("a");
   link.href = `rankings#${createCategorySlug(ranking.categoryName)}`;
 
-  const positionNumber = document.createElement('div');
-  positionNumber.className = `ranking-position-number ${isTopRank ? 'top-rank' : 'bottom-rank'}`;
+  const positionNumber = document.createElement("div");
+  positionNumber.className = `ranking-position-number ${isTopRank ? "top-rank" : "bottom-rank"}`;
   positionNumber.textContent = `#${ranking.position}`;
 
-  const content = document.createElement('div');
-  content.className = 'ranking-badge-content';
+  const content = document.createElement("div");
+  content.className = "ranking-badge-content";
 
-  const category = document.createElement('div');
-  category.className = 'ranking-badge-category';
+  const category = document.createElement("div");
+  category.className = "ranking-badge-category";
   category.textContent = translateCategory(ranking.categoryName);
 
-  const labelDiv = document.createElement('div');
-  labelDiv.className = 'ranking-badge-label';
+  const labelDiv = document.createElement("div");
+  labelDiv.className = "ranking-badge-label";
   labelDiv.textContent = i18n.t(labelKey);
 
   content.appendChild(category);
@@ -126,8 +125,8 @@ function createRankingBadge(ranking, labelKey, isTopRank) {
  */
 function displayRankings() {
   const rankings = calculateCountryRankings();
-  const container = document.getElementById('rankingsInfo');
-  container.innerHTML = '';
+  const container = document.getElementById("rankingsInfo");
+  container.innerHTML = "";
 
   // Filter categories with more than 3 countries for meaningful rankings
   const multiCountryRankings = rankings.filter((r) => r.totalCountries > 3);
@@ -143,14 +142,14 @@ function displayRankings() {
 
   // Create top ranking badges
   topRankings.forEach((ranking, index) => {
-    const labelKey = index === 0 ? 'country.highestRanking' : 'country.secondHighest';
+    const labelKey = index === 0 ? "country.highestRanking" : "country.secondHighest";
     const badge = createRankingBadge(ranking, labelKey, true);
     container.appendChild(badge);
   });
 
   // Create bottom ranking badges
   bottomRankings.forEach((ranking, index) => {
-    const labelKey = index === 0 ? 'country.lowestRanking' : 'country.secondLowest';
+    const labelKey = index === 0 ? "country.lowestRanking" : "country.secondLowest";
     const badge = createRankingBadge(ranking, labelKey, false);
     container.appendChild(badge);
   });
@@ -161,7 +160,7 @@ function displayRankings() {
  */
 function toggleLayout() {
   isSquareLayout = !isSquareLayout;
-  const svg = d3.select('#countrySvg');
+  const svg = d3.select("#countrySvg");
   const hexRadius = 6;
 
   if (isSquareLayout) {
@@ -169,40 +168,46 @@ function toggleLayout() {
     const hexbin = d3.hexbin().radius(hexRadius);
 
     svg
-      .selectAll('.hexagon')
+      .selectAll(".hexagon")
       .transition()
       .duration(1000)
       .ease(d3.easeCubicInOut)
-      .attr('transform', (d, i) => {
+      .attr("transform", (d, i) => {
         const pos = hexagonPositions[i];
         return `translate(${pos.x},${pos.y})`;
       })
-      .attr('d', hexbin.hexagon(hexRadius))
-      .attr('stroke-width', 0);
+      .attr("d", hexbin.hexagon(hexRadius))
+      .attr("stroke-width", 0);
 
     svg
-      .selectAll('text[data-label], line[data-label], circle[data-label]')
+      .selectAll("text[data-label], line[data-label], circle[data-label]")
       .transition()
       .duration(500)
-      .attr('opacity', 0);
+      .attr("opacity", 0);
   } else {
     const hexbin = d3.hexbin().radius(hexRadius);
 
     svg
-      .selectAll('.hexagon')
+      .selectAll(".hexagon")
       .transition()
       .duration(1000)
       .ease(d3.easeCubicInOut)
-      .attr('transform', (d, i) => `translate(${hexDataGlobal[i].x},${hexDataGlobal[i].y})`)
-      .attr('d', hexbin.hexagon(hexRadius))
-      .attr('stroke-width', 0.1);
+      .attr("transform", (d, i) => `translate(${hexDataGlobal[i].x},${hexDataGlobal[i].y})`)
+      .attr("d", hexbin.hexagon(hexRadius))
+      .attr("stroke-width", 0.1);
 
     svg
-      .selectAll('text[data-label], line[data-label], circle[data-label]')
+      .selectAll("text[data-label], line[data-label], circle[data-label]")
       .transition()
       .delay(500)
       .duration(500)
-      .attr('opacity', 1);
+      .attr("opacity", 1);
+  }
+
+  // Update view toggle button text
+  const menuToggle = document.getElementById("menuViewToggle");
+  if (menuToggle) {
+    menuToggle.textContent = getViewToggleText();
   }
 }
 
@@ -224,9 +229,7 @@ function calculateHexagonGridPositions(totalHexagons) {
   const availableWidth = width - padding * 2;
   const availableHeight = height - padding * 2;
 
-  const cols = Math.ceil(
-    Math.sqrt(totalHexagons * (availableWidth / availableHeight) * (hexWidth / hexHeight))
-  );
+  const cols = Math.ceil(Math.sqrt(totalHexagons * (availableWidth / availableHeight) * (hexWidth / hexHeight)));
   const rows = Math.ceil(totalHexagons / cols);
 
   const gridWidth = cols * hexWidth;
@@ -251,7 +254,7 @@ function calculateHexagonGridPositions(totalHexagons) {
  * @returns {string} Translated button text
  */
 function getViewToggleText() {
-  return isSquareLayout ? i18n.t('country.mapView') : i18n.t('country.squareView');
+  return isSquareLayout ? i18n.t("country.mapView") : i18n.t("country.squareView");
 }
 
 /**
@@ -265,8 +268,8 @@ function renderCountry(countryKey) {
   const categories = config.categories;
   const labels = config.labels;
 
-  const svg = d3.select('#countrySvg');
-  svg.selectAll('*').remove();
+  const svg = d3.select("#countrySvg");
+  svg.selectAll("*").remove();
 
   const width = 800;
   const height = 800;
@@ -304,9 +307,7 @@ function renderCountry(countryKey) {
     }
   }
 
-  const hexPoints = hexCenters.filter((center) =>
-    d3.geoContains(countryFeature, projection.invert(center))
-  );
+  const hexPoints = hexCenters.filter((center) => d3.geoContains(countryFeature, projection.invert(center)));
   const hexData = hexbin(hexPoints);
   hexDataGlobal = hexData;
 
@@ -339,45 +340,45 @@ function renderCountry(countryKey) {
 
   function highlightHexagons(category) {
     svg
-      .selectAll('.hexagon')
+      .selectAll(".hexagon")
       .filter((_, i) => hexColors[i] === category)
-      .classed('highlight', true);
+      .classed("highlight", true);
     svg
-      .selectAll('.legend-item')
+      .selectAll(".legend-item")
       .filter((_, i) => categories[i].name !== category)
-      .classed('dimmed', true);
+      .classed("dimmed", true);
     svg
-      .selectAll('.legend-item')
+      .selectAll(".legend-item")
       .filter((_, i) => categories[i].name === category)
-      .classed('dimmed', false);
+      .classed("dimmed", false);
   }
 
   function deselectHexagons() {
-    svg.selectAll('.hexagon').classed('highlight', false);
-    svg.selectAll('.legend-item').classed('dimmed', false);
+    svg.selectAll(".hexagon").classed("highlight", false);
+    svg.selectAll(".legend-item").classed("dimmed", false);
     selectedCategory = null;
   }
 
   svg
-    .append('g')
-    .selectAll('path')
+    .append("g")
+    .selectAll("path")
     .data(hexData)
     .enter()
-    .append('path')
-    .attr('class', 'hexagon')
-    .attr('d', (d) => hexbin.hexagon(0))
-    .attr('transform', (d) => `translate(${d.x},${d.y - Math.random() * 200})`)
-    .attr('fill', 'var(--bg-light)')
-    .on('mouseenter', function (event, d) {
+    .append("path")
+    .attr("class", "hexagon")
+    .attr("d", (d) => hexbin.hexagon(0))
+    .attr("transform", (d) => `translate(${d.x},${d.y - Math.random() * 200})`)
+    .attr("fill", "var(--bg-light)")
+    .on("mouseenter", function (event, d) {
       const category = hexColors[hexData.indexOf(d)];
       highlightHexagons(category);
     })
-    .on('mouseleave', function (event, d) {
+    .on("mouseleave", function (event, d) {
       if (!selectedCategory) {
         deselectHexagons();
       }
     })
-    .on('click', function (event, d) {
+    .on("click", function (event, d) {
       const category = hexColors[hexData.indexOf(d)];
       if (selectedCategory === category) {
         deselectHexagons();
@@ -393,53 +394,53 @@ function renderCountry(countryKey) {
     .delay((d, i) => i * 0.7)
     .duration(750)
     .ease(d3.easeCubicOut)
-    .attr('fill', (d, i) => colorScale(hexColors[i]))
-    .attr('transform', (d) => `translate(${d.x},${d.y})`)
-    .attr('d', (d) => hexbin.hexagon(hexRadius));
+    .attr("fill", (d, i) => colorScale(hexColors[i]))
+    .attr("transform", (d) => `translate(${d.x},${d.y})`)
+    .attr("d", (d) => hexbin.hexagon(hexRadius));
 
-  d3.select('body').on('click', function () {
+  d3.select("body").on("click", function () {
     if (selectedCategory !== null) {
       deselectHexagons();
     }
   });
 
-  const legendPosition = config.legendPosition || 'top';
+  const legendPosition = config.legendPosition || "top";
   let legendY = 5;
-  if (legendPosition === 'bottom') {
+  if (legendPosition === "bottom") {
     legendY = height - categories.length * 20 - 120;
   }
 
-  const legend = svg.append('g').attr('transform', `translate(5, ${legendY})`);
+  const legend = svg.append("g").attr("transform", `translate(5, ${legendY})`);
 
   categories.forEach((category, i) => {
     const legendItem = legend
-      .append('g')
-      .attr('transform', `translate(0, ${i * 20})`)
-      .attr('class', `legend-item ${category.name.replace(/\s+/g, '-')}`);
+      .append("g")
+      .attr("transform", `translate(0, ${i * 20})`)
+      .attr("class", `legend-item ${category.name.replace(/\s+/g, "-")}`);
 
     legendItem
-      .append('path')
-      .attr('d', hexbin.hexagon(hexRadius))
-      .attr('transform', 'translate(5,5)')
-      .style('fill', category.color)
-      .attr('opacity', 0)
+      .append("path")
+      .attr("d", hexbin.hexagon(hexRadius))
+      .attr("transform", "translate(5,5)")
+      .style("fill", category.color)
+      .attr("opacity", 0)
       .transition()
       .delay(i * 40)
       .duration(500)
-      .attr('opacity', 1);
+      .attr("opacity", 1);
 
     legendItem
-      .append('text')
-      .attr('x', 20)
-      .attr('y', 10)
+      .append("text")
+      .attr("x", 20)
+      .attr("y", 10)
       .text(`${translateCategory(category.name)}, ${(category.percentage * 100).toFixed(2)}%`)
-      .attr('font-size', '14px')
-      .attr('fill', 'var(--text-light)')
-      .attr('opacity', 0)
+      .attr("font-size", "14px")
+      .attr("fill", "var(--text-light)")
+      .attr("opacity", 0)
       .transition()
       .delay(i * 40)
       .duration(500)
-      .attr('opacity', 1);
+      .attr("opacity", 1);
   });
 
   labels
@@ -448,122 +449,122 @@ function renderCountry(countryKey) {
       const labelGroup = svg;
 
       const labelText = labelGroup
-        .append('text')
-        .attr('x', category.labelPosition.x)
-        .attr('y', category.labelPosition.y)
+        .append("text")
+        .attr("x", category.labelPosition.x)
+        .attr("y", category.labelPosition.y)
         .text(translateLabel(category.label))
-        .attr('font-size', '18px')
-        .attr('fill', 'var(--text-light)')
-        .attr('font-weight', 'bold')
-        .attr('opacity', 0)
-        .attr('data-label', category.label)
-        .attr('data-type', 'position');
+        .attr("font-size", "18px")
+        .attr("fill", "var(--text-light)")
+        .attr("font-weight", "bold")
+        .attr("opacity", 0)
+        .attr("data-label", category.label)
+        .attr("data-type", "position");
 
       const line = labelGroup
-        .append('line')
-        .attr('x1', category.labelPosition.x - 10)
-        .attr('y1', category.labelPosition.y - 5)
-        .attr('x2', category.labelTarget.x - 10)
-        .attr('y2', category.labelTarget.y - 5)
-        .attr('stroke', 'var(--text-light)')
-        .attr('stroke-width', 2)
-        .attr('stroke-dasharray', '2,2')
-        .attr('opacity', 0)
-        .attr('data-label', category.label);
+        .append("line")
+        .attr("x1", category.labelPosition.x - 10)
+        .attr("y1", category.labelPosition.y - 5)
+        .attr("x2", category.labelTarget.x - 10)
+        .attr("y2", category.labelTarget.y - 5)
+        .attr("stroke", "var(--text-light)")
+        .attr("stroke-width", 2)
+        .attr("stroke-dasharray", "2,2")
+        .attr("opacity", 0)
+        .attr("data-label", category.label);
 
       line
         .transition()
         .delay(totalHexagons * 0.7 + 750 + i * 300)
         .duration(500)
-        .attr('opacity', 1);
+        .attr("opacity", 1);
 
       const targetCircle = labelGroup
-        .append('circle')
-        .attr('cx', category.labelTarget.x - 10)
-        .attr('cy', category.labelTarget.y - 5)
-        .attr('r', 5)
-        .attr('fill', 'var(--text-light)')
-        .attr('opacity', 0)
-        .attr('data-label', category.label)
-        .attr('data-type', 'target');
+        .append("circle")
+        .attr("cx", category.labelTarget.x - 10)
+        .attr("cy", category.labelTarget.y - 5)
+        .attr("r", 5)
+        .attr("fill", "var(--text-light)")
+        .attr("opacity", 0)
+        .attr("data-label", category.label)
+        .attr("data-type", "target");
 
       targetCircle
         .transition()
         .delay(totalHexagons * 0.7 + 750 + i * 300)
         .duration(500)
-        .attr('opacity', 1);
+        .attr("opacity", 1);
 
       const positionCircle = labelGroup
-        .append('circle')
-        .attr('cx', category.labelPosition.x - 10)
-        .attr('cy', category.labelPosition.y - 5)
-        .attr('r', 5)
-        .attr('fill', 'var(--text-light)')
-        .attr('opacity', 0)
-        .attr('data-label', category.label)
-        .attr('data-type', 'position');
+        .append("circle")
+        .attr("cx", category.labelPosition.x - 10)
+        .attr("cy", category.labelPosition.y - 5)
+        .attr("r", 5)
+        .attr("fill", "var(--text-light)")
+        .attr("opacity", 0)
+        .attr("data-label", category.label)
+        .attr("data-type", "position");
 
       positionCircle
         .transition()
         .delay(totalHexagons * 0.7 + 750 + i * 300)
         .duration(500)
-        .attr('opacity', 1);
+        .attr("opacity", 1);
 
       if (DEV_MODE) {
         const dragPosition = d3
           .drag()
-          .on('drag', function (event) {
-            const label = d3.select(this).attr('data-label');
+          .on("drag", function (event) {
+            const label = d3.select(this).attr("data-label");
             const newX = event.x;
             const newY = event.y;
 
             svg
               .selectAll(`circle[data-label="${label}"][data-type="position"]`)
-              .attr('cx', newX - 10)
-              .attr('cy', newY - 5);
+              .attr("cx", newX - 10)
+              .attr("cy", newY - 5);
 
-            svg.selectAll(`text[data-label="${label}"]`).attr('x', newX).attr('y', newY);
+            svg.selectAll(`text[data-label="${label}"]`).attr("x", newX).attr("y", newY);
 
             svg
               .selectAll(`line[data-label="${label}"]`)
-              .attr('x1', newX - 10)
-              .attr('y1', newY - 5);
+              .attr("x1", newX - 10)
+              .attr("y1", newY - 5);
           })
-          .on('end', function () {
+          .on("end", function () {
             printLabelCoordinates();
           });
 
         const dragTarget = d3
           .drag()
-          .on('drag', function (event) {
-            const label = d3.select(this).attr('data-label');
+          .on("drag", function (event) {
+            const label = d3.select(this).attr("data-label");
             const newX = event.x;
             const newY = event.y;
 
             svg
               .selectAll(`circle[data-label="${label}"][data-type="target"]`)
-              .attr('cx', newX - 10)
-              .attr('cy', newY - 5);
+              .attr("cx", newX - 10)
+              .attr("cy", newY - 5);
 
             svg
               .selectAll(`line[data-label="${label}"]`)
-              .attr('x2', newX - 10)
-              .attr('y2', newY - 5);
+              .attr("x2", newX - 10)
+              .attr("y2", newY - 5);
           })
-          .on('end', function () {
+          .on("end", function () {
             printLabelCoordinates();
           });
 
-        labelText.attr('cursor', 'move').call(dragPosition);
-        positionCircle.attr('cursor', 'move').call(dragPosition);
-        targetCircle.attr('cursor', 'move').call(dragTarget);
+        labelText.attr("cursor", "move").call(dragPosition);
+        positionCircle.attr("cursor", "move").call(dragPosition);
+        targetCircle.attr("cursor", "move").call(dragTarget);
       }
 
       labelText
         .transition()
         .delay(totalHexagons * 0.7 + 750 + i * 300)
         .duration(500)
-        .attr('opacity', 1);
+        .attr("opacity", 1);
     });
 
   function printLabelCoordinates() {
@@ -574,10 +575,10 @@ function renderCountry(countryKey) {
       const targetEl = svg.select(`circle[data-label="${label.label}"][data-type="target"]`);
 
       if (!textEl.empty() && !targetEl.empty()) {
-        const posX = parseFloat(textEl.attr('x'));
-        const posY = parseFloat(textEl.attr('y'));
-        const targetX = parseFloat(targetEl.attr('cx')) + 10;
-        const targetY = parseFloat(targetEl.attr('cy')) + 5;
+        const posX = parseFloat(textEl.attr("x"));
+        const posY = parseFloat(textEl.attr("y"));
+        const targetX = parseFloat(targetEl.attr("cx")) + 10;
+        const targetY = parseFloat(targetEl.attr("cy")) + 5;
 
         coordinates.push({
           label: label.label,
@@ -591,7 +592,7 @@ function renderCountry(countryKey) {
     if (DEV_MODE) {
       console.log(`\n=== ${countryKey} Label Coordinates (JSON) ===`);
       console.log(JSON.stringify(coordinates, null, 2));
-      console.log('===============================================\n');
+      console.log("===============================================\n");
     }
   }
 }
@@ -599,63 +600,56 @@ function renderCountry(countryKey) {
 /**
  * Initialize the country page
  */
-function initCountryPage() {
-  // Load map data
-  const mapDataPromise = fetch('vendor/countries-50m.json')
-    .then((response) => response.json())
-    .then((world) => {
-      worldData = world;
-      return world;
-    })
-    .catch((error) => console.error('Error loading data:', error));
+async function initCountryPage() {
+  try {
+    // Load map data and translations in parallel
+    const [_, world] = await Promise.all([initI18n(), fetch("/vendor/countries-50m.json").then((res) => res.json())]);
 
-  // Wait for both translations and map data before rendering
-  Promise.all([initI18n(), mapDataPromise]).then(() => {
+    worldData = world;
+
     // Initialize page UI elements with translations
     initializePageElements();
 
-    // Initialize menu with view toggle
-    initMenu({
-      showViewToggle: true,
-      onViewToggle: () => {
-        toggleLayout();
-      },
-      getViewToggleText: getViewToggleText,
-    });
+    // Expose view toggle functions for menu
+    globalThis.toggleLayout = toggleLayout;
+    globalThis.getViewToggleText = getViewToggleText;
 
-    // Render the country visualization
-    if (worldData) {
-      renderCountry(currentCountry);
+    // Set initial view toggle button text
+    const menuToggle = document.getElementById("menuViewToggle");
+    if (menuToggle) {
+      menuToggle.textContent = getViewToggleText();
     }
 
+    // Render the country visualization
+    renderCountry(currentCountry);
+
     // Listen for language changes and re-render dynamic content
-    window.addEventListener('languageChanged', () => {
+    globalThis.addEventListener("languageChanged", () => {
       // Update page title and country name
       const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
-      document.getElementById('pageTitle').textContent =
-        `${i18n.t('country.titlePrefix')}${countryName} - OnsLand`;
-      document.querySelector('.title-country').textContent = countryName;
+      document.title = `${i18n.t("country.titlePrefix")}${countryName} - OnsLand`;
+      document.querySelector(".title-country").textContent = countryName;
 
-      // Update menu toggle text
-      const menuToggle = document.querySelector('#menuViewToggle');
+      // Update view toggle button text
+      const menuToggle = document.getElementById("menuViewToggle");
       if (menuToggle) {
         menuToggle.textContent = getViewToggleText();
       }
 
       // Re-render country visualization (legend and labels)
-      if (worldData) {
-        renderCountry(currentCountry);
-      }
+      renderCountry(currentCountry);
 
       // Re-render rankings
       displayRankings();
     });
-  });
+  } catch (error) {
+    console.error("Error initializing country page:", error);
+  }
 }
 
 // Initialize page when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initCountryPage);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initCountryPage);
 } else {
   initCountryPage();
 }

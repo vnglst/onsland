@@ -6,15 +6,14 @@
  */
 function initAboutPage() {
   initI18n().then(() => {
-    updatePageTitle(i18n.t('about.title'));
-    updateMetaDescription(i18n.t('about.metaDescription'));
-    initMenu();
+    updatePageTitle(i18n.t("about.title"));
+    updateMetaDescription(i18n.t("about.metaDescription"));
   });
 }
 
 // Initialize page when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initAboutPage);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initAboutPage);
 } else {
   initAboutPage();
 }

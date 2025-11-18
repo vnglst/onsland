@@ -8,7 +8,8 @@ main {
 svg {
   padding: 25px;
   max-width: 800px;
-  margin: auto;
+  width: 100%;
+  display: block;
 }
 
 .hexagon {
