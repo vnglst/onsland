@@ -19,28 +19,3 @@ function updateMetaDescription(description) {
     metaDesc.setAttribute('content', description);
   }
 }
-
-/**
- * Initializes common page elements with translations
- * @param {Object} options - Configuration options
- * @param {string} options.titleKey - i18n key for the page title
- * @param {string} options.descriptionKey - i18n key for the meta description
- * @param {Function} options.onComplete - Optional callback after initialization
- */
-function initializePage(options = {}) {
-  return initI18n().then(() => {
-    if (options.titleKey) {
-      updatePageTitle(i18n.t(options.titleKey));
-    }
-
-    if (options.descriptionKey) {
-      updateMetaDescription(i18n.t(options.descriptionKey));
-    }
-
-    if (options.onComplete) {
-      options.onComplete();
-    }
-
-    return true;
-  });
-}

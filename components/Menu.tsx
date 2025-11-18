@@ -19,14 +19,14 @@ const LANGUAGES = [
 export default function Menu({ showViewToggle = false }: MenuProps) {
   return (
     <>
-      <button class="hamburger" aria-label="Menu">
+      <button type="button" class="hamburger" aria-label="Menu">
         <span></span>
         <span></span>
         <span></span>
       </button>
 
       <div class="menu-panel">
-        <button class="menu-close" aria-label="Close menu">
+        <button type="button" class="menu-close" aria-label="Close menu">
           ×
         </button>
 
@@ -69,6 +69,7 @@ export default function Menu({ showViewToggle = false }: MenuProps) {
           <div class="menu-section menu-view-section">
             <h3 data-i18n="menu.view">View</h3>
             <button
+              type="button"
               class="menu-button menu-view-toggle"
               id="menuViewToggle"
             >

@@ -36,16 +36,16 @@ const toggleMenu = () => {
 
 const handleLanguageChange = (e) => {
   const newLang = e.target.value;
-  if (window.i18n) {
-    window.i18n.changeLanguage(newLang);
+  if (globalThis.i18n) {
+    globalThis.i18n.changeLanguage(newLang);
   }
 };
 
 const handleViewToggle = () => {
-  if (window.toggleView) {
-    window.toggleView();
-  } else if (window.toggleLayout) {
-    window.toggleLayout();
+  if (globalThis.toggleView) {
+    globalThis.toggleView();
+  } else if (globalThis.toggleLayout) {
+    globalThis.toggleLayout();
   }
 };
 

@@ -21,7 +21,7 @@ export default function Home() {
                 Land Use
               </span>
             </h1>
-            <Menu showViewToggle={true} />
+            <Menu showViewToggle />
           </div>
         </nav>
       </header>
