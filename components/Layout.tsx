@@ -115,6 +115,7 @@ export default function Layout({
       <Footer />
 
       {/* Common scripts that need to be at the end */}
+      <script src="/shared/menu.js" />
       <script src="/shared/countries.js" />
       <script src="/shared/render.js" />
       <script src="/shared/page-init.js" />

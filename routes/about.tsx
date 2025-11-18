@@ -1,5 +1,5 @@
 import Layout from "../components/Layout.tsx";
-import Menu from "../islands/Menu.tsx";
+import Menu from "../components/Menu.tsx";
 
 export default function About() {
   return (
