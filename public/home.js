@@ -41,6 +41,16 @@ function getViewToggleText() {
 }
 
 /**
+ * Update the view toggle button text
+ */
+function updateViewToggleButton() {
+  const menuToggle = document.getElementById("menuViewToggle");
+  if (menuToggle) {
+    menuToggle.textContent = getViewToggleText();
+  }
+}
+
+/**
  * Update all country card titles with translations
  */
 function updateCountryCardTitles() {
@@ -152,7 +162,7 @@ function initHomepage() {
     initI18n(),
     fetch("/vendor/countries-50m.json").then((response) => response.json()),
   ])
-    .then(([_, world]) => {
+    .then(([, world]) => {
       worldData = world;
 
       updatePageTitle(i18n.t("homepage.title"));
@@ -163,10 +173,7 @@ function initHomepage() {
       window.getViewToggleText = getViewToggleText;
 
       // Set initial view toggle button text
-      const menuToggle = document.getElementById("menuViewToggle");
-      if (menuToggle) {
-        menuToggle.textContent = getViewToggleText();
-      }
+      updateViewToggleButton();
 
       // Render homepage now that both i18n and map data are ready
       showHomepage();
@@ -174,14 +181,7 @@ function initHomepage() {
       // Listen for language changes and update country titles
       window.addEventListener("languageChanged", () => {
         updatePageTitle(i18n.t("homepage.title"));
-
-        // Update view toggle button text
-        const menuToggle = document.getElementById("menuViewToggle");
-        if (menuToggle) {
-          menuToggle.textContent = getViewToggleText();
-        }
-
-        // Update all country cards
+        updateViewToggleButton();
         updateCountryCardTitles();
       });
     })

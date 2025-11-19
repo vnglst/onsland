@@ -91,6 +91,6 @@ function translateLabel(labelName) {
 }
 
 // Export functions to global scope
-globalThis.translateCategory = translateCategory;
-globalThis.translateLabel = translateLabel;
-globalThis.createCategorySlug = createCategorySlug;
+window.translateCategory = translateCategory;
+window.translateLabel = translateLabel;
+window.createCategorySlug = createCategorySlug;
