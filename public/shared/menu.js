@@ -1,5 +1,4 @@
 // Menu functionality - handles menu open/close and interactions
-// This file runs in the browser, not in Deno
 let isOpen = false;
 
 const closeMenu = () => {

@@ -3,7 +3,6 @@
 
 const DEV_MODE = false;
 
-// Get country from Fresh route parameter (set in [country].tsx)
 const countryFromRoute = window.__COUNTRY__;
 const currentCountry = validCountries.includes(countryFromRoute) ? countryFromRoute : "netherlands";
 
