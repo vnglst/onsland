@@ -1,5 +1,8 @@
 // Rankings page functionality
 
+import { countryConfigs, countryNames } from './shared/countries.js';
+import { translateCategory } from './shared/translation-utils.js';
+
 /**
  * Extract all categories and their data from all countries
  * @returns {Object} Category data with country rankings

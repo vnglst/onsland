@@ -48,10 +48,7 @@ app.get('/rankings', (req, res) => {
     title: 'Land Use Rankings - OnsLand',
     description: 'Rankings of European countries by land use categories - which countries have the most water, woodland, urban areas, and more.',
     pageSpecificCss: ['/rankings.css'],
-    pageSpecificScripts: [
-      '/shared/translation-utils.js',
-      '/rankings.js'
-    ]
+    pageSpecificModules: ['/rankings.js']
   });
 });
 
@@ -60,7 +57,7 @@ app.get('/about', (req, res) => {
     title: 'About - OnsLand',
     description: 'Learn about the OnsLand project - an interactive visualization of land use across Europe. Discover the data sources, technology, and how to contribute.',
     pageSpecificCss: ['/about.css'],
-    pageSpecificScripts: ['/about.js']
+    pageSpecificModules: ['/about.js']
   });
 });
 
