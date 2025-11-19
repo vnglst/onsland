@@ -98,7 +98,7 @@ function renderRankings() {
       countryName.className = "ranking-country";
       const link = document.createElement("a");
       link.href = `/country/${country.countryKey}`;
-      link.textContent = i18n.t(`countries.${country.countryKey}`) || country.countryName;
+      link.textContent = globalThis.i18n.t(`countries.${country.countryKey}`) || country.countryName;
       countryName.appendChild(link);
       item.appendChild(countryName);
 
@@ -144,8 +144,8 @@ function handleHashScroll() {
 function initRankingsPage() {
   initI18n().then(() => {
     // Update page title and meta description
-    updatePageTitle(i18n.t("rankings.title"));
-    updateMetaDescription(i18n.t("rankings.metaDescription"));
+    globalThis.updatePageTitle(globalThis.i18n.t("rankings.title"));
+    globalThis.updateMetaDescription(globalThis.i18n.t("rankings.metaDescription"));
 
     // Render rankings after translations are loaded
     renderRankings();
@@ -156,7 +156,7 @@ function initRankingsPage() {
     // Listen for language changes and re-render rankings
     window.addEventListener("languageChanged", () => {
       // Update page title
-      updatePageTitle(i18n.t("rankings.title"));
+      globalThis.updatePageTitle(globalThis.i18n.t("rankings.title"));
 
       // Clear and re-render rankings
       const container = document.getElementById("rankingsContainer");
