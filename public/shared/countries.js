@@ -10,6 +10,10 @@ if (!response.ok) {
 
 const data = await response.json();
 
+if (!data.validCountries || !data.countries) {
+  throw new Error('Invalid countries data format');
+}
+
 export const validCountries = data.validCountries;
 export const countryNames = data.countryNames;
 export const countryConfigs = data.countries;
