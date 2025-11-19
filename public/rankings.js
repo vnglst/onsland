@@ -2,6 +2,7 @@
 
 import { countryConfigs, countryNames } from './shared/countries.js';
 import { translateCategory } from './shared/translation-utils.js';
+import { updatePageTitle, updateMetaDescription } from './shared/page-utils.js';
 
 /**
  * Extract all categories and their data from all countries
@@ -144,8 +145,8 @@ function handleHashScroll() {
 function initRankingsPage() {
   globalThis.initI18n().then(() => {
     // Update page title and meta description
-    globalThis.updatePageTitle(globalThis.i18n.t("rankings.title"));
-    globalThis.updateMetaDescription(globalThis.i18n.t("rankings.metaDescription"));
+    updatePageTitle(globalThis.i18n.t("rankings.title"));
+    updateMetaDescription(globalThis.i18n.t("rankings.metaDescription"));
 
     // Render rankings after translations are loaded
     renderRankings();
@@ -156,7 +157,7 @@ function initRankingsPage() {
     // Listen for language changes and re-render rankings
     window.addEventListener("languageChanged", () => {
       // Update page title
-      globalThis.updatePageTitle(globalThis.i18n.t("rankings.title"));
+      updatePageTitle(globalThis.i18n.t("rankings.title"));
 
       // Clear and re-render rankings
       const container = document.getElementById("rankingsContainer");

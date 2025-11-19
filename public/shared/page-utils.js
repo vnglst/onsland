@@ -1,10 +1,12 @@
-// Common page initialization utilities
+/**
+ * Page utility functions
+ */
 
 /**
  * Updates the page title
  * @param {string} title - The new page title
  */
-function updatePageTitle(title) {
+export function updatePageTitle(title) {
   document.title = title;
 }
 
@@ -12,12 +14,9 @@ function updatePageTitle(title) {
  * Updates the page meta description
  * @param {string} description - The new meta description
  */
-function updateMetaDescription(description) {
+export function updateMetaDescription(description) {
   const metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) {
     metaDesc.setAttribute('content', description);
   }
 }
-
-globalThis.updatePageTitle = updatePageTitle;
-globalThis.updateMetaDescription = updateMetaDescription;
