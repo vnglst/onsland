@@ -18,8 +18,10 @@
   "author": "Koen van Gilst",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.19.2",
-    "express-handlebars": "^7.1.2"
+    "@fastify/static": "^8.3.0",
+    "@fastify/view": "^11.1.1",
+    "fastify": "^5.6.2",
+    "handlebars": "^4.7.8"
   },
   "engines": {
     "node": ">=24.0.0"
