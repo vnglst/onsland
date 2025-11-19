@@ -71,13 +71,8 @@ function showHomepage() {
     const placeholder = document.createElement("div");
     placeholder.className = "loading-placeholder";
 
-    const loadingText = document.createElement("div");
-    loadingText.className = "loading-text";
-    loadingText.textContent = i18n.t("common.loading");
-
     link.appendChild(title);
     link.appendChild(placeholder);
-    link.appendChild(loadingText);
     homepage.appendChild(link);
   });
 
@@ -141,10 +136,7 @@ function renderCountryCard(countryCard, countryKey) {
  */
 function initHomepage() {
   // Load both i18n and map data in parallel, then render
-  Promise.all([
-    initI18n(),
-    fetch("/vendor/countries-50m.json").then((response) => response.json()),
-  ])
+  Promise.all([initI18n(), fetch("/vendor/countries-50m.json").then((response) => response.json())])
     .then(([, world]) => {
       worldData = world;
 
