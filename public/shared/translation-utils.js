@@ -4,15 +4,29 @@
 
 import { countryConfigs } from './countries.js';
 
+/**
+ * Convert a string to camelCase
+ * @param {string} str - String to convert
+ * @returns {string} camelCase version
+ */
+function toCamelCase(str) {
+  return str
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]+/g, '') // Remove special chars except spaces
+    .split(/\s+/) // Split on whitespace
+    .map((word, index) => {
+      if (index === 0) return word;
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join('');
+}
+
 const categoryMap = (() => {
   const map = {};
   Object.values(countryConfigs).forEach((config) => {
     config.categories?.forEach((category) => {
       if (!map[category.name]) {
-        const key = category.name
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, '_')
-          .replace(/^_|_$/g, '');
+        const key = toCamelCase(category.name);
         map[category.name] = `categories.${key}`;
       }
     });
@@ -25,10 +39,7 @@ const labelMap = (() => {
   Object.values(countryConfigs).forEach((config) => {
     config.labels?.forEach((labelObj) => {
       if (!map[labelObj.label]) {
-        const key = labelObj.label
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, '_')
-          .replace(/^_|_$/g, '');
+        const key = toCamelCase(labelObj.label);
         map[labelObj.label] = `labels.${key}`;
       }
     });
