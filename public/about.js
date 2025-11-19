@@ -4,7 +4,7 @@
  * Initialize the about page
  */
 function initAboutPage() {
-  initI18n().then(() => {
+  globalThis.initI18n().then(() => {
     globalThis.updatePageTitle(globalThis.i18n.t("about.title"));
     globalThis.updateMetaDescription(globalThis.i18n.t("about.metaDescription"));
   });

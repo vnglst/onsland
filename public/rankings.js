@@ -142,7 +142,7 @@ function handleHashScroll() {
  * Initialize the rankings page
  */
 function initRankingsPage() {
-  initI18n().then(() => {
+  globalThis.initI18n().then(() => {
     // Update page title and meta description
     globalThis.updatePageTitle(globalThis.i18n.t("rankings.title"));
     globalThis.updateMetaDescription(globalThis.i18n.t("rankings.metaDescription"));
