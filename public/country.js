@@ -163,9 +163,7 @@ function toggleLayout() {
     .range(categories.map((c) => c.color));
 
   // Calculate positions and stroke width based on layout mode
-  const hexagonPositions = isSquareLayout
-    ? calculateHexagonGridPositions(hexDataGlobal.length)
-    : null;
+  const hexagonPositions = isSquareLayout ? calculateHexagonGridPositions(hexDataGlobal.length) : null;
   const strokeWidth = isSquareLayout ? 0 : 0.1;
   const labelOpacity = isSquareLayout ? 0 : 1;
   const labelDelay = isSquareLayout ? 0 : 500;

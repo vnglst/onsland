@@ -59,9 +59,10 @@ function showHomepage() {
 
   // Create all cards with loading placeholders first to prevent layout shift
   validCountries.forEach((countryKey) => {
-    const countryCard = document.createElement("div");
-    countryCard.className = "country-card loading";
-    countryCard.setAttribute("data-country", countryKey);
+    const link = document.createElement("a");
+    link.href = `/country/${countryKey}`;
+    link.className = "country-card loading";
+    link.setAttribute("data-country", countryKey);
 
     const title = document.createElement("div");
     title.className = "country-card-title";
@@ -74,10 +75,10 @@ function showHomepage() {
     loadingText.className = "loading-text";
     loadingText.textContent = i18n.t("common.loading");
 
-    countryCard.appendChild(title);
-    countryCard.appendChild(placeholder);
-    countryCard.appendChild(loadingText);
-    homepage.appendChild(countryCard);
+    link.appendChild(title);
+    link.appendChild(placeholder);
+    link.appendChild(loadingText);
+    homepage.appendChild(link);
   });
 
   const observerOptions = {
@@ -127,10 +128,6 @@ function renderCountryCard(countryCard, countryKey) {
   svg.classList.add("country-preview");
 
   countryCard.appendChild(svg);
-
-  countryCard.onclick = () => {
-    window.location.href = `/country/${countryKey}`;
-  };
 
   if (isSquareView) {
     renderCountrySquarePreview(countryKey, svg, worldData);

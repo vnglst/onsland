@@ -21,6 +21,8 @@
   flex-direction: column;
   gap: 8px;
   min-height: 320px;
+  text-decoration: none;
+  color: inherit;
 }
 
 .country-card:hover {
