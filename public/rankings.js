@@ -11,6 +11,12 @@ import { updatePageTitle, updateMetaDescription } from './shared/page-utils.js';
 function getAllCategoryRankings() {
   const categoryData = {};
 
+  // Check if data is loaded
+  if (!countryConfigs || Object.keys(countryConfigs).length === 0) {
+    console.error('Country configurations not loaded');
+    return categoryData;
+  }
+
   // Iterate through all countries and collect category data
   Object.keys(countryConfigs).forEach((countryKey) => {
     const config = countryConfigs[countryKey];
@@ -142,8 +148,11 @@ function handleHashScroll() {
 /**
  * Initialize the rankings page
  */
-function initRankingsPage() {
-  globalThis.initI18n().then(() => {
+async function initRankingsPage() {
+  try {
+    // Wait for i18n to initialize
+    await globalThis.initI18n();
+
     // Update page title and meta description
     updatePageTitle(globalThis.i18n.t("rankings.title"));
     updateMetaDescription(globalThis.i18n.t("rankings.metaDescription"));
@@ -167,7 +176,18 @@ function initRankingsPage() {
       // Preserve scroll to hash if present
       handleHashScroll();
     });
-  });
+  } catch (error) {
+    console.error("Error initializing rankings page:", error);
+    const container = document.getElementById("rankingsContainer");
+    if (container) {
+      container.innerHTML = `
+        <div class="error-message">
+          <h2>Failed to load rankings</h2>
+          <p>Please refresh the page to try again.</p>
+        </div>
+      `;
+    }
+  }
 }
 
 // Initialize page when DOM is ready
