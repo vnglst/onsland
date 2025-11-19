@@ -88,8 +88,4 @@ const initMenu = () => {
 };
 
 // Run when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initMenu);
-} else {
-  initMenu();
-}
+onDOMReady(initMenu);

@@ -159,8 +159,4 @@ function initRankingsPage() {
 }
 
 // Initialize page when DOM is ready
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initRankingsPage);
-} else {
-  initRankingsPage();
-}
+onDOMReady(initRankingsPage);

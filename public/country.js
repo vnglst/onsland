@@ -196,11 +196,7 @@ function toggleLayout() {
     .duration(500)
     .attr("opacity", labelOpacity);
 
-  // Update view toggle button text
-  const menuToggle = document.getElementById("menuViewToggle");
-  if (menuToggle) {
-    menuToggle.textContent = getViewToggleText();
-  }
+  updateMenuViewToggle(getViewToggleText);
 }
 
 /**
@@ -690,10 +686,7 @@ async function initCountryPage() {
     window.getViewToggleText = getViewToggleText;
 
     // Set initial view toggle button text
-    const menuToggle = document.getElementById("menuViewToggle");
-    if (menuToggle) {
-      menuToggle.textContent = getViewToggleText();
-    }
+    updateMenuViewToggle(getViewToggleText);
 
     // Render the country visualization
     renderCountry(currentCountry);
@@ -706,10 +699,7 @@ async function initCountryPage() {
       document.querySelector(".title-country").textContent = countryName;
 
       // Update view toggle button text
-      const menuToggle = document.getElementById("menuViewToggle");
-      if (menuToggle) {
-        menuToggle.textContent = getViewToggleText();
-      }
+      updateMenuViewToggle(getViewToggleText);
 
       // Re-render country visualization (legend and labels)
       renderCountry(currentCountry);
@@ -723,8 +713,4 @@ async function initCountryPage() {
 }
 
 // Initialize page when DOM is ready
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initCountryPage);
-} else {
-  initCountryPage();
-}
+onDOMReady(initCountryPage);
