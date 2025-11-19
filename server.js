@@ -1,6 +1,7 @@
 import Fastify from 'fastify';
 import fastifyView from '@fastify/view';
 import fastifyStatic from '@fastify/static';
+import fastifyCompress from '@fastify/compress';
 import handlebars from 'handlebars';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -14,10 +15,17 @@ const fastify = Fastify({
 
 const PORT = process.env.PORT || 8000;
 
+// Register compression (gzip/brotli)
+await fastify.register(fastifyCompress, {
+  global: true,
+  threshold: 1024 // Only compress responses larger than 1KB
+});
+
 // Register static file serving
 await fastify.register(fastifyStatic, {
   root: join(__dirname, 'public'),
-  prefix: '/'
+  prefix: '/',
+  maxAge: '1d' // Cache static files for 1 day
 });
 
 // Register view engine

@@ -43,16 +43,12 @@
   <link rel="stylesheet" href="{{this}}">
   {{/each}}
 
+  <!-- Preload critical resources -->
+  <link rel="preload" href="/vendor/d3.v7.min.js" as="script">
+  <link rel="preload" href="/shared/i18n.js" as="script">
+
   <!-- Analytics -->
   <script defer data-domain="onsland.koenvangilst.nl" src="https://plausible.koenvangilst.nl/js/script.js"></script>
-
-  <!-- Vendor libraries -->
-  <script src="/vendor/d3.v7.min.js"></script>
-  <script src="/vendor/d3-hexbin.v0.2.min.js"></script>
-  <script src="/vendor/topojson-client.v3.min.js"></script>
-
-  <!-- Shared scripts -->
-  <script src="/shared/i18n.js"></script>
 
   <!-- Inline script if provided -->
   {{#if inlineScript}}
@@ -64,15 +60,21 @@
 
   {{> footer}}
 
-  <!-- Common scripts that need to be at the end -->
-  <script src="/shared/page-init.js"></script>
-  <script src="/shared/menu.js"></script>
-  <script src="/shared/countries.js"></script>
-  <script src="/shared/render.js"></script>
+  <!-- Vendor libraries (defer ensures they load in order without blocking) -->
+  <script defer src="/vendor/d3.v7.min.js"></script>
+  <script defer src="/vendor/d3-hexbin.v0.2.min.js"></script>
+  <script defer src="/vendor/topojson-client.v3.min.js"></script>
+
+  <!-- Shared scripts -->
+  <script defer src="/shared/i18n.js"></script>
+  <script defer src="/shared/page-init.js"></script>
+  <script defer src="/shared/menu.js"></script>
+  <script defer src="/shared/countries.js"></script>
+  <script defer src="/shared/render.js"></script>
 
   <!-- Page-specific scripts -->
   {{#each pageSpecificScripts}}
-  <script src="{{this}}"></script>
+  <script defer src="{{this}}"></script>
   {{/each}}
 </body>
 </html>
