@@ -4,6 +4,7 @@
 
 import { validCountries, countryNames } from './shared/countries.js';
 import { renderCountryPreview, renderCountrySquarePreview } from './shared/render.js';
+import { updatePageTitle, updateMetaDescription } from './shared/page-utils.js';
 
 const OBSERVER_CONFIG = {
   root: null,
@@ -243,8 +244,8 @@ async function initHomepage() {
     HomepageState.setWorldData(world);
 
     // Update page metadata
-    globalThis.updatePageTitle(globalThis.i18n.t("homepage.title"));
-    globalThis.updateMetaDescription(globalThis.i18n.t("homepage.metaDescription"));
+    updatePageTitle(globalThis.i18n.t("homepage.title"));
+    updateMetaDescription(globalThis.i18n.t("homepage.metaDescription"));
 
     // Expose view toggle functions for Menu island
     globalThis.toggleView = toggleView;

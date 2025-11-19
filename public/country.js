@@ -5,6 +5,7 @@
 
 import { validCountries, countryNames, countryConfigs } from './shared/countries.js';
 import { translateCategory, translateLabel } from './shared/translation-utils.js';
+import { updatePageTitle, updateMetaDescription } from './shared/page-utils.js';
 
 const DEV_MODE = false;
 
@@ -48,7 +49,7 @@ function initializePageElements() {
   const countryName = globalThis.i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
   document.title = `${globalThis.i18n.t("country.titlePrefix")}${countryName} - OnsLand`;
   document.querySelector(".title-country").textContent = countryName;
-  globalThis.updateMetaDescription(globalThis.i18n.t("country.metaDescription"));
+  updateMetaDescription(globalThis.i18n.t("country.metaDescription"));
 
   // Display rankings after translations are loaded
   displayRankings();
