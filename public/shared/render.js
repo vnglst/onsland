@@ -2,7 +2,7 @@
  * Shared rendering utilities for OnsLand visualizations
  */
 
-import { validCountries, countryNames, countryConfigs } from './countries.js';
+import { validCountries, countryNames, countryConfigs, loadPromise } from './countries.js';
 
 const PREVIEW_CONFIG = {
   MAP: {

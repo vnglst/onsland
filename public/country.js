@@ -3,7 +3,7 @@
  * Handles the detailed country visualization with D3.js and rankings display
  */
 
-import { validCountries, countryNames, countryConfigs } from './shared/countries.js';
+import { validCountries, countryNames, countryConfigs, loadPromise } from './shared/countries.js';
 import { translateCategory, translateLabel } from './shared/translation-utils.js';
 import { updatePageTitle, updateMetaDescription } from './shared/page-utils.js';
 
@@ -767,8 +767,9 @@ function renderCountry(countryKey) {
  */
 async function initCountryPage() {
   try {
-    // Load map data and translations in parallel
-    const [_, world] = await Promise.all([
+    // Load all required data in parallel
+    const [_, __, world] = await Promise.all([
+      loadPromise,
       globalThis.initI18n(),
       fetch("/vendor/countries-50m.json").then((res) => {
         if (!res.ok) {

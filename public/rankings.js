@@ -1,6 +1,6 @@
 // Rankings page functionality
 
-import { countryConfigs, countryNames } from './shared/countries.js';
+import { countryConfigs, countryNames, loadPromise } from './shared/countries.js';
 import { translateCategory } from './shared/translation-utils.js';
 import { updatePageTitle, updateMetaDescription } from './shared/page-utils.js';
 
@@ -142,7 +142,7 @@ function handleHashScroll() {
  * Initialize the rankings page
  */
 async function initRankingsPage() {
-  await globalThis.initI18n();
+  await Promise.all([loadPromise, globalThis.initI18n()]);
 
   updatePageTitle(globalThis.i18n.t("rankings.title"));
   updateMetaDescription(globalThis.i18n.t("rankings.metaDescription"));

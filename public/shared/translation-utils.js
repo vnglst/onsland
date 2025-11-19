@@ -2,7 +2,7 @@
  * Translation utilities - auto-generates mappings from country data
  */
 
-import { countryConfigs } from './countries.js';
+import { countryConfigs, loadPromise } from './countries.js';
 
 /**
  * Convert a string to camelCase
@@ -21,31 +21,29 @@ function toCamelCase(str) {
     .join('');
 }
 
-const categoryMap = (() => {
-  const map = {};
+let categoryMap = {};
+let labelMap = {};
+
+// Build maps after data loads
+loadPromise.then(() => {
   Object.values(countryConfigs).forEach((config) => {
     config.categories?.forEach((category) => {
-      if (!map[category.name]) {
+      if (!categoryMap[category.name]) {
         const key = toCamelCase(category.name);
-        map[category.name] = `categories.${key}`;
+        categoryMap[category.name] = `categories.${key}`;
       }
     });
   });
-  return map;
-})();
 
-const labelMap = (() => {
-  const map = {};
   Object.values(countryConfigs).forEach((config) => {
     config.labels?.forEach((labelObj) => {
-      if (!map[labelObj.label]) {
+      if (!labelMap[labelObj.label]) {
         const key = toCamelCase(labelObj.label);
-        map[labelObj.label] = `labels.${key}`;
+        labelMap[labelObj.label] = `labels.${key}`;
       }
     });
   });
-  return map;
-})();
+});
 
 export function translateCategory(categoryName) {
   const i18nKey = categoryMap[categoryName];

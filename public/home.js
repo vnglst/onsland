@@ -2,7 +2,7 @@
  * Homepage functionality - lazy loading country cards with view toggling
  */
 
-import { validCountries, countryNames } from './shared/countries.js';
+import { validCountries, countryNames, loadPromise } from './shared/countries.js';
 import { renderCountryPreview, renderCountrySquarePreview } from './shared/render.js';
 import { updatePageTitle, updateMetaDescription } from './shared/page-utils.js';
 
@@ -229,8 +229,9 @@ function renderCountryCard(countryCard, countryKey) {
  */
 async function initHomepage() {
   try {
-    // Load both i18n and map data in parallel
-    const [_, world] = await Promise.all([
+    // Load all required data in parallel
+    const [_, __, world] = await Promise.all([
+      loadPromise,
       globalThis.initI18n(),
       fetch("/vendor/countries-50m.json").then((response) => {
         if (!response.ok) {
