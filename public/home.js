@@ -259,7 +259,7 @@ async function initHomepage() {
 
     // Listen for language changes and update country titles
     globalThis.addEventListener("languageChanged", () => {
-      globalThis.updatePageTitle(globalThis.i18n.t("homepage.title"));
+      updatePageTitle(globalThis.i18n.t("homepage.title"));
       updateViewToggleButton();
       updateCountryCardTitles();
     });
