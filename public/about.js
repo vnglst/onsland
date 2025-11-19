@@ -1,12 +1,14 @@
 // About page functionality
 
+import { updatePageTitle, updateMetaDescription } from './shared/page-utils.js';
+
 /**
  * Initialize the about page
  */
 function initAboutPage() {
   globalThis.initI18n().then(() => {
-    globalThis.updatePageTitle(globalThis.i18n.t("about.title"));
-    globalThis.updateMetaDescription(globalThis.i18n.t("about.metaDescription"));
+    updatePageTitle(globalThis.i18n.t("about.title"));
+    updateMetaDescription(globalThis.i18n.t("about.metaDescription"));
   });
 }
 
