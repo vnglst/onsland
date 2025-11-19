@@ -57,6 +57,15 @@ function translateCategory(categoryName) {
 }
 
 /**
+ * Create a URL-friendly slug from a category name
+ * @param {string} categoryName - The category name to convert
+ * @returns {string} URL-friendly slug
+ */
+function createCategorySlug(categoryName) {
+  return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+}
+
+/**
  * Translates a label name using the i18n system
  * Maps label display names to translation keys
  */
@@ -84,3 +93,4 @@ function translateLabel(labelName) {
 // Export functions to global scope
 globalThis.translateCategory = translateCategory;
 globalThis.translateLabel = translateLabel;
+globalThis.createCategorySlug = createCategorySlug;

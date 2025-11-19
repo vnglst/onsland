@@ -1121,56 +1121,54 @@ const countryConfigs = {
       { name: "Other cropland", color: "var(--agriculture-950)", percentage: 0.072 },
     ],
     labels: [
-      [
-        {
-          label: "Water",
-          displayLabel: true,
-          labelTarget: {
-            x: 424,
-            y: 181,
-          },
-          labelPosition: {
-            x: 458,
-            y: 157,
-          },
+      {
+        label: "Water",
+        displayLabel: true,
+        labelTarget: {
+          x: 424,
+          y: 181,
         },
-        {
-          label: "Nature",
-          displayLabel: true,
-          labelTarget: {
-            x: 634,
-            y: 269,
-          },
-          labelPosition: {
-            x: 696,
-            y: 258,
-          },
+        labelPosition: {
+          x: 458,
+          y: 157,
         },
-        {
-          label: "Cities",
-          displayLabel: true,
-          labelTarget: {
-            x: 634,
-            y: 379,
-          },
-          labelPosition: {
-            x: 674,
-            y: 396,
-          },
+      },
+      {
+        label: "Nature",
+        displayLabel: true,
+        labelTarget: {
+          x: 634,
+          y: 269,
         },
-        {
-          label: "Agriculture",
-          displayLabel: true,
-          labelTarget: {
-            x: 631,
-            y: 535,
-          },
-          labelPosition: {
-            x: 661,
-            y: 532,
-          },
+        labelPosition: {
+          x: 696,
+          y: 258,
         },
-      ],
+      },
+      {
+        label: "Cities",
+        displayLabel: true,
+        labelTarget: {
+          x: 634,
+          y: 379,
+        },
+        labelPosition: {
+          x: 674,
+          y: 396,
+        },
+      },
+      {
+        label: "Agriculture",
+        displayLabel: true,
+        labelTarget: {
+          x: 631,
+          y: 535,
+        },
+        labelPosition: {
+          x: 661,
+          y: 532,
+        },
+      },
     ],
   },
   bulgaria: {

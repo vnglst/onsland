@@ -1,5 +1,31 @@
 // Shared rendering utilities for OnsLand visualizations
 
+/**
+ * Calculate hexagon color assignments based on category percentages
+ * @param {number} totalHexagons - Total number of hexagons to color
+ * @param {Array} categories - Array of category objects with name and percentage
+ * @returns {Array} Array of category names for each hexagon
+ */
+function calculateHexagonColors(totalHexagons, categories) {
+  const hexColors = [];
+  let remainingHexagons = totalHexagons;
+
+  categories.forEach((category, index) => {
+    let hexagonsPerCategory;
+    if (index === categories.length - 1) {
+      hexagonsPerCategory = remainingHexagons;
+    } else {
+      hexagonsPerCategory = Math.round(totalHexagons * category.percentage);
+      remainingHexagons -= hexagonsPerCategory;
+    }
+    for (let i = 0; i < hexagonsPerCategory; i++) {
+      hexColors.push(category.name);
+    }
+  });
+
+  return hexColors;
+}
+
 const validCountries = [
   'austria',
   'belgium',
@@ -110,21 +136,7 @@ function renderCountryPreview(countryKey, svgElement, worldData) {
     .domain(categories.map((c) => c.name))
     .range(categories.map((c) => c.color));
 
-  let hexColors = [];
-  let remainingHexagons = totalHexagons;
-
-  categories.forEach((category, index) => {
-    let hexagonsPerCategory;
-    if (index === categories.length - 1) {
-      hexagonsPerCategory = remainingHexagons;
-    } else {
-      hexagonsPerCategory = Math.round(totalHexagons * category.percentage);
-      remainingHexagons -= hexagonsPerCategory;
-    }
-    for (let i = 0; i < hexagonsPerCategory; i++) {
-      hexColors.push(category.name);
-    }
-  });
+  const hexColors = calculateHexagonColors(totalHexagons, categories);
 
   svg
     .append('g')
@@ -174,21 +186,7 @@ function renderCountrySquarePreview(countryKey, svgElement, worldData) {
     .domain(categories.map((c) => c.name))
     .range(categories.map((c) => c.color));
 
-  let hexColors = [];
-  let remainingHexagons = totalHexagons;
-
-  categories.forEach((category, index) => {
-    let hexagonsPerCategory;
-    if (index === categories.length - 1) {
-      hexagonsPerCategory = remainingHexagons;
-    } else {
-      hexagonsPerCategory = Math.round(totalHexagons * category.percentage);
-      remainingHexagons -= hexagonsPerCategory;
-    }
-    for (let i = 0; i < hexagonsPerCategory; i++) {
-      hexColors.push(category.name);
-    }
-  });
+  const hexColors = calculateHexagonColors(totalHexagons, categories);
 
   // Create hexagon path generator
   const hexbin = d3.hexbin().radius(hexRadius);
@@ -210,38 +208,4 @@ function renderCountrySquarePreview(countryKey, svgElement, worldData) {
     .attr('fill', (d, i) => (hexColors[i] ? colorScale(hexColors[i]) : 'var(--bg-light)'))
     .attr('stroke', 'var(--bg-light)')
     .attr('stroke-width', 0.5);
-}
-
-function squarePath(size) {
-  const half = size / 2;
-  return `M ${-half},${-half} L ${half},${-half} L ${half},${half} L ${-half},${half} Z`;
-}
-
-function calculateSquarePositions(totalHexagons) {
-  const width = 800;
-  const height = 800;
-  const squareSize = 10;
-  const padding = 50;
-
-  const availableWidth = width - padding * 2;
-  const availableHeight = height - padding * 2;
-
-  const cols = Math.ceil(Math.sqrt(totalHexagons * (availableWidth / availableHeight)));
-  const rows = Math.ceil(totalHexagons / cols);
-
-  const gridWidth = cols * squareSize;
-  const gridHeight = rows * squareSize;
-  const offsetX = (width - gridWidth) / 1.5 + squareSize / 2;
-  const offsetY = squareSize;
-
-  const positions = [];
-  for (let i = 0; i < totalHexagons; i++) {
-    const row = Math.floor(i / cols);
-    const col = i % cols;
-    const x = offsetX + col * squareSize;
-    const y = offsetY + row * squareSize;
-    positions.push({ x, y });
-  }
-
-  return positions;
 }

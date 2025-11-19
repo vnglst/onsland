@@ -38,15 +38,6 @@ function getAllCategoryRankings() {
 }
 
 /**
- * Create a URL-friendly slug from a category name
- * @param {string} categoryName - The category name to convert
- * @returns {string} URL-friendly slug
- */
-function createCategorySlug(categoryName) {
-  return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-}
-
-/**
  * Render all category rankings to the page
  */
 function renderRankings() {

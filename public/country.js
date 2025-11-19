@@ -73,15 +73,6 @@ function calculateCountryRankings() {
 }
 
 /**
- * Create a URL-friendly slug from a category name
- * @param {string} categoryName - The category name to convert
- * @returns {string} URL-friendly slug
- */
-function createCategorySlug(categoryName) {
-  return categoryName.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-}
-
-/**
  * Create a ranking badge element
  * @param {Object} ranking - Ranking data
  * @param {string} labelKey - i18n key for the label
@@ -162,6 +153,7 @@ function toggleLayout() {
   isSquareLayout = !isSquareLayout;
   const svg = d3.select("#countrySvg");
   const hexRadius = 6;
+  const hexbin = d3.hexbin().radius(hexRadius);
 
   // Get color scale to ensure proper colors
   const config = countryConfigs[currentCountry];
@@ -171,50 +163,39 @@ function toggleLayout() {
     .domain(categories.map((c) => c.name))
     .range(categories.map((c) => c.color));
 
-  if (isSquareLayout) {
-    const hexagonPositions = calculateHexagonGridPositions(hexDataGlobal.length);
-    const hexbin = d3.hexbin().radius(hexRadius);
+  // Calculate positions and stroke width based on layout mode
+  const hexagonPositions = isSquareLayout
+    ? calculateHexagonGridPositions(hexDataGlobal.length)
+    : null;
+  const strokeWidth = isSquareLayout ? 0 : 0.1;
+  const labelOpacity = isSquareLayout ? 0 : 1;
+  const labelDelay = isSquareLayout ? 0 : 500;
 
-    svg
-      .selectAll(".hexagon")
-      .interrupt() // Stop any ongoing transitions
-      .attr("fill", (d, i) => colorScale(hexColorsGlobal[i])) // Ensure correct color immediately
-      .transition()
-      .duration(1000)
-      .ease(d3.easeCubicInOut)
-      .attr("transform", (d, i) => {
+  // Animate hexagons
+  svg
+    .selectAll(".hexagon")
+    .interrupt()
+    .attr("fill", (d, i) => colorScale(hexColorsGlobal[i]))
+    .transition()
+    .duration(1000)
+    .ease(d3.easeCubicInOut)
+    .attr("transform", (d, i) => {
+      if (isSquareLayout) {
         const pos = hexagonPositions[i];
         return `translate(${pos.x},${pos.y})`;
-      })
-      .attr("d", hexbin.hexagon(hexRadius))
-      .attr("stroke-width", 0);
+      }
+      return `translate(${hexDataGlobal[i].x},${hexDataGlobal[i].y})`;
+    })
+    .attr("d", hexbin.hexagon(hexRadius))
+    .attr("stroke-width", strokeWidth);
 
-    svg
-      .selectAll("text[data-label], line[data-label], circle[data-label]")
-      .transition()
-      .duration(500)
-      .attr("opacity", 0);
-  } else {
-    const hexbin = d3.hexbin().radius(hexRadius);
-
-    svg
-      .selectAll(".hexagon")
-      .interrupt() // Stop any ongoing transitions
-      .attr("fill", (d, i) => colorScale(hexColorsGlobal[i])) // Ensure correct color immediately
-      .transition()
-      .duration(1000)
-      .ease(d3.easeCubicInOut)
-      .attr("transform", (d, i) => `translate(${hexDataGlobal[i].x},${hexDataGlobal[i].y})`)
-      .attr("d", hexbin.hexagon(hexRadius))
-      .attr("stroke-width", 0.1);
-
-    svg
-      .selectAll("text[data-label], line[data-label], circle[data-label]")
-      .transition()
-      .delay(500)
-      .duration(500)
-      .attr("opacity", 1);
-  }
+  // Animate labels
+  svg
+    .selectAll("text[data-label], line[data-label], circle[data-label]")
+    .transition()
+    .delay(labelDelay)
+    .duration(500)
+    .attr("opacity", labelOpacity);
 
   // Update view toggle button text
   const menuToggle = document.getElementById("menuViewToggle");
