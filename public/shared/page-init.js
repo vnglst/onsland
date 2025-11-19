@@ -18,3 +18,6 @@ function updateMetaDescription(description) {
     metaDesc.setAttribute('content', description);
   }
 }
+
+globalThis.updatePageTitle = updatePageTitle;
+globalThis.updateMetaDescription = updateMetaDescription;
