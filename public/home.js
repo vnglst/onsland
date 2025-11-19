@@ -258,7 +258,7 @@ async function initHomepage() {
     showHomepage();
 
     // Listen for language changes and update country titles
-    globalThis.addEventListener("languageChanged", () => {
+    window.addEventListener("languageChanged", () => {
       updatePageTitle(globalThis.i18n.t("homepage.title"));
       updateViewToggleButton();
       updateCountryCardTitles();

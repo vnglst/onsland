@@ -797,7 +797,7 @@ async function initCountryPage() {
     renderCountry(currentCountry);
 
     // Listen for language changes and re-render dynamic content
-    globalThis.addEventListener("languageChanged", () => {
+    window.addEventListener("languageChanged", () => {
       try {
         // Update page title and country name
         const countryName = globalThis.i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
