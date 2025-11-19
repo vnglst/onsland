@@ -25,11 +25,7 @@ function toggleView() {
     }
   });
 
-  // Update view toggle button text
-  const menuToggle = document.getElementById("menuViewToggle");
-  if (menuToggle) {
-    menuToggle.textContent = getViewToggleText();
-  }
+  updateMenuViewToggle(getViewToggleText);
 }
 
 /**
@@ -38,16 +34,6 @@ function toggleView() {
  */
 function getViewToggleText() {
   return isSquareView ? i18n.t("homepage.mapView") : i18n.t("homepage.squareView");
-}
-
-/**
- * Update the view toggle button text
- */
-function updateViewToggleButton() {
-  const menuToggle = document.getElementById("menuViewToggle");
-  if (menuToggle) {
-    menuToggle.textContent = getViewToggleText();
-  }
 }
 
 /**
@@ -173,7 +159,7 @@ function initHomepage() {
       window.getViewToggleText = getViewToggleText;
 
       // Set initial view toggle button text
-      updateViewToggleButton();
+      updateMenuViewToggle(getViewToggleText);
 
       // Render homepage now that both i18n and map data are ready
       showHomepage();
@@ -181,7 +167,7 @@ function initHomepage() {
       // Listen for language changes and update country titles
       window.addEventListener("languageChanged", () => {
         updatePageTitle(i18n.t("homepage.title"));
-        updateViewToggleButton();
+        updateMenuViewToggle(getViewToggleText);
         updateCountryCardTitles();
       });
     })
@@ -189,8 +175,4 @@ function initHomepage() {
 }
 
 // Initialize page when DOM is ready
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initHomepage);
-} else {
-  initHomepage();
-}
+onDOMReady(initHomepage);

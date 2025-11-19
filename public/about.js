@@ -12,8 +12,4 @@ function initAboutPage() {
 }
 
 // Initialize page when DOM is ready
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initAboutPage);
-} else {
-  initAboutPage();
-}
+onDOMReady(initAboutPage);

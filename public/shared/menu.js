@@ -1,5 +1,4 @@
 // Menu functionality - handles menu open/close and interactions
-// This file runs in the browser, not in Deno
 let isOpen = false;
 
 const closeMenu = () => {
@@ -89,8 +88,4 @@ const initMenu = () => {
 };
 
 // Run when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initMenu);
-} else {
-  initMenu();
-}
+onDOMReady(initMenu);
