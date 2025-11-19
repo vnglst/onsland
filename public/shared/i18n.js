@@ -135,25 +135,35 @@ function updateTranslations() {
 }
 
 // Initialize i18n and update page
+let initPromise = null;
 async function initI18n() {
-  try {
-    await i18n.init(i18n.currentLanguage);
-    updateTranslations();
+  if (initPromise) return initPromise;
 
-    // Listen for language changes and update page
-    i18n.onLanguageChange((language) => {
+  initPromise = (async () => {
+    try {
+      await i18n.init(i18n.currentLanguage);
       updateTranslations();
-      window.dispatchEvent(
-        new CustomEvent('languageChanged', {
-          detail: { language },
-        })
-      );
-    });
-  } catch (error) {
-    console.error('Failed to initialize i18n:', error);
-  }
+
+      // Listen for language changes and update page
+      i18n.onLanguageChange((language) => {
+        updateTranslations();
+        window.dispatchEvent(
+          new CustomEvent('languageChanged', {
+            detail: { language },
+          })
+        );
+      });
+    } catch (error) {
+      console.error('Failed to initialize i18n:', error);
+    }
+  })();
+
+  return initPromise;
 }
 
 globalThis.i18n = i18n;
 globalThis.initI18n = initI18n;
 globalThis.updateTranslations = updateTranslations;
+
+// Auto-initialize i18n when script loads
+initI18n();
