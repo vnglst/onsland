@@ -1540,26 +1540,50 @@ const countryConfigs = {
       {
         label: "Water",
         displayLabel: true,
-        labelTarget: { x: 400, y: 100 },
-        labelPosition: { x: 400, y: 100 },
+        labelTarget: {
+          x: 423,
+          y: 171,
+        },
+        labelPosition: {
+          x: 464,
+          y: 128,
+        },
       },
       {
         label: "Nature",
         displayLabel: true,
-        labelTarget: { x: 400, y: 200 },
-        labelPosition: { x: 400, y: 200 },
+        labelTarget: {
+          x: 659,
+          y: 284,
+        },
+        labelPosition: {
+          x: 710,
+          y: 256,
+        },
       },
       {
         label: "Cities",
         displayLabel: true,
-        labelTarget: { x: 400, y: 300 },
-        labelPosition: { x: 400, y: 300 },
+        labelTarget: {
+          x: 710,
+          y: 454,
+        },
+        labelPosition: {
+          x: 734,
+          y: 437,
+        },
       },
       {
         label: "Agriculture",
         displayLabel: true,
-        labelTarget: { x: 400, y: 500 },
-        labelPosition: { x: 400, y: 500 },
+        labelTarget: {
+          x: 624,
+          y: 622,
+        },
+        labelPosition: {
+          x: 666,
+          y: 642,
+        },
       },
     ],
   },
