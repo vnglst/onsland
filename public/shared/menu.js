@@ -36,23 +36,23 @@ const toggleMenu = () => {
 
 const handleLanguageChange = (e) => {
   const newLang = e.target.value;
-  if (globalThis.i18n) {
-    globalThis.i18n.changeLanguage(newLang);
+  if (window.i18n) {
+    window.i18n.changeLanguage(newLang);
   }
 };
 
 const handleViewToggle = () => {
-  if (globalThis.toggleView) {
-    globalThis.toggleView();
-  } else if (globalThis.toggleLayout) {
-    globalThis.toggleLayout();
+  if (window.toggleView) {
+    window.toggleView();
+  } else if (window.toggleLayout) {
+    window.toggleLayout();
   }
 };
 
 const updateLanguageSelect = () => {
   const languageSwitcher = document.querySelector('.menu-language-switcher');
-  if (languageSwitcher && globalThis.i18n) {
-    languageSwitcher.value = globalThis.i18n.currentLanguage;
+  if (languageSwitcher && window.i18n) {
+    languageSwitcher.value = window.i18n.currentLanguage;
   }
 };
 

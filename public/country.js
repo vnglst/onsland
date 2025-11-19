@@ -596,7 +596,7 @@ function renderCountry(countryKey) {
 async function initCountryPage() {
   try {
     // Load map data and translations in parallel
-    const [_, world] = await Promise.all([initI18n(), fetch("/vendor/countries-50m.json").then((res) => res.json())]);
+    const [, world] = await Promise.all([initI18n(), fetch("/vendor/countries-50m.json").then((res) => res.json())]);
 
     worldData = world;
 
@@ -604,8 +604,8 @@ async function initCountryPage() {
     initializePageElements();
 
     // Expose view toggle functions for menu
-    globalThis.toggleLayout = toggleLayout;
-    globalThis.getViewToggleText = getViewToggleText;
+    window.toggleLayout = toggleLayout;
+    window.getViewToggleText = getViewToggleText;
 
     // Set initial view toggle button text
     const menuToggle = document.getElementById("menuViewToggle");
@@ -617,7 +617,7 @@ async function initCountryPage() {
     renderCountry(currentCountry);
 
     // Listen for language changes and re-render dynamic content
-    globalThis.addEventListener("languageChanged", () => {
+    window.addEventListener("languageChanged", () => {
       // Update page title and country name
       const countryName = i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
       document.title = `${i18n.t("country.titlePrefix")}${countryName} - OnsLand`;

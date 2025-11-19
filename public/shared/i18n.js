@@ -143,7 +143,7 @@ async function initI18n() {
     // Listen for language changes and update page
     i18n.onLanguageChange((language) => {
       updateTranslations();
-      globalThis.dispatchEvent(
+      window.dispatchEvent(
         new CustomEvent('languageChanged', {
           detail: { language },
         })
@@ -155,6 +155,6 @@ async function initI18n() {
 }
 
 // Export for use in other scripts
-globalThis.i18n = i18n;
-globalThis.initI18n = initI18n;
-globalThis.updateTranslations = updateTranslations;
+window.i18n = i18n;
+window.initI18n = initI18n;
+window.updateTranslations = updateTranslations;
