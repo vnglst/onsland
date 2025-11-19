@@ -34,7 +34,7 @@ const ANIMATION_CONFIG = {
 };
 
 // Get country from route parameter
-const countryFromRoute = globalThis.__COUNTRY__;
+const countryFromRoute = window.__COUNTRY__;
 const currentCountry = validCountries.includes(countryFromRoute) ? countryFromRoute : "netherlands";
 
 let worldData = null;
