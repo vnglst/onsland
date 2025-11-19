@@ -154,7 +154,6 @@ async function initI18n() {
   }
 }
 
-// Export for use in other scripts
 globalThis.i18n = i18n;
 globalThis.initI18n = initI18n;
 globalThis.updateTranslations = updateTranslations;

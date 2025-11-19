@@ -1,5 +1,4 @@
 // Rankings page functionality
-// Handles rendering and displaying land use category rankings
 
 /**
  * Extract all categories and their data from all countries

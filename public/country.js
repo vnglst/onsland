@@ -1,7 +1,6 @@
 /**
  * Country page functionality
  * Handles the detailed country visualization with D3.js and rankings display
- * ES6 Module
  */
 
 import { validCountries, countryNames, countryConfigs } from './shared/countries.js';

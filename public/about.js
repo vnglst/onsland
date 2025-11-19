@@ -1,5 +1,4 @@
 // About page functionality
-// Simple initialization for the about page
 
 /**
  * Initialize the about page

@@ -1,5 +1,4 @@
 // Common page initialization utilities
-// Provides reusable functions for initializing page metadata and UI elements
 
 /**
  * Updates the page title
