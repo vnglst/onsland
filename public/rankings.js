@@ -11,13 +11,6 @@ import { updatePageTitle, updateMetaDescription } from './shared/page-utils.js';
 function getAllCategoryRankings() {
   const categoryData = {};
 
-  // Check if data is loaded
-  if (!countryConfigs || Object.keys(countryConfigs).length === 0) {
-    console.error('Country configurations not loaded');
-    return categoryData;
-  }
-
-  // Iterate through all countries and collect category data
   Object.keys(countryConfigs).forEach((countryKey) => {
     const config = countryConfigs[countryKey];
     const countryName = countryNames[countryKey];
@@ -149,45 +142,23 @@ function handleHashScroll() {
  * Initialize the rankings page
  */
 async function initRankingsPage() {
-  try {
-    // Wait for i18n to initialize
-    await globalThis.initI18n();
+  await globalThis.initI18n();
 
-    // Update page title and meta description
+  updatePageTitle(globalThis.i18n.t("rankings.title"));
+  updateMetaDescription(globalThis.i18n.t("rankings.metaDescription"));
+
+  renderRankings();
+  handleHashScroll();
+
+  window.addEventListener("languageChanged", () => {
     updatePageTitle(globalThis.i18n.t("rankings.title"));
-    updateMetaDescription(globalThis.i18n.t("rankings.metaDescription"));
 
-    // Render rankings after translations are loaded
+    const container = document.getElementById("rankingsContainer");
+    container.innerHTML = "";
     renderRankings();
 
-    // Handle hash scrolling
     handleHashScroll();
-
-    // Listen for language changes and re-render rankings
-    window.addEventListener("languageChanged", () => {
-      // Update page title
-      updatePageTitle(globalThis.i18n.t("rankings.title"));
-
-      // Clear and re-render rankings
-      const container = document.getElementById("rankingsContainer");
-      container.innerHTML = "";
-      renderRankings();
-
-      // Preserve scroll to hash if present
-      handleHashScroll();
-    });
-  } catch (error) {
-    console.error("Error initializing rankings page:", error);
-    const container = document.getElementById("rankingsContainer");
-    if (container) {
-      container.innerHTML = `
-        <div class="error-message">
-          <h2>Failed to load rankings</h2>
-          <p>Please refresh the page to try again.</p>
-        </div>
-      `;
-    }
-  }
+  });
 }
 
 // Initialize page when DOM is ready

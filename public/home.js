@@ -265,16 +265,6 @@ async function initHomepage() {
     });
   } catch (error) {
     console.error("Error initializing homepage:", error);
-    // Show user-friendly error message
-    const homepage = document.getElementById("homepage");
-    if (homepage) {
-      homepage.innerHTML = `
-        <div class="error-message">
-          <h2>Failed to load page</h2>
-          <p>Please refresh the page to try again.</p>
-        </div>
-      `;
-    }
   }
 }
 

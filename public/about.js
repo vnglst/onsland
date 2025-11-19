@@ -6,13 +6,9 @@ import { updatePageTitle, updateMetaDescription } from './shared/page-utils.js';
  * Initialize the about page
  */
 async function initAboutPage() {
-  try {
-    await globalThis.initI18n();
-    updatePageTitle(globalThis.i18n.t("about.title"));
-    updateMetaDescription(globalThis.i18n.t("about.metaDescription"));
-  } catch (error) {
-    console.error("Error initializing about page:", error);
-  }
+  await globalThis.initI18n();
+  updatePageTitle(globalThis.i18n.t("about.title"));
+  updateMetaDescription(globalThis.i18n.t("about.metaDescription"));
 }
 
 // Initialize page when DOM is ready

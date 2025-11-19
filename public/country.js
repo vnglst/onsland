@@ -798,45 +798,24 @@ async function initCountryPage() {
 
     // Listen for language changes and re-render dynamic content
     window.addEventListener("languageChanged", () => {
-      try {
-        // Update page title and country name
-        const countryName = globalThis.i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
-        document.title = `${globalThis.i18n.t("country.titlePrefix")}${countryName} - OnsLand`;
+      const countryName = globalThis.i18n.t(`countries.${currentCountry}`) || countryNames[currentCountry];
+      document.title = `${globalThis.i18n.t("country.titlePrefix")}${countryName} - OnsLand`;
 
-        const titleElement = document.querySelector(".title-country");
-        if (titleElement) {
-          titleElement.textContent = countryName;
-        }
-
-        // Update view toggle button text
-        const menuToggle = document.getElementById("menuViewToggle");
-        if (menuToggle) {
-          menuToggle.textContent = getViewToggleText();
-        }
-
-        // Re-render country visualization
-        renderCountry(currentCountry);
-
-        // Re-render rankings
-        displayRankings();
-      } catch (error) {
-        console.error("Error handling language change:", error);
+      const titleElement = document.querySelector(".title-country");
+      if (titleElement) {
+        titleElement.textContent = countryName;
       }
+
+      const menuToggle = document.getElementById("menuViewToggle");
+      if (menuToggle) {
+        menuToggle.textContent = getViewToggleText();
+      }
+
+      renderCountry(currentCountry);
+      displayRankings();
     });
   } catch (error) {
     console.error("Error initializing country page:", error);
-
-    // Show user-friendly error message
-    const svg = d3.select("#countrySvg");
-    svg.selectAll("*").remove();
-
-    svg.append("text")
-      .attr("x", VIZ_CONFIG.SVG_WIDTH / 2)
-      .attr("y", VIZ_CONFIG.SVG_HEIGHT / 2)
-      .attr("text-anchor", "middle")
-      .attr("fill", "var(--text-light)")
-      .attr("font-size", "18px")
-      .text("Failed to load visualization. Please refresh the page.");
   }
 }
 
