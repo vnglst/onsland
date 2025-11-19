@@ -50,7 +50,7 @@ class I18n {
     return this.translations[language];
   }
 
-  // Get translation by key (supports nested keys with dot notation)
+  // Get translation by key
   t(key) {
     const translation = this.getNestedTranslation(key);
 
@@ -62,7 +62,7 @@ class I18n {
     return translation;
   }
 
-  // Get nested translation using dot notation (e.g., "categories.water")
+  // Get nested translation using dot notation
   getNestedTranslation(key) {
     const keys = key.split('.');
     let result = this.translations[this.currentLanguage];

@@ -33,7 +33,7 @@ const ANIMATION_CONFIG = {
   DELAY_PER_LABEL: 300
 };
 
-// Get country from Fresh route parameter (set in server.js)
+// Get country from route parameter
 const countryFromRoute = globalThis.__COUNTRY__;
 const currentCountry = validCountries.includes(countryFromRoute) ? countryFromRoute : "netherlands";
 
@@ -164,10 +164,10 @@ function displayRankings() {
   // Sort by position
   const sortedRankings = [...multiCountryRankings].sort((a, b) => a.position - b.position);
 
-  // Get top 2 rankings (lowest positions)
+  // Get top 2 rankings
   const topRankings = sortedRankings.slice(0, 2);
 
-  // Get bottom 2 rankings (highest positions)
+  // Get bottom 2 rankings
   const bottomRankings = sortedRankings.slice(-2).reverse();
 
   // Create top ranking badges
@@ -814,7 +814,7 @@ async function initCountryPage() {
           menuToggle.textContent = getViewToggleText();
         }
 
-        // Re-render country visualization (legend and labels)
+        // Re-render country visualization
         renderCountry(currentCountry);
 
         // Re-render rankings

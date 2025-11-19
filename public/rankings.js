@@ -29,7 +29,7 @@ function getAllCategoryRankings() {
     });
   });
 
-  // Sort countries within each category by percentage (descending)
+  // Sort countries within each category by percentage
   Object.keys(categoryData).forEach((categoryName) => {
     categoryData[categoryName].countries.sort((a, b) => b.percentage - a.percentage);
   });
@@ -65,7 +65,7 @@ function renderRankings() {
     }
     const categorySlug = createCategorySlug(categoryName);
 
-    // Find the maximum percentage for this category (for bar scaling)
+    // Find the maximum percentage for this category
     const maxPercentage = data.countries[0]?.percentage || 0;
 
     const section = document.createElement("div");

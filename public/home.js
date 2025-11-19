@@ -11,7 +11,7 @@ const OBSERVER_CONFIG = {
   threshold: 0
 };
 
-// Homepage state (encapsulated)
+// Homepage state
 const HomepageState = {
   worldData: null,
   isSquareView: false,
