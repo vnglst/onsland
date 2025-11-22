@@ -480,7 +480,9 @@ function renderLabels(svg, labels, totalHexagons, countryKey) {
     });
 
     if (DEV_MODE) {
-      // Label coordinates can be logged here for development
+      console.log(`\n=== ${countryKey} Label Coordinates (JSON) ===`);
+      console.log(JSON.stringify(coordinates, null, 2));
+      console.log("===============================================\n");
     }
   }
 
