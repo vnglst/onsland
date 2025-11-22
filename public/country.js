@@ -480,9 +480,7 @@ function renderLabels(svg, labels, totalHexagons, countryKey) {
     });
 
     if (DEV_MODE) {
-      console.log(`\n=== ${countryKey} Label Coordinates (JSON) ===`);
-      console.log(JSON.stringify(coordinates, null, 2));
-      console.log("===============================================\n");
+      // Label coordinates can be logged here for development
     }
   }
 
@@ -637,7 +635,6 @@ function renderCountry(countryKey) {
   const countryFeature = countries.features.find((d) => d.id === config.isoCode);
 
   if (!countryFeature) {
-    console.error(`Country ${countryKey} not found in dataset`);
     return;
   }
 
@@ -706,7 +703,7 @@ async function initCountryPage() {
       displayRankings();
     });
   } catch (error) {
-    console.error("Error initializing country page:", error);
+    // Error initializing country page
   }
 }
 

@@ -160,7 +160,9 @@ function initHomepage() {
         updateCountryCardTitles();
       });
     })
-    .catch((error) => console.error("Error loading data:", error));
+    .catch((error) => {
+      // Error loading data
+    });
 }
 
 // Initialize page when DOM is ready

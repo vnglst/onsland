@@ -20,7 +20,7 @@ class I18n {
     try {
       localStorage.setItem('language', lang);
     } catch {
-      console.warn('Could not save language preference');
+      // Could not save language preference
     }
   }
 
@@ -35,7 +35,6 @@ class I18n {
       this.translations[language] = data;
       return data;
     } catch (error) {
-      console.error(`Error loading translations for ${language}:`, error);
       throw error;
     }
   }
@@ -55,7 +54,6 @@ class I18n {
     const translation = this.getNestedTranslation(key);
 
     if (translation === undefined) {
-      console.warn(`Translation not found for key: ${key}`);
       return key;
     }
 
@@ -150,7 +148,7 @@ async function initI18n() {
       );
     });
   } catch (error) {
-    console.error('Failed to initialize i18n:', error);
+    // Failed to initialize i18n
   }
 }
 
