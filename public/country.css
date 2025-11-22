@@ -16,10 +16,15 @@ svg {
   stroke: var(--bg-light);
   stroke-width: 0.1px;
   cursor: pointer;
+  transition: stroke-width 0.2s ease;
 }
 
 .hexagon.highlight {
   stroke-width: 1px;
+}
+
+.legend-item {
+  transition: opacity 0.2s ease;
 }
 
 .legend-item.dimmed {

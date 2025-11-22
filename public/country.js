@@ -362,17 +362,17 @@ function renderHexagons(svg, hexbin, hexData, hexColors, colorScale, hexRadius, 
     .attr("d", (d) => hexbin.hexagon(0))
     .attr("transform", (d) => `translate(${d.x},${d.y - Math.random() * 200})`)
     .attr("fill", "var(--bg-light)")
-    .on("mouseenter", function (event, d) {
-      const category = hexColors[hexData.indexOf(d)];
+    .on("mouseenter", function (event, d, i) {
+      const category = hexColors[i];
       handlers.highlightHexagons(category);
     })
-    .on("mouseleave", function (event, d) {
+    .on("mouseleave", function (event, d, i) {
       if (!handlers.getSelectedCategory()) {
         handlers.deselectHexagons();
       }
     })
-    .on("click", function (event, d) {
-      const category = hexColors[hexData.indexOf(d)];
+    .on("click", function (event, d, i) {
+      const category = hexColors[i];
       if (handlers.getSelectedCategory() === category) {
         handlers.deselectHexagons();
       } else {
@@ -384,7 +384,7 @@ function renderHexagons(svg, hexbin, hexData, hexColors, colorScale, hexRadius, 
       event.preventDefault();
     })
     .transition()
-    .delay((d, i) => i * 0.7)
+    .delay((d, i) => Math.min(i * 0.7, 300))
     .duration(750)
     .ease(d3.easeCubicOut)
     .attr("fill", (d, i) => colorScale(hexColors[i]))
@@ -513,9 +513,11 @@ function renderLabels(svg, labels, totalHexagons, countryKey) {
         .attr("opacity", 0)
         .attr("data-label", category.label);
 
+      const labelDelay = Math.min(300, totalHexagons * 0.7) + 750 + i * 300;
+
       line
         .transition()
-        .delay(totalHexagons * 0.7 + 750 + i * 300)
+        .delay(labelDelay)
         .duration(500)
         .attr("opacity", 1);
 
@@ -531,7 +533,7 @@ function renderLabels(svg, labels, totalHexagons, countryKey) {
 
       targetCircle
         .transition()
-        .delay(totalHexagons * 0.7 + 750 + i * 300)
+        .delay(labelDelay)
         .duration(500)
         .attr("opacity", 1);
 
@@ -547,7 +549,7 @@ function renderLabels(svg, labels, totalHexagons, countryKey) {
 
       positionCircle
         .transition()
-        .delay(totalHexagons * 0.7 + 750 + i * 300)
+        .delay(labelDelay)
         .duration(500)
         .attr("opacity", 1);
 
@@ -603,7 +605,7 @@ function renderLabels(svg, labels, totalHexagons, countryKey) {
 
       labelText
         .transition()
-        .delay(totalHexagons * 0.7 + 750 + i * 300)
+        .delay(labelDelay)
         .duration(500)
         .attr("opacity", 1);
     });
