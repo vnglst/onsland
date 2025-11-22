@@ -15,26 +15,6 @@ const fastify = Fastify({
 
 const PORT = process.env.PORT || 8000;
 
-// Security: Add CSP headers
-fastify.addHook('onSend', async (request, reply) => {
-  reply.header('Content-Security-Policy', [
-    "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' https://plausible.io",
-    "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data:",
-    "font-src 'self'",
-    "connect-src 'self' https://plausible.io",
-    "frame-ancestors 'none'",
-    "base-uri 'self'",
-    "form-action 'self'"
-  ].join('; '));
-
-  reply.header('X-Content-Type-Options', 'nosniff');
-  reply.header('X-Frame-Options', 'DENY');
-  reply.header('X-XSS-Protection', '1; mode=block');
-  reply.header('Referrer-Policy', 'strict-origin-when-cross-origin');
-});
-
 // Register compression (gzip/brotli)
 await fastify.register(fastifyCompress, {
   global: true,
@@ -74,26 +54,8 @@ fastify.get('/', async (request, reply) => {
   });
 });
 
-// Valid country list for validation
-const validCountries = [
-  'austria', 'belgium', 'bulgaria', 'croatia', 'czechia', 'denmark',
-  'estonia', 'finland', 'france', 'germany', 'greece', 'hungary',
-  'ireland', 'italy', 'latvia', 'lithuania', 'luxembourg', 'netherlands',
-  'poland', 'portugal', 'romania', 'slovakia', 'slovenia', 'spain',
-  'sweden', 'uk'
-];
-
 fastify.get('/country/:country', async (request, reply) => {
   const { country } = request.params;
-
-  // Validate country parameter
-  if (!validCountries.includes(country)) {
-    return reply.status(404).view('404', {
-      title: '404 - Country Not Found - OnsLand',
-      description: 'Country not found'
-    });
-  }
-
   return reply.view('country', {
     title: 'Land Use - OnsLand',
     description: 'Interactive visualization of land use showing agriculture, nature, urban areas, and more.',
