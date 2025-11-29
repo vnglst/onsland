@@ -1,4 +1,5 @@
 /* AI Researchers World Map Styles */
+/* Color Palette: Red (#dc2626, #ef4444, #f87171) and Blue (#1e40af, #2563eb, #3b82f6) */
 
 .researchers-container {
   max-width: 100%;
@@ -18,35 +19,39 @@
 
 .layer-btn {
   padding: 0.75rem 1.5rem;
-  background: #f3f4f6;
+  background: linear-gradient(135deg, #f0f9ff 0%, #fee2e2 100%);
   border: 2px solid transparent;
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: #374151;
+  color: #1e293b;
 }
 
 .layer-btn:hover {
-  background: #e5e7eb;
-  border-color: #9ca3af;
+  background: linear-gradient(135deg, #dbeafe 0%, #fecaca 100%);
+  border-color: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
 }
 
 .layer-btn.active {
-  background: #4f46e5;
+  background: linear-gradient(135deg, #1e40af 0%, #dc2626 100%);
   color: white;
-  border-color: #4f46e5;
+  border-color: #1e40af;
+  box-shadow: 0 6px 12px -2px rgba(30, 64, 175, 0.4);
 }
 
 /* Visualization Container */
 .visualization-container {
   position: relative;
   width: 100%;
-  background: #f9fafb;
+  background: linear-gradient(135deg, #eff6ff 0%, #fef2f2 100%);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(30, 64, 175, 0.15), 0 2px 4px -1px rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .world-map {
@@ -60,7 +65,7 @@
 }
 
 .countries path:hover {
-  fill: #d1d5db;
+  fill: #e0e7ff;
 }
 
 /* Researcher Info Panel */
@@ -74,10 +79,12 @@
   overflow-y: auto;
   background: white;
   border-radius: 12px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(30, 64, 175, 0.2), 0 10px 10px -5px rgba(220, 38, 38, 0.1);
   padding: 1.5rem;
   z-index: 100;
   animation: slideIn 0.3s ease;
+  border-left: 4px solid #2563eb;
+  border-top: 1px solid rgba(220, 38, 38, 0.1);
 }
 
 @keyframes slideIn {
@@ -98,7 +105,7 @@
   background: transparent;
   border: none;
   font-size: 1.5rem;
-  color: #9ca3af;
+  color: #dc2626;
   cursor: pointer;
   width: 32px;
   height: 32px;
@@ -110,15 +117,20 @@
 }
 
 .close-btn:hover {
-  background: #f3f4f6;
-  color: #374151;
+  background: linear-gradient(135deg, #dbeafe 0%, #fee2e2 100%);
+  color: #b91c1c;
+  transform: rotate(90deg);
 }
 
 .researcher-info-panel h2 {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
-  color: #111827;
+  background: linear-gradient(135deg, #1e40af 0%, #dc2626 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   padding-right: 2rem;
+  font-weight: 700;
 }
 
 .researcher-details {
@@ -130,7 +142,7 @@
 .detail-section h3 {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #6b7280;
+  color: #1e40af;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin: 0 0 0.5rem 0;
@@ -159,14 +171,18 @@
   padding: 1rem 1.5rem;
   background: white;
   border-radius: 8px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px 0 rgba(30, 64, 175, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .legend-panel h3 {
   margin: 0 0 0.75rem 0;
   font-size: 1rem;
   font-weight: 600;
-  color: #374151;
+  background: linear-gradient(135deg, #1e40af 0%, #dc2626 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Hexagon Interactions */
@@ -176,7 +192,7 @@
 
 .researcher-hex:hover {
   stroke-width: 2.5;
-  filter: drop-shadow(0 0 8px rgba(79, 70, 229, 0.6));
+  filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.7)) drop-shadow(0 0 5px rgba(220, 38, 38, 0.3));
 }
 
 /* Responsive Design */

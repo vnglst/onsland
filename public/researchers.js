@@ -7,10 +7,10 @@
   let selectedResearcher = null;
   const hexRadius = 8;
 
-  // Colors for hexagons
-  const hexagonColor = '#4f46e5'; // Indigo
-  const hexagonHoverColor = '#6366f1'; // Lighter indigo
-  const hexagonSelectedColor = '#ec4899'; // Pink
+  // Colors for hexagons - Red and Blue palette
+  const hexagonColor = '#2563eb'; // Blue
+  const hexagonHoverColor = '#3b82f6'; // Lighter blue
+  const hexagonSelectedColor = '#dc2626'; // Red
 
   function init() {
     setupSVG();
