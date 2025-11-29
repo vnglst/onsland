@@ -10,6 +10,7 @@
     "navigation": "Navigatie",
     "home": "Home",
     "rankings": "Rankings",
+    "researchers": "AI-onderzoekers",
     "about": "Over",
     "language": "Taal",
     "view": "Weergave"
@@ -38,6 +39,20 @@
     "metaDescription": "Rankings van Europese landen op basis van landgebruikscategorieën - welke landen hebben het meeste water, bos, stedelijke gebieden en meer.",
     "heading": "Landgebruik Rankings",
     "headingShort": "Rankings"
+  },
+  "researchers": {
+    "title": "AI-onderzoekers Wereldkaart - OnsLand",
+    "metaDescription": "Interactieve hexagonale wereldkaart met de top 20 meest invloedrijke AI-onderzoekers en hun reis van geboorteplaats naar opleiding en huidige werk.",
+    "heading": "AI-onderzoekers Wereldkaart",
+    "headingShort": "AI-onderzoekers",
+    "layerBorn": "Geboren",
+    "layerUniversity": "Universiteit",
+    "layerWork": "Huidig werk",
+    "bornLabel": "Geboren",
+    "educationLabel": "Opleiding",
+    "workLabel": "Huidig werk",
+    "contributionLabel": "Belangrijkste bijdrage",
+    "legendTitle": "Klik op een hexagoon voor meer informatie"
   },
   "countries": {
     "austria": "Oostenrijk",

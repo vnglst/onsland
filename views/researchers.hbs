@@ -1,0 +1,70 @@
+<header>
+  <nav class="navbar">
+    <div class="homepage-header">
+      <a href="/" class="back-button">
+        <span class="back-text-full">
+          <span data-i18n="common.back">Back</span>
+        </span>
+        <span class="back-text-short" data-i18n="common.backShort">
+          ←
+        </span>
+      </a>
+      <h1>
+        <span class="title-full" data-i18n="researchers.heading">
+          AI Researchers World Map
+        </span>
+        <span class="title-short" data-i18n="researchers.headingShort">
+          AI Researchers
+        </span>
+      </h1>
+      {{> menu}}
+    </div>
+  </nav>
+</header>
+
+<main class="researchers-container">
+  <div class="layer-controls">
+    <button class="layer-btn active" data-layer="born" data-i18n="researchers.layerBorn">
+      Born
+    </button>
+    <button class="layer-btn" data-layer="university" data-i18n="researchers.layerUniversity">
+      University
+    </button>
+    <button class="layer-btn" data-layer="work" data-i18n="researchers.layerWork">
+      Current Work
+    </button>
+  </div>
+
+  <div class="visualization-container">
+    <svg id="worldMap" class="world-map"></svg>
+  </div>
+
+  <div class="researcher-info-panel" id="researcherInfo" style="display: none;">
+    <button class="close-btn" id="closeInfo">×</button>
+    <h2 id="researcherName"></h2>
+    <div class="researcher-details">
+      <div class="detail-section">
+        <h3 data-i18n="researchers.bornLabel">Born</h3>
+        <p id="bornLocation"></p>
+      </div>
+      <div class="detail-section">
+        <h3 data-i18n="researchers.educationLabel">Education</h3>
+        <ul id="universityList"></ul>
+      </div>
+      <div class="detail-section">
+        <h3 data-i18n="researchers.workLabel">Current Work</h3>
+        <p id="workLocation"></p>
+        <p id="workInstitution"></p>
+      </div>
+      <div class="detail-section">
+        <h3 data-i18n="researchers.contributionLabel">Key Contribution</h3>
+        <p id="contribution"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend-panel">
+    <h3 data-i18n="researchers.legendTitle">Click a hexagon to learn more</h3>
+    <div id="legendContent"></div>
+  </div>
+</main>
