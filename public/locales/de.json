@@ -10,6 +10,7 @@
     "navigation": "Navigation",
     "home": "Startseite",
     "rankings": "Ranglisten",
+    "researchers": "KI-Forscher",
     "about": "Über",
     "language": "Sprache",
     "view": "Ansicht"
@@ -38,6 +39,20 @@
     "metaDescription": "Ranglisten europäischer Länder nach Landnutzungskategorien - welche Länder haben die meisten Gewässer, Wälder, städtischen Gebiete und mehr.",
     "heading": "Landnutzungsranglisten",
     "headingShort": "Ranglisten"
+  },
+  "researchers": {
+    "title": "KI-Forscher Weltkarte - OnsLand",
+    "metaDescription": "Interaktive hexagonale Weltkarte, die die 20 einflussreichsten KI-Forscher und ihre Reise vom Geburtsort über die Ausbildung bis zur aktuellen Arbeit zeigt.",
+    "heading": "KI-Forscher Weltkarte",
+    "headingShort": "KI-Forscher",
+    "layerBorn": "Geburtsort",
+    "layerUniversity": "Universität",
+    "layerWork": "Aktuelle Arbeit",
+    "bornLabel": "Geburtsort",
+    "educationLabel": "Ausbildung",
+    "workLabel": "Aktuelle Arbeit",
+    "contributionLabel": "Hauptbeitrag",
+    "legendTitle": "Klicken Sie auf ein Hexagon, um mehr zu erfahren"
   },
   "countries": {
     "austria": "Österreich",

@@ -81,6 +81,18 @@ fastify.get('/rankings', async (request, reply) => {
   });
 });
 
+fastify.get('/researchers', async (request, reply) => {
+  return reply.view('researchers', {
+    title: 'AI Researchers World Map - OnsLand',
+    description: 'Interactive hexagonal world map showing the top 20 most influential AI researchers and their journey from birthplace to education and current work.',
+    pageSpecificCss: ['/researchers.css'],
+    pageSpecificScripts: [
+      '/shared/researchers.js',
+      '/researchers.js'
+    ]
+  });
+});
+
 fastify.get('/about', async (request, reply) => {
   return reply.view('about', {
     title: 'About - OnsLand',

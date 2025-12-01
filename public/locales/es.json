@@ -10,6 +10,7 @@
     "navigation": "Navegación",
     "home": "Inicio",
     "rankings": "Clasificaciones",
+    "researchers": "Investigadores IA",
     "about": "Acerca de",
     "language": "Idioma",
     "view": "Vista"
@@ -38,6 +39,20 @@
     "metaDescription": "Clasificaciones de países europeos por categorías de uso del suelo - qué países tienen más agua, bosques, áreas urbanas y más.",
     "heading": "Clasificaciones de Uso del Suelo",
     "headingShort": "Clasificaciones"
+  },
+  "researchers": {
+    "title": "Mapa Mundial de Investigadores IA - OnsLand",
+    "metaDescription": "Mapa mundial hexagonal interactivo que muestra los 20 investigadores de IA más influyentes y su viaje desde el lugar de nacimiento hasta la educación y el trabajo actual.",
+    "heading": "Mapa Mundial de Investigadores IA",
+    "headingShort": "Investigadores IA",
+    "layerBorn": "Nacimiento",
+    "layerUniversity": "Universidad",
+    "layerWork": "Trabajo actual",
+    "bornLabel": "Nacimiento",
+    "educationLabel": "Educación",
+    "workLabel": "Trabajo actual",
+    "contributionLabel": "Contribución clave",
+    "legendTitle": "Haz clic en un hexágono para obtener más información"
   },
   "countries": {
     "austria": "Austria",
