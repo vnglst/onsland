@@ -1,0 +1,37 @@
+<header>
+  <nav class="navbar">
+    <div id="gameHeader">
+      <a href="/" class="back-button">
+        <span class="back-text-full">Back</span>
+        <span class="back-text-short">←</span>
+      </a>
+      <h1>Cat & Mouse 3D</h1>
+      {{> menu}}
+    </div>
+  </nav>
+</header>
+
+<main class="game-container">
+  <div id="gameCanvas"></div>
+
+  <div id="gameInfo">
+    <div id="instructions">
+      <h2>Instructions</h2>
+      <p><strong>WASD</strong> or <strong>Arrow Keys</strong> - Move the mouse</p>
+      <p><strong>Space</strong> - Jump (use to reach special passages)</p>
+      <p>🐭 You are the <strong>MOUSE</strong></p>
+      <p>🐱 Escape from the <strong>CAT</strong></p>
+      <p>💎 Some passages are too small for the cat!</p>
+      <p id="score">Time survived: <span id="time">0</span>s</p>
+    </div>
+
+    <div id="gameOver" style="display: none;">
+      <h2>Game Over!</h2>
+      <p>The cat caught you!</p>
+      <p>Time survived: <span id="finalTime">0</span>s</p>
+      <button id="restartBtn">Play Again</button>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>

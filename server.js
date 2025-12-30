@@ -90,6 +90,15 @@ fastify.get('/about', async (request, reply) => {
   });
 });
 
+fastify.get('/game', async (request, reply) => {
+  return reply.view('game', {
+    title: 'Cat & Mouse 3D - OnsLand',
+    description: 'Play a 3D cat and mouse game. You are the mouse, escape from the AI cat!',
+    pageSpecificCss: ['/game.css'],
+    pageSpecificScripts: ['/game.js']
+  });
+});
+
 // 404 handler
 fastify.setNotFoundHandler(async (request, reply) => {
   return reply.status(404).view('404', {

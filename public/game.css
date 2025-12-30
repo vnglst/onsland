@@ -1,0 +1,122 @@
+.game-container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 80px);
+  overflow: hidden;
+  background: linear-gradient(to bottom, #87ceeb 0%, #98d8e8 100%);
+}
+
+#gameCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#gameInfo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+}
+
+#instructions h2,
+#gameOver h2 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 1.5em;
+}
+
+#instructions p {
+  margin: 10px 0;
+  color: #34495e;
+  line-height: 1.6;
+}
+
+#score {
+  margin-top: 20px;
+  padding: 10px;
+  background: #3498db;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+#gameOver {
+  text-align: center;
+}
+
+#gameOver p {
+  font-size: 1.2em;
+  margin: 15px 0;
+}
+
+#finalTime {
+  color: #e74c3c;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+#restartBtn {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
+}
+
+#restartBtn:hover {
+  background: #229954;
+}
+
+#gameHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+#gameHeader h1 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #2c3e50;
+}
+
+.back-button {
+  text-decoration: none;
+  color: #3498db;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.back-button:hover {
+  color: #2980b9;
+}
+
+@media (max-width: 768px) {
+  #gameInfo {
+    position: static;
+    max-width: 100%;
+    margin: 10px;
+  }
+
+  .game-container {
+    height: auto;
+    min-height: 500px;
+  }
+
+  #gameHeader h1 {
+    font-size: 1.2em;
+  }
+}
