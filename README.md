@@ -24,7 +24,7 @@ Want to add more countries? The map rendering is already there, and land use dat
 
 1. Query the data from the SQLite database in `data/land-cover.db` to get the land use percentages for your country
 
-2. Add the country configuration to [public/shared/countries.js](public/shared/countries.js)
+2. Add the country configuration to [public/shared/countries.js](public/shared/countries.js) and add its slug to the supported country list in [server.js](server.js)
 
    - Add the `isoCode` by checking the Wikipedia "[List of ISO 3166 country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)" to get the country's **NUM**eric code
    - Add the geographic `center` coordinates (longitude and then latitude) for proper map centering
@@ -43,7 +43,7 @@ This project uses Express.js, a minimal Node.js web framework.
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) 24+ installed on your machine
+- [Node.js](https://nodejs.org/) 24.22.1+ installed on your machine
 
 ### Running Locally
 
