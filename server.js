@@ -4,7 +4,7 @@ import fastifyStatic from '@fastify/static';
 import fastifyCompress from '@fastify/compress';
 import handlebars from 'handlebars';
 import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import { dirname, join, resolve } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -14,6 +14,34 @@ const fastify = Fastify({
 });
 
 const PORT = process.env.PORT || 8000;
+const supportedCountries = new Set([
+  'austria',
+  'belgium',
+  'bulgaria',
+  'croatia',
+  'czechia',
+  'denmark',
+  'estonia',
+  'finland',
+  'france',
+  'germany',
+  'greece',
+  'hungary',
+  'ireland',
+  'italy',
+  'latvia',
+  'lithuania',
+  'luxembourg',
+  'netherlands',
+  'poland',
+  'portugal',
+  'romania',
+  'slovakia',
+  'slovenia',
+  'spain',
+  'sweden',
+  'uk'
+]);
 
 // Register compression (gzip/brotli)
 await fastify.register(fastifyCompress, {
@@ -56,6 +84,10 @@ fastify.get('/', async (request, reply) => {
 
 fastify.get('/country/:country', async (request, reply) => {
   const { country } = request.params;
+  if (!supportedCountries.has(country)) {
+    return reply.callNotFound();
+  }
+
   return reply.view('country', {
     title: 'Land Use - OnsLand',
     description: 'Interactive visualization of land use showing agriculture, nature, urban areas, and more.',
@@ -64,7 +96,7 @@ fastify.get('/country/:country', async (request, reply) => {
       '/shared/translation-utils.js',
       '/country.js'
     ],
-    inlineScript: `window.__COUNTRY__ = "${country}";`,
+    inlineScript: `window.__COUNTRY__ = ${JSON.stringify(country).replace(/</g, '\\u003c')};`,
     showViewToggle: true
   });
 });
@@ -98,11 +130,14 @@ fastify.setNotFoundHandler(async (request, reply) => {
   });
 });
 
-// Start server
-try {
-  await fastify.listen({ port: PORT, host: '0.0.0.0' });
-  console.log(`Server running at http://localhost:${PORT}`);
-} catch (err) {
-  fastify.log.error(err);
-  process.exit(1);
+export { fastify };
+
+if (process.argv[1] && resolve(process.argv[1]) === __filename) {
+  try {
+    await fastify.listen({ port: PORT, host: '0.0.0.0' });
+    console.log(`Server running at http://localhost:${PORT}`);
+  } catch (err) {
+    fastify.log.error(err);
+    process.exit(1);
+  }
 }
