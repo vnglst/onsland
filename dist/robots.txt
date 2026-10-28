@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://onsland.koenvangilst.nl/sitemap.xml

@@ -130,7 +130,7 @@ fastify.setNotFoundHandler(async (request, reply) => {
   });
 });
 
-export { fastify };
+export { fastify, supportedCountries };
 
 if (process.argv[1] && resolve(process.argv[1]) === __filename) {
   try {

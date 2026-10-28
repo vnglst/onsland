@@ -94,3 +94,11 @@ Created by [Koen van Gilst](https://koenvangilst.nl)
 ---
 
 Previous HN discussion: https://news.ycombinator.com/item?id=40599763
+
+## Static production release
+
+Production uses the shared `vnglst/static-sites` Nginx host; no Node process runs there.
+Run `npm ci && npm test && npm run export`, commit `dist/` with the source,
+then update the immutable Onsland source pin in the hosting repository.
+The export preserves `/`, `/about`, `/rankings` and all 26 `/country/<name>` URLs.
+Unsupported countries and missing files return 404. Node/Fastify remain local development and export tools.
